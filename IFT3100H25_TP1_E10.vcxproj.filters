@@ -1,11 +1,17 @@
 <?xml version="1.0"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
-		<ClCompile Include="src\ofApp.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\app\Application.cpp">
+			<Filter>src\app</Filter>
+		</ClCompile>
+		<ClCompile Include="src\app\Renderer.cpp">
+			<Filter>src\app</Filter>
+		</ClCompile>
+		<ClCompile Include="src\plugin\image\Histogram.cpp">
+			<Filter>src\plugin\image</Filter>
 		</ClCompile>
 		<ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxBaseGui.cpp">
 			<Filter>addons\ofxGui\src</Filter>
@@ -53,8 +59,14 @@
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="src\ofApp.h">
-			<Filter>src</Filter>
+		<ClInclude Include="src\app\Application.hpp">
+			<Filter>src\app</Filter>
+		</ClInclude>
+		<ClInclude Include="src\app\Renderer.hpp">
+			<Filter>src\app</Filter>
+		</ClInclude>
+		<ClInclude Include="src\plugin\image\Histogram.hpp">
+			<Filter>src\plugin\image</Filter>
 		</ClInclude>
 		<ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxBaseGui.h">
 			<Filter>addons\ofxGui\src</Filter>

@@ -1,7 +1,7 @@
 /*
 Une classe qui permet de dessiner l'histogramme d'une image.
 
-CHOSE A AMELIORER : J'utilise des valeurs constante pour les dimensions de l'histogramme. 
+CHOSE A AMELIORER : J'utilise des valeurs constante pour les dimensions de l'histogramme.
 					Il serait probablement preferable de les calculer en fonction de la taille de la fenetre.
 					Je ne suis pas certain de l'optimisation non plus.
 */
@@ -10,6 +10,8 @@ CHOSE A AMELIORER : J'utilise des valeurs constante pour les dimensions de l'his
 
 #include "ofMain.h"
 #include <vector>
+
+namespace plugin::image {
 
 class Histogram
 {
@@ -30,23 +32,23 @@ private:
 	ofTrueTypeFont font;
 	ofColor color;
 
-	vector<int> redAbsoluteHistogram;
-	vector<int> greenAbsoluteHistogram;
-	vector<int> blueAbsoluteHistogram;
+	std::vector<int> redAbsoluteHistogram;
+	std::vector<int> greenAbsoluteHistogram;
+	std::vector<int> blueAbsoluteHistogram;
 
-	vector<float> redRelativeHistogram;
-	vector<float> greenRelativeHistogram;
-	vector<float> blueRelativeHistogram;
+	std::vector<float> redRelativeHistogram;
+	std::vector<float> greenRelativeHistogram;
+	std::vector<float> blueRelativeHistogram;
 
-	vector<int>* histogramAbsolute = nullptr;
-	vector<float>* histogramRelative = nullptr;
+	std::vector<int>* histogramAbsolute = nullptr;
+	std::vector<float>* histogramRelative = nullptr;
 
 	int maxValue;
 
-	vector<int> getRed();
-	vector<int> getGreen();
-	vector<int> getBlue();
-	vector<float> getRelativeHistogram(vector<int> h);
+	std::vector<int> getRed();
+	std::vector<int> getGreen();
+	std::vector<int> getBlue();
+	std::vector<float> getRelativeHistogram(std::vector<int> h);
 	void drawHistogram();
 	void drawXAxis();
 	void drawYAxis();
@@ -54,3 +56,5 @@ private:
 	bool mouseIsHoveringBar(glm::vec2 barTop, float barHeight);
 	void drawTooltip();
 };
+
+} // namespace plugin::image

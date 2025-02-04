@@ -1,7 +1,6 @@
-// IFT3100H25_AlmostEmptyProject/renderer.cpp
-// Classe responsable du rendu de l'application.
+#include "Histogram.hpp"
 
-#include "histogram.h"
+namespace plugin::image {
 
 // fonction d'initialisation
 void Histogram::setup(ofImage _image)
@@ -208,7 +207,7 @@ Brief : Permet de dessiner l'axe des Y avec son label.
 void Histogram::drawYAxis()
 {
 	ofSetColor(ofColor::white);
-	
+
 	//On dessine la grande ligne verticale.
 	glm::vec2 lineStart = glm::vec2(OFFSET, MAX_Y - OFFSET);
 	glm::vec2 lineEnd = glm::vec2(OFFSET, OFFSET);
@@ -295,8 +294,10 @@ void Histogram::drawTooltip()
 			ofDrawRectangle(ofGetMouseX(), ofGetMouseY(), textWidth, textHeight + 5);
 			ofSetColor(ofColor::black);
 			font.drawString(text, ofGetMouseX() + 10, ofGetMouseY() + 20);
-			
+
 		}
 	}
-	
+
 }
+
+} // namespace plugin::image
