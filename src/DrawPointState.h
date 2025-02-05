@@ -7,4 +7,7 @@ class DrawPointState : public State {
     void update() override;
     void draw() override;
     void exit() override;
+
+private:
+    void drawCursor();
 };
