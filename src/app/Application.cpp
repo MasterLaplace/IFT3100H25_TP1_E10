@@ -7,9 +7,9 @@ void Application::setup()
 
     ofLog() << "<app::setup>";
 
-    _image.load("test.png");
-    ofSetWindowShape(_image.getWidth(), _image.getHeight());
-    _histogram.setup(_image);
+    // _image.load("test.png");
+    // ofSetWindowShape(_image.getWidth(), _image.getHeight());
+    // _histogram.setup(_image);
 }
 
 //--------------------------------------------------------------
@@ -20,6 +20,7 @@ void Application::update()
 //--------------------------------------------------------------
 void Application::draw()
 {
+    /*
     if (!_is_histogram_drawn)
     {
         _image.draw(0, 0);
@@ -29,6 +30,7 @@ void Application::draw()
     {
         _histogram.draw(_histogram_color);
     }
+    */
 }
 
 //--------------------------------------------------------------
@@ -37,6 +39,7 @@ void Application::exit() { ofLog() << "<app::exit>"; }
 //--------------------------------------------------------------
 void Application::keyPressed(int key)
 {
+    /*
     if (key == ' ')
     {
         _is_histogram_drawn = false;
@@ -59,6 +62,7 @@ void Application::keyPressed(int key)
         _is_histogram_drawn = true;
         _histogram_color = 'b';
     }
+    */
 }
 
 //--------------------------------------------------------------
