@@ -2,16 +2,15 @@
 
 #pragma once
 
-#include "ofMain.h"
-#include "image.hpp"
-#include "StateMachine.h"
-#include "DrawPointState.h"
 #include "DrawLineState.h"
+#include "DrawPointState.h"
+#include "StateMachine.h"
+#include "image.hpp"
+#include "ofMain.h"
 
 using namespace plugin;
 
-class Application : public ofBaseApp
-{
+class Application : public ofBaseApp {
 public:
     /**
      * @brief fonction d'initialisation de l'application
@@ -50,11 +49,10 @@ public:
     void gotMessage(ofMessage msg);
 
 private:
-
     StateMachine stateMachine;
 
     /*
-    Vestige de l'histogramme. 
+    Vestige de l'histogramme.
     Une fois l'histogramme bien implémenté je vais retirer ça.
 
     ofImage _image;

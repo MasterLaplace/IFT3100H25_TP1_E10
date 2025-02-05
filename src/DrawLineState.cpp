@@ -1,23 +1,17 @@
 #include "DrawLineState.h"
 
-void DrawLineState::enter() { 
-	std::cout << "On entre dans le DrawLineState." << std::endl; 
-}
+void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
 
 void DrawLineState::update() {}
 
-void DrawLineState::draw() {
+void DrawLineState::draw() { drawCursor(); }
 
-    drawCursor();
+void DrawLineState::exit() { std::cout << "On sort du DrawLineState." << std::endl; }
 
-}
+void DrawLineState::drawCursor()
+{
 
-void DrawLineState::exit() {
-	std::cout << "On sort du DrawLineState." << std::endl; }
-
-void DrawLineState::drawCursor() {
-
-	// Le decallage de l'icone par rapport au curseur.
+    // Le decallage de l'icone par rapport au curseur.
     glm::vec2 upOffset = glm::vec2(50, 10);
     glm::vec2 downOffset = glm::vec2(25, 50);
 
@@ -27,5 +21,4 @@ void DrawLineState::drawCursor() {
 
     // On dessine la ligne.
     ofDrawLine(mousePosition + upOffset, mousePosition + downOffset);
-
 }

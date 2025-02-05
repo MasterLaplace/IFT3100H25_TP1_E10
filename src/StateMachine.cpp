@@ -1,17 +1,17 @@
 #include "StateMachine.h"
 
-StateMachine::StateMachine() { 
-	currentState = nullptr; 
-}
+StateMachine::StateMachine() { currentState = nullptr; }
 
-StateMachine::~StateMachine() { 
-	if (currentState)
+StateMachine::~StateMachine()
+{
+    if (currentState)
     {
         delete currentState;
     }
 }
 
-void StateMachine::changeState(State *newState) { 
+void StateMachine::changeState(State *newState)
+{
     if (currentState)
     {
         currentState->exit();
@@ -26,7 +26,8 @@ void StateMachine::changeState(State *newState) {
     }
 }
 
-void StateMachine::update() { 
+void StateMachine::update()
+{
     if (currentState)
     {
         currentState->mousePosition = mousePosition;
@@ -34,10 +35,10 @@ void StateMachine::update() {
     }
 }
 
-void StateMachine::draw() {
+void StateMachine::draw()
+{
     if (currentState)
     {
         currentState->draw();
     }
 }
-
