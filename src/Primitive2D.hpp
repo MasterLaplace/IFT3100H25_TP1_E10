@@ -11,6 +11,5 @@ public:
     }
 
     glm::vec2 position;
-    ofColor color; 
-
+    ofColor color;
 };

@@ -5,7 +5,6 @@
 
 class State {
 public:
-
     glm::vec2 mousePosition;
 
     virtual void enter() = 0;
