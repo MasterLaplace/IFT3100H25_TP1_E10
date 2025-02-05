@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include <iostream>
 
 class State {
 public:
@@ -8,5 +9,4 @@ public:
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void exit() = 0;
-    virtual void keyPressed(int key) = 0;
 };

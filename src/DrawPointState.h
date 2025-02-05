@@ -1,0 +1,10 @@
+#pragma once
+
+#include "State.h"
+
+class DrawPointState : public State {
+    void enter() override;
+    void update() override;
+    void draw() override;
+    void exit() override;
+};

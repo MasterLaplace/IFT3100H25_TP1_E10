@@ -4,7 +4,9 @@
 
 #include "ofMain.h"
 #include "image.hpp"
-// #include "StateMachine.hpp"
+#include "StateMachine.h"
+#include "DrawPointState.h"
+#include "DrawLineState.h"
 
 using namespace plugin;
 
@@ -48,8 +50,16 @@ public:
     void gotMessage(ofMessage msg);
 
 private:
+
+    StateMachine stateMachine;
+
+    /*
+    Vestige de l'histogramme. 
+    Une fois l'histogramme bien implémenté je vais retirer ça.
+
     ofImage _image;
     image::Histogram _histogram;
     bool _is_histogram_drawn = false;
     char _histogram_color = 'r';
+    */
 };

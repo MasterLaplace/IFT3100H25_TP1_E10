@@ -7,6 +7,7 @@ void Application::setup()
 
     ofLog() << "<app::setup>";
 
+    stateMachine.changeState(new DrawPointState);
     // _image.load("test.png");
     // ofSetWindowShape(_image.getWidth(), _image.getHeight());
     // _histogram.setup(_image);
@@ -39,6 +40,15 @@ void Application::exit() { ofLog() << "<app::exit>"; }
 //--------------------------------------------------------------
 void Application::keyPressed(int key)
 {
+    if (key == 'p')
+    {
+        stateMachine.changeState(new DrawPointState);
+    }
+
+    if (key == 'l')
+    {
+        stateMachine.changeState(new DrawLineState);
+    }
     /*
     if (key == ' ')
     {
