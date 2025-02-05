@@ -14,13 +14,12 @@ void Application::setup()
 }
 
 //--------------------------------------------------------------
-void Application::update()
-{
-}
+void Application::update() { stateMachine.update(); }
 
 //--------------------------------------------------------------
 void Application::draw()
 {
+    stateMachine.draw();
     /*
     if (!_is_histogram_drawn)
     {
