@@ -29,6 +29,7 @@ void StateMachine::changeState(State *newState) {
 void StateMachine::update() { 
     if (currentState)
     {
+        currentState->mousePosition = mousePosition;
         currentState->update();
     }
 }

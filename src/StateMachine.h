@@ -4,6 +4,8 @@
 
 class StateMachine {
 public:
+    glm::vec2 mousePosition;
+
     StateMachine();
     ~StateMachine();
 

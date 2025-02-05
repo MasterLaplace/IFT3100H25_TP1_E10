@@ -78,7 +78,11 @@ void Application::keyPressed(int key)
 void Application::keyReleased(int key) { ofLog() << "<app::keyReleased: " << key << ">"; }
 
 //--------------------------------------------------------------
-void Application::mouseMoved(int x, int y) {}
+void Application::mouseMoved(int x, int y) {
+
+    stateMachine.mousePosition = glm::vec2(x, y);
+
+}
 
 //--------------------------------------------------------------
 void Application::mouseDragged(int x, int y, int button) {}
