@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "DrawLineState.h"
-#include "DrawPointState.h"
-#include "StateMachine.h"
+#include "DrawLineState.hpp"
+#include "DrawPointState.hpp"
+#include "StateMachine.hpp"
 #include "image.hpp"
 #include "ofMain.h"
 

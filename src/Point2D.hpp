@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Primitive2D.h"
+#include "Primitive2D.hpp"
 #include "ofMain.h"
 
 class Point2D : public Primitive2D {

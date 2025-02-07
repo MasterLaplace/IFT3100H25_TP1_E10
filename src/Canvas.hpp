@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Primitive2D.h"
+#include "Primitive2D.hpp"
 #include "ofMain.h"
 #include <vector>
 

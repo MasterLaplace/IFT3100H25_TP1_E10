@@ -1,4 +1,4 @@
-#include "DrawLineState.h"
+#include "DrawLineState.hpp"
 
 void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
 

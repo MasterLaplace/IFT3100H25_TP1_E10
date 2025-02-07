@@ -1,4 +1,4 @@
-#include "StateMachine.h"
+#include "StateMachine.hpp"
 
 StateMachine::StateMachine() { currentState = nullptr; }
 
