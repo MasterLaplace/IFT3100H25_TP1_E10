@@ -15,30 +15,23 @@ void Application::setup()
 void Application::update() { currentController->update(); }
 
 //--------------------------------------------------------------
-void Application::draw()
-{
-    currentController->draw();
-}
+void Application::draw() { currentController->draw(); }
 
 //--------------------------------------------------------------
 void Application::exit() { ofLog() << "<app::exit>"; }
 
 //--------------------------------------------------------------
-void Application::keyPressed(int key) { 
-    
-    currentController->keyPressed(key); 
-
-}
+void Application::keyPressed(int key) { currentController->keyPressed(key); }
 
 //--------------------------------------------------------------
 void Application::keyReleased(int key) { ofLog() << "<app::keyReleased: " << key << ">"; }
 
 //--------------------------------------------------------------
-void Application::mouseMoved(int x, int y) { 
-    
+void Application::mouseMoved(int x, int y)
+{
+
     glm::vec2 position = glm::vec2(x, y);
     currentController->mouseMoved(position);
-
 }
 
 //--------------------------------------------------------------

@@ -6,15 +6,15 @@
 
 class Controller2D : public Controller {
 
-	public:
-        void setup();
-        void update();
-        void draw();
-        void exit();
+public:
+    void setup();
+    void update();
+    void draw();
+    void exit();
 
-        void keyPressed(int key);
-        void mouseMoved(glm::vec2 pos);
+    void keyPressed(int key);
+    void mouseMoved(glm::vec2 pos);
 
-    private:
-        StateMachine stateMachine;
+private:
+    StateMachine stateMachine;
 };
