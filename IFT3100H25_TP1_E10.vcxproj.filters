@@ -94,7 +94,7 @@
     <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
+    <ClCompile Include="Controller2D.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -264,6 +264,9 @@
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
     <ClInclude Include="Controller.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller2D.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

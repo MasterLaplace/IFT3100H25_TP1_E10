@@ -2,9 +2,8 @@
 
 #pragma once
 
-#include "DrawLineState.hpp"
-#include "DrawPointState.hpp"
-#include "StateMachine.hpp"
+#include "../Controller.hpp"
+#include "../Controller2D.hpp"
 #include "image.hpp"
 #include "ofMain.h"
 
@@ -49,7 +48,9 @@ public:
     void gotMessage(ofMessage msg);
 
 private:
-    StateMachine stateMachine;
+    Controller2D controller2D;
+    //Controller3D controller3D;
+    Controller *currentController;
 
     /*
     Vestige de l'histogramme.

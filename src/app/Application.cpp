@@ -7,78 +7,39 @@ void Application::setup()
 
     ofLog() << "<app::setup>";
 
-    stateMachine.changeState(new DrawPointState);
-    // _image.load("test.png");
-    // ofSetWindowShape(_image.getWidth(), _image.getHeight());
-    // _histogram.setup(_image);
+    currentController = &controller2D;
+    currentController->setup();
 }
 
 //--------------------------------------------------------------
-void Application::update() { stateMachine.update(); }
+void Application::update() { currentController->update(); }
 
 //--------------------------------------------------------------
 void Application::draw()
 {
-    stateMachine.draw();
-    /*
-    if (!_is_histogram_drawn)
-    {
-        _image.draw(0, 0);
-    }
-
-    else
-    {
-        _histogram.draw(_histogram_color);
-    }
-    */
+    currentController->draw();
 }
 
 //--------------------------------------------------------------
 void Application::exit() { ofLog() << "<app::exit>"; }
 
 //--------------------------------------------------------------
-void Application::keyPressed(int key)
-{
-    if (key == 'p')
-    {
-        stateMachine.changeState(new DrawPointState);
-    }
+void Application::keyPressed(int key) { 
+    
+    currentController->keyPressed(key); 
 
-    if (key == 'l')
-    {
-        stateMachine.changeState(new DrawLineState);
-    }
-    /*
-    if (key == ' ')
-    {
-        _is_histogram_drawn = false;
-    }
-
-    else if (key == 'r')
-    {
-        _is_histogram_drawn = true;
-        _histogram_color = 'r';
-    }
-
-    else if (key == 'g')
-    {
-        _is_histogram_drawn = true;
-        _histogram_color = 'g';
-    }
-
-    else if (key == 'b')
-    {
-        _is_histogram_drawn = true;
-        _histogram_color = 'b';
-    }
-    */
 }
 
 //--------------------------------------------------------------
 void Application::keyReleased(int key) { ofLog() << "<app::keyReleased: " << key << ">"; }
 
 //--------------------------------------------------------------
-void Application::mouseMoved(int x, int y) { stateMachine.mousePosition = glm::vec2(x, y); }
+void Application::mouseMoved(int x, int y) { 
+    
+    glm::vec2 position = glm::vec2(x, y);
+    currentController->mouseMoved(position);
+
+}
 
 //--------------------------------------------------------------
 void Application::mouseDragged(int x, int y, int button) {}
