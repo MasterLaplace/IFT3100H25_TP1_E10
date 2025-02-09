@@ -97,6 +97,9 @@
     <ClCompile Include="Controller2D.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="DrawingTools.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -267,6 +270,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Controller2D.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingTools.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

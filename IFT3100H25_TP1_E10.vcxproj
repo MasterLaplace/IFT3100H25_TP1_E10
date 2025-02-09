@@ -105,6 +105,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Controller2D.cpp" />
+    <ClCompile Include="DrawingTools.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\DrawLineState.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Controller.hpp" />
     <ClInclude Include="Controller2D.hpp" />
+    <ClInclude Include="DrawingTools.hpp" />
     <ClInclude Include="src\Canvas.hpp" />
     <ClInclude Include="src\DrawLineState.hpp" />
     <ClInclude Include="src\DrawPointState.hpp" />
