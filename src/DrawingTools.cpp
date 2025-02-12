@@ -10,7 +10,6 @@ void DrawingTools::setup(Controller2D *_controller)
 
 void DrawingTools::draw()
 {
-
     gui.begin();
     ImGui::Begin("Outils de dessin");
 

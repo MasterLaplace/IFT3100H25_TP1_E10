@@ -8,14 +8,14 @@
 class Controller2D : public Controller {
 
 public:
-    void setup();
-    void update();
-    void draw();
-    void exit();
+    void setup() override;
+    void update() override;
+    void draw() override;
+    void exit() override;
 
     // Methodes pour que "Application.cpp" puisse parler au Controlleur.
-    void keyPressed(int key);
-    void mouseMoved(glm::vec2 pos);
+    void keyPressed(int key) override;
+    void mouseMoved(glm::vec2 pos) override;
 
     // Methodes pour parler avec le gui.
     void drawPointButtonPressed();

@@ -28,77 +28,89 @@
     <ClCompile Include="src\plugin\image\Histogram.cpp">
       <Filter>src\plugin\image</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxBaseGui.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxButton.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxColorPicker.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxGuiGroup.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxInputField.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxLabel.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxPanel.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxSlider.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxSliderGroup.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxToggle.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\BaseEngine.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\BaseEngine.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\DefaultTheme.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\DefaultTheme.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineGLFW.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineGLFW.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineOpenGLES.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineOpenFrameworks.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineVk.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\Gui.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\Gui.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\ImHelpers.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\ImHelpers.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\ofxImGuiLoggerChannel.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.cpp">
       <Filter>addons\ofxImGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_context_support.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl2.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\extras\imgui_stdlib.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui_demo.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_demo.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui_draw.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_draw.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_tables.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="Controller2D.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawingTools.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,37 +118,43 @@
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\app">
-      <UniqueIdentifier>{EFF85920--8C5-B-43-F5-A-937-1F6075CAD944}</UniqueIdentifier>
+      <UniqueIdentifier>{37191F97--09A-2-40-2D-8-D0C-99DC4984D333}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin">
-      <UniqueIdentifier>{D2EB213F--04A-2-49-77-B-2DF-D1A50AC817F0}</UniqueIdentifier>
+      <UniqueIdentifier>{97C42B47--49B-F-46-D6-8-0FF-86F551AF3103}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\image">
-      <UniqueIdentifier>{AF2CFF20--49C-7-49-C7-B-A80-26E10CDAAFE3}</UniqueIdentifier>
+      <UniqueIdentifier>{020C4A24--B06-6-4C-95-B-F81-268414F19834}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{6F29824B--11B-6-4E-AF-9-FBE-883CD7EA383B}</UniqueIdentifier>
+      <UniqueIdentifier>{3DE6CDDA--2E3-4-40-E2-A-8E0-CD880AA9CA2B}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui">
-      <UniqueIdentifier>{4B5EFDD3--B89-A-44-62-8-E13-FE4D58688C4A}</UniqueIdentifier>
+      <UniqueIdentifier>{C61242D8--6EE-7-40-9D-9-42F-6D14971E2C74}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui\src">
-      <UniqueIdentifier>{9ABBE5B8--ABA-6-44-D9-A-A00-6CA173A2F59C}</UniqueIdentifier>
+      <UniqueIdentifier>{2E1508F4--06F-4-43-2A-A-ACB-6A21396BD990}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui">
-      <UniqueIdentifier>{264FFBCC--790-D-46-78-B-110-8D268F85274C}</UniqueIdentifier>
+      <UniqueIdentifier>{0FC38B62--695-5-46-51-9-642-F200731E56BD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\src">
-      <UniqueIdentifier>{71532B97--E3B-8-45-AD-8-1B4-750ED82AC937}</UniqueIdentifier>
+      <UniqueIdentifier>{B634137C--EE2-5-41-4F-8-BF0-9DBF6890162E}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs">
-      <UniqueIdentifier>{271EC65E--E5F-7-4B-20-8-17F-C45693B987EA}</UniqueIdentifier>
+      <UniqueIdentifier>{A71D687C--E0C-F-4A-F3-B-4B0-4AD9FAAC2342}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui">
-      <UniqueIdentifier>{27F36643--0E5-A-46-C7-8-4A4-E61DF9270543}</UniqueIdentifier>
+      <UniqueIdentifier>{9896D3F4--4AD-1-45-80-B-228-90F175730437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\libs\imgui\backends">
+      <UniqueIdentifier>{B01B272D--2DE-F-42-99-9-C40-0894F91A796F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\libs\imgui\extras">
+      <UniqueIdentifier>{4D3EFFAC--71E-B-46-B0-A-4CC-71AB338B758D}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui\src">
-      <UniqueIdentifier>{7225FD9A--07D-D-4E-70-8-34A-7B9D42E59276}</UniqueIdentifier>
+      <UniqueIdentifier>{2B094111--471-9-45-FD-9-83D-49EC502A216F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -182,98 +200,125 @@
     <ClInclude Include="src\plugin\image\image.hpp">
       <Filter>src\plugin\image</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxBaseGui.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxButton.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxColorPicker.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxGui.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxGuiGroup.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxGuiUtils.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxInputField.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxLabel.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxPanel.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxSlider.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxSliderGroup.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxGui\src\ofxToggle.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\BaseEngine.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseEngine.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\BaseTheme.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseTheme.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\DefaultTheme.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\DefaultTheme.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineGLFW.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineGLFW.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineOpenGLES.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineOpenFrameworks.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\EngineVk.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\Gui.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineVk.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\imconfig.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\gles1CompatibilityHacks.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\ImHelpers.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\glfwCompatibilityHacks.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\ofxImGui.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\Gui.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\src\ofxImGuiLoggerChannel.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\imconfig.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ImHelpers.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\LinkedList.hpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGui.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGuiConstants.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_arc_support.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_context_support.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl2.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3_loader.h">
+      <Filter>addons\ofxImGui\libs\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\extras\imgui_stdlib.h">
+      <Filter>addons\ofxImGui\libs\imgui\extras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imgui_internal.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_internal.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imstb_rectpack.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_rectpack.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imstb_textedit.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_textedit.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\of_v0.12.0_vs_release\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller2D.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawingTools.hpp">
-      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
