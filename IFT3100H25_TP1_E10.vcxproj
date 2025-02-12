@@ -104,6 +104,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Controller2D.cpp" />
+    <ClCompile Include="src\DrawingTools.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\DrawLineState.cpp" />
@@ -143,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Canvas.hpp" />
+    <ClInclude Include="src\Controller.hpp" />
+    <ClInclude Include="src\Controller2D.hpp" />
+    <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\DrawLineState.hpp" />
     <ClInclude Include="src\DrawPointState.hpp" />
     <ClInclude Include="src\Point2D.hpp" />

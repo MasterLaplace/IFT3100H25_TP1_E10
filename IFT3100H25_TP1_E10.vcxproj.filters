@@ -112,6 +112,8 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Controller2D.cpp" />
+    <ClCompile Include="src\DrawingTools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -320,6 +322,9 @@
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Controller.hpp" />
+    <ClInclude Include="src\DrawingTools.hpp" />
+    <ClInclude Include="src\Controller2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
