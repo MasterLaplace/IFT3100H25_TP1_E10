@@ -1,7 +1,9 @@
 #include "Node2D.hpp"
 
+//Le contructeur ne prend qu'un pointeur sur une Primitive2D.
 Node2D::Node2D(Primitive2D *primitive) : primitive(primitive) {}
 
+//Le destructeur s'assure de supprimer récursivement tout les enfants du Node2D.
 Node2D::~Node2D()
 {
     for (int i = 0; i < children.size(); i++)
@@ -10,8 +12,10 @@ Node2D::~Node2D()
     }
 }
 
+//Permet d'ajouter un enfant à sa liste.
 void Node2D::addChild(Node2D *child) { children.push_back(child); }
 
+//Permet de dessiner sa propre Primitive2D ainsi que celle de tout ses enfants.
 void Node2D::draw()
 {
 
@@ -26,6 +30,7 @@ void Node2D::draw()
     }
 }
 
+//Permet d'accéder à une Node2D spécifique à l'aide de son identifiant unique.
 Node2D *Node2D::getChildById(const int id)
 {
     // Cas de base. Si on est sur la bonne Node2D on la retourne.

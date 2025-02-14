@@ -1,5 +1,11 @@
 #pragma once
 
+/*
+La classe Canvas gère principalement l'arbre de structure.
+L'arbre de structure est composé de Node2D.
+Chaque Node2D possède une Primitive2D ainsi qu'une liste de pointeurs vers d'autres Node2D qui sont ses enfants.
+*/
+
 #include "Node2D.hpp"
 #include "ofMain.h"
 #include <vector>
