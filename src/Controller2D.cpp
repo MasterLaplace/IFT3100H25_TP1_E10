@@ -54,16 +54,8 @@ void Controller2D::mouseMoved(glm::vec2 pos)
 
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
-void Controller2D::onPointSizeChanged(float newSize) {
+void Controller2D::onPointSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
-    stateMachine.onStrokeSizeChanged(newSize);
-
-}
-
-void Controller2D::onPointColorChanged(ofColor newColor) {
-
-    stateMachine.onColorChanged(newColor);
-
-}
+void Controller2D::onPointColorChanged(ofColor newColor) { stateMachine.onColorChanged(newColor); }
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
