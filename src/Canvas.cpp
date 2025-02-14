@@ -1,6 +1,6 @@
 #include "Canvas.hpp"
 
-//À la destruction du Canvas, on s'assure qu'on détruit l'arbre de Node2D.
+// À la destruction du Canvas, on s'assure qu'on détruit l'arbre de Node2D.
 Canvas::~Canvas()
 {
     for (int i = 0; i < nodes.size(); i++)
@@ -9,10 +9,10 @@ Canvas::~Canvas()
     }
 }
 
-//Pour ajouter un enfant à sa liste de Node2D.
+// Pour ajouter un enfant à sa liste de Node2D.
 void Canvas::addNode(Node2D *node) { nodes.push_back(node); }
 
-//Pour dessiner à l'écran toutes les Primitive2D qui sont contenu dans chaques noeuds de l'arbre.
+// Pour dessiner à l'écran toutes les Primitive2D qui sont contenu dans chaques noeuds de l'arbre.
 void Canvas::draw()
 {
 
@@ -22,7 +22,7 @@ void Canvas::draw()
     }
 }
 
-//Pour récupérer un noeud spécifique à l'aide de son identifiant unique.
+// Pour récupérer un noeud spécifique à l'aide de son identifiant unique.
 Node2D *Canvas::getChildById(const int id)
 {
     Node2D *result = nullptr;
