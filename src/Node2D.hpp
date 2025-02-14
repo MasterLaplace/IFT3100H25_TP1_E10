@@ -16,5 +16,5 @@ public:
     void traverse();
 
 private:
-    std::vector<Node2D*> children;
+    std::vector<Node2D *> children;
 };

@@ -7,11 +7,11 @@
 class Canvas {
 public:
     ~Canvas();
-    void addNode(Node2D* node);
+    void addNode(Node2D *node);
     void draw();
     Node2D *getChildById(const int id);
     void traverse();
 
 private:
-    std::vector<Node2D*> nodes;
+    std::vector<Node2D *> nodes;
 };

@@ -10,13 +10,10 @@ Node2D::~Node2D()
     }
 }
 
-void Node2D::addChild(Node2D *child) {
+void Node2D::addChild(Node2D *child) { children.push_back(child); }
 
-    children.push_back(child);
-
-}
-
-void Node2D::draw() {
+void Node2D::draw()
+{
 
     if (primitive)
     {
@@ -51,8 +48,6 @@ Node2D *Node2D::getChildById(const int id)
 
 void Node2D::traverse() {
 
-    //À définir en fonction du type d'information dont on a besoin pour afficher dans le UI.
+    // À définir en fonction du type d'information dont on a besoin pour afficher dans le UI.
 
 };
-
-
