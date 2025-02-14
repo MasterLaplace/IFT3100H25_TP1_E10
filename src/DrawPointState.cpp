@@ -4,7 +4,10 @@ void DrawPointState::enter() { std::cout << "On entre dans le DrawPointState." <
 
 void DrawPointState::update() {}
 
-void DrawPointState::draw() { drawCursor(); }
+void DrawPointState::draw() { 
+    drawCursor();
+    drawPreview();
+}
 
 void DrawPointState::exit() { std::cout << "On sort du DrawPointState." << std::endl; }
 
@@ -20,4 +23,13 @@ void DrawPointState::drawCursor()
 
     // On dessine le point.
     ofDrawCircle(mousePosition + offset, radius);
+}
+
+void DrawPointState::drawPreview() {
+    ofColor previewColor = color;
+    previewColor.a = 127;
+
+    ofSetColor(previewColor);
+    ofDrawCircle(mousePosition, strokeSize);
+
 }

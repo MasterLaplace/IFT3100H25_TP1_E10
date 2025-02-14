@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Controller.hpp"
+#include "Canvas.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawingTools.hpp"
@@ -19,9 +20,13 @@ public:
 
     // Methodes pour parler avec le gui.
     void drawPointButtonPressed();
+    void onPointSizeChanged(float newSize);
+    void onPointColorChanged(ofColor newColor);
+
     void drawLineButtonPressed();
 
 private:
     StateMachine stateMachine;
+    Canvas canvas;
     DrawingTools gui;
 };

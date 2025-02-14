@@ -15,6 +15,7 @@ void Canvas::addNode(Node2D *node) { nodes.push_back(node); }
 //Pour dessiner à l'écran toutes les Primitive2D qui sont contenu dans chaques noeuds de l'arbre.
 void Canvas::draw()
 {
+    ofBackground(255);
 
     for (int i = 0; i < nodes.size(); i++)
     {

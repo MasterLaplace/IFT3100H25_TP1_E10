@@ -13,6 +13,9 @@ public:
     void update();
     void draw();
 
+    void onStrokeSizeChanged(float newSize);
+    void onColorChanged(ofColor newColor);
+
 private:
     State *currentState;
 };

@@ -6,6 +6,8 @@
 class State {
 public:
     glm::vec2 mousePosition;
+    float strokeSize;
+    ofColor color;
 
     virtual void enter() = 0;
     virtual void update() = 0;

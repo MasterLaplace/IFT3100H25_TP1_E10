@@ -10,4 +10,5 @@ class DrawPointState : public State {
 
 private:
     void drawCursor();
+    void drawPreview();
 };

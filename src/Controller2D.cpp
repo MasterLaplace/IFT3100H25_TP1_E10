@@ -15,6 +15,8 @@ void Controller2D::update() { stateMachine.update(); }
 
 void Controller2D::draw()
 {
+    // On dessine le canvas en premier.
+    canvas.draw();
 
     // C'est Controlleur qui demande à son état de dessiner des choses en lien avec l'état.
     // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
@@ -22,9 +24,6 @@ void Controller2D::draw()
 
     // C'est le Controlleur qui demande au GUI de s'afficher aussi.
     gui.draw();
-
-    // C'est probablement le Controlleur qui va aussi demander au Canvas de s'afficher.
-    // TODO
 }
 
 void Controller2D::exit() {}
@@ -54,5 +53,17 @@ void Controller2D::mouseMoved(glm::vec2 pos)
 }
 
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
+
+void Controller2D::onPointSizeChanged(float newSize) {
+
+    stateMachine.onStrokeSizeChanged(newSize);
+
+}
+
+void Controller2D::onPointColorChanged(ofColor newColor) {
+
+    stateMachine.onColorChanged(newColor);
+
+}
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
