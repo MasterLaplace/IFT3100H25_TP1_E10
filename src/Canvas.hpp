@@ -1,15 +1,17 @@
 #pragma once
 
-#include "Primitive2D.hpp"
+#include "Node2D.hpp"
 #include "ofMain.h"
 #include <vector>
 
 class Canvas {
 public:
-    void addPrimitive(Primitive2D *primitive);
+    ~Canvas();
+    void addNode(Node2D* node);
+    void draw();
+    Node2D *getChildById(const int id);
+    void traverse();
 
 private:
-    std::vector<Primitive2D *> shapes;
-
-    void drawPoint();
+    std::vector<Node2D*> nodes;
 };

@@ -8,8 +8,16 @@ public:
     {
         position = _position;
         color = _color;
+        id = nextId;
+        nextId++;
     }
 
+    virtual void draw() = 0;
+
+    int id;
     glm::vec2 position;
     ofColor color;
+
+private:
+    static int nextId;
 };
