@@ -8,7 +8,7 @@ void DrawingTools::setup(Controller2D *_controller)
     selectedTool = tool::POINT;
     controller->onPointSizeChanged(pointSize);
     controller->onPointColorChanged(pointColor);
-    gui.setup();              // On initialise le gui.
+    gui.setup(); // On initialise le gui.
 }
 
 void DrawingTools::draw()
@@ -20,9 +20,10 @@ void DrawingTools::draw()
     gui.end();
 }
 
-void DrawingTools::drawToolsPanel() {
+void DrawingTools::drawToolsPanel()
+{
 
-ImGui::Begin("Outils de dessin");
+    ImGui::Begin("Outils de dessin");
 
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
 
@@ -46,13 +47,14 @@ ImGui::Begin("Outils de dessin");
     ImGui::End();
 }
 
-void DrawingTools::drawDynamicPanel() {
+void DrawingTools::drawDynamicPanel()
+{
     ImGui::SetNextWindowPos(ImVec2(200, 10), ImGuiCond_FirstUseEver);
     ImGui::Begin("Option de dessin");
 
     switch (selectedTool)
     {
-    case DrawingTools::POINT: 
+    case DrawingTools::POINT:
         ImGui::Text("Option pour le point");
 
         // Si on change la taille du point.
@@ -63,16 +65,17 @@ void DrawingTools::drawDynamicPanel() {
         }
 
         // Si on change la couleur du point.
-        if (ImGui::ColorEdit3("Couleur", (float*)&pointColor));
+        if (ImGui::ColorEdit3("Couleur", (float *) &pointColor))
+            ;
         {
             // On envoie le tableau de couleur au controleur.
-            // C'est le Controlleur qui va transformer ce tableau en ofColor 
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
             // pour ensuite l'envoyer à l'état.
             controller->onPointColorChanged(pointColor);
         }
         break;
 
-    case DrawingTools::LINE: 
+    case DrawingTools::LINE:
         ImGui::Text("Option de ligne");
         ImGui::SliderFloat("Epaisseur", &lineWidth, 1.0f, 10.0f);
         ImGui::ColorEdit3("Couleur", lineColor);
@@ -82,5 +85,4 @@ void DrawingTools::drawDynamicPanel() {
     }
 
     ImGui::End();
-
 }

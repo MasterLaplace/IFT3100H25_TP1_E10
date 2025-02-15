@@ -54,21 +54,15 @@ void Controller2D::mouseMoved(glm::vec2 pos)
 
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
-void Controller2D::onPointSizeChanged(float newSize) {
-
-    stateMachine.onStrokeSizeChanged(newSize);
-
-}
-
+void Controller2D::onPointSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
 // Cette méthode reçoit un tableau de trois float parce que c'est ce que ImGui utilise.
 // On transforme ce tableau en un ofColor pour l'envoyer à l'état.
 void Controller2D::onPointColorChanged(float _newColor[3])
 {
 
-    ofColor newColor = ofColor(_newColor[0]*255, _newColor[1]*255, _newColor[2]*255);
+    ofColor newColor = ofColor(_newColor[0] * 255, _newColor[1] * 255, _newColor[2] * 255);
     stateMachine.onColorChanged(newColor);
-
 }
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
