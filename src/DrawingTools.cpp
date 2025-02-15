@@ -54,12 +54,20 @@ void DrawingTools::drawDynamicPanel() {
     {
     case DrawingTools::POINT: 
         ImGui::Text("Option pour le point");
+
+        // Si on change la taille du point.
         if (ImGui::SliderFloat("Taille", &pointSize, 1.0f, 50.0f))
         {
+            // On envoie l'information au controleur concernant la nouvelle taille du point.
             controller->onPointSizeChanged(pointSize);
         }
+
+        // Si on change la couleur du point.
         if (ImGui::ColorEdit3("Couleur", (float*)&pointColor));
         {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor 
+            // pour ensuite l'envoyer à l'état.
             controller->onPointColorChanged(pointColor);
         }
         break;

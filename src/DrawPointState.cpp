@@ -25,6 +25,7 @@ void DrawPointState::drawCursor()
     ofDrawCircle(mousePosition + offset, radius);
 }
 
+// On dessine le preview du point avec de la transparence.
 void DrawPointState::drawPreview() {
     ofColor previewColor = color;
     previewColor.a = 127;

@@ -27,7 +27,7 @@ private:
 
     // Attributs du point.
     float pointSize = 5.0f;
-    ofColor pointColor = ofColor::black;
+    float pointColor[3] = {0.0f, 0.0f, 0.0f};
 
     // Attributs de la ligne.
     float lineWidth = 2.0f;
