@@ -43,14 +43,6 @@ void StateMachine::draw()
     }
 }
 
-void StateMachine::onStrokeSizeChanged(float newSize) {
+void StateMachine::onStrokeSizeChanged(float newSize) { currentState->strokeSize = newSize; }
 
-    currentState->strokeSize = newSize;
-
-}
-
-void StateMachine::onColorChanged(ofColor newColor) {
-
-    currentState->color = newColor;
-
-}
+void StateMachine::onColorChanged(ofColor newColor) { currentState->color = newColor; }

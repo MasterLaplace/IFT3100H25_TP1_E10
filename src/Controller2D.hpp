@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Controller.hpp"
 #include "Canvas.hpp"
+#include "Controller.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawingTools.hpp"
