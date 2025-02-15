@@ -4,7 +4,8 @@ void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << 
 
 void DrawLineState::update() {}
 
-void DrawLineState::draw() { 
+void DrawLineState::draw()
+{
     drawCursor();
     drawPreview();
 }
@@ -26,7 +27,7 @@ void DrawLineState::drawCursor()
     ofDrawLine(mousePosition + upOffset, mousePosition + downOffset);
 }
 
-void DrawLineState::drawPreview() 
+void DrawLineState::drawPreview()
 {
     if (isMousePressed)
     {
