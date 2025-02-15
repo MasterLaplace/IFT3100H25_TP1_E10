@@ -31,6 +31,8 @@ void StateMachine::update()
     if (currentState)
     {
         currentState->mousePosition = mousePosition;
+        currentState->mousePressedPosition = mousePressedPosition;
+        currentState->isMousePressed = isMousePressed;
         currentState->update();
     }
 }

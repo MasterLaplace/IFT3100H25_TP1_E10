@@ -35,16 +35,19 @@ void Application::mouseMoved(int x, int y)
 }
 
 //--------------------------------------------------------------
-void Application::mouseDragged(int x, int y, int button) {}
+void Application::mouseDragged(int x, int y, int button) 
+{
+    glm::vec2 position = glm::vec2(x, y);
+    currentController->mouseMoved(position);
+}
 
 //--------------------------------------------------------------
-void Application::mousePressed(int x, int y, int button) {}
+void Application::mousePressed(int x, int y, int button) 
+{ currentController->mousePressed(x, y, button); }
 
 //--------------------------------------------------------------
 void Application::mouseReleased(int x, int y, int button)
-{
-    ofLog() << "<app::mouse released at: (" << x << ", " << y << ")>";
-}
+{ currentController->mouseReleased(x, y, button); }
 
 //--------------------------------------------------------------
 void Application::mouseEntered(int x, int y) {}

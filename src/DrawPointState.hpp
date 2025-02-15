@@ -3,6 +3,8 @@
 #include "State.hpp"
 
 class DrawPointState : public State {
+
+public:
     void enter() override;
     void update() override;
     void draw() override;

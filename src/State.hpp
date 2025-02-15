@@ -6,6 +6,8 @@
 class State {
 public:
     glm::vec2 mousePosition;
+    glm::vec2 mousePressedPosition;
+    bool isMousePressed = false;
     float strokeSize;
     ofColor color;
 

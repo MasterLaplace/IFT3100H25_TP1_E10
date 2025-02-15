@@ -10,18 +10,19 @@ class Controller2D;
 
 class DrawingTools {
 public:
+    enum tool {
+        POINT,
+        LINE
+    };
+    tool selectedTool;
+
     void setup(Controller2D *_controller);
     void draw();
 
 private:
     ofxImGui::Gui gui;
     Controller2D *controller;
-    enum tool {
-        POINT,
-        LINE
-    };
 
-    tool selectedTool;
     void drawToolsPanel();
     void drawDynamicPanel();
 
@@ -31,5 +32,5 @@ private:
 
     // Attributs de la ligne.
     float lineWidth = 2.0f;
-    float lineColor[3] = {1.0f, 1.0f, 1.0f};
+    float lineColor[3] = {0.0f, 0.0f, 0.0f};
 };

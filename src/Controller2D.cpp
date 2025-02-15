@@ -36,11 +36,13 @@ void Controller2D::keyPressed(int key)
     if (key == 'p')
     {
         drawPointButtonPressed();
+        gui.selectedTool = DrawingTools::tool::POINT;
     }
 
     if (key == 'l')
     {
         drawLineButtonPressed();
+        gui.selectedTool = DrawingTools::tool::LINE;
     }
 }
 
@@ -52,9 +54,20 @@ void Controller2D::mouseMoved(glm::vec2 pos)
     stateMachine.mousePosition = pos;
 }
 
+void Controller2D::mousePressed(int x, int y, int button) 
+{
+    // On transmet la position de la sourie à l'état.
+    // L'input provient de Application.
+    stateMachine.mousePressedPosition = glm::vec2(x, y);
+    stateMachine.isMousePressed = true;
+}
+
+void Controller2D::mouseReleased(int x, int y, int button) 
+{ stateMachine.isMousePressed = false; }
+
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
-void Controller2D::onPointSizeChanged(float newSize) {
+void Controller2D::onSizeChanged(float newSize) {
 
     stateMachine.onStrokeSizeChanged(newSize);
 
@@ -63,7 +76,7 @@ void Controller2D::onPointSizeChanged(float newSize) {
 
 // Cette méthode reçoit un tableau de trois float parce que c'est ce que ImGui utilise.
 // On transforme ce tableau en un ofColor pour l'envoyer à l'état.
-void Controller2D::onPointColorChanged(float _newColor[3])
+void Controller2D::onColorChanged(float _newColor[3])
 {
 
     ofColor newColor = ofColor(_newColor[0]*255, _newColor[1]*255, _newColor[2]*255);

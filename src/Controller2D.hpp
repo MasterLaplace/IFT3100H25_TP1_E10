@@ -17,11 +17,13 @@ public:
     // Methodes pour que "Application.cpp" puisse parler au Controlleur.
     void keyPressed(int key);
     void mouseMoved(glm::vec2 pos);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
 
     // Methodes pour parler avec le gui.
     void drawPointButtonPressed();
-    void onPointSizeChanged(float newSize);
-    void onPointColorChanged(float _newColor[3]);
+    void onSizeChanged(float newSize);
+    void onColorChanged(float _newColor[3]);
 
     void drawLineButtonPressed();
 

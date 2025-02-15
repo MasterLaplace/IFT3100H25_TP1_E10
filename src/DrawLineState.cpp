@@ -4,7 +4,10 @@ void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << 
 
 void DrawLineState::update() {}
 
-void DrawLineState::draw() { drawCursor(); }
+void DrawLineState::draw() { 
+    drawCursor();
+    drawPreview();
+}
 
 void DrawLineState::exit() { std::cout << "On sort du DrawLineState." << std::endl; }
 
@@ -21,4 +24,17 @@ void DrawLineState::drawCursor()
 
     // On dessine la ligne.
     ofDrawLine(mousePosition + upOffset, mousePosition + downOffset);
+}
+
+void DrawLineState::drawPreview() 
+{
+    if (isMousePressed)
+    {
+        ofColor previewColor = color;
+        previewColor.a = 127;
+        ofSetColor(previewColor);
+        ofSetLineWidth(strokeSize);
+        ofDrawLine(mousePressedPosition, mousePosition);
+        std::cout << mousePosition << std::endl;
+    }
 }

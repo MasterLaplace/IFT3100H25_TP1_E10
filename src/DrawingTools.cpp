@@ -6,8 +6,8 @@ void DrawingTools::setup(Controller2D *_controller)
 
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
-    controller->onPointSizeChanged(pointSize);
-    controller->onPointColorChanged(pointColor);
+    controller->onSizeChanged(pointSize);
+    controller->onColorChanged(pointColor);
     gui.setup();              // On initialise le gui.
 }
 
@@ -32,8 +32,8 @@ ImGui::Begin("Outils de dessin");
         selectedTool = tool::POINT;
         // On appelle la méthode "drawPointButttonPressed" sur le controleur.
         controller->drawPointButtonPressed();
-        controller->onPointSizeChanged(pointSize);
-        controller->onPointColorChanged(pointColor);
+        controller->onSizeChanged(pointSize);
+        controller->onColorChanged(pointColor);
     }
 
     // Même chose pour la ligne.
@@ -41,6 +41,8 @@ ImGui::Begin("Outils de dessin");
     {
         selectedTool = tool::LINE;
         controller->drawLineButtonPressed();
+        controller->onSizeChanged(lineWidth);
+        controller->onColorChanged(lineColor);
     }
 
     ImGui::End();
@@ -59,7 +61,7 @@ void DrawingTools::drawDynamicPanel() {
         if (ImGui::SliderFloat("Taille", &pointSize, 1.0f, 50.0f))
         {
             // On envoie l'information au controleur concernant la nouvelle taille du point.
-            controller->onPointSizeChanged(pointSize);
+            controller->onSizeChanged(pointSize);
         }
 
         // Si on change la couleur du point.
@@ -68,14 +70,28 @@ void DrawingTools::drawDynamicPanel() {
             // On envoie le tableau de couleur au controleur.
             // C'est le Controlleur qui va transformer ce tableau en ofColor 
             // pour ensuite l'envoyer à l'état.
-            controller->onPointColorChanged(pointColor);
+            controller->onColorChanged(pointColor);
         }
         break;
 
     case DrawingTools::LINE: 
         ImGui::Text("Option de ligne");
-        ImGui::SliderFloat("Epaisseur", &lineWidth, 1.0f, 10.0f);
-        ImGui::ColorEdit3("Couleur", lineColor);
+
+        // Si on change la taille de la ligne.
+        if (ImGui::SliderFloat("Epaisseur", &lineWidth, 1.0f, 10.0f))
+        {
+            // On envoie l'information au controleur concernant la nouvelle taille de la ligne.
+            controller->onSizeChanged(lineWidth);
+        }
+
+        // Si on change la couleur de la ligne.
+        if (ImGui::ColorEdit3("Couleur", lineColor))
+        {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
+            // pour ensuite l'envoyer à l'état.
+            controller->onColorChanged(lineColor);
+        }
         break;
 
     default: break;

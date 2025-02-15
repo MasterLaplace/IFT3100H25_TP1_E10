@@ -5,6 +5,8 @@
 class StateMachine {
 public:
     glm::vec2 mousePosition;
+    glm::vec2 mousePressedPosition;
+    bool isMousePressed = false;
 
     StateMachine();
     ~StateMachine();
