@@ -4,7 +4,8 @@ void DrawPointState::enter() { std::cout << "On entre dans le DrawPointState." <
 
 void DrawPointState::update() {}
 
-void DrawPointState::draw() { 
+void DrawPointState::draw()
+{
     drawCursor();
     drawPreview();
 }
@@ -26,11 +27,11 @@ void DrawPointState::drawCursor()
 }
 
 // On dessine le preview du point avec de la transparence.
-void DrawPointState::drawPreview() {
+void DrawPointState::drawPreview()
+{
     ofColor previewColor = color;
     previewColor.a = 127;
 
     ofSetColor(previewColor);
     ofDrawCircle(mousePosition, strokeSize);
-
 }
