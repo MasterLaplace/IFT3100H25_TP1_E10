@@ -2,9 +2,10 @@
 
 #include "Canvas.hpp"
 #include "Controller.hpp"
-#include "DrawLineState.hpp"
-#include "DrawPointState.hpp"
 #include "DrawingTools.hpp"
+#include "plugin/states/states.hpp"
+
+using namespace plugin::states;
 
 class Controller2D : public Controller {
 

@@ -1,5 +1,7 @@
 #include "DrawPointState.hpp"
 
+using namespace plugin::primitive;
+
 namespace plugin::states {
 
 void DrawPointState::enter() { std::cout << "On entre dans le DrawPointState." << std::endl; }

@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 
+namespace plugin::primitive {
+
 class Primitive2D {
 public:
     Primitive2D(glm::vec2 _position, ofColor _color)
@@ -21,3 +23,5 @@ public:
 private:
     static int nextId;
 };
+
+} // namespace plugin::primitives

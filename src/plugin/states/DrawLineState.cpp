@@ -1,8 +1,20 @@
 #include "DrawLineState.hpp"
 
+using namespace plugin::primitive;
+
 namespace plugin::states {
 
 void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
+
+void DrawLineState::mousePressed(int x, int y, int button) { }
+
+void DrawLineState::mouseReleased(int x, int y, int button)
+{
+    Canvas *canvas = Canvas::getInstance();
+    Line2D *line = new Line2D(mousePressedPosition, mousePosition, color, strokeSize);
+    Node2D *node = new Node2D(line);
+    canvas->addNode(node);
+}
 
 void DrawLineState::update() {}
 

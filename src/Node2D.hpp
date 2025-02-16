@@ -7,8 +7,9 @@ Chaque Node2D contient une Primitive2D et une liste de pointeurs sur des Node2D 
 */
 
 #include <vector>
+#include "plugin/primitive/primitive.hpp"
 
-using namespace plugin;
+using namespace plugin::primitive;
 
 class Node2D {
 public:

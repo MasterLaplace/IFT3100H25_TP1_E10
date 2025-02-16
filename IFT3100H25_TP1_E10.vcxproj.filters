@@ -117,6 +117,9 @@
     <ClCompile Include="src\plugin\primitives\Primitive2D.cpp" />
     <ClCompile Include="src\plugin\states\DrawPointState.cpp" />
     <ClCompile Include="src\plugin\states\StateMachine.cpp" />
+    <ClCompile Include="src\plugin\primitive\Line2D.cpp" />
+    <ClCompile Include="src\plugin\primitive\Point2D.cpp" />
+    <ClCompile Include="src\plugin\primitive\Primitive2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -323,6 +326,12 @@
     <ClInclude Include="src\plugin\states\DrawPointState.hpp" />
     <ClInclude Include="src\plugin\states\State.hpp" />
     <ClInclude Include="src\plugin\states\StateMachine.hpp" />
+    <ClInclude Include="src\plugin\states\states.hpp" />
+    <ClInclude Include="src\plugin\primitives\primitive.hpp" />
+    <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\primitive.hpp" />
+    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

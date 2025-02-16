@@ -4,7 +4,6 @@
 Une classe virtuelle de controlleur pour pouvoir un controller2D et, éventuellement, un Controller3D.
 */
 
-#include "StateMachine.hpp"
 #include "ofMain.h"
 #include "ofxImGui.h"
 
