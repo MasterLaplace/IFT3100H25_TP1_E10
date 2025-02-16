@@ -104,7 +104,7 @@ void DrawingTools::drawDynamicPanel()
     ImGui::End();
 }
 
-void DrawingTools::drawSceneGraph() 
+void DrawingTools::drawSceneGraph()
 {
     ImGui::SetNextWindowPos(ImVec2(400, 10), ImGuiCond_FirstUseEver);
     ImGui::Begin("Graphe de scene");

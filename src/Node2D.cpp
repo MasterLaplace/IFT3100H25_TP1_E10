@@ -50,7 +50,8 @@ Node2D *Node2D::getChildById(const int id)
     return nullptr; // Sinon, on retourne un nullptr.
 }
 
-void Node2D::traverse() {
+void Node2D::traverse()
+{
 
     if (primitive != nullptr)
     {
@@ -61,5 +62,4 @@ void Node2D::traverse() {
     {
         children[i]->traverse();
     }
-
 };

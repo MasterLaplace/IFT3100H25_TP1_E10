@@ -13,7 +13,7 @@ Chaque Node2D possède une Primitive2D ainsi qu'une liste de pointeurs vers d'aut
 class Canvas {
 public:
     std::vector<Node2D *> nodes;
-    
+
     ~Canvas();
 
     static Canvas *getInstance();
@@ -24,5 +24,4 @@ public:
     void traverse();
 
 private:
-    
 };

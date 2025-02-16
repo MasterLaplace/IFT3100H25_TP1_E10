@@ -44,8 +44,8 @@ Node2D *Canvas::getChildById(const int id)
     return result;
 }
 
-void Canvas::traverse() 
-{ 
+void Canvas::traverse()
+{
     for (int i = 0; i < nodes.size(); i++)
     {
         nodes[i]->traverse();

@@ -4,8 +4,8 @@
 #include "Controller.hpp"
 #include "DrawingTools.hpp"
 #include "plugin/states/states.hpp"
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace plugin::states;
 

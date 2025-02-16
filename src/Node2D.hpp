@@ -25,5 +25,4 @@ public:
     void traverse();
 
 private:
-    
 };

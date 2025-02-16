@@ -14,9 +14,7 @@ void Controller2D::setup()
     gui.setup(this);
 }
 
-void Controller2D::update() { 
-    stateMachine.update(); 
-}
+void Controller2D::update() { stateMachine.update(); }
 
 void Controller2D::draw()
 {
@@ -78,8 +76,8 @@ void Controller2D::onColorChanged(float _newColor[3])
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
-std::vector<int> Controller2D::getPrimitiveId() 
-{ 
+std::vector<int> Controller2D::getPrimitiveId()
+{
     std::vector<int> ids;
     for (auto node : canvas->nodes)
     {
@@ -88,8 +86,8 @@ std::vector<int> Controller2D::getPrimitiveId()
     return ids;
 }
 
-void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids) 
-{ 
+void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)
+{
     if (node->primitive != nullptr)
     {
         ids.push_back(node->primitive->id);
