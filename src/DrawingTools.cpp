@@ -119,7 +119,7 @@ void DrawingTools::drawSceneGraph()
     std::vector<int> ids = controller->getPrimitiveId();
     for (int id : ids)
     {
-        if(ImGui::Selectable(("Primitive ", std::to_string(id)).c_str(), selectedPrimitiveId == id))
+        if (ImGui::Selectable(("Primitive ", std::to_string(id)).c_str(), selectedPrimitiveId == id))
         {
             selectedPrimitiveId = id;
             std::cout << "Primitive " << id << " sélectionnée." << std::endl;
