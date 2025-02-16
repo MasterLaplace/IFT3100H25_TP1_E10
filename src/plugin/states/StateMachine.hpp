@@ -1,6 +1,9 @@
 #pragma once
 
 #include "State.hpp"
+#include "Canvas.hpp"
+
+namespace plugin::states {
 
 class StateMachine {
 public:
@@ -13,6 +16,8 @@ public:
 
     void changeState(State *newState);
     void update();
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
     void draw();
 
     void onStrokeSizeChanged(float newSize);
@@ -21,3 +26,5 @@ public:
 private:
     State *currentState;
 };
+
+} // namespace plugin::states

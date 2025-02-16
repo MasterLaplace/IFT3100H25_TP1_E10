@@ -2,6 +2,8 @@
 
 #include "State.hpp"
 
+namespace plugin::states {
+
 class DrawLineState : public State {
 
 public:
@@ -14,3 +16,5 @@ private:
     void drawCursor();
     void drawPreview();
 };
+
+} // namespace plugin::states

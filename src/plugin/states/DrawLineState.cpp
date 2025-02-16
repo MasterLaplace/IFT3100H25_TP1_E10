@@ -1,5 +1,7 @@
 #include "DrawLineState.hpp"
 
+namespace plugin::states {
+
 void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
 
 void DrawLineState::update() {}
@@ -39,3 +41,5 @@ void DrawLineState::drawPreview()
         std::cout << mousePosition << std::endl;
     }
 }
+
+} // namespace plugin::states   

@@ -1,8 +1,22 @@
 #include "DrawPointState.hpp"
 
+namespace plugin::states {
+
 void DrawPointState::enter() { std::cout << "On entre dans le DrawPointState." << std::endl; }
 
 void DrawPointState::update() {}
+
+void DrawPointState::mousePressed(int x, int y, int button) {}
+
+void DrawPointState::mouseReleased(int x, int y, int button)
+{
+    Canvas *canvas = Canvas::getInstance();
+
+    Point2D *point = new Point2D(mousePosition, color, strokeSize);
+    Node2D *node = new Node2D(point);
+
+    canvas->addNode(node);
+}
 
 void DrawPointState::draw()
 {
@@ -35,3 +49,5 @@ void DrawPointState::drawPreview()
     ofSetColor(previewColor);
     ofDrawCircle(mousePosition, strokeSize);
 }
+
+} // namespace plugin::states

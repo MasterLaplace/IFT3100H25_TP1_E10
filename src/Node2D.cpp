@@ -18,7 +18,6 @@ void Node2D::addChild(Node2D *child) { children.push_back(child); }
 // Permet de dessiner sa propre Primitive2D ainsi que celle de tout ses enfants.
 void Node2D::draw()
 {
-
     if (primitive)
     {
         primitive->draw();

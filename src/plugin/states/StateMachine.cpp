@@ -1,5 +1,7 @@
 #include "StateMachine.hpp"
 
+namespace plugin::states {
+
 StateMachine::StateMachine() { currentState = nullptr; }
 
 StateMachine::~StateMachine()
@@ -37,6 +39,22 @@ void StateMachine::update()
     }
 }
 
+void StateMachine::mousePressed(int x, int y, int button)
+{
+    // On transmet la position de la sourie à l'état.
+    // L'input provient de Application.
+    mousePressedPosition = glm::vec2(x, y);
+    isMousePressed = true;
+
+    currentState->mousePressed(x, y, button);
+}
+
+void StateMachine::mouseReleased(int x, int y, int button)
+{
+    isMousePressed = false;
+    currentState->mouseReleased(x, y, button);
+}
+
 void StateMachine::draw()
 {
     if (currentState)
@@ -48,3 +66,5 @@ void StateMachine::draw()
 void StateMachine::onStrokeSizeChanged(float newSize) { currentState->strokeSize = newSize; }
 
 void StateMachine::onColorChanged(ofColor newColor) { currentState->color = newColor; }
+
+} // namespace plugin::states

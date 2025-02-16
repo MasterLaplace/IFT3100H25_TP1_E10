@@ -29,6 +29,6 @@ public:
 
 private:
     StateMachine stateMachine;
-    Canvas canvas;
+    Canvas *canvas;
     DrawingTools gui;
 };

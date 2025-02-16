@@ -52,6 +52,8 @@ private:
     // Controller3D controller3D;
     Controller *currentController;
 
+    bool isInterceptedByImGui();
+
     /*
     Vestige de l'histogramme.
     Une fois l'histogramme bien implémenté je vais retirer ça.

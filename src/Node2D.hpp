@@ -6,8 +6,9 @@ Cette structure de données est gérée par la classe Canvas.
 Chaque Node2D contient une Primitive2D et une liste de pointeurs sur des Node2D qui sont ses enfants.
 */
 
-#include "Primitive2D.hpp"
 #include <vector>
+
+using namespace plugin;
 
 class Node2D {
 public:

@@ -13,6 +13,9 @@ Chaque Node2D possède une Primitive2D ainsi qu'une liste de pointeurs vers d'aut
 class Canvas {
 public:
     ~Canvas();
+
+    static Canvas *getInstance();
+
     void addNode(Node2D *node);
     void draw();
     Node2D *getChildById(const int id);
