@@ -110,6 +110,7 @@
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\DrawLineState.cpp" />
     <ClCompile Include="src\DrawPointState.cpp" />
+    <ClCompile Include="src\Node2D.cpp" />
     <ClCompile Include="src\StateMachine.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\DrawLineState.hpp" />
     <ClInclude Include="src\DrawPointState.hpp" />
+    <ClInclude Include="src\Node2D.hpp" />
     <ClInclude Include="src\Point2D.hpp" />
     <ClInclude Include="src\Primitive2D.hpp" />
     <ClInclude Include="src\State.hpp" />

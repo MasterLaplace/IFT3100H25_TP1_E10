@@ -114,6 +114,7 @@
     </ClCompile>
     <ClCompile Include="src\Controller2D.cpp" />
     <ClCompile Include="src\DrawingTools.cpp" />
+    <ClCompile Include="src\Node2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -325,6 +326,7 @@
     <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\Controller2D.hpp" />
+    <ClInclude Include="src\Node2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
