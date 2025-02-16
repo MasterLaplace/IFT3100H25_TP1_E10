@@ -2,9 +2,12 @@
 
 #include "Canvas.hpp"
 #include "Controller.hpp"
-#include "DrawLineState.hpp"
-#include "DrawPointState.hpp"
 #include "DrawingTools.hpp"
+#include "plugin/states/states.hpp"
+#include <vector>
+#include <string>
+
+using namespace plugin::states;
 
 class Controller2D : public Controller {
 
@@ -24,11 +27,12 @@ public:
     void drawPointButtonPressed();
     void onSizeChanged(float newSize);
     void onColorChanged(float _newColor[3]);
-
     void drawLineButtonPressed();
+    std::vector<int> getPrimitiveId();
+    void collectPrimitiveId(Node2D *node, std::vector<int> &ids);
 
 private:
     StateMachine stateMachine;
-    Canvas canvas;
+    Canvas *canvas;
     DrawingTools gui;
 };

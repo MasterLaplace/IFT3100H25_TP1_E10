@@ -29,7 +29,6 @@ void Application::keyReleased(int key) { ofLog() << "<app::keyReleased: " << key
 //--------------------------------------------------------------
 void Application::mouseMoved(int x, int y)
 {
-
     glm::vec2 position = glm::vec2(x, y);
     currentController->mouseMoved(position);
 }
@@ -42,10 +41,22 @@ void Application::mouseDragged(int x, int y, int button)
 }
 
 //--------------------------------------------------------------
-void Application::mousePressed(int x, int y, int button) { currentController->mousePressed(x, y, button); }
+void Application::mousePressed(int x, int y, int button)
+{
+    if (isInterceptedByImGui())
+        return;
+
+    currentController->mousePressed(x, y, button);
+}
 
 //--------------------------------------------------------------
-void Application::mouseReleased(int x, int y, int button) { currentController->mouseReleased(x, y, button); }
+void Application::mouseReleased(int x, int y, int button)
+{
+    if (isInterceptedByImGui())
+        return;
+
+    currentController->mouseReleased(x, y, button);
+}
 
 //--------------------------------------------------------------
 void Application::mouseEntered(int x, int y) {}
@@ -61,3 +72,10 @@ void Application::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
 void Application::dragEvent(ofDragInfo dragInfo) {}
+
+bool Application::isInterceptedByImGui()
+{
+    // Interception de la sourie par ImGui si on est en train d'interagir avec l'interface.
+    ImGuiIO &io = ImGui::GetIO();
+    return io.WantCaptureMouse;
+}

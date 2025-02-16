@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Canvas.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller2D.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DrawingTools.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Node2D.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Application.cpp">
+      <Filter>src\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Renderer.cpp">
+      <Filter>src\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\image\Histogram.cpp">
+      <Filter>src\plugin\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\primitive\Line2D.cpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\primitive\Point2D.cpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\primitive\Primitive2D.cpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawLineState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawPointState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\StateMachine.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\BaseEngine.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\DefaultTheme.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineGLFW.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineVk.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\Gui.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\ImHelpers.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.cpp">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_demo.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_draw.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app">
+      <UniqueIdentifier>{AEF99ED3--4DD-8-43-64-A-BF7-7AE26D0F1B41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin">
+      <UniqueIdentifier>{AB604C34--7E1-D-48-B5-9-C0E-4ED625D76FA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin\image">
+      <UniqueIdentifier>{140F3E2A--4C7-9-44-88-B-A60-22AED87FEA04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin\primitive">
+      <UniqueIdentifier>{57364C7B--13E-8-4D-41-8-D6A-6BF314F94ED1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin\states">
+      <UniqueIdentifier>{5D2B5AF6--AB7-3-43-96-B-2B6-08CFE92D69AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{F09F4621--7F9-F-45-05-B-BD3-A48B6461AE73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui">
+      <UniqueIdentifier>{B9B4FDA5--163-F-4C-45-8-70E-FBE412255CBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\src">
+      <UniqueIdentifier>{D373E7E1--D73-C-47-76-8-212-3279264F8B5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\libs">
+      <UniqueIdentifier>{C22D631A--18C-E-47-BD-A-484-4FB046E614DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\libs\imgui">
+      <UniqueIdentifier>{43285ACE--D3D-C-4B-E1-9-36F-E57BCFC5C8ED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImGui\libs\imgui\src">
+      <UniqueIdentifier>{12949914--B4F-A-43-5C-9-BAB-D843D27BCD1F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Canvas.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller2D.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DrawingTools.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Node2D.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Application.hpp">
+      <Filter>src\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Renderer.hpp">
+      <Filter>src\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\image\Exporting.hpp">
+      <Filter>src\plugin\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\image\Histogram.hpp">
+      <Filter>src\plugin\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\image\Importing.hpp">
+      <Filter>src\plugin\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\image\Sampling.hpp">
+      <Filter>src\plugin\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\image\image.hpp">
+      <Filter>src\plugin\image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\primitive\Line2D.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\primitive\Point2D.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\primitive\primitive.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawLineState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawPointState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\State.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\StateMachine.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\states.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseEngine.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseTheme.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\DefaultTheme.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineGLFW.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineVk.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\Gui.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\imconfig.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ImHelpers.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGui.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.h">
+      <Filter>addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.h">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_internal.h">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_rectpack.h">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_textedit.h">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
+      <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

@@ -25,6 +25,7 @@ private:
 
     void drawToolsPanel();
     void drawDynamicPanel();
+    void drawSceneGraph();
 
     // Attributs du point.
     float pointSize = 5.0f;

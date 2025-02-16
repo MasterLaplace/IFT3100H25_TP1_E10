@@ -17,6 +17,7 @@ void DrawingTools::draw()
     gui.begin();
     drawToolsPanel();
     drawDynamicPanel();
+    drawSceneGraph();
     gui.end();
 }
 
@@ -98,6 +99,19 @@ void DrawingTools::drawDynamicPanel()
         break;
 
     default: break;
+    }
+
+    ImGui::End();
+}
+
+void DrawingTools::drawSceneGraph() 
+{
+    ImGui::SetNextWindowPos(ImVec2(400, 10), ImGuiCond_FirstUseEver);
+    ImGui::Begin("Graphe de scene");
+    std::vector<int> ids = controller->getPrimitiveId();
+    for (int id : ids)
+    {
+        ImGui::Text("Primitive %d", id);
     }
 
     ImGui::End();

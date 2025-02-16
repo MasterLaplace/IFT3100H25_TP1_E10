@@ -18,7 +18,6 @@ void Node2D::addChild(Node2D *child) { children.push_back(child); }
 // Permet de dessiner sa propre Primitive2D ainsi que celle de tout ses enfants.
 void Node2D::draw()
 {
-
     if (primitive)
     {
         primitive->draw();
@@ -53,6 +52,14 @@ Node2D *Node2D::getChildById(const int id)
 
 void Node2D::traverse() {
 
-    // À définir en fonction du type d'information dont on a besoin pour afficher dans le UI.
+    if (primitive != nullptr)
+    {
+        std::cout << "Primitive: " << primitive->id << std::endl;
+    }
+
+    for (int i = 0; i < children.size(); i++)
+    {
+        children[i]->traverse();
+    }
 
 };

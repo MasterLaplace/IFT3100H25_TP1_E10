@@ -1,5 +1,12 @@
 #include "Canvas.hpp"
 
+// Méthode statique pour obtenir l'instance du Canvas.
+Canvas *Canvas::getInstance()
+{
+    static Canvas instance;
+    return &instance;
+}
+
 // À la destruction du Canvas, on s'assure qu'on détruit l'arbre de Node2D.
 Canvas::~Canvas()
 {
@@ -37,8 +44,10 @@ Node2D *Canvas::getChildById(const int id)
     return result;
 }
 
-void Canvas::traverse()
-{
-
-    // À définir en fonction du type d'information dont on a besoin pour afficher dans le UI.
+void Canvas::traverse() 
+{ 
+    for (int i = 0; i < nodes.size(); i++)
+    {
+        nodes[i]->traverse();
+    }
 }

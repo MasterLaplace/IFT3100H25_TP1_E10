@@ -2,6 +2,9 @@
 
 void Controller2D::setup()
 {
+    // On configure l'instance du Canvas dans la scène par le singleton
+    // pour qu'on puisse y accéder de n'importe où.
+    canvas = Canvas::getInstance();
 
     // On initialise l'état du Controlleur pour dessiner des points.
     // On pourrait changer l'état initial au besoin.
@@ -11,12 +14,14 @@ void Controller2D::setup()
     gui.setup(this);
 }
 
-void Controller2D::update() { stateMachine.update(); }
+void Controller2D::update() { 
+    stateMachine.update(); 
+}
 
 void Controller2D::draw()
 {
     // On dessine le canvas en premier.
-    canvas.draw();
+    canvas->draw();
 
     // C'est Controlleur qui demande à son état de dessiner des choses en lien avec l'état.
     // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
@@ -54,15 +59,9 @@ void Controller2D::mouseMoved(glm::vec2 pos)
     stateMachine.mousePosition = pos;
 }
 
-void Controller2D::mousePressed(int x, int y, int button)
-{
-    // On transmet la position de la sourie à l'état.
-    // L'input provient de Application.
-    stateMachine.mousePressedPosition = glm::vec2(x, y);
-    stateMachine.isMousePressed = true;
-}
+void Controller2D::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.isMousePressed = false; }
+void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
 
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
@@ -78,3 +77,26 @@ void Controller2D::onColorChanged(float _newColor[3])
 }
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
+
+std::vector<int> Controller2D::getPrimitiveId() 
+{ 
+    std::vector<int> ids;
+    for (auto node : canvas->nodes)
+    {
+        collectPrimitiveId(node, ids);
+    }
+    return ids;
+}
+
+void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids) 
+{ 
+    if (node->primitive != nullptr)
+    {
+        ids.push_back(node->primitive->id);
+    }
+
+    for (auto child : node->children)
+    {
+        collectPrimitiveId(child, ids);
+    }
+}
