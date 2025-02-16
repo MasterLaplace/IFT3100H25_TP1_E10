@@ -106,12 +106,24 @@ void DrawingTools::drawDynamicPanel()
 
 void DrawingTools::drawSceneGraph()
 {
+    float panelWidth = ofGetWidth() / 6;
+    float panelHeight = ofGetHeight() / 2;
+
     ImGui::SetNextWindowPos(ImVec2(400, 10), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(panelHeight, panelWidth), ImGuiCond_FirstUseEver);
     ImGui::Begin("Graphe de scene");
+
+    ImGui::Text("Primitive :");
+    ImGui::Separator();
+
     std::vector<int> ids = controller->getPrimitiveId();
     for (int id : ids)
     {
-        ImGui::Text("Primitive %d", id);
+        if(ImGui::Selectable(("Primitive ", std::to_string(id)).c_str(), selectedPrimitiveId == id))
+        {
+            selectedPrimitiveId = id;
+            std::cout << "Primitive " << id << " sélectionnée." << std::endl;
+        }
     }
 
     ImGui::End();

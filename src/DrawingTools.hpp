@@ -27,6 +27,8 @@ private:
     void drawDynamicPanel();
     void drawSceneGraph();
 
+    int selectedPrimitiveId = -1;
+
     // Attributs du point.
     float pointSize = 5.0f;
     float pointColor[3] = {0.0f, 0.0f, 0.0f};
