@@ -41,17 +41,21 @@ void Application::mouseDragged(int x, int y, int button)
 }
 
 //--------------------------------------------------------------
-void Application::mousePressed(int x, int y, int button) { 
-    if (isInterceptedByImGui()) return;
+void Application::mousePressed(int x, int y, int button)
+{
+    if (isInterceptedByImGui())
+        return;
 
-    currentController->mousePressed(x, y, button); 
+    currentController->mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------
-void Application::mouseReleased(int x, int y, int button) { 
-    if (isInterceptedByImGui()) return;
+void Application::mouseReleased(int x, int y, int button)
+{
+    if (isInterceptedByImGui())
+        return;
 
-    currentController->mouseReleased(x, y, button); 
+    currentController->mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------

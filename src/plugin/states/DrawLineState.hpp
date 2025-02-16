@@ -1,7 +1,7 @@
 #pragma once
 
-#include "State.hpp"
 #include "Canvas.hpp"
+#include "State.hpp"
 #include "plugin/primitive/primitive.hpp"
 
 namespace plugin::states {

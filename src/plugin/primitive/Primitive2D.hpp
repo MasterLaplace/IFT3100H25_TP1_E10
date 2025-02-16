@@ -24,4 +24,4 @@ private:
     static int nextId;
 };
 
-} // namespace plugin::primitives
+} // namespace plugin::primitive

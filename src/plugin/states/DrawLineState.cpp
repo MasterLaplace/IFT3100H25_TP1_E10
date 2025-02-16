@@ -6,7 +6,7 @@ namespace plugin::states {
 
 void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
 
-void DrawLineState::mousePressed(int x, int y, int button) { }
+void DrawLineState::mousePressed(int x, int y, int button) {}
 
 void DrawLineState::mouseReleased(int x, int y, int button)
 {
@@ -54,4 +54,4 @@ void DrawLineState::drawPreview()
     }
 }
 
-} // namespace plugin::states   
+} // namespace plugin::states

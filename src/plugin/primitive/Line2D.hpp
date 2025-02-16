@@ -7,7 +7,8 @@ namespace plugin::primitive {
 
 class Line2D : public Primitive2D {
 public:
-    Line2D(glm::vec2 _startPosition, glm::vec2 _endPosition, ofColor _color, float _strokeWidth) : Primitive2D(_startPosition, _color)
+    Line2D(glm::vec2 _startPosition, glm::vec2 _endPosition, ofColor _color, float _strokeWidth)
+        : Primitive2D(_startPosition, _color)
     {
         endPosition = _endPosition;
         strokeWidth = _strokeWidth;

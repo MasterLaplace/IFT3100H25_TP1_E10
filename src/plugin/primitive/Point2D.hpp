@@ -14,4 +14,4 @@ public:
     float size;
 };
 
-} // namespace plugin::primitives
+} // namespace plugin::primitive
