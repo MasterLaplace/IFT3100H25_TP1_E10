@@ -4,8 +4,8 @@
 C'est une classe temporaire de UI juste pour donner une idée de comment l'implémenter.
 */
 
-#include "ofxImGui.h"
 #include "Node2D.hpp"
+#include "ofxImGui.h"
 
 class Controller2D;
 

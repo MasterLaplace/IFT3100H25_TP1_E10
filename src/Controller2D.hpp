@@ -30,7 +30,7 @@ public:
     void onSizeChanged(float newSize);
     void onColorChanged(float _newColor[3]);
     void onPrimitiveSelected(int id);
-    
+
     std::vector<int> getPrimitiveId();
     Node2D *getNodeById(const int id);
     void collectPrimitiveId(Node2D *node, std::vector<int> &ids);

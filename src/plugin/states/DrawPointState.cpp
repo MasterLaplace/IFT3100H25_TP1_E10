@@ -26,7 +26,6 @@ void DrawPointState::mouseReleased(int x, int y, int button)
     {
         parent->addChild(node);
     }
-
 }
 
 void DrawPointState::draw()

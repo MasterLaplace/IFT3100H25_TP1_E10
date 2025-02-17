@@ -67,9 +67,6 @@ void StateMachine::onStrokeSizeChanged(float newSize) { currentState->strokeSize
 
 void StateMachine::onColorChanged(ofColor newColor) { currentState->color = newColor; }
 
-void StateMachine::onPrimitiveSelected(int id) 
-{ 
-    currentState->selectedPrimitiveId = id; 
-}
+void StateMachine::onPrimitiveSelected(int id) { currentState->selectedPrimitiveId = id; }
 
 } // namespace plugin::states
