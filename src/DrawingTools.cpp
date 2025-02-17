@@ -119,12 +119,29 @@ void DrawingTools::drawSceneGraph()
     std::vector<int> ids = controller->getPrimitiveId();
     for (int id : ids)
     {
-        if (ImGui::Selectable(("Primitive ", std::to_string(id)).c_str(), selectedPrimitiveId == id))
+        Node2D *node = controller->getNodeById(id);
+        if (node)
         {
-            selectedPrimitiveId = id;
-            std::cout << "Primitive " << id << " sélectionnée." << std::endl;
+            displayNode(node, 0);
         }
     }
 
     ImGui::End();
+}
+
+void DrawingTools::displayNode(Node2D *node, int indentLevel)
+{
+    ImGui::Indent(indentLevel * 10.0f);
+    std::string nodeLabel = "Primitive " + std::to_string(node->primitive->id);
+    if (ImGui::Selectable(nodeLabel.c_str(), selectedPrimitiveId == node->primitive->id))
+    {
+        selectedPrimitiveId = node->primitive->id;
+        controller->onPrimitiveSelected(node->primitive->id);
+    }
+
+    for (Node2D *child : node->children)
+    {
+        displayNode(child, indentLevel + 1);
+    }
+    ImGui::Unindent(indentLevel * 10.0f);
 }

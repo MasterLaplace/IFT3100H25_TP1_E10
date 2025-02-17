@@ -4,7 +4,7 @@ using namespace plugin::primitive;
 
 namespace plugin::states {
 
-void DrawPointState::enter() { std::cout << "On entre dans le DrawPointState." << std::endl; }
+void DrawPointState::enter() {}
 
 void DrawPointState::update() {}
 
@@ -13,11 +13,20 @@ void DrawPointState::mousePressed(int x, int y, int button) {}
 void DrawPointState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
-
+    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
     Point2D *point = new Point2D(mousePosition, color, strokeSize);
     Node2D *node = new Node2D(point);
 
-    canvas->addNode(node);
+    if (!parent)
+    {
+        canvas->addNode(node);
+    }
+
+    else
+    {
+        parent->addChild(node);
+    }
+
 }
 
 void DrawPointState::draw()

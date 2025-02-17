@@ -5,6 +5,7 @@ C'est une classe temporaire de UI juste pour donner une idée de comment l'implém
 */
 
 #include "ofxImGui.h"
+#include "Node2D.hpp"
 
 class Controller2D;
 
@@ -26,6 +27,7 @@ private:
     void drawToolsPanel();
     void drawDynamicPanel();
     void drawSceneGraph();
+    void displayNode(Node2D *node, int indentLevel = 0);
 
     int selectedPrimitiveId = -1;
 

@@ -74,6 +74,9 @@ void Controller2D::onColorChanged(float _newColor[3])
     stateMachine.onColorChanged(newColor);
 }
 
+void Controller2D::onPrimitiveSelected(int id) 
+{ stateMachine.onPrimitiveSelected(id); }
+
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
 std::vector<int> Controller2D::getPrimitiveId()
@@ -85,6 +88,9 @@ std::vector<int> Controller2D::getPrimitiveId()
     }
     return ids;
 }
+
+Node2D *Controller2D::getNodeById(const int id) 
+{ return canvas->getChildById(id); }
 
 void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)
 {

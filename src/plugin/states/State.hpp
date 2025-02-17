@@ -10,6 +10,7 @@ public:
     glm::vec2 mousePosition;
     glm::vec2 mousePressedPosition;
     bool isMousePressed = false;
+    int selectedPrimitiveId = -1;
     float strokeSize;
     ofColor color;
 

@@ -25,10 +25,14 @@ public:
 
     // Methodes pour parler avec le gui.
     void drawPointButtonPressed();
+    void drawLineButtonPressed();
+
     void onSizeChanged(float newSize);
     void onColorChanged(float _newColor[3]);
-    void drawLineButtonPressed();
+    void onPrimitiveSelected(int id);
+    
     std::vector<int> getPrimitiveId();
+    Node2D *getNodeById(const int id);
     void collectPrimitiveId(Node2D *node, std::vector<int> &ids);
 
 private:
