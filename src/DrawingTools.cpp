@@ -116,21 +116,31 @@ void DrawingTools::drawSceneGraph()
     ImGui::Text("Primitive :");
     ImGui::Separator();
 
+    std::unordered_multimap<int, Node2D *> displayedNodes;
+    displayedNodes.clear();
+
     std::vector<int> ids = controller->getPrimitiveId();
     for (int id : ids)
     {
         Node2D *node = controller->getNodeById(id);
         if (node)
         {
-            displayNode(node, 0);
+            displayNode(node, 0, displayedNodes);
         }
     }
 
     ImGui::End();
 }
 
-void DrawingTools::displayNode(Node2D *node, int indentLevel)
+void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> &displayedNodes)
 {
+    if (displayedNodes.find(node->primitive->id) != displayedNodes.end())
+    {
+        return;
+    }
+
+    displayedNodes.insert(std::make_pair(node->primitive->id,node));
+
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = "Primitive " + std::to_string(node->primitive->id);
     if (ImGui::Selectable(nodeLabel.c_str(), selectedPrimitiveId == node->primitive->id))
@@ -141,7 +151,7 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
 
     for (Node2D *child : node->children)
     {
-        displayNode(child, indentLevel + 1);
+        displayNode(child, indentLevel + 1, displayedNodes);
     }
     ImGui::Unindent(indentLevel * 10.0f);
 }

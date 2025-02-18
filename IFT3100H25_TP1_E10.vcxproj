@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\backends;..\..\..\addons\ofxImGui\libs\imgui\docs;..\..\..\addons\ofxImGui\libs\imgui\extras;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;src\plugin\primitive;src\plugin\states;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\backends;..\..\..\addons\ofxImGui\libs\imgui\docs;..\..\..\addons\ofxImGui\libs\imgui\extras;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;src\plugin\primitive;src\plugin\states;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -104,67 +104,48 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Controller2D.cpp" />
-    <ClCompile Include="src\DrawingTools.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
+    <ClCompile Include="src\Controller2D.cpp" />
+    <ClCompile Include="src\DrawLineState.cpp" />
+    <ClCompile Include="src\DrawPointState.cpp" />
+    <ClCompile Include="src\DrawingTools.cpp" />
+    <ClCompile Include="src\Node2D.cpp" />
+    <ClCompile Include="src\StateMachine.cpp" />
+    <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\app\Renderer.cpp" />
+    <ClCompile Include="src\plugin\image\Histogram.cpp" />
     <ClCompile Include="src\plugin\primitive\Line2D.cpp" />
     <ClCompile Include="src\plugin\primitive\Point2D.cpp" />
     <ClCompile Include="src\plugin\primitive\Primitive2D.cpp" />
     <ClCompile Include="src\plugin\states\DrawLineState.cpp" />
-    <ClCompile Include="src\Node2D.cpp" />
     <ClCompile Include="src\plugin\states\DrawPointState.cpp" />
     <ClCompile Include="src\plugin\states\StateMachine.cpp" />
-    <ClCompile Include="src\app\Application.cpp" />
-    <ClCompile Include="src\app\Renderer.cpp" />
-    <ClCompile Include="src\plugin\image\Histogram.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\BaseEngine.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\DefaultTheme.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineGLFW.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineOpenFrameworks.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxImGui\src\EngineVk.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\Gui.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\ImHelpers.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_context_support.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl2.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\extras\imgui_stdlib.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_demo.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_draw.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_tables.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Canvas.hpp" />
     <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\Controller2D.hpp" />
+    <ClInclude Include="src\DrawLineState.hpp" />
+    <ClInclude Include="src\DrawPointState.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
-    <ClInclude Include="src\plugin\primitives\primitive.hpp" />
-    <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
-    <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
-    <ClInclude Include="src\plugin\primitive\primitive.hpp" />
-    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp" />
-    <ClInclude Include="src\plugin\states\DrawLineState.hpp" />
     <ClInclude Include="src\Node2D.hpp" />
-    <ClInclude Include="src\plugin\states\DrawPointState.hpp" />
-    <ClInclude Include="src\plugin\states\State.hpp" />
-    <ClInclude Include="src\plugin\states\StateMachine.hpp" />
-    <ClInclude Include="src\plugin\primitives\Line2D.hpp" />
-    <ClInclude Include="src\plugin\primitives\Point2D.hpp" />
-    <ClInclude Include="src\plugin\primitives\Primitive2D.hpp" />
+    <ClInclude Include="src\Point2D.hpp" />
+    <ClInclude Include="src\Primitive2D.hpp" />
+    <ClInclude Include="src\State.hpp" />
+    <ClInclude Include="src\StateMachine.hpp" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />
     <ClInclude Include="src\plugin\image\Exporting.hpp" />
@@ -172,47 +153,31 @@
     <ClInclude Include="src\plugin\image\Importing.hpp" />
     <ClInclude Include="src\plugin\image\Sampling.hpp" />
     <ClInclude Include="src\plugin\image\image.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\primitive.hpp" />
+    <ClInclude Include="src\plugin\states\DrawLineState.hpp" />
+    <ClInclude Include="src\plugin\states\DrawPointState.hpp" />
+    <ClInclude Include="src\plugin\states\State.hpp" />
+    <ClInclude Include="src\plugin\states\StateMachine.hpp" />
+    <ClInclude Include="src\plugin\states\states.hpp" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseEngine.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\BaseTheme.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\DefaultTheme.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineGLFW.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineOpenFrameworks.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineOpenGLES.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\EngineVk.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\src\gles1CompatibilityHacks.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\src\glfwCompatibilityHacks.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\Gui.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\imconfig.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\ImHelpers.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\src\LinkedList.hpp" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGui.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGuiConstants.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\src\ofxImGuiLoggerChannel.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_arc_support.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_glfw_context_support.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl2.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\extras\imgui_stdlib.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_internal.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_rectpack.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_textedit.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h" />
-    <ClInclude Include="src\plugin\states\states.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
