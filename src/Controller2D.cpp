@@ -57,15 +57,9 @@ void Controller2D::mouseMoved(glm::vec2 pos)
     stateMachine.mousePosition = pos;
 }
 
-void Controller2D::mousePressed(int x, int y, int button) 
-{ 
-    stateMachine.mousePressed(x, y, button); 
-}
+void Controller2D::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller2D::mouseReleased(int x, int y, int button) 
-{
-    stateMachine.mouseReleased(x, y, button); 
-}
+void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
 
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 

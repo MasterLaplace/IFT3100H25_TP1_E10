@@ -139,7 +139,7 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_mul
         return;
     }
 
-    displayedNodes.insert(std::make_pair(node->primitive->id,node));
+    displayedNodes.insert(std::make_pair(node->primitive->id, node));
 
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = "Primitive " + std::to_string(node->primitive->id);
