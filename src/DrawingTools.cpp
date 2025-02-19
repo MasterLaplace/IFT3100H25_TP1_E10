@@ -28,17 +28,17 @@ void DrawingTools::drawToolsPanel()
 
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
 
-    // Si le bouton "Point" est activé.
+    // Si le bouton "Point" est activï¿½.
     if (ImGui::Button("Point"))
     {
         selectedTool = tool::POINT;
-        // On appelle la méthode "drawPointButttonPressed" sur le controleur.
+        // On appelle la mï¿½thode "drawPointButttonPressed" sur le controleur.
         controller->drawPointButtonPressed();
         controller->onSizeChanged(pointSize);
         controller->onColorChanged(pointColor);
     }
 
-    // Même chose pour la ligne.
+    // Mï¿½me chose pour la ligne.
     if (ImGui::Button("Ligne"))
     {
         selectedTool = tool::LINE;
@@ -73,7 +73,7 @@ void DrawingTools::drawDynamicPanel()
         {
             // On envoie le tableau de couleur au controleur.
             // C'est le Controlleur qui va transformer ce tableau en ofColor
-            // pour ensuite l'envoyer à l'état.
+            // pour ensuite l'envoyer ï¿½ l'ï¿½tat.
             controller->onColorChanged(pointColor);
         }
         break;
@@ -93,7 +93,7 @@ void DrawingTools::drawDynamicPanel()
         {
             // On envoie le tableau de couleur au controleur.
             // C'est le Controlleur qui va transformer ce tableau en ofColor
-            // pour ensuite l'envoyer à l'état.
+            // pour ensuite l'envoyer ï¿½ l'ï¿½tat.
             controller->onColorChanged(lineColor);
         }
         break;
@@ -132,7 +132,7 @@ void DrawingTools::drawSceneGraph()
     ImGui::End();
 }
 
-void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> &displayedNodes)
+void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> displayedNodes)
 {
     if (displayedNodes.find(node->primitive->id) != displayedNodes.end())
     {

@@ -1,11 +1,12 @@
 #pragma once
 
 /*
-C'est une classe temporaire de UI juste pour donner une idée de comment l'implémenter.
+C'est une classe temporaire de UI juste pour donner une idÃ©e de comment l'implÃ©menter.
 */
 
 #include "Node2D.hpp"
 #include "ofxImGui.h"
+#include <unordered_map>
 
 class Controller2D;
 
@@ -28,7 +29,7 @@ private:
     void drawDynamicPanel();
     void drawSceneGraph();
     void displayNode(Node2D *node, int indentLevel = 0,
-                     std::unordered_multimap<int, Node2D *> &displayedNodes = std::unordered_multimap<int, Node2D *>());
+                     std::unordered_multimap<int, Node2D *> displayedNodes = std::unordered_multimap<int, Node2D *>());
 
     int selectedPrimitiveId = -1;
 
