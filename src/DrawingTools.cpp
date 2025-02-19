@@ -46,7 +46,7 @@ void DrawingTools::drawToolsPanel()
         controller->onSizeChanged(lineWidth);
         controller->onColorChanged(fillColor);
     }
-    
+
     // Si le bouton "Rectangle" est activé.
     if (ImGui::Button("Rectangle"))
     {
@@ -105,10 +105,10 @@ void DrawingTools::drawDynamicPanel()
             controller->onColorChanged(fillColor);
         }
         break;
-            
+
     case DrawingTools::RECTANGLE:
         ImGui::Text("Option de rectangle");
-        
+
         // Si on change la couleur de la ligne.
         if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
         {

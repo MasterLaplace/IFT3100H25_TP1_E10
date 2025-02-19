@@ -1,6 +1,6 @@
+#include "Ellipse.hpp"
 #include "Line2D.hpp"
 #include "Point2D.hpp"
-#include "Rectangle.hpp"
-#include "Ellipse.hpp"
 #include "Polygon.hpp"
 #include "Primitive2D.hpp"
+#include "Rectangle.hpp"
