@@ -2,9 +2,10 @@
 
 namespace plugin::primitive {
 
-void Rectangle::draw() {
+void Rectangle::draw()
+{
     ofSetColor(color);
     ofDrawRectangle(position, dimensions.x, dimensions.y);
 }
 
-}
+} // namespace plugin::primitive

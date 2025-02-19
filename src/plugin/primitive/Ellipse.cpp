@@ -2,7 +2,8 @@
 
 namespace plugin::primitive {
 
-void Ellipse::draw() {
+void Ellipse::draw()
+{
     ofSetColor(color);
     ofDrawEllipse(position.x, position.y, radius.x, radius.y);
 }
