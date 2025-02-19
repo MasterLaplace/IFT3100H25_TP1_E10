@@ -132,7 +132,7 @@ void DrawingTools::drawSceneGraph()
     ImGui::End();
 }
 
-void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> displayedNodes)
+void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> &displayedNodes)
 {
     if (displayedNodes.find(node->primitive->id) != displayedNodes.end())
     {
