@@ -35,7 +35,7 @@ void DrawingTools::drawToolsPanel()
         // On appelle la m�thode "drawPointButttonPressed" sur le controleur.
         controller->drawPointButtonPressed();
         controller->onSizeChanged(pointSize);
-        controller->onColorChanged(pointColor);
+        controller->onColorChanged(fillColor);
     }
 
     // M�me chose pour la ligne.
@@ -44,7 +44,15 @@ void DrawingTools::drawToolsPanel()
         selectedTool = tool::LINE;
         controller->drawLineButtonPressed();
         controller->onSizeChanged(lineWidth);
-        controller->onColorChanged(lineColor);
+        controller->onColorChanged(fillColor);
+    }
+    
+    // Si le bouton "Rectangle" est activé.
+    if (ImGui::Button("Rectangle"))
+    {
+        selectedTool = tool::RECTANGLE;
+        controller->drawRectangleButtonPressed();
+        controller->onColorChanged(fillColor);
     }
 
     ImGui::End();
@@ -68,13 +76,13 @@ void DrawingTools::drawDynamicPanel()
         }
 
         // Si on change la couleur du point.
-        if (ImGui::ColorEdit3("Couleur", (float *) &pointColor))
+        if (ImGui::ColorEdit3("Couleur", (float *) &fillColor))
             ;
         {
             // On envoie le tableau de couleur au controleur.
             // C'est le Controlleur qui va transformer ce tableau en ofColor
             // pour ensuite l'envoyer � l'�tat.
-            controller->onColorChanged(pointColor);
+            controller->onColorChanged(fillColor);
         }
         break;
 
@@ -89,12 +97,25 @@ void DrawingTools::drawDynamicPanel()
         }
 
         // Si on change la couleur de la ligne.
-        if (ImGui::ColorEdit3("Couleur", lineColor))
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
         {
             // On envoie le tableau de couleur au controleur.
             // C'est le Controlleur qui va transformer ce tableau en ofColor
             // pour ensuite l'envoyer � l'�tat.
-            controller->onColorChanged(lineColor);
+            controller->onColorChanged(fillColor);
+        }
+        break;
+            
+    case DrawingTools::RECTANGLE:
+        ImGui::Text("Option de rectangle");
+        
+        // Si on change la couleur de la ligne.
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
+        {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
+            // pour ensuite l'envoyer � l'�tat.
+            controller->onColorChanged(fillColor);
         }
         break;
 

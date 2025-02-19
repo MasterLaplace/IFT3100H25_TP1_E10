@@ -61,8 +61,6 @@ void Controller2D::mousePressed(int x, int y, int button) { stateMachine.mousePr
 
 void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
 
-void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
-
 void Controller2D::onSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
 // Cette méthode reçoit un tableau de trois float parce que c'est ce que ImGui utilise.
@@ -75,8 +73,6 @@ void Controller2D::onColorChanged(float _newColor[3])
 }
 
 void Controller2D::onPrimitiveSelected(int id) { stateMachine.onPrimitiveSelected(id); }
-
-void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
 std::vector<int> Controller2D::getPrimitiveId()
 {
@@ -102,3 +98,9 @@ void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)
         collectPrimitiveId(child, ids);
     }
 }
+
+void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
+
+void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
+
+void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
