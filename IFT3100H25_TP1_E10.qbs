@@ -26,8 +26,6 @@ Project{
             'src/app/Renderer.cpp',
             'src/app/Renderer.hpp',
             'src/main.cpp',
-            'src/ofApp.cpp',
-            'src/ofApp.h',
             'src/plugin/image/Exporting.hpp',
             'src/plugin/image/Histogram.cpp',
             'src/plugin/image/Histogram.hpp',

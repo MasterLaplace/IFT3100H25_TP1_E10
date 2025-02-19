@@ -572,3 +572,8 @@ _deps
 build/
 .Test/
 of_*_release/
+texture/
+classical-lighting/
+topology/
+raytracing/
+modern-lighting/
