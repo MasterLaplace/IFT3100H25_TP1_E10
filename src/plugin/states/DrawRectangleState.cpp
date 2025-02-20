@@ -26,7 +26,8 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
         position.y = mousePosition.y;
     }
 
-    plugin::primitive::Rectangle *rectangle = new plugin::primitive::Rectangle(position, color, glm::vec2(width, height));
+    plugin::primitive::Rectangle *rectangle =
+        new plugin::primitive::Rectangle(position, color, glm::vec2(width, height));
     Node2D *node = new Node2D(rectangle);
     Node2D *parent = canvas->getChildById(selectedPrimitiveId);
 
