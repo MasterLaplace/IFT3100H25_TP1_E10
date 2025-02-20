@@ -1,11 +1,8 @@
 #include "Importation.hpp"
 
-void Importation::setup() { }
+void Importation::setup() {}
 
-void Importation::update()
-{
-
-}
+void Importation::update() {}
 
 // Affichage de l'image importée
 void Importation::draw()
