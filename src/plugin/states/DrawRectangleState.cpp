@@ -26,10 +26,19 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
         position.y = mousePosition.y;
     }
 
-    Rectangle *rectangle = new Rectangle(position, color, glm::vec2(width, height));
+    plugin::primitive::Rectangle *rectangle = new plugin::primitive::Rectangle(position, color, glm::vec2(width, height));
     Node2D *node = new Node2D(rectangle);
+    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
 
-    canvas->addNode(node);
+    if (!parent)
+    {
+        canvas->addNode(node);
+    }
+
+    else
+    {
+        parent->addChild(node);
+    }
 }
 
 void DrawRectangleState::update() {}
