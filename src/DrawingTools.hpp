@@ -14,7 +14,10 @@ class DrawingTools {
 public:
     enum tool {
         POINT,
-        LINE
+        LINE,
+        RECTANGLE,
+        ELLIPSE,
+        POLYGON
     };
     tool selectedTool;
 
@@ -32,6 +35,9 @@ private:
                      std::unordered_multimap<int, Node2D *> &displayedNodes = std::unordered_multimap<int, Node2D *>());
 
     int selectedPrimitiveId = -1;
+
+    // Attributs générique
+    float fillColor[3] = {0.0f, 0.0f, 0.0f};
 
     // Attributs du point.
     float pointSize = 5.0f;

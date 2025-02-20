@@ -27,6 +27,7 @@ public:
     // Methodes pour parler avec le gui.
     void drawPointButtonPressed();
     void drawLineButtonPressed();
+    void drawRectangleButtonPressed();
 
     void onSizeChanged(float newSize);
     void onColorChanged(float _newColor[3]);
