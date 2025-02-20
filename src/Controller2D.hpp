@@ -3,6 +3,7 @@
 #include "Canvas.hpp"
 #include "Controller.hpp"
 #include "DrawingTools.hpp"
+#include "Importation.hpp"
 #include "plugin/states/states.hpp"
 #include <string>
 #include <vector>
@@ -39,4 +40,5 @@ private:
     StateMachine stateMachine;
     Canvas *canvas;
     DrawingTools gui;
+    Importation importer;
 };

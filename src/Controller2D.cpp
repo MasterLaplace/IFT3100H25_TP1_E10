@@ -12,14 +12,23 @@ void Controller2D::setup()
 
     // C'est ici qu'on va initialiser l'interface pour le 2D.
     gui.setup(this);
+
+    importer.setup();
 }
 
-void Controller2D::update() { stateMachine.update(); }
+void Controller2D::update()
+{
+    importer.update();
+    stateMachine.update();
+}
 
 void Controller2D::draw()
 {
     // On dessine le canvas en premier.
     canvas->draw();
+
+    // On dessine ensuite l'image importée.
+    importer.draw();
 
     // C'est Controlleur qui demande à son état de dessiner des choses en lien avec l'état.
     // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
@@ -46,6 +55,11 @@ void Controller2D::keyPressed(int key)
     {
         drawLineButtonPressed();
         gui.selectedTool = DrawingTools::tool::LINE;
+    }
+
+    if (key == 'i')
+    {
+        importer.importImage();
     }
 }
 
