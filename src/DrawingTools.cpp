@@ -137,31 +137,24 @@ void DrawingTools::drawSceneGraph()
     ImGui::Text("Primitive :");
     ImGui::Separator();
 
-    std::unordered_multimap<int, Node2D *> displayedNodes;
-    displayedNodes.clear();
-
-    std::vector<int> ids = controller->getPrimitiveId();
-    for (int id : ids)
+    std::vector<Node2D*> nodes = controller->getCanvasNodes();
+    for (Node2D* node : nodes)
     {
-        Node2D *node = controller->getNodeById(id);
-        if (node)
-        {
-            displayNode(node, 0, displayedNodes);
-        }
+        displayNode(node, 0);
+        // cout << "Node : " << node->primitive->id << endl;
+    }
+
+    if (ImGui::Button("deselectionner"))
+    {
+        selectedPrimitiveId = -1;
+        controller->onPrimitiveSelected(-1);
     }
 
     ImGui::End();
 }
 
-void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_multimap<int, Node2D *> &displayedNodes)
+void DrawingTools::displayNode(Node2D *node, int indentLevel)
 {
-    if (displayedNodes.find(node->primitive->id) != displayedNodes.end())
-    {
-        return;
-    }
-
-    displayedNodes.insert(std::make_pair(node->primitive->id, node));
-
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = "Primitive " + std::to_string(node->primitive->id);
     if (ImGui::Selectable(nodeLabel.c_str(), selectedPrimitiveId == node->primitive->id))
@@ -172,7 +165,7 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel, std::unordered_mul
 
     for (Node2D *child : node->children)
     {
-        displayNode(child, indentLevel + 1, displayedNodes);
+        displayNode(child, indentLevel + 1);
     }
     ImGui::Unindent(indentLevel * 10.0f);
 }

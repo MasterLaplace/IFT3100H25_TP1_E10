@@ -98,6 +98,8 @@ std::vector<int> Controller2D::getPrimitiveId()
     return ids;
 }
 
+std::vector<Node2D*> Controller2D::getCanvasNodes() { return canvas->nodes; }
+
 Node2D *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
 
 void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)

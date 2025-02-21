@@ -31,8 +31,7 @@ private:
     void drawToolsPanel();
     void drawDynamicPanel();
     void drawSceneGraph();
-    void displayNode(Node2D *node, int indentLevel = 0,
-                     std::unordered_multimap<int, Node2D *> &displayedNodes = std::unordered_multimap<int, Node2D *>());
+    void displayNode(Node2D *node, int indentLevel = 0);
 
     int selectedPrimitiveId = -1;
 

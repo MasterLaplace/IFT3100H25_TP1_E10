@@ -38,7 +38,10 @@ Node2D *Canvas::getChildById(const int id)
     // On appelle la fonction getChildById sur tous les enfants de la racine.
     for (auto node : nodes)
     {
-        result = node->getChildById(id);
+        if (result == nullptr)
+        {
+            result = node->getChildById(id);
+        }
     }
 
     return result;
