@@ -137,8 +137,8 @@ void DrawingTools::drawSceneGraph()
     ImGui::Text("Primitive :");
     ImGui::Separator();
 
-    std::vector<Node2D*> nodes = controller->getCanvasNodes();
-    for (Node2D* node : nodes)
+    std::vector<Node2D *> nodes = controller->getCanvasNodes();
+    for (Node2D *node : nodes)
     {
         displayNode(node, 0);
         // cout << "Node : " << node->primitive->id << endl;

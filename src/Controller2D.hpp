@@ -34,7 +34,7 @@ public:
     void onPrimitiveSelected(int id);
 
     std::vector<int> getPrimitiveId();
-    std::vector<Node2D*> getCanvasNodes();
+    std::vector<Node2D *> getCanvasNodes();
     Node2D *getNodeById(const int id);
     void collectPrimitiveId(Node2D *node, std::vector<int> &ids);
 
