@@ -86,8 +86,8 @@ void Controller2D::onColorChanged(float _newColor[3])
     stateMachine.onColorChanged(newColor);
 }
 
-void Controller2D::onColorChanged(int id, float _newColor[3]) 
-{ 
+void Controller2D::onColorChanged(int id, float _newColor[3])
+{
     Node2D *node = getNodeById(id);
     if (node)
     {
@@ -98,9 +98,9 @@ void Controller2D::onColorChanged(int id, float _newColor[3])
 
 void Controller2D::onPrimitiveSelected(int id) { stateMachine.onPrimitiveSelected(id); }
 
-void Controller2D::onPositionChanged(int id, glm::vec2 newPos) 
-{ 
-    Node2D *node = getNodeById(id); 
+void Controller2D::onPositionChanged(int id, glm::vec2 newPos)
+{
+    Node2D *node = getNodeById(id);
     if (node)
 
     {
@@ -123,7 +123,7 @@ std::vector<Node2D *> Controller2D::getCanvasNodes() { return canvas->nodes; }
 Node2D *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
 
 void Controller2D::getNodeColor(const int id, float color[3])
-{ 
+{
     Node2D *node = getNodeById(id);
 
     if (node)

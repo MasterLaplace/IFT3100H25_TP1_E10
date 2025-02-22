@@ -171,7 +171,7 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
     ImGui::Unindent(indentLevel * 10.0f);
 }
 
-void DrawingTools::drawProprietiesPanel() 
+void DrawingTools::drawProprietiesPanel()
 {
     ImGui::SetNextWindowPos(ImVec2(600, 10), ImGuiCond_FirstUseEver);
     ImGui::Begin("Propriétés");
