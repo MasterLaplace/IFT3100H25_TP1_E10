@@ -77,10 +77,10 @@ void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseR
 
 void Controller2D::onSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
-void Controller2D::onSizeChanged(int id, float newSize) 
+void Controller2D::onSizeChanged(int id, float newSize)
 {
     Node2D *node = getNodeById(id);
-    if (Point2D* p = dynamic_cast<Point2D*>(node->primitive))
+    if (Point2D *p = dynamic_cast<Point2D *>(node->primitive))
     {
         p->size = newSize;
     }

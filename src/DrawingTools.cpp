@@ -206,7 +206,7 @@ void DrawingTools::drawProprietiesPanel()
         ImGui::Separator();
 
         // Si la primitive selectionnee est de type Point2D.
-        if (Point2D* point = dynamic_cast<Point2D*>(node->primitive))
+        if (Point2D *point = dynamic_cast<Point2D *>(node->primitive))
         {
             ImGui::Text("Taille :");
             if (ImGui::DragFloat("Taille", &point->size, 0.1f))
@@ -216,7 +216,7 @@ void DrawingTools::drawProprietiesPanel()
         }
 
         // Si la primitive selectionnee est de type Rectangle.
-        if (plugin::primitive::Rectangle* rectangle = dynamic_cast<plugin::primitive::Rectangle*>(node->primitive))
+        if (plugin::primitive::Rectangle *rectangle = dynamic_cast<plugin::primitive::Rectangle *>(node->primitive))
         {
             ImGui::Text("Dimensions :");
             if (ImGui::DragFloat2("Dimensions", &rectangle->dimensions.x, 0.1f))
