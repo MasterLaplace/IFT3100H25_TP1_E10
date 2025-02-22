@@ -32,6 +32,7 @@ private:
     void drawDynamicPanel();
     void drawSceneGraph();
     void displayNode(Node2D *node, int indentLevel = 0);
+    void drawProprietiesPanel();
 
     int selectedPrimitiveId = -1;
 

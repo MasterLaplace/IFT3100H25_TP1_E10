@@ -18,6 +18,7 @@ void DrawingTools::draw()
     drawToolsPanel();
     drawDynamicPanel();
     drawSceneGraph();
+    drawProprietiesPanel();
     gui.end();
 }
 
@@ -168,4 +169,38 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
         displayNode(child, indentLevel + 1);
     }
     ImGui::Unindent(indentLevel * 10.0f);
+}
+
+void DrawingTools::drawProprietiesPanel() 
+{
+    ImGui::SetNextWindowPos(ImVec2(600, 10), ImGuiCond_FirstUseEver);
+    ImGui::Begin("Propriétés");
+    ImGui::Text("Propriétés :");
+    ImGui::Separator();
+
+    Node2D *node = controller->getNodeById(selectedPrimitiveId);
+    if (node != nullptr)
+    {
+        ImGui::Text("Primitive %d", selectedPrimitiveId);
+        ImGui::Separator();
+
+        // Pour modifier la position de la primitive.
+        ImGui::Text("Position :");
+        if (ImGui::DragFloat2("Position", &node->primitive->position.x, 0.1f))
+        {
+            controller->onPositionChanged(selectedPrimitiveId, node->primitive->position);
+        }
+
+        // Pour modifier la couleur de la primitive.
+        float nodeColor[3];
+        controller->getNodeColor(selectedPrimitiveId, nodeColor);
+        ImGui::Text("Couleur :");
+        if (ImGui::ColorEdit3("Couleur", nodeColor))
+        {
+            controller->onColorChanged(selectedPrimitiveId, nodeColor);
+        }
+        ImGui::Separator();
+    }
+
+    ImGui::End();
 }
