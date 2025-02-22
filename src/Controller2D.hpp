@@ -30,6 +30,7 @@ public:
     void drawRectangleButtonPressed();
 
     void onSizeChanged(float newSize);
+    void onSizeChanged(int id, float newSize);
     void onColorChanged(float _newColor[3]);
     void onColorChanged(int id, float _newColor[3]);
     void onPrimitiveSelected(int id);

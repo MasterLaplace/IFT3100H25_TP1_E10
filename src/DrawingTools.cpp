@@ -173,12 +173,16 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
 
 void DrawingTools::drawProprietiesPanel() 
 {
+    // Les setting de la fenetre
     ImGui::SetNextWindowPos(ImVec2(600, 10), ImGuiCond_FirstUseEver);
     ImGui::Begin("Propriétés");
     ImGui::Text("Propriétés :");
     ImGui::Separator();
 
+    // On va chercher la node selectionnee.
     Node2D *node = controller->getNodeById(selectedPrimitiveId);
+
+    // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
     if (node != nullptr)
     {
         ImGui::Text("Primitive %d", selectedPrimitiveId);
@@ -200,6 +204,26 @@ void DrawingTools::drawProprietiesPanel()
             controller->onColorChanged(selectedPrimitiveId, nodeColor);
         }
         ImGui::Separator();
+
+        // Si la primitive selectionnee est de type Point2D.
+        if (Point2D* point = dynamic_cast<Point2D*>(node->primitive))
+        {
+            ImGui::Text("Taille :");
+            if (ImGui::DragFloat("Taille", &point->size, 0.1f))
+            {
+                controller->onSizeChanged(selectedPrimitiveId, point->size);
+            }
+        }
+
+        // Si la primitive selectionnee est de type Rectangle.
+        if (plugin::primitive::Rectangle* rectangle = dynamic_cast<plugin::primitive::Rectangle*>(node->primitive))
+        {
+            ImGui::Text("Dimensions :");
+            if (ImGui::DragFloat2("Dimensions", &rectangle->dimensions.x, 0.1f))
+            {
+                controller->onSizeChanged(selectedPrimitiveId, rectangle->dimensions.x);
+            }
+        }
     }
 
     ImGui::End();

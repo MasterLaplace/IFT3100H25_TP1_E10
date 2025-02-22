@@ -77,6 +77,15 @@ void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseR
 
 void Controller2D::onSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
+void Controller2D::onSizeChanged(int id, float newSize) 
+{
+    Node2D *node = getNodeById(id);
+    if (Point2D* p = dynamic_cast<Point2D*>(node->primitive))
+    {
+        p->size = newSize;
+    }
+}
+
 // Cette méthode reçoit un tableau de trois float parce que c'est ce que ImGui utilise.
 // On transforme ce tableau en un ofColor pour l'envoyer à l'état.
 void Controller2D::onColorChanged(float _newColor[3])
