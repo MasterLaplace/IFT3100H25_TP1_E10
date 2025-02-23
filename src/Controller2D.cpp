@@ -29,7 +29,7 @@ void Controller2D::draw()
 
     // On dessine ensuite l'image importée.
     importer.draw();
-    
+
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
 
@@ -64,7 +64,7 @@ void Controller2D::keyReleased(int key)
     {
         importer.importImage();
     }
-    
+
     if (key == 'e')
     {
         exporter.exportImage();

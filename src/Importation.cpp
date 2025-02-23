@@ -31,7 +31,7 @@ void Importation::importImage()
         }
         else
         {
-            //ofLogError() << "Échec du chargement de l'image.";
+            // ofLogError() << "Échec du chargement de l'image.";
         }
     }
 }
