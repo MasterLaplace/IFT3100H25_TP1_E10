@@ -4,11 +4,13 @@
 #include "Controller.hpp"
 #include "DrawingTools.hpp"
 #include "Importation.hpp"
+#include "plugin/image/image.hpp"
 #include "plugin/states/states.hpp"
 #include <string>
 #include <vector>
 
 using namespace plugin::states;
+using namespace plugin::image;
 
 class Controller2D : public Controller {
 
@@ -19,7 +21,7 @@ public:
     void exit();
 
     // Methodes pour que "Application.cpp" puisse parler au Controlleur.
-    void keyPressed(int key);
+    void keyReleased(int key);
     void mouseMoved(glm::vec2 pos);
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
@@ -47,4 +49,5 @@ private:
     Canvas *canvas;
     DrawingTools gui;
     Importation importer;
+    Exporting exporter;
 };

@@ -21,10 +21,13 @@ void Application::draw() { currentController->draw(); }
 void Application::exit() { ofLog() << "<app::exit>"; }
 
 //--------------------------------------------------------------
-void Application::keyPressed(int key) { currentController->keyPressed(key); }
+void Application::keyPressed(int key) { }
 
 //--------------------------------------------------------------
-void Application::keyReleased(int key) { ofLog() << "<app::keyReleased: " << key << ">"; }
+void Application::keyReleased(int key) {
+    currentController->keyReleased(key);
+    ofLog() << "<app::keyReleased: " << key << ">";
+}
 
 //--------------------------------------------------------------
 void Application::mouseMoved(int x, int y)

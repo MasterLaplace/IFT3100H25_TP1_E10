@@ -29,6 +29,9 @@ void Controller2D::draw()
 
     // On dessine ensuite l'image importée.
     importer.draw();
+    
+    // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
+    exporter.setPixels();
 
     // C'est Controlleur qui demande à son état de dessiner des choses en lien avec l'état.
     // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
@@ -40,7 +43,7 @@ void Controller2D::draw()
 
 void Controller2D::exit() {}
 
-void Controller2D::keyPressed(int key)
+void Controller2D::keyReleased(int key)
 {
 
     // C'est les racourcies claviers.
@@ -60,6 +63,11 @@ void Controller2D::keyPressed(int key)
     if (key == 'i')
     {
         importer.importImage();
+    }
+    
+    if (key == 'e')
+    {
+        exporter.exportImage();
     }
 }
 

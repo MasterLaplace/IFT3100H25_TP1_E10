@@ -14,7 +14,7 @@ public:
     virtual void draw() = 0;
     virtual void exit() = 0;
 
-    virtual void keyPressed(int key) = 0;
+    virtual void keyReleased(int key) = 0;
     virtual void mouseMoved(glm::vec2 pos) = 0;
     virtual void mousePressed(int x, int y, int button) = 0;
     virtual void mouseReleased(int x, int y, int button) = 0;
