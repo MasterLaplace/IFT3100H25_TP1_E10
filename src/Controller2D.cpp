@@ -130,6 +130,16 @@ void Controller2D::onPositionChanged(int id, glm::vec2 newPos)
     }
 }
 
+void Controller2D::onEndPositionChanged(int id, glm::vec2 newPos) 
+{
+    Node2D *node = getNodeById(id);
+    if (Line2D *line = dynamic_cast<Line2D *>(node->primitive))
+
+    {
+        line->endPosition = newPos;
+    }
+}
+
 std::vector<int> Controller2D::getPrimitiveId()
 {
     std::vector<int> ids;

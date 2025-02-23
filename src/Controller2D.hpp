@@ -40,6 +40,7 @@ public:
     void onColorChanged(int id, float _newColor[3]);
     void onPrimitiveSelected(int id);
     void onPositionChanged(int id, glm::vec2 newPos);
+    void onEndPositionChanged(int id, glm::vec2 newPos);
 
     std::vector<int> getPrimitiveId();
     std::vector<Node2D *> getCanvasNodes();

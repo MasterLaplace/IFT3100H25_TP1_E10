@@ -23,6 +23,7 @@ void DrawingTools::draw()
     gui.end();
 }
 
+// Sert a dessiner le menu de la barre de menu
 void DrawingTools::drawMenuBar() 
 { 
     if (ImGui::BeginMainMenuBar())
@@ -36,8 +37,12 @@ void DrawingTools::drawMenuBar()
 
             if (ImGui::MenuItem("Exporter image"))
             {
-                //controller->exporter.setPixels();
                 controller->exportImage();
+            }
+
+            if (ImGui::MenuItem("Quitter"))
+            {
+                ofExit();
             }
             ImGui::EndMenu();
         }
@@ -45,9 +50,11 @@ void DrawingTools::drawMenuBar()
     }
 }
 
+// Sert a dessiner le panel des outils de dessin
 void DrawingTools::drawToolsPanel()
 {
-
+    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(ofGetWidth() - 20, 100), ImGuiCond_FirstUseEver);
     ImGui::Begin("Outils de dessin");
 
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
@@ -82,9 +89,11 @@ void DrawingTools::drawToolsPanel()
     ImGui::End();
 }
 
+// Sert a dessiner le panel dynamique
 void DrawingTools::drawDynamicPanel()
 {
-    ImGui::SetNextWindowPos(ImVec2(200, 10), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(10, 140), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(ofGetWidth() - 20, 200), ImGuiCond_FirstUseEver);
     ImGui::Begin("Option de dessin");
 
     switch (selectedTool)
@@ -149,13 +158,14 @@ void DrawingTools::drawDynamicPanel()
     ImGui::End();
 }
 
+// Sert a dessiner le graphe de scene
 void DrawingTools::drawSceneGraph()
 {
     float panelWidth = ofGetWidth() / 6;
-    float panelHeight = ofGetHeight() / 2;
+    float panelHeight = ofGetHeight() - 40;
 
-    ImGui::SetNextWindowPos(ImVec2(400, 10), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(panelHeight, panelWidth), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_FirstUseEver);
     ImGui::Begin("Graphe de scene");
 
     ImGui::Text("Primitive :");
@@ -177,6 +187,7 @@ void DrawingTools::drawSceneGraph()
     ImGui::End();
 }
 
+// Sert a afficher les noeuds du graphe de scene
 void DrawingTools::displayNode(Node2D *node, int indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
@@ -194,29 +205,30 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
     ImGui::Unindent(indentLevel * 10.0f);
 }
 
+// Sert a dessiner le panel des proprietes
 void DrawingTools::drawProprietiesPanel()
 {
     // Les setting de la fenetre
-    ImGui::SetNextWindowPos(ImVec2(600, 10), ImGuiCond_FirstUseEver);
+    float panelWidth = ofGetWidth() / 6;
+    float panelHeight = ofGetHeight() - 40;
+
+    ImGui::SetNextWindowPos(ImVec2(ofGetWidth() - panelWidth - 10, 30), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_FirstUseEver);
     ImGui::Begin("Propriétés");
+
     ImGui::Text("Propriétés :");
     ImGui::Separator();
 
     // On va chercher la node selectionnee.
     Node2D *node = controller->getNodeById(selectedPrimitiveId);
 
+    // On s'occupe des proprietes generiques en premier.
+
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
     if (node != nullptr)
     {
         ImGui::Text("Primitive %d", selectedPrimitiveId);
         ImGui::Separator();
-
-        // Pour modifier la position de la primitive.
-        ImGui::Text("Position :");
-        if (ImGui::DragFloat2("Position", &node->primitive->position.x, 0.1f))
-        {
-            controller->onPositionChanged(selectedPrimitiveId, node->primitive->position);
-        }
 
         // Pour modifier la couleur de la primitive.
         float nodeColor[3];
@@ -228,6 +240,16 @@ void DrawingTools::drawProprietiesPanel()
         }
         ImGui::Separator();
 
+        // Pour modifier la position de la primitive.
+        ImGui::Text("Position :");
+        if (ImGui::DragFloat2("Position", &node->primitive->position.x, 0.1f))
+        {
+            controller->onPositionChanged(selectedPrimitiveId, node->primitive->position);
+        }
+        ImGui::Separator();
+        
+        // On s'occupe des proprietes specifiques des primitives.
+
         // Si la primitive selectionnee est de type Point2D.
         if (Point2D *point = dynamic_cast<Point2D *>(node->primitive))
         {
@@ -235,6 +257,22 @@ void DrawingTools::drawProprietiesPanel()
             if (ImGui::DragFloat("Taille", &point->size, 0.1f))
             {
                 controller->onSizeChanged(selectedPrimitiveId, point->size);
+            }
+        }
+
+        // Si la primitive selectionnee est de type Line2D.
+        if (Line2D *line = dynamic_cast<Line2D *>(node->primitive))
+        {
+            ImGui::Text("Debut de la ligne");
+            if (ImGui::DragFloat2("Debut", &line->position.x, 0.1f))
+            {
+                controller->onPositionChanged(selectedPrimitiveId, line->position);
+            }
+
+            ImGui::Text("Fin de la ligne :");
+            if (ImGui::DragFloat2("Fin", &line->endPosition.x, 0.1f))
+            {
+                controller->onEndPositionChanged(selectedPrimitiveId, line->endPosition);
             }
         }
 

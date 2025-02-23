@@ -11,9 +11,19 @@ void DrawLineState::mousePressed(int x, int y, int button) {}
 void DrawLineState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
+    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
     Line2D *line = new Line2D(mousePressedPosition, mousePosition, color, strokeSize);
     Node2D *node = new Node2D(line);
-    canvas->addNode(node);
+
+    if (!parent)
+    {
+        canvas->addNode(node);
+    }
+
+    else
+    {
+        parent->addChild(node);
+    }
 }
 
 void DrawLineState::update() {}
