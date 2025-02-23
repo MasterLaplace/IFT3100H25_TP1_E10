@@ -23,8 +23,8 @@ void DrawingTools::draw()
     gui.end();
 }
 
-void DrawingTools::drawMenuBar() 
-{ 
+void DrawingTools::drawMenuBar()
+{
     if (ImGui::BeginMainMenuBar())
     {
         if (ImGui::BeginMenu("Fichier"))
@@ -36,7 +36,7 @@ void DrawingTools::drawMenuBar()
 
             if (ImGui::MenuItem("Exporter image"))
             {
-                //controller->exporter.setPixels();
+                // controller->exporter.setPixels();
                 controller->exportImage();
             }
             ImGui::EndMenu();
