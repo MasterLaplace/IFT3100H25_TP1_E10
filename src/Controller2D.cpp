@@ -83,8 +83,7 @@ void Controller2D::mousePressed(int x, int y, int button) { stateMachine.mousePr
 
 void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
 
-void Controller2D::importImage() 
-{ importer.importImage(); }
+void Controller2D::importImage() { importer.importImage(); }
 
 void Controller2D::exportImage() { exporter.exportImage(); }
 

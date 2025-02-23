@@ -29,7 +29,7 @@ public:
     // Methodes pour parler avec le gui.
     void importImage();
     void exportImage();
-    
+
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();
