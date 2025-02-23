@@ -15,11 +15,34 @@ void DrawingTools::draw()
 {
 
     gui.begin();
+    drawMenuBar();
     drawToolsPanel();
     drawDynamicPanel();
     drawSceneGraph();
     drawProprietiesPanel();
     gui.end();
+}
+
+void DrawingTools::drawMenuBar() 
+{ 
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("Fichier"))
+        {
+            if (ImGui::MenuItem("Importer image"))
+            {
+                controller->importImage();
+            }
+
+            if (ImGui::MenuItem("Exporter image"))
+            {
+                //controller->exporter.setPixels();
+                controller->exportImage();
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
 }
 
 void DrawingTools::drawToolsPanel()

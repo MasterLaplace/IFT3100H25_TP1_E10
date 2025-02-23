@@ -28,6 +28,7 @@ private:
     ofxImGui::Gui gui;
     Controller2D *controller;
 
+    void drawMenuBar();
     void drawToolsPanel();
     void drawDynamicPanel();
     void drawSceneGraph();

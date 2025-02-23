@@ -27,6 +27,9 @@ public:
     void mouseReleased(int x, int y, int button);
 
     // Methodes pour parler avec le gui.
+    void importImage();
+    void exportImage();
+    
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();

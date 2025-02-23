@@ -6,7 +6,7 @@ void Exporting::setPixels()
 {
     pixels.allocate(ofGetWidth(), ofGetHeight(), OF_PIXELS_RGB);
     glReadPixels(0, 0, ofGetWidth(), ofGetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels.getData());
-    std::cout << "Pixels allocated and read." << std::endl;
+    //std::cout << "Pixels allocated and read." << std::endl;
 }
 
 void Exporting::exportImage()
