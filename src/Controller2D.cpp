@@ -26,10 +26,10 @@ void Controller2D::draw()
 {
     // On dessine le canvas en premier.
     canvas->draw();
-
+    
     // On dessine ensuite l'image importée.
     importer.draw();
-
+    
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
 
@@ -183,3 +183,5 @@ void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawP
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
 void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
+
+void Controller2D::drawHistogram() { stateMachine.changeState(new DrawHistogramState()); }

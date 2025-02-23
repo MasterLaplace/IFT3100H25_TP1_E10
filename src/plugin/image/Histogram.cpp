@@ -228,7 +228,7 @@ void Histogram::drawYAxis()
     }
 
     // On dessine le label.
-    std::string label = "Fréquence";
+    std::string label = "Frequence";
     drawVerticalText(label, (OFFSET / 2) - 10, ofGetHeight() / 2);
 }
 
