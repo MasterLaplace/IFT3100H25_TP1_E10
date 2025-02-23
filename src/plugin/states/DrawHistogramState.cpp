@@ -1,6 +1,6 @@
 #include "DrawHistogramState.hpp"
 
-void plugin::states::DrawHistogramState::enter() 
+void plugin::states::DrawHistogramState::enter()
 {
     Canvas *canvas = Canvas::getInstance();
 
@@ -12,8 +12,7 @@ void plugin::states::DrawHistogramState::enter()
 
 void plugin::states::DrawHistogramState::update() {}
 
-void plugin::states::DrawHistogramState::draw() { histogram.draw('r'); 
-}
+void plugin::states::DrawHistogramState::draw() { histogram.draw('r'); }
 
 void plugin::states::DrawHistogramState::exit() {}
 

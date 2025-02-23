@@ -16,7 +16,6 @@ public:
     void mousePressed(int x, int y, int button) override;
     void mouseReleased(int x, int y, int button) override;
 
-
 private:
     plugin::image::Histogram histogram;
 };
