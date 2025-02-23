@@ -24,8 +24,8 @@ void DrawingTools::draw()
 }
 
 // Sert a dessiner le menu de la barre de menu
-void DrawingTools::drawMenuBar() 
-{ 
+void DrawingTools::drawMenuBar()
+{
     if (ImGui::BeginMainMenuBar())
     {
         if (ImGui::BeginMenu("Fichier"))
@@ -247,7 +247,7 @@ void DrawingTools::drawProprietiesPanel()
             controller->onPositionChanged(selectedPrimitiveId, node->primitive->position);
         }
         ImGui::Separator();
-        
+
         // On s'occupe des proprietes specifiques des primitives.
 
         // Si la primitive selectionnee est de type Point2D.
