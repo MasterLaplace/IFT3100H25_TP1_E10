@@ -57,5 +57,4 @@ private:
     HistogramUI histogramUI;
     Importation importer;
     Exporting exporter;
-    
 };
