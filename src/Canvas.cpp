@@ -19,7 +19,7 @@ Canvas::~Canvas()
 // Pour ajouter un enfant à sa liste de Node2D.
 void Canvas::addNode(Node2D *node) { nodes.push_back(node); }
 
-void Canvas::removeNode(int id) 
+void Canvas::removeNode(int id)
 {
     Node2D *node = getChildById(id);
     if (node)
@@ -86,7 +86,7 @@ void Canvas::traverse()
     }
 }
 
-void Canvas::removeNodeRecursive(Node2D *node, Node2D *parent) 
+void Canvas::removeNodeRecursive(Node2D *node, Node2D *parent)
 {
     for (auto it = parent->children.begin(); it != parent->children.end(); ++it)
     {

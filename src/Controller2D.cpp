@@ -193,10 +193,7 @@ void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLi
 
 void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
 
-void Controller2D::deletePrimitiveButtonPressed(int id) 
-{ 
-        canvas->removeNode(id);
-}
+void Controller2D::deletePrimitiveButtonPressed(int id) { canvas->removeNode(id); }
 
 void Controller2D::drawHistogram(int color)
 {
