@@ -16,7 +16,8 @@ namespace plugin::image {
 class Histogram {
 public:
     void setup(ofImage _image);
-    void draw(char c);
+    void setColor(int _c) { c = _c; }
+    void draw();
 
 private:
     const int OFFSET = 100;
@@ -24,6 +25,8 @@ private:
     const int MAX_Y = 974;
     const int MAX_X = 1280;
     const int BAR_WIDTH = MAX_X / MAX_COLOR_VALUE;
+
+    int c;
 
     ofImage image;
     ofTrueTypeFont font;

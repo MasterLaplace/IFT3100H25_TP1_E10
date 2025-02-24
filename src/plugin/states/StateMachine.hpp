@@ -14,6 +14,8 @@ public:
     StateMachine();
     ~StateMachine();
 
+    State *getCurrentState();
+
     void changeState(State *newState);
     void update();
     void mousePressed(int x, int y, int button);

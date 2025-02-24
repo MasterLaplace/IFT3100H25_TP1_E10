@@ -184,4 +184,16 @@ void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLi
 
 void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
 
-void Controller2D::drawHistogram() { stateMachine.changeState(new DrawHistogramState()); }
+void Controller2D::drawHistogram(int color)
+{
+    if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        stateMachine.changeState(new DrawHistogramState(color));
+    }
+
+    else
+    {
+        DrawHistogramState *state = dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState());
+        state->setColor(color);
+    }
+}

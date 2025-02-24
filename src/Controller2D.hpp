@@ -33,7 +33,7 @@ public:
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();
-    void drawHistogram();
+    void drawHistogram(int color);
 
     void onSizeChanged(float newSize);
     void onSizeChanged(int id, float newSize);
@@ -55,5 +55,5 @@ private:
     DrawingTools gui;
     Importation importer;
     Exporting exporter;
-    Histogram histogram;
+    
 };

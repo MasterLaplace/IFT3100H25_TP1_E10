@@ -12,11 +12,16 @@ void plugin::states::DrawHistogramState::enter()
 
 void plugin::states::DrawHistogramState::update() {}
 
-void plugin::states::DrawHistogramState::draw() { histogram.draw('r'); 
-}
+void plugin::states::DrawHistogramState::draw() { histogram.draw();}
 
 void plugin::states::DrawHistogramState::exit() {}
 
 void plugin::states::DrawHistogramState::mousePressed(int x, int y, int button) {}
 
 void plugin::states::DrawHistogramState::mouseReleased(int x, int y, int button) {}
+
+void plugin::states::DrawHistogramState::setColor(int color) 
+{ 
+    this->color = color;
+    histogram.setColor(color); 
+}

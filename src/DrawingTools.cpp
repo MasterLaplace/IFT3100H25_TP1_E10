@@ -51,8 +51,19 @@ void DrawingTools::drawMenuBar()
         {
             if (ImGui::MenuItem("Rouge"))
             {
-                controller->drawHistogram();
+                controller->drawHistogram(0);
             }
+
+            if (ImGui::MenuItem("Vert"))
+            {
+                controller->drawHistogram(1);
+            }
+
+            if (ImGui::MenuItem("Bleu"))
+            {
+                controller->drawHistogram(2);
+            }
+
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();

@@ -19,25 +19,25 @@ void Histogram::setup(ofImage _image)
 }
 
 // fonction de rendu
-void Histogram::draw(char c)
+void Histogram::draw()
 {
     // On efface le canvas. Je ne suis meme pas certain que c'est reellement la bonne methode.
     ofClear(0);
 
     // On fait pointer les pointeurs vers les bons histogrammes.
-    if (c == 'r')
+    if (c == 0)
     {
         histogramAbsolute = &redAbsoluteHistogram;
         histogramRelative = &redRelativeHistogram;
         color = ofColor::red;
     }
-    else if (c == 'g')
+    else if (c == 1)
     {
         histogramAbsolute = &greenAbsoluteHistogram;
         histogramRelative = &greenRelativeHistogram;
         color = ofColor::green;
     }
-    else if (c == 'b')
+    else if (c == 2)
     {
         histogramAbsolute = &blueAbsoluteHistogram;
         histogramRelative = &blueRelativeHistogram;

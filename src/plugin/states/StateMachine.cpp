@@ -12,6 +12,8 @@ StateMachine::~StateMachine()
     }
 }
 
+State *StateMachine::getCurrentState() { return currentState; }
+
 void StateMachine::changeState(State *newState)
 {
     if (currentState)
