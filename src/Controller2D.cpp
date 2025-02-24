@@ -12,6 +12,7 @@ void Controller2D::setup()
 
     // C'est ici qu'on va initialiser l'interface pour le 2D.
     gui.setup(this);
+    histogramUI.setup(this);
 
     importer.setup();
 }
@@ -37,8 +38,17 @@ void Controller2D::draw()
     // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
     stateMachine.draw();
 
-    // C'est le Controlleur qui demande au GUI de s'afficher aussi.
-    gui.draw();
+    // C'est le Controlleur qui demande au GUI de s'afficher aussi en fonction de l'etat.
+    if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) != nullptr)
+    {
+        histogramUI.draw();
+    }
+
+    else
+    {
+        gui.draw();
+    }
+    
 }
 
 void Controller2D::exit() {}
