@@ -14,8 +14,6 @@ void Polygon::draw()
     ofEndShape(true);
 }
 
-bool Polygon::isInside(glm::vec2* point) {
-    return false;
-}
+bool Polygon::isInside(glm::vec2 *point) { return false; }
 
 } // namespace plugin::primitive

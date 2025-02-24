@@ -15,7 +15,7 @@ public:
     }
 
     virtual void draw() = 0;
-    virtual bool isInside(glm::vec2* point) = 0;
+    virtual bool isInside(glm::vec2 *point) = 0;
 
     int id;
     glm::vec2 position;

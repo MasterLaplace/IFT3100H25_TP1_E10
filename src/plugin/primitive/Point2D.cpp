@@ -8,7 +8,7 @@ void Point2D::draw()
     ofDrawCircle(position, size);
 }
 
-bool Point2D::isInside(glm::vec2* point)
+bool Point2D::isInside(glm::vec2 *point)
 {
     float distance = glm::distance(position, *point);
     return distance < size;

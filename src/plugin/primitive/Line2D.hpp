@@ -16,7 +16,7 @@ public:
     }
 
     void draw() override;
-    bool isInside(glm::vec2* point) override;
+    bool isInside(glm::vec2 *point) override;
 
     glm::vec2 startPosition;
     glm::vec2 endPosition;

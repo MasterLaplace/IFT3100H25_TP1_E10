@@ -9,7 +9,8 @@ void Line2D::draw()
     ofDrawLine(position, endPosition + position);
 }
 
-bool Line2D::isInside(glm::vec2* point) {
+bool Line2D::isInside(glm::vec2 *point)
+{
     // On calcule la distance entre le clic et la ligne :https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
     // Si la distance est en-dessous d'une certaine limite, return true
     // Sinon, return false
@@ -20,7 +21,8 @@ bool Line2D::isInside(glm::vec2* point) {
     float endx = endPosition.x + position.x;
     float endy = endPosition.y + position.y;
 
-    if (startx > endx && starty > endy) {
+    if (startx > endx && starty > endy)
+    {
         float temp = startx;
         startx = endx;
         endx = temp;
@@ -43,12 +45,12 @@ bool Line2D::isInside(glm::vec2* point) {
     float maxY = starty > endy ? starty : endy;
     float minY = starty < endy ? starty : endy;
 
-    if (distance <= 5 && x >= minX && x <= maxX && y >= minY && y <= maxY) {
+    if (distance <= 5 && x >= minX && x <= maxX && y >= minY && y <= maxY)
+    {
         return true;
     }
 
     return false;
 }
 
-    
 } // namespace plugin::primitive
