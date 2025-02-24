@@ -48,7 +48,6 @@ void Controller2D::draw()
     {
         gui.draw();
     }
-    
 }
 
 void Controller2D::exit() {}
