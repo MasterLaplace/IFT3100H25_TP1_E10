@@ -55,5 +55,4 @@ private:
     DrawingTools gui;
     Importation importer;
     Exporting exporter;
-    
 };
