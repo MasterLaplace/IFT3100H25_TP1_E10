@@ -1,6 +1,14 @@
 #include "Line2D.hpp"
 
 namespace plugin::primitive {
+Line2D::Line2D(glm::vec2 _position, glm::vec2 _endPosition, ofColor _color, float _strokeWidth) 
+    : Primitive2D(_position, _color)
+{
+    startPosition - glm::vec2(0, 0);
+    endPosition = _endPosition - _position;
+    strokeWidth = _strokeWidth;
+    name = "Ligne " + std::to_string(id);
+}
 
 void Line2D::draw()
 {

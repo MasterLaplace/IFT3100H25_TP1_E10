@@ -34,6 +34,7 @@ public:
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();
+    void deletePrimitiveButtonPressed(int id);
     void drawHistogram(int color);
 
     void onSizeChanged(float newSize);

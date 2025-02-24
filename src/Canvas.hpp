@@ -19,9 +19,12 @@ public:
     static Canvas *getInstance();
 
     void addNode(Node2D *node);
+    void removeNode(int id);
+
     void draw();
     Node2D *getChildById(const int id);
     void traverse();
 
 private:
+    void removeNodeRecursive(Node2D *node, Node2D *parent);
 };

@@ -211,7 +211,7 @@ void DrawingTools::drawSceneGraph()
 void DrawingTools::displayNode(Node2D *node, int indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
-    std::string nodeLabel = "Primitive " + std::to_string(node->primitive->id);
+    std::string nodeLabel = node->primitive->name;
     if (ImGui::Selectable(nodeLabel.c_str(), selectedPrimitiveId == node->primitive->id))
     {
         selectedPrimitiveId = node->primitive->id;
@@ -247,7 +247,7 @@ void DrawingTools::drawProprietiesPanel()
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
     if (node != nullptr)
     {
-        ImGui::Text("Primitive %d", selectedPrimitiveId);
+        ImGui::Text(node->primitive->name.c_str());
         ImGui::Separator();
 
         // Pour modifier la couleur de la primitive.
@@ -304,6 +304,13 @@ void DrawingTools::drawProprietiesPanel()
             {
                 controller->onSizeChanged(selectedPrimitiveId, rectangle->dimensions.x);
             }
+        }
+
+        // Pour supprimer une primitive.
+        if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
+        {
+            controller->deletePrimitiveButtonPressed(selectedPrimitiveId);
+            selectedPrimitiveId = -1;
         }
     }
 

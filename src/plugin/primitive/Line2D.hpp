@@ -7,13 +7,7 @@ namespace plugin::primitive {
 
 class Line2D : public Primitive2D {
 public:
-    Line2D(glm::vec2 _position, glm::vec2 _endPosition, ofColor _color, float _strokeWidth)
-        : Primitive2D(_position, _color)
-    {
-        startPosition - glm::vec2(0, 0);
-        endPosition = _endPosition - _position;
-        strokeWidth = _strokeWidth;
-    }
+    Line2D(glm::vec2 _position, glm::vec2 _endPosition, ofColor _color, float _strokeWidth);
 
     void draw() override;
     bool isInside(glm::vec2 *point) override;

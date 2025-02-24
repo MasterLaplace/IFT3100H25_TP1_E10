@@ -10,6 +10,7 @@ Node2D::~Node2D()
     {
         delete children[i];
     }
+    delete primitive;
 }
 
 // Permet d'ajouter un enfant à sa liste.

@@ -18,6 +18,7 @@ public:
     virtual bool isInside(glm::vec2 *point) = 0;
 
     int id;
+    string name;
     glm::vec2 position;
     ofColor color;
 
