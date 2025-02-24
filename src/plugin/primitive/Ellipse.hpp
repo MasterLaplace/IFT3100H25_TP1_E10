@@ -13,6 +13,7 @@ public:
     }
 
     void draw() override;
+    bool isInside(glm::vec2 *point) override;
 
     glm::vec2 radius;
 };

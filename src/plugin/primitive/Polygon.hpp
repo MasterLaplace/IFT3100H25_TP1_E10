@@ -14,6 +14,7 @@ public:
     }
 
     void draw() override;
+    bool isInside(glm::vec2 *point) override;
 
     vector<glm::vec2> points;
 };
