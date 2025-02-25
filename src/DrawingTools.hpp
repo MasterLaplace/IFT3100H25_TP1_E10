@@ -13,6 +13,7 @@ class Controller2D;
 class DrawingTools {
 public:
     enum tool {
+        SELECT,
         POINT,
         LINE,
         RECTANGLE,
@@ -34,8 +35,6 @@ private:
     void drawSceneGraph();
     void displayNode(Node2D *node, int indentLevel = 0);
     void drawProprietiesPanel();
-
-    int selectedPrimitiveId = -1;
 
     // Attributs générique
     float fillColor[3] = {0.0f, 0.0f, 0.0f};

@@ -1,4 +1,5 @@
 #include "DrawHistogramState.hpp"
+#include "SelectionState.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawRectangleState.hpp"

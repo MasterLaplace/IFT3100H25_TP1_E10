@@ -25,6 +25,7 @@ public:
     void onStrokeSizeChanged(float newSize);
     void onColorChanged(ofColor newColor);
     void onPrimitiveSelected(int id);
+    int  getSelectedNodeId();
 
 private:
     State *currentState;

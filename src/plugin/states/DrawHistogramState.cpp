@@ -1,27 +1,31 @@
 #include "DrawHistogramState.hpp"
 
-void plugin::states::DrawHistogramState::enter()
+namespace plugin::states {
+
+void DrawHistogramState::enter()
 {
     Canvas *canvas = Canvas::getInstance();
-
+    
     ofImage canvasImage;
     canvasImage.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-
+    
     histogram.setup(canvasImage);
 }
 
-void plugin::states::DrawHistogramState::update() {}
+void DrawHistogramState::update() {}
 
-void plugin::states::DrawHistogramState::draw() { histogram.draw(); }
+void DrawHistogramState::draw() { histogram.draw(); }
 
-void plugin::states::DrawHistogramState::exit() {}
+void DrawHistogramState::exit() {}
 
-void plugin::states::DrawHistogramState::mousePressed(int x, int y, int button) {}
+void DrawHistogramState::mousePressed(int x, int y, int button) {}
 
-void plugin::states::DrawHistogramState::mouseReleased(int x, int y, int button) {}
+void DrawHistogramState::mouseReleased(int x, int y, int button) {}
 
-void plugin::states::DrawHistogramState::setColor(int color)
+void DrawHistogramState::setColor(int color)
 {
     this->color = color;
     histogram.setColor(color);
 }
+
+} // namespace plugin::states

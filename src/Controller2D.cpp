@@ -160,6 +160,7 @@ std::vector<int> Controller2D::getPrimitiveId()
 
 std::vector<Node2D *> Controller2D::getCanvasNodes() { return canvas->nodes; }
 
+
 Node2D *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
 
 void Controller2D::getNodeColor(const int id, float color[3])
@@ -187,13 +188,20 @@ void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)
     }
 }
 
+int Controller2D::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
+
+void Controller2D::selectionButtonPressed() { stateMachine.changeState(new SelectionState()); }
+
 void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
 void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
 void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
 
-void Controller2D::deletePrimitiveButtonPressed(int id) { canvas->removeNode(id); }
+void Controller2D::deletePrimitiveButtonPressed(int id) {
+    canvas->removeNode(id);
+    stateMachine.onPrimitiveSelected(-1);
+}
 
 void Controller2D::drawHistogram(int color)
 {

@@ -78,6 +78,12 @@ void DrawingTools::drawToolsPanel()
     ImGui::Begin("Outils de dessin");
 
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
+    
+    if (ImGui::Button("Selection"))
+    {
+        selectedTool = tool::SELECT;
+        controller->selectionButtonPressed();
+    }
 
     // Si le bouton "Point" est activ�.
     if (ImGui::Button("Point"))
@@ -118,6 +124,9 @@ void DrawingTools::drawDynamicPanel()
 
     switch (selectedTool)
     {
+    case DrawingTools::SELECT:
+        ImGui::Text("Selection");
+
     case DrawingTools::POINT:
         ImGui::Text("Option pour le point");
 
@@ -200,7 +209,6 @@ void DrawingTools::drawSceneGraph()
 
     if (ImGui::Button("deselectionner"))
     {
-        selectedPrimitiveId = -1;
         controller->onPrimitiveSelected(-1);
     }
 
@@ -212,9 +220,9 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = node->primitive->name;
-    if (ImGui::Selectable(nodeLabel.c_str(), selectedPrimitiveId == node->primitive->id))
+    int selectedNodeId = controller->getSelectedNodeId();
+    if (ImGui::Selectable(nodeLabel.c_str(), selectedNodeId == node->primitive->id))
     {
-        selectedPrimitiveId = node->primitive->id;
         controller->onPrimitiveSelected(node->primitive->id);
     }
 
@@ -240,7 +248,8 @@ void DrawingTools::drawProprietiesPanel()
     ImGui::Separator();
 
     // On va chercher la node selectionnee.
-    Node2D *node = controller->getNodeById(selectedPrimitiveId);
+    int selectedNodeId = controller->getSelectedNodeId();
+    Node2D *node = controller->getNodeById(selectedNodeId);
 
     // On s'occupe des proprietes generiques en premier.
 
@@ -252,11 +261,11 @@ void DrawingTools::drawProprietiesPanel()
 
         // Pour modifier la couleur de la primitive.
         float nodeColor[3];
-        controller->getNodeColor(selectedPrimitiveId, nodeColor);
+        controller->getNodeColor(selectedNodeId, nodeColor);
         ImGui::Text("Couleur :");
         if (ImGui::ColorEdit3("Couleur", nodeColor))
         {
-            controller->onColorChanged(selectedPrimitiveId, nodeColor);
+            controller->onColorChanged(selectedNodeId, nodeColor);
         }
         ImGui::Separator();
 
@@ -264,7 +273,7 @@ void DrawingTools::drawProprietiesPanel()
         ImGui::Text("Position :");
         if (ImGui::DragFloat2("Position", &node->primitive->position.x, 0.1f))
         {
-            controller->onPositionChanged(selectedPrimitiveId, node->primitive->position);
+            controller->onPositionChanged(selectedNodeId, node->primitive->position);
         }
         ImGui::Separator();
 
@@ -276,7 +285,7 @@ void DrawingTools::drawProprietiesPanel()
             ImGui::Text("Taille :");
             if (ImGui::DragFloat("Taille", &point->size, 0.1f))
             {
-                controller->onSizeChanged(selectedPrimitiveId, point->size);
+                controller->onSizeChanged(selectedNodeId, point->size);
             }
         }
 
@@ -286,13 +295,13 @@ void DrawingTools::drawProprietiesPanel()
             ImGui::Text("Debut de la ligne");
             if (ImGui::DragFloat2("Debut", &line->position.x, 0.1f))
             {
-                controller->onPositionChanged(selectedPrimitiveId, line->position);
+                controller->onPositionChanged(selectedNodeId, line->position);
             }
 
             ImGui::Text("Fin de la ligne :");
             if (ImGui::DragFloat2("Fin", &line->endPosition.x, 0.1f))
             {
-                controller->onEndPositionChanged(selectedPrimitiveId, line->endPosition);
+                controller->onEndPositionChanged(selectedNodeId, line->endPosition);
             }
         }
 
@@ -302,15 +311,14 @@ void DrawingTools::drawProprietiesPanel()
             ImGui::Text("Dimensions :");
             if (ImGui::DragFloat2("Dimensions", &rectangle->dimensions.x, 0.1f))
             {
-                controller->onSizeChanged(selectedPrimitiveId, rectangle->dimensions.x);
+                controller->onSizeChanged(selectedNodeId, rectangle->dimensions.x);
             }
         }
 
         // Pour supprimer une primitive.
         if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
         {
-            controller->deletePrimitiveButtonPressed(selectedPrimitiveId);
-            selectedPrimitiveId = -1;
+            controller->deletePrimitiveButtonPressed(selectedNodeId);
         }
     }
 

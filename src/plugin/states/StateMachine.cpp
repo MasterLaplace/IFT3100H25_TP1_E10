@@ -71,4 +71,6 @@ void StateMachine::onColorChanged(ofColor newColor) { currentState->color = newC
 
 void StateMachine::onPrimitiveSelected(int id) { currentState->selectedPrimitiveId = id; }
 
+int StateMachine::getSelectedNodeId() { return currentState->selectedPrimitiveId; }
+
 } // namespace plugin::states

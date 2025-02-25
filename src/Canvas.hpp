@@ -24,7 +24,8 @@ public:
     void draw();
     Node2D *getChildById(const int id);
     void traverse();
-
+    int findMouseSelectedNode(glm::vec2 point, std::vector<Node2D *> nodesToCheck);
+    
 private:
     void removeNodeRecursive(Node2D *node, Node2D *parent);
 };

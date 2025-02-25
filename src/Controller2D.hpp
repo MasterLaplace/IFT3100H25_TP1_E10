@@ -31,6 +31,7 @@ public:
     void importImage();
     void exportImage();
 
+    void selectionButtonPressed();
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();
@@ -50,6 +51,7 @@ public:
     Node2D *getNodeById(const int id);
     void getNodeColor(const int id, float color[3]);
     void collectPrimitiveId(Node2D *node, std::vector<int> &ids);
+    int getSelectedNodeId();
 
 private:
     StateMachine stateMachine;
