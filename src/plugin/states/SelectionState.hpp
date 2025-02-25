@@ -19,8 +19,7 @@ public:
 private:
     void drawCursor();
     void drawPreview();
-    int  findSelectedNode(glm::vec2 position, std::vector<Node2D *> nodes);
+    int findSelectedNode(glm::vec2 position, std::vector<Node2D *> nodes);
 };
 
 } // namespace plugin::states
-

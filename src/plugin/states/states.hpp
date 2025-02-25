@@ -1,7 +1,7 @@
 #include "DrawHistogramState.hpp"
-#include "SelectionState.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawRectangleState.hpp"
+#include "SelectionState.hpp"
 #include "State.hpp"
 #include "StateMachine.hpp"

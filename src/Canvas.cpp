@@ -108,15 +108,19 @@ void Canvas::removeNodeRecursive(Node2D *node, Node2D *parent)
     }
 }
 
-int Canvas::findMouseSelectedNode(glm::vec2 point, std::vector<Node2D *> nodesToCheck) {
-    for (int i = nodesToCheck.size() - 1; i >= 0; i--) {
+int Canvas::findMouseSelectedNode(glm::vec2 point, std::vector<Node2D *> nodesToCheck)
+{
+    for (int i = nodesToCheck.size() - 1; i >= 0; i--)
+    {
         int nodeId = findMouseSelectedNode(point, nodesToCheck[i]->children);
-        
-        if (nodeId != -1) {
+
+        if (nodeId != -1)
+        {
             return nodeId;
         }
-        
-        if (nodes[i]->primitive->isInside(&point)) {
+
+        if (nodes[i]->primitive->isInside(&point))
+        {
             return nodesToCheck[i]->primitive->id;
         }
     }

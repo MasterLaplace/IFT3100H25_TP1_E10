@@ -78,7 +78,7 @@ void DrawingTools::drawToolsPanel()
     ImGui::Begin("Outils de dessin");
 
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
-    
+
     if (ImGui::Button("Selection"))
     {
         selectedTool = tool::SELECT;
@@ -124,8 +124,7 @@ void DrawingTools::drawDynamicPanel()
 
     switch (selectedTool)
     {
-    case DrawingTools::SELECT:
-        ImGui::Text("Selection");
+    case DrawingTools::SELECT: ImGui::Text("Selection");
 
     case DrawingTools::POINT:
         ImGui::Text("Option pour le point");

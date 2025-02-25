@@ -5,10 +5,10 @@ namespace plugin::states {
 void DrawHistogramState::enter()
 {
     Canvas *canvas = Canvas::getInstance();
-    
+
     ofImage canvasImage;
     canvasImage.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-    
+
     histogram.setup(canvasImage);
 }
 
