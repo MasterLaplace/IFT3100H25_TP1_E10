@@ -8,10 +8,8 @@ namespace plugin::primitive {
 
 class Polygon : public Primitive2D {
 public:
-    Polygon(glm::vec2 _position, ofColor _color, vector<glm::vec2> _points) : Primitive2D(_position, _color)
-    {
-        points = _points;
-    }
+    Polygon(glm::vec2 _position, ofColor _color, vector<glm::vec2> _points);
+    ~Polygon() override = default;
 
     void draw() override;
     bool isInside(glm::vec2 *point) override;

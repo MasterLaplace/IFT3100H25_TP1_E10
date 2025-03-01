@@ -13,12 +13,13 @@ public:
         id = nextId;
         nextId++;
     }
+    virtual ~Primitive2D() = default;
 
     virtual void draw() = 0;
     virtual bool isInside(glm::vec2 *point) = 0;
 
     int id;
-    string name;
+    string name = "Primitive2D";
     glm::vec2 position;
     ofColor color;
 

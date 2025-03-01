@@ -8,6 +8,7 @@ namespace plugin::primitive {
 class Point2D : public Primitive2D {
 public:
     Point2D(glm::vec2 _position, ofColor _color, float _size);
+    ~Point2D() override = default;
 
     void draw() override;
     bool isInside(glm::vec2 *point) override;

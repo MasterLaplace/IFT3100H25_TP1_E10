@@ -2,6 +2,13 @@
 
 namespace plugin::primitive {
 
+Ellipse::Ellipse(glm::vec2 _position, ofColor _color, glm::vec2 _radius) : Primitive2D(_position, _color)
+{
+    radius = _radius;
+    name = "Ellipse " + std::to_string(id);
+}
+
+
 void Ellipse::draw()
 {
     ofSetColor(color);

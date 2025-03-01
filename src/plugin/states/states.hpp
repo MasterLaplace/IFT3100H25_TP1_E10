@@ -2,6 +2,8 @@
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawRectangleState.hpp"
+#include "DrawEllipseState.hpp"
+#include "DrawPolygonState.hpp"
 #include "SelectionState.hpp"
 #include "State.hpp"
 #include "StateMachine.hpp"

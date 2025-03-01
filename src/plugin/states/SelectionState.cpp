@@ -17,8 +17,6 @@ void SelectionState::mouseReleased(int x, int y, int button)
     Canvas *canvas = Canvas::getInstance();
     int nodeId = findSelectedNode(glm::vec2(x, y), canvas->nodes);
     selectedPrimitiveId = nodeId;
-
-    ofLog() << "Selected primitive: " << selectedPrimitiveId;
 }
 
 void SelectionState::drawCursor() {}

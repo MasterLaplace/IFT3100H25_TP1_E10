@@ -35,6 +35,8 @@ public:
     void drawPointButtonPressed();
     void drawLineButtonPressed();
     void drawRectangleButtonPressed();
+    void drawEllipseButtonPressed();
+    void drawPolygonButtonPressed();
     void deletePrimitiveButtonPressed(int id);
     void drawHistogram(int color);
 

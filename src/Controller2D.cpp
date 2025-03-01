@@ -197,6 +197,10 @@ void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLi
 
 void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
 
+void Controller2D::drawEllipseButtonPressed() { stateMachine.changeState(new DrawEllipseState()); }
+
+void Controller2D::drawPolygonButtonPressed() { stateMachine.changeState(new DrawPolygonState()); }
+
 void Controller2D::deletePrimitiveButtonPressed(int id)
 {
     canvas->removeNode(id);

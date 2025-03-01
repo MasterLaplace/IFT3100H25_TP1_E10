@@ -35,7 +35,6 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
     {
         canvas->addNode(node);
     }
-
     else
     {
         parent->addChild(node);
@@ -67,30 +66,29 @@ void DrawRectangleState::drawCursor()
 
 void DrawRectangleState::drawPreview()
 {
-    if (isMousePressed)
+    if(!isMousePressed) return;
+    
+    ofColor previewColor = color;
+    previewColor.a = 127;
+    ofSetColor(previewColor);
+
+    // On calcule la largeur et la hauteur du rectangle
+    float width = abs(mousePressedPosition.x - mousePosition.x);
+    float height = abs(mousePressedPosition.y - mousePosition.y);
+
+    // Position is always the top left corner
+    glm::vec2 position = glm::vec2(mousePressedPosition.x, mousePressedPosition.y);
+
+    if (mousePosition.x < mousePressedPosition.x)
     {
-        ofColor previewColor = color;
-        previewColor.a = 127;
-        ofSetColor(previewColor);
-
-        // On calcule la largeur et la hauteur du rectangle
-        float width = abs(mousePressedPosition.x - mousePosition.x);
-        float height = abs(mousePressedPosition.y - mousePosition.y);
-
-        // Position is always the top left corner
-        glm::vec2 position = glm::vec2(mousePressedPosition.x, mousePressedPosition.y);
-
-        if (mousePosition.x < mousePressedPosition.x)
-        {
-            position.x = mousePosition.x;
-        }
-        if (mousePosition.y < mousePressedPosition.y)
-        {
-            position.y = mousePosition.y;
-        }
-
-        ofDrawRectangle(position, width, height);
+        position.x = mousePosition.x;
     }
+    if (mousePosition.y < mousePressedPosition.y)
+    {
+        position.y = mousePosition.y;
+    }
+
+    ofDrawRectangle(position, width, height);
 }
 
 } // namespace plugin::states
