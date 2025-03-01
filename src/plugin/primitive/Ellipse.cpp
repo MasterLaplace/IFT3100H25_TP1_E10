@@ -8,7 +8,6 @@ Ellipse::Ellipse(glm::vec2 _position, ofColor _color, glm::vec2 _radius) : Primi
     name = "Ellipse " + std::to_string(id);
 }
 
-
 void Ellipse::draw()
 {
     ofSetColor(color);

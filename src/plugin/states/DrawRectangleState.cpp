@@ -66,8 +66,9 @@ void DrawRectangleState::drawCursor()
 
 void DrawRectangleState::drawPreview()
 {
-    if(!isMousePressed) return;
-    
+    if (!isMousePressed)
+        return;
+
     ofColor previewColor = color;
     previewColor.a = 127;
     ofSetColor(previewColor);

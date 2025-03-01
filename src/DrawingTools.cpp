@@ -111,14 +111,14 @@ void DrawingTools::drawToolsPanel()
         controller->drawRectangleButtonPressed();
         controller->onColorChanged(fillColor);
     }
-    
+
     if (ImGui::Button("Ellipse"))
     {
         selectedTool = tool::ELLIPSE;
         controller->drawEllipseButtonPressed();
         controller->onColorChanged(fillColor);
     }
-    
+
     if (ImGui::Button("Polygone"))
     {
         selectedTool = tool::POLYGON;
@@ -138,80 +138,79 @@ void DrawingTools::drawDynamicPanel()
 
     switch (selectedTool)
     {
-        case DrawingTools::SELECT: ImGui::Text("Selection");
-            
-        case DrawingTools::POINT:
-            ImGui::Text("Option pour le point");
-            
-            // Si on change la taille du point.
-            if (ImGui::SliderFloat("Taille", &pointSize, 1.0f, 50.0f))
-            {
-                // On envoie l'information au controleur concernant la nouvelle taille du point.
-                controller->onSizeChanged(pointSize);
-            }
-            
-            // Si on change la couleur du point.
-            if (ImGui::ColorEdit3("Couleur", (float *) &fillColor))
-            {
-                // On envoie le tableau de couleur au controleur.
-                // C'est le Controlleur qui va transformer ce tableau en ofColor
-                // pour ensuite l'envoyer � l'�tat.
-                controller->onColorChanged(fillColor);
-            }
-            break;
-            
-        case DrawingTools::LINE:
-            ImGui::Text("Option de ligne");
-            
-            // Si on change la taille de la ligne.
-            if (ImGui::SliderFloat("Epaisseur", &lineWidth, 1.0f, 10.0f))
-            {
-                // On envoie l'information au controleur concernant la nouvelle taille de la ligne.
-                controller->onSizeChanged(lineWidth);
-            }
-            
-            // Si on change la couleur de la ligne.
-            if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
-            {
-                // On envoie le tableau de couleur au controleur.
-                // C'est le Controlleur qui va transformer ce tableau en ofColor
-                // pour ensuite l'envoyer � l'�tat.
-                controller->onColorChanged(fillColor);
-            }
-            break;
-            
-        case DrawingTools::RECTANGLE:
-            ImGui::Text("Option de rectangle");
-            
-            // Si on change la couleur de la ligne.
-            if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
-            {
-                // On envoie le tableau de couleur au controleur.
-                // C'est le Controlleur qui va transformer ce tableau en ofColor
-                // pour ensuite l'envoyer � l'�tat.
-                controller->onColorChanged(fillColor);
-            }
-            break;
-            
-        case DrawingTools::ELLIPSE:
-            ImGui::Text("Option de ellipse");
-            
-            if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
-            {
-                controller->onColorChanged(fillColor);
-            }
-            break;
-        case DrawingTools::POLYGON:
-            ImGui::Text("Option de polygone");
-            
-            if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
-            {
-                controller->onColorChanged(fillColor);
-            }
-            break;
-            
-        default:
-            break;
+    case DrawingTools::SELECT: ImGui::Text("Selection");
+
+    case DrawingTools::POINT:
+        ImGui::Text("Option pour le point");
+
+        // Si on change la taille du point.
+        if (ImGui::SliderFloat("Taille", &pointSize, 1.0f, 50.0f))
+        {
+            // On envoie l'information au controleur concernant la nouvelle taille du point.
+            controller->onSizeChanged(pointSize);
+        }
+
+        // Si on change la couleur du point.
+        if (ImGui::ColorEdit3("Couleur", (float *) &fillColor))
+        {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
+            // pour ensuite l'envoyer � l'�tat.
+            controller->onColorChanged(fillColor);
+        }
+        break;
+
+    case DrawingTools::LINE:
+        ImGui::Text("Option de ligne");
+
+        // Si on change la taille de la ligne.
+        if (ImGui::SliderFloat("Epaisseur", &lineWidth, 1.0f, 10.0f))
+        {
+            // On envoie l'information au controleur concernant la nouvelle taille de la ligne.
+            controller->onSizeChanged(lineWidth);
+        }
+
+        // Si on change la couleur de la ligne.
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
+        {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
+            // pour ensuite l'envoyer � l'�tat.
+            controller->onColorChanged(fillColor);
+        }
+        break;
+
+    case DrawingTools::RECTANGLE:
+        ImGui::Text("Option de rectangle");
+
+        // Si on change la couleur de la ligne.
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
+        {
+            // On envoie le tableau de couleur au controleur.
+            // C'est le Controlleur qui va transformer ce tableau en ofColor
+            // pour ensuite l'envoyer � l'�tat.
+            controller->onColorChanged(fillColor);
+        }
+        break;
+
+    case DrawingTools::ELLIPSE:
+        ImGui::Text("Option de ellipse");
+
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
+        {
+            controller->onColorChanged(fillColor);
+        }
+        break;
+    case DrawingTools::POLYGON:
+        ImGui::Text("Option de polygone");
+
+        if (ImGui::ColorEdit3("Couleur", &fillColor[0]))
+        {
+            controller->onColorChanged(fillColor);
+        }
+        break;
+
+    default: break;
     }
 
     ImGui::End();

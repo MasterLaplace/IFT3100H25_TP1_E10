@@ -9,7 +9,7 @@ class Ellipse : public Primitive2D {
 public:
     Ellipse(glm::vec2 _position, ofColor _color, glm::vec2 _radius);
     ~Ellipse() override = default;
-    
+
     void draw() override;
     bool isInside(glm::vec2 *point) override;
 
