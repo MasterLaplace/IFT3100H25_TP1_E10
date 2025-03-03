@@ -18,9 +18,7 @@ public:
     ObjModels() = default;
     ~ObjModels() = default;
 
-    bool load(const std::string &path) {
-        return yourModel.load(path);
-    }
+    bool load(const std::string &path) { return yourModel.load(path); }
 
     void draw() { yourModel.draw(OF_MESH_FILL); }
 

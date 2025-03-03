@@ -10,8 +10,8 @@
 #ifndef IMPORTING_HPP_
 #define IMPORTING_HPP_
 
-#include "ofMain.h"
 #include "../geometry/ObjModels.hpp"
+#include "ofMain.h"
 
 namespace plugin::image::Importing {
 
