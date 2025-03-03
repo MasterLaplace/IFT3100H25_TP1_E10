@@ -2,12 +2,12 @@
 
 void Controller2D::setup()
 {
-    // On configure l'instance du Canvas dans la scène par le singleton
-    // pour qu'on puisse y accéder de n'importe où.
+    // On configure l'instance du Canvas dans la scï¿½ne par le singleton
+    // pour qu'on puisse y accï¿½der de n'importe oï¿½.
     canvas = Canvas::getInstance();
 
-    // On initialise l'état du Controlleur pour dessiner des points.
-    // On pourrait changer l'état initial au besoin.
+    // On initialise l'ï¿½tat du Controlleur pour dessiner des points.
+    // On pourrait changer l'ï¿½tat initial au besoin.
     stateMachine.changeState(new DrawPointState());
 
     // C'est ici qu'on va initialiser l'interface pour le 2D.
@@ -28,14 +28,14 @@ void Controller2D::draw()
     // On dessine le canvas en premier.
     canvas->draw();
 
-    // On dessine ensuite l'image importée.
+    // On dessine ensuite l'image importï¿½e.
     importer.draw();
 
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
 
-    // C'est Controlleur qui demande à son état de dessiner des choses en lien avec l'état.
-    // Par exemple, si on est dans l'état DrawRectangleState, on va dessiner le fantome du rectangle.
+    // C'est Controlleur qui demande ï¿½ son ï¿½tat de dessiner des choses en lien avec l'ï¿½tat.
+    // Par exemple, si on est dans l'ï¿½tat DrawRectangleState, on va dessiner le fantome du rectangle.
     stateMachine.draw();
 
     // C'est le Controlleur qui demande au GUI de s'afficher aussi en fonction de l'etat.
@@ -83,7 +83,7 @@ void Controller2D::keyReleased(int key)
 void Controller2D::mouseMoved(glm::vec2 pos)
 {
 
-    // On transmet la position de la sourie à l'état.
+    // On transmet la position de la sourie ï¿½ l'ï¿½tat.
     // L'input provient de Application.
     stateMachine.mousePosition = pos;
 }
@@ -100,15 +100,15 @@ void Controller2D::onSizeChanged(float newSize) { stateMachine.onStrokeSizeChang
 
 void Controller2D::onSizeChanged(int id, float newSize)
 {
-    Node2D *node = getNodeById(id);
+    Node<Primitive2D> *node = getNodeById(id);
     if (Point2D *p = dynamic_cast<Point2D *>(node->primitive))
     {
         p->size = newSize;
     }
 }
 
-// Cette méthode reçoit un tableau de trois float parce que c'est ce que ImGui utilise.
-// On transforme ce tableau en un ofColor pour l'envoyer à l'état.
+// Cette mï¿½thode reï¿½oit un tableau de trois float parce que c'est ce que ImGui utilise.
+// On transforme ce tableau en un ofColor pour l'envoyer ï¿½ l'ï¿½tat.
 void Controller2D::onColorChanged(float _newColor[3])
 {
 
@@ -118,7 +118,7 @@ void Controller2D::onColorChanged(float _newColor[3])
 
 void Controller2D::onColorChanged(int id, float _newColor[3])
 {
-    Node2D *node = getNodeById(id);
+    Node<Primitive2D> *node = getNodeById(id);
     if (node)
     {
         ofColor newColor = ofColor(_newColor[0] * 255, _newColor[1] * 255, _newColor[2] * 255);
@@ -130,7 +130,7 @@ void Controller2D::onPrimitiveSelected(int id) { stateMachine.onPrimitiveSelecte
 
 void Controller2D::onPositionChanged(int id, glm::vec2 newPos)
 {
-    Node2D *node = getNodeById(id);
+    Node<Primitive2D> *node = getNodeById(id);
     if (node)
 
     {
@@ -140,7 +140,7 @@ void Controller2D::onPositionChanged(int id, glm::vec2 newPos)
 
 void Controller2D::onEndPositionChanged(int id, glm::vec2 newPos)
 {
-    Node2D *node = getNodeById(id);
+    Node<Primitive2D> *node = getNodeById(id);
     if (Line2D *line = dynamic_cast<Line2D *>(node->primitive))
 
     {
@@ -158,13 +158,13 @@ std::vector<int> Controller2D::getPrimitiveId()
     return ids;
 }
 
-std::vector<Node2D *> Controller2D::getCanvasNodes() { return canvas->nodes; }
+std::vector<Node<Primitive2D> *> Controller2D::getCanvasNodes() { return canvas->nodes; }
 
-Node2D *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
+Node<Primitive2D> *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
 
 void Controller2D::getNodeColor(const int id, float color[3])
 {
-    Node2D *node = getNodeById(id);
+    Node<Primitive2D> *node = getNodeById(id);
 
     if (node)
     {
@@ -174,7 +174,7 @@ void Controller2D::getNodeColor(const int id, float color[3])
     }
 }
 
-void Controller2D::collectPrimitiveId(Node2D *node, std::vector<int> &ids)
+void Controller2D::collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids)
 {
     if (node->primitive != nullptr)
     {

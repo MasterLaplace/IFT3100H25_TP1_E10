@@ -1,36 +1,36 @@
 #include "Canvas.hpp"
 
-// Méthode statique pour obtenir l'instance du Canvas.
+// Mï¿½thode statique pour obtenir l'instance du Canvas.
 Canvas *Canvas::getInstance()
 {
     static Canvas instance;
     return &instance;
 }
 
-// À la destruction du Canvas, on s'assure qu'on détruit l'arbre de Node2D.
+// ï¿½ la destruction du Canvas, on s'assure qu'on dï¿½truit l'arbre de Node.
 Canvas::~Canvas()
 {
-    for (int i = 0; i < nodes.size(); i++)
+    for (size_t i = 0; i < nodes.size(); i++)
     {
         delete nodes[i];
     }
 }
 
-// Pour ajouter un enfant à sa liste de Node2D.
-void Canvas::addNode(Node2D *node) { nodes.push_back(node); }
+// Pour ajouter un enfant ï¿½ sa liste de Node.
+void Canvas::addNode(Node<Primitive2D> *node) { nodes.push_back(node); }
 
 void Canvas::removeNode(int id)
 {
-    Node2D *node = getChildById(id);
+    Node<Primitive2D> *node = getChildById(id);
     if (node)
     {
         // La boucle qui permet de deleter les enfants de la node.
-        for (int i = 0; i < node->children.size(); i++)
+        for (size_t i = 0; i < node->children.size(); i++)
         {
             removeNode(node->children[i]->primitive->id);
         }
 
-        // On cherche la node à supprimer dans la liste de nodes.
+        // On cherche la node ï¿½ supprimer dans la liste de nodes.
         // Si on la trouve, on la supprime.
         // Sinon, on appelle la fonction removeNodeRecursive sur tous.
         for (auto it = nodes.begin(); it != nodes.end(); ++it)
@@ -50,21 +50,21 @@ void Canvas::removeNode(int id)
     }
 }
 
-// Pour dessiner à l'écran toutes les Primitive2D qui sont contenu dans chaques noeuds de l'arbre.
+// Pour dessiner ï¿½ l'ï¿½cran toutes les Primitive2D qui sont contenu dans chaques noeuds de l'arbre.
 void Canvas::draw()
 {
     ofBackground(255);
 
-    for (int i = 0; i < nodes.size(); i++)
+    for (size_t i = 0; i < nodes.size(); i++)
     {
         nodes[i]->draw();
     }
 }
 
-// Pour récupérer un noeud spécifique à l'aide de son identifiant unique.
-Node2D *Canvas::getChildById(const int id)
+// Pour rï¿½cupï¿½rer un noeud spï¿½cifique ï¿½ l'aide de son identifiant unique.
+Node<Primitive2D> *Canvas::getChildById(const int id)
 {
-    Node2D *result = nullptr;
+    Node<Primitive2D> *result = nullptr;
 
     // On appelle la fonction getChildById sur tous les enfants de la racine.
     for (auto node : nodes)
@@ -80,19 +80,19 @@ Node2D *Canvas::getChildById(const int id)
 
 void Canvas::traverse()
 {
-    for (int i = 0; i < nodes.size(); i++)
+    for (size_t i = 0; i < nodes.size(); i++)
     {
         nodes[i]->traverse();
     }
 }
 
-void Canvas::removeNodeRecursive(Node2D *node, Node2D *parent)
+void Canvas::removeNodeRecursive(Node<Primitive2D> *node, Node<Primitive2D> *parent)
 {
     for (auto it = parent->children.begin(); it != parent->children.end(); ++it)
     {
         if (*it == node)
         {
-            for (int i = 0; i < node->children.size(); i++)
+            for (size_t i = 0; i < node->children.size(); i++)
             {
                 removeNode(node->children[i]->primitive->id);
             }
@@ -108,7 +108,7 @@ void Canvas::removeNodeRecursive(Node2D *node, Node2D *parent)
     }
 }
 
-int Canvas::findMouseSelectedNode(glm::vec2 point, std::vector<Node2D *> nodesToCheck)
+int Canvas::findMouseSelectedNode(glm::vec2 point, std::vector<Node<Primitive2D> *> nodesToCheck)
 {
     for (int i = nodesToCheck.size() - 1; i >= 0; i--)
     {
@@ -125,5 +125,5 @@ int Canvas::findMouseSelectedNode(glm::vec2 point, std::vector<Node2D *> nodesTo
         }
     }
 
-    return -1; // Retourne -1 si rien n'est trouvŽ
+    return -1; // Retourne -1 si rien n'est trouvï¿½
 }

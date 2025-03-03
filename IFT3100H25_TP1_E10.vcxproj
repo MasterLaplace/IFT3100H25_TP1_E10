@@ -109,7 +109,6 @@
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\Controller2D.cpp" />
     <ClCompile Include="src\DrawingTools.cpp" />
-    <ClCompile Include="src\Node2D.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
     <ClCompile Include="src\plugin\image\Histogram.cpp" />
@@ -155,7 +154,8 @@
     <ClInclude Include="src\Controller2D.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\Importation.hpp" />
-    <ClInclude Include="src\Node2D.hpp" />
+    <ClInclude Include="src\Node.hpp" />
+    <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />
     <ClInclude Include="src\plugin\image\ColourSpaces.hpp" />

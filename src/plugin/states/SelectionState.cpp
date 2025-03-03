@@ -23,7 +23,7 @@ void SelectionState::drawCursor() {}
 
 void SelectionState::drawPreview() {}
 
-int SelectionState::findSelectedNode(glm::vec2 position, std::vector<Node2D *> nodes)
+int SelectionState::findSelectedNode(glm::vec2 position, std::vector<Node<Primitive2D> *> nodes)
 {
     for (int i = nodes.size() - 1; i >= 0; i--)
     {

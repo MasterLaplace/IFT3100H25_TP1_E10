@@ -4,7 +4,7 @@
 C'est une classe temporaire de UI juste pour donner une idée de comment l'implémenter.
 */
 
-#include "Node2D.hpp"
+#include "Node.hpp"
 #include "ofxImGui.h"
 #include <unordered_map>
 
@@ -33,7 +33,7 @@ private:
     void drawToolsPanel();
     void drawDynamicPanel();
     void drawSceneGraph();
-    void displayNode(Node2D *node, int indentLevel = 0);
+    void displayNode(Node<Primitive2D> *node, int indentLevel = 0);
     void drawProprietiesPanel();
 
     // Attributs générique

@@ -13,9 +13,9 @@ void DrawPointState::mousePressed(int x, int y, int button) {}
 void DrawPointState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
-    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
+    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
     Point2D *point = new Point2D(mousePosition, color, strokeSize);
-    Node2D *node = new Node2D(point);
+    Node<Primitive2D> *node = new Node<Primitive2D>(point);
 
     if (!parent)
     {

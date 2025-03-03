@@ -28,8 +28,8 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
 
     plugin::primitive::Rectangle *rectangle =
         new plugin::primitive::Rectangle(position, color, glm::vec2(width, height));
-    Node2D *node = new Node2D(rectangle);
-    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
+    Node<Primitive2D> *node = new Node<Primitive2D>(rectangle);
+    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {
@@ -55,7 +55,7 @@ void DrawRectangleState::drawCursor()
 {
     // Le decallage de l'icone par rapport au curseur
     glm::vec2 upOffset = glm::vec2(50, 10);
-    glm::vec2 downOffset = glm::vec2(25, 50);
+    // glm::vec2 downOffset = glm::vec2(25, 50);
 
     ofFill();
     ofSetColor(ofColor::black);

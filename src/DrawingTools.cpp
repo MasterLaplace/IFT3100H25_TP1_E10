@@ -3,7 +3,6 @@
 
 void DrawingTools::setup(Controller2D *_controller)
 {
-
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
     controller->onSizeChanged(pointSize);
@@ -13,7 +12,6 @@ void DrawingTools::setup(Controller2D *_controller)
 
 void DrawingTools::draw()
 {
-
     gui.begin();
     drawMenuBar();
     drawToolsPanel();
@@ -229,8 +227,8 @@ void DrawingTools::drawSceneGraph()
     ImGui::Text("Primitive :");
     ImGui::Separator();
 
-    std::vector<Node2D *> nodes = controller->getCanvasNodes();
-    for (Node2D *node : nodes)
+    std::vector<Node<Primitive2D> *> nodes = controller->getCanvasNodes();
+    for (Node<Primitive2D> *node : nodes)
     {
         displayNode(node, 0);
         // cout << "Node : " << node->primitive->id << endl;
@@ -245,7 +243,7 @@ void DrawingTools::drawSceneGraph()
 }
 
 // Sert a afficher les noeuds du graphe de scene
-void DrawingTools::displayNode(Node2D *node, int indentLevel)
+void DrawingTools::displayNode(Node<Primitive2D> *node, int indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = node->primitive->name;
@@ -255,7 +253,7 @@ void DrawingTools::displayNode(Node2D *node, int indentLevel)
         controller->onPrimitiveSelected(node->primitive->id);
     }
 
-    for (Node2D *child : node->children)
+    for (Node<Primitive2D> *child : node->children)
     {
         displayNode(child, indentLevel + 1);
     }
@@ -278,7 +276,7 @@ void DrawingTools::drawProprietiesPanel()
 
     // On va chercher la node selectionnee.
     int selectedNodeId = controller->getSelectedNodeId();
-    Node2D *node = controller->getNodeById(selectedNodeId);
+    Node<Primitive2D> *node = controller->getNodeById(selectedNodeId);
 
     // On s'occupe des proprietes generiques en premier.
 

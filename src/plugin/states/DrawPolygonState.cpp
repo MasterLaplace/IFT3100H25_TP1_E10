@@ -36,8 +36,8 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
     plugin::primitive::Polygon *polygon = new plugin::primitive::Polygon(position, color, points);
 
     // On cree le noeud.
-    Node2D *node = new Node2D(polygon);
-    Node2D *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
+    Node<Primitive2D> *node = new Node<Primitive2D>(polygon);
+    Node<Primitive2D> *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {
@@ -98,12 +98,12 @@ void DrawPolygonState::drawPreview()
 
     ofSetColor(previewColor);
 
-    for (int i = 0; i < points.size(); i++)
+    for (size_t i = 0; i < points.size(); i++)
     {
         ofDrawCircle(points[i], 5);
     }
 
-    for (int i = 0; i < points.size() - 1; i++)
+    for (size_t i = 0; i < points.size() - 1; i++)
     {
         ofDrawLine(points[i], points[i + 1]);
     }

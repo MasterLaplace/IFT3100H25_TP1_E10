@@ -49,10 +49,10 @@ public:
     void onEndPositionChanged(int id, glm::vec2 newPos);
 
     std::vector<int> getPrimitiveId();
-    std::vector<Node2D *> getCanvasNodes();
-    Node2D *getNodeById(const int id);
+    std::vector<Node<Primitive2D> *> getCanvasNodes();
+    Node<Primitive2D> *getNodeById(const int id);
     void getNodeColor(const int id, float color[3]);
-    void collectPrimitiveId(Node2D *node, std::vector<int> &ids);
+    void collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids);
     int getSelectedNodeId();
 
 private:

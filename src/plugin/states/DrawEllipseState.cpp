@@ -35,8 +35,8 @@ void DrawEllipseState::mouseReleased(int x, int y, int button)
     plugin::primitive::Ellipse *ellipse = new plugin::primitive::Ellipse(center, color, glm::vec2(radiusX, radiusY));
 
     // On cree le noeud.
-    Node2D *node = new Node2D(ellipse);
-    Node2D *parent = canvas->getChildById(selectedPrimitiveId);
+    Node<Primitive2D> *node = new Node<Primitive2D>(ellipse);
+    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {
