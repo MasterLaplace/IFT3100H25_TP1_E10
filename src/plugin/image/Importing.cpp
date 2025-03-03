@@ -2,16 +2,24 @@
 
 namespace plugin::image::Importing {
 
-std::optional<ofImage> importImage()
+bool importImage(ofImage &image)
 {
     ofFileDialogResult result = ofSystemLoadDialog("Importer l'image");
 
     if (!result.bSuccess)
-        return std::nullopt;
+        return false;
 
-    ofImage newImage;
+    return image.load(result.getPath());
+}
 
-    return newImage.load(result.getPath()) ? std::make_optional(newImage) : std::nullopt;
+bool importModel(geometry::ObjModels &model)
+{
+    ofFileDialogResult result = ofSystemLoadDialog("Importer le modèle");
+
+    if (!result.bSuccess)
+        return false;
+
+    return model.load(result.getPath());
 }
 
 } // namespace plugin::image::Importing

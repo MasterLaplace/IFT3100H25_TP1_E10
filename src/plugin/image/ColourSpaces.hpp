@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2025
+** ULAVAL PROJECT, 2025
 ** IFT-INFOGRAPHIE [WSL : Ubuntu]
 ** File description:
 ** L’application permet de manière interactive de choisir et de convertir des

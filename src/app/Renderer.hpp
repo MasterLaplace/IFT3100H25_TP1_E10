@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2025
+** ULAVAL PROJECT, 2025
 ** IFT3100H25_TP1_E10
 ** File description:
 ** Classe responsable du rendu de l'application.

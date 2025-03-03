@@ -11,11 +11,13 @@
 #define IMPORTING_HPP_
 
 #include "ofMain.h"
-#include <optional>
+#include "../geometry/ObjModels.hpp"
 
 namespace plugin::image::Importing {
 
-std::optional<ofImage> importImage();
+bool importImage(ofImage &image);
+
+bool importModel(geometry::ObjModels &model);
 
 } // namespace plugin::image::Importing
 
