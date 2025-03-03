@@ -11,8 +11,7 @@ Chaque Node contient une Primitive2D et une liste de pointeurs sur des Node qui 
 
 using namespace plugin::primitive;
 
-template <typename T>
-class Node {
+template <typename T> class Node {
 public:
     /**
      * @brief Construit un nouveau Node avec une Primitive2D.
