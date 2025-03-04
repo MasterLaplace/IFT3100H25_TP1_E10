@@ -360,23 +360,23 @@ void DrawingTools::drawProprietiesPanel()
             drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
         }
 #else
-        if (dynamic_cast<Point2D*>(primitive.get()) != nullptr)
+        if (dynamic_cast<Point2D *>(primitive.get()) != nullptr)
         {
             drawPointProperties(std::dynamic_pointer_cast<Point2D>(primitive));
         }
-        else if (dynamic_cast<Line2D*>(primitive.get()) != nullptr)
+        else if (dynamic_cast<Line2D *>(primitive.get()) != nullptr)
         {
             drawLineProperties(std::dynamic_pointer_cast<Line2D>(primitive));
         }
-        else if (dynamic_cast<Rectangle*>(primitive.get()) != nullptr)
+        else if (dynamic_cast<Rectangle *>(primitive.get()) != nullptr)
         {
             drawRectangleProperties(std::dynamic_pointer_cast<Rectangle>(primitive));
         }
-        else if (dynamic_cast<Ellipse*>(primitive.get()) != nullptr)
+        else if (dynamic_cast<Ellipse *>(primitive.get()) != nullptr)
         {
             drawEllipseProperties(std::dynamic_pointer_cast<Ellipse>(primitive));
         }
-        else if (dynamic_cast<Polygon*>(primitive.get()) != nullptr)
+        else if (dynamic_cast<Polygon *>(primitive.get()) != nullptr)
         {
             drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
         }
