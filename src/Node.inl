@@ -29,7 +29,7 @@ template <typename T> void Node<T>::draw()
     }
 }
 
-template <typename T> typename Node<T>::Node<T> *Node<T>::getChildById(const uint32_t id)
+template <typename T> Node<T> *Node<T>::getChildById(const uint32_t id)
 {
     // Cas de base. Si on est sur la bonne Node on la retourne.
     if (_id == id)

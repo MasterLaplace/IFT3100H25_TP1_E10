@@ -2,7 +2,7 @@
 
 namespace plugin::primitive {
 
-Polygon::Polygon(PrimitiveParams params, vector<glm::vec2> _points) : Primitive(params) { points = _points; }
+Polygon::Polygon(PrimitiveParams params, std::vector<glm::vec2> _points) : Primitive(params) { points = _points; }
 
 void Polygon::draw()
 {

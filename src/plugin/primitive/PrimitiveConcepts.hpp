@@ -17,7 +17,7 @@
 
 #include <type_traits>
 
-#if __cplusplus >= 201703L
+#if __cplusplus > 201703L
 template <typename T>
 concept IsPoint2D = std::is_base_of_v<plugin::primitive::Point2D, T>;
 

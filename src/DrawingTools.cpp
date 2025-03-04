@@ -338,7 +338,7 @@ void DrawingTools::drawProprietiesPanel()
         ImGui::Separator();
         auto &primitive = node->getPrimitive();
 
-#if __cplusplus >= 201703L
+#if __cplusplus > 201703L
         if constexpr (IsPoint2D<decltype(primitive)>)
         {
             drawPointProperties(std::dynamic_pointer_cast<Point2D>(primitive));
