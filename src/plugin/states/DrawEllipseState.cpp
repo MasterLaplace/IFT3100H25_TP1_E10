@@ -1,5 +1,7 @@
 #include "DrawEllipseState.hpp"
 
+using namespace plugin::primitive;
+
 namespace plugin::states {
 
 void DrawEllipseState::enter() {}
@@ -31,22 +33,22 @@ void DrawEllipseState::mouseReleased(int x, int y, int button)
     }
 
     // On calcule le centre de l'ellipse.
-    glm::vec2 center =
-        glm::vec2(mousePressedPosition.x + invertX * radiusX / 2, mousePressedPosition.y + invertY * radiusY / 2);
+    glm::vec3 center =
+        glm::vec3(mousePressedPosition.x + invertX * radiusX / 2, mousePressedPosition.y + invertY * radiusY / 2, 0);
 
     // On cree l'ellipse.
-    Primitive2DParams params;
+    PrimitiveParams params;
     params.position = center;
     params.fillColor = fillColor;
     params.outlineWidth = outlineWidth;
     params.outlineColor = outlineColor;
     params.isFilled = isFilled;
 
-    plugin::primitive::Ellipse *ellipse = new plugin::primitive::Ellipse(params, glm::vec2(radiusX, radiusY));
+    auto ellipse = std::make_shared<Ellipse>(params, glm::vec2(radiusX, radiusY));
 
     // On cree le noeud.
-    Node<Primitive2D> *node = new Node<Primitive2D>(ellipse);
-    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
+    auto node = new NodePrimitive(ellipse, "Ellipse");
+    NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {

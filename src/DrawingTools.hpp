@@ -9,7 +9,9 @@ C'est une classe temporaire de UI juste pour donner une idée de comment l'impl�
 #include "plugin/primitive/primitive.hpp"
 #include <unordered_map>
 
-class Controller2D;
+using namespace plugin::primitive;
+
+class Controller;
 
 class DrawingTools {
 public:
@@ -23,27 +25,27 @@ public:
     };
     tool selectedTool;
 
-    void setup(Controller2D *_controller);
+    void setup(Controller *_controller);
     void draw();
 
 private:
     ofxImGui::Gui gui;
-    Controller2D *controller;
+    Controller *controller;
 
     void drawMenuBar();
     void drawToolsPanel();
     void drawDynamicPanel();
     void drawSceneGraph();
-    void displayNode(Node<Primitive2D> *node, int indentLevel = 0);
+    void displayNode(NodePrimitive *node, uint32_t indentLevel = 0);
     void drawProprietiesPanel();
 
     void onToolSelected(tool _tool);
 
-    void drawPointProperties(Point2D *point);
-    void drawLineProperties(Line2D *line);
-    void drawRectangleProperties(plugin::primitive::Rectangle *rectangle);
-    void drawEllipseProperties(plugin::primitive::Ellipse *ellipse);
-    void drawPolygonProperties(plugin::primitive::Polygon *polygon);
+    void drawPointProperties(const std::shared_ptr<Point2D> &point);
+    void drawLineProperties(const std::shared_ptr<Line2D> &line);
+    void drawRectangleProperties(const std::shared_ptr<Rectangle> &rectangle);
+    void drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse);
+    void drawPolygonProperties(const std::shared_ptr<Polygon> &polygon);
 
     // Attributs générique
     float outlineWidth = 1.0f;

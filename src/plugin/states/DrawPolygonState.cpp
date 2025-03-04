@@ -1,5 +1,7 @@
 #include "DrawPolygonState.hpp"
 
+using namespace plugin::primitive;
+
 namespace plugin::states {
 
 void DrawPolygonState::enter() {}
@@ -32,19 +34,16 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
     }
     points[0] = glm::vec2(0, 0);
 
-    Primitive2DParams params;
-    params.position = position;
+    PrimitiveParams params;
+    params.position = glm::vec3(position.x, position.y, 0);
     params.fillColor = fillColor;
     params.outlineColor = outlineColor;
     params.outlineWidth = outlineWidth;
     params.isFilled = isFilled;
 
-    // On cree le polygone.
-    plugin::primitive::Polygon *polygon = new plugin::primitive::Polygon(params, points);
-
     // On cree le noeud.
-    Node<Primitive2D> *node = new Node<Primitive2D>(polygon);
-    Node<Primitive2D> *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
+    auto node = new NodePrimitive(std::make_shared<Polygon>(params, points), "Polygon");
+    NodePrimitive *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {

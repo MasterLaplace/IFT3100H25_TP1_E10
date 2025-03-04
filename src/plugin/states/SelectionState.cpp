@@ -15,28 +15,28 @@ void SelectionState::mousePressed(int x, int y, int button) {}
 void SelectionState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
-    int nodeId = findSelectedNode(glm::vec2(x, y), canvas->nodes);
-    selectedPrimitiveId = nodeId;
+
+    selectedPrimitiveId = findSelectedNode(glm::vec3(x, y, 0), canvas->nodes);
 }
 
 void SelectionState::drawCursor() {}
 
 void SelectionState::drawPreview() {}
 
-int SelectionState::findSelectedNode(glm::vec2 position, std::vector<Node<Primitive2D> *> nodes)
+int SelectionState::findSelectedNode(const glm::vec3 &position, const std::vector<NodePrimitive *> &nodes)
 {
     for (int i = nodes.size() - 1; i >= 0; i--)
     {
-        int nodeId = findSelectedNode(position, nodes[i]->children);
+        int nodeId = findSelectedNode(position, nodes[i]->getChildren());
 
         if (nodeId != -1)
         {
             return nodeId;
         }
 
-        if (nodes[i]->primitive->isInside(&position))
+        if (nodes[i]->getPrimitive()->isInside(position))
         {
-            return nodes[i]->primitive->id;
+            return nodes[i]->getId();
         }
     }
     return -1;

@@ -1,7 +1,7 @@
 #include "HistogramUI.hpp"
-#include "Controller2D.hpp"
+#include "Controller.hpp"
 
-void HistogramUI::setup(Controller2D *_controller)
+void HistogramUI::setup(Controller *_controller)
 {
     controller = _controller;
     gui.setup();

@@ -2,15 +2,14 @@
 
 namespace plugin::primitive {
 
-Polygon::Polygon(Primitive2DParams params, vector<glm::vec2> _points) : Primitive2D(params)
+Polygon::Polygon(PrimitiveParams params, vector<glm::vec2> _points) : Primitive(params)
 {
     points = _points;
-    name = "Polygon " + std::to_string(id);
 }
 
 void Polygon::draw()
 {
-    if (isFilled)
+    if (param.isFilled)
     {
         drawFill();
     }
@@ -20,41 +19,41 @@ void Polygon::draw()
 
 void Polygon::drawFill()
 {
-    ofSetColor(fillColor);
+    ofSetColor(param.fillColor);
     ofSetLineWidth(1);
     ofFill();
 
     ofBeginShape();
     for (auto &point : points)
     {
-        ofVertex(point + position);
+        ofVertex(point + param.position);
     }
     ofEndShape(true);
 }
 
 void Polygon::drawOutline()
 {
-    ofSetColor(outlineColor);
-    ofSetLineWidth(outlineWidth);
+    ofSetColor(param.outlineColor);
+    ofSetLineWidth(param.outlineWidth);
     ofNoFill();
 
     ofBeginShape();
     for (auto &point : points)
     {
-        ofVertex(point + position);
+        ofVertex(point + param.position);
     }
     ofEndShape(true);
 }
 
-bool Polygon::isInside(glm::vec2 *mousePosition)
+bool Polygon::isInside(const glm::vec3 &mousePosition)
 {
     int xMax = INT16_MIN, yMax = INT16_MIN;
     int xMin = INT16_MAX, yMin = INT16_MAX;
 
     for (auto &point : points)
     {
-        int absolute_vx = point.x + position.x;
-        int absolute_vy = point.y + position.y;
+        int absolute_vx = point.x + param.position.x;
+        int absolute_vy = point.y + param.position.y;
 
         if (absolute_vx > xMax)
         {
@@ -77,7 +76,7 @@ bool Polygon::isInside(glm::vec2 *mousePosition)
         }
     }
 
-    if (mousePosition->x < xMin || mousePosition->x > xMax || mousePosition->y < yMin || mousePosition->y > yMax)
+    if (mousePosition.x < xMin || mousePosition.x > xMax || mousePosition.y < yMin || mousePosition.y > yMax)
     {
         return false;
     }
@@ -85,10 +84,10 @@ bool Polygon::isInside(glm::vec2 *mousePosition)
     bool isInside = false;
     for (int i = 0; i < points.size(); i++)
     {
-        int horizontal_line_y = mousePosition->y;
+        int horizontal_line_y = mousePosition.y;
 
-        glm::vec2 a = points[i] + position;
-        glm::vec2 b = points[(i + 1) % points.size()] + position;
+        glm::vec2 a = points[i] + param.position;
+        glm::vec2 b = points[(i + 1) % points.size()] + param.position;
 
         if ((a.y > horizontal_line_y && b.y > horizontal_line_y) ||
             (a.y < horizontal_line_y && b.y < horizontal_line_y))
@@ -99,7 +98,7 @@ bool Polygon::isInside(glm::vec2 *mousePosition)
         float slope = (b.y - a.y) / (b.x - a.x);
         float x = a.x + (horizontal_line_y - a.y) / slope;
 
-        if (x > mousePosition->x)
+        if (x > mousePosition.x)
         {
             isInside = !isInside;
         }

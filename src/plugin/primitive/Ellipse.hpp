@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Primitive2D.hpp"
+#include "Primitive.hpp"
 #include "ofMain.h"
 
 namespace plugin::primitive {
 
-class Ellipse : public Primitive2D {
+class Ellipse : public Primitive {
 public:
-    Ellipse(Primitive2DParams params, glm::vec2 _radius);
+    Ellipse(PrimitiveParams params, glm::vec2 _radius);
     ~Ellipse() override = default;
 
     void draw() override;
-    bool isInside(glm::vec2 *point) override;
+    bool isInside(const glm::vec3 &point) override;
 
     glm::vec2 radius;
 

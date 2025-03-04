@@ -1,7 +1,7 @@
 #include "DrawingTools.hpp"
-#include "Controller2D.hpp"
+#include "Controller.hpp"
 
-void DrawingTools::setup(Controller2D *_controller)
+void DrawingTools::setup(Controller *_controller)
 {
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
@@ -80,20 +80,20 @@ void DrawingTools::drawToolsPanel()
     ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Outils de dessin");
 
-    bool buttonClicked = false;
+    // bool buttonClicked = false;
 
     if (ImGui::Button("Selection"))
     {
         onToolSelected(tool::SELECT);
     }
 
-    // Si le bouton "Point" est activ�.
+    // Si le bouton "Point" est activé.
     if (ImGui::Button("Point"))
     {
         onToolSelected(tool::POINT);
     }
 
-    // M�me chose pour la ligne.
+    // Même chose pour la ligne.
     if (ImGui::Button("Ligne"))
     {
         onToolSelected(tool::LINE);
@@ -252,7 +252,7 @@ void DrawingTools::drawDynamicPanel()
 
     if (propertiesChanged)
     {
-        Primitive2DParams params;
+        PrimitiveParams params;
         params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
         params.outlineWidth = outlineWidth;
@@ -279,8 +279,7 @@ void DrawingTools::drawSceneGraph()
     ImGui::Text("Primitive :");
     ImGui::Separator();
 
-    std::vector<Node<Primitive2D> *> nodes = controller->getCanvasNodes();
-    for (Node<Primitive2D> *node : nodes)
+    for (auto &node : controller->getCanvasNodes())
     {
         displayNode(node, 0);
         // cout << "Node : " << node->primitive->id << endl;
@@ -295,17 +294,17 @@ void DrawingTools::drawSceneGraph()
 }
 
 // Sert a afficher les noeuds du graphe de scene
-void DrawingTools::displayNode(Node<Primitive2D> *node, int indentLevel)
+void DrawingTools::displayNode(NodePrimitive *node, uint32_t indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
-    std::string nodeLabel = node->primitive->name;
+    std::string nodeLabel = node->getName();
     int selectedNodeId = controller->getSelectedNodeId();
-    if (ImGui::Selectable(nodeLabel.c_str(), selectedNodeId == node->primitive->id))
+    if (ImGui::Selectable(nodeLabel.c_str(), selectedNodeId == static_cast<int>(node->getId())))
     {
-        controller->onPrimitiveSelected(node->primitive->id);
+        controller->onPrimitiveSelected(node->getId());
     }
 
-    for (Node<Primitive2D> *child : node->children)
+    for (auto &child : node->getChildren())
     {
         displayNode(child, indentLevel + 1);
     }
@@ -315,7 +314,7 @@ void DrawingTools::displayNode(Node<Primitive2D> *node, int indentLevel)
 // Sert a dessiner le panel des proprietes
 void DrawingTools::drawProprietiesPanel()
 {
-    // Les setting de la fenetre
+    // Les settings de la fenetre
     float panelWidth = ofGetWidth() / 6;
     float panelHeight = ofGetHeight() - 40;
 
@@ -328,39 +327,36 @@ void DrawingTools::drawProprietiesPanel()
 
     // On va chercher la node selectionnee.
     int selectedNodeId = controller->getSelectedNodeId();
-    Node<Primitive2D> *node = controller->getNodeById(selectedNodeId);
+    NodePrimitive *node = controller->getNodeById(selectedNodeId);
 
     // On s'occupe des proprietes generiques en premier.
 
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
     if (node != nullptr)
     {
-        ImGui::Text(node->primitive->name.c_str());
+        ImGui::Text(node->getName().c_str());
         ImGui::Separator();
+        auto &primitive = node->getPrimitive();
 
-        if (Point2D *point = dynamic_cast<Point2D *>(node->primitive))
+        if constexpr (IsPoint2D<decltype(primitive)>)
         {
-            drawPointProperties(point);
+            drawPointProperties(std::dynamic_pointer_cast<Point2D>(primitive));
         }
-
-        if (Line2D *line = dynamic_cast<Line2D *>(node->primitive))
+        else if constexpr (IsLine2D<decltype(primitive)>)
         {
-            drawLineProperties(line);
+            drawLineProperties(std::dynamic_pointer_cast<Line2D>(primitive));
         }
-
-        if (plugin::primitive::Rectangle *rectangle = dynamic_cast<plugin::primitive::Rectangle *>(node->primitive))
+        else if constexpr (IsRectangle<decltype(primitive)>)
         {
-            drawRectangleProperties(rectangle);
+            drawRectangleProperties(std::dynamic_pointer_cast<Rectangle>(primitive));
         }
-
-        if (plugin::primitive::Ellipse *ellipse = dynamic_cast<plugin::primitive::Ellipse *>(node->primitive))
+        else if constexpr (IsEllipse<decltype(primitive)>)
         {
-            drawEllipseProperties(ellipse);
+            drawEllipseProperties(std::dynamic_pointer_cast<Ellipse>(primitive));
         }
-
-        if (plugin::primitive::Polygon *polygon = dynamic_cast<plugin::primitive::Polygon *>(node->primitive))
+        else if constexpr (IsPolygon<decltype(primitive)>)
         {
-            drawPolygonProperties(polygon);
+            drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
         }
 
         // Pour supprimer une primitive.
@@ -378,7 +374,7 @@ void DrawingTools::onToolSelected(tool tool)
     selectedTool = tool;
     controller->onToolSelected(tool);
 
-    Primitive2DParams params;
+    PrimitiveParams params;
     params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
     params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
     params.outlineWidth = outlineWidth;
@@ -387,10 +383,10 @@ void DrawingTools::onToolSelected(tool tool)
     controller->onPrimitivePropertiesChanged(params);
 }
 
-void DrawingTools::drawPointProperties(Point2D *point)
+void DrawingTools::drawPointProperties(const std::shared_ptr<Point2D> &point)
 {
     float size = point->size;
-    float color[3] = {point->fillColor.r / 255.0f, point->fillColor.g / 255.0f, point->fillColor.b / 255.0f};
+    float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f, point->param.fillColor.b / 255.0f};
 
     ImGui::Text("Taille :");
     if (ImGui::SliderFloat("Taille", &size, 1.0f, 30.0f))
@@ -401,25 +397,25 @@ void DrawingTools::drawPointProperties(Point2D *point)
     ImGui::Text("Couleur :");
     if (ImGui::ColorEdit3("Couleur", &color[0]))
     {
-        point->fillColor = ofColor(color[0] * 255, color[1] * 255, color[2] * 255);
+        point->param.fillColor = ofColor(color[0] * 255, color[1] * 255, color[2] * 255);
     }
 }
 
-void DrawingTools::drawLineProperties(Line2D *line)
+void DrawingTools::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
-    float width = line->outlineWidth;
-    float color[3] = {line->fillColor.r / 255.0f, line->fillColor.g / 255.0f, line->fillColor.b / 255.0f};
+    float width = line->param.outlineWidth;
+    float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f, line->param.fillColor.b / 255.0f};
 
     ImGui::Text("Epaisseur :");
     if (ImGui::SliderFloat("Epaisseur", &width, 1.0f, 30.0f))
     {
-        line->outlineWidth = width;
+        line->param.outlineWidth = width;
     }
 
     ImGui::Text("Couleur :");
     if (ImGui::ColorEdit3("Couleur", &color[0]))
     {
-        line->fillColor = ofColor(color[0] * 255, color[1] * 255, color[2] * 255);
+        line->param.fillColor = ofColor(color[0] * 255, color[1] * 255, color[2] * 255);
     }
 
     ImGui::Text("Debut :");
@@ -435,31 +431,31 @@ void DrawingTools::drawLineProperties(Line2D *line)
     }
 }
 
-void DrawingTools::drawRectangleProperties(plugin::primitive::Rectangle *rectangle)
+void DrawingTools::drawRectangleProperties(const std::shared_ptr<Rectangle> &rectangle)
 {
-    float width = rectangle->outlineWidth;
-    float fillColor[3] = {rectangle->fillColor.r / 255.0f, rectangle->fillColor.g / 255.0f,
-                          rectangle->fillColor.b / 255.0f};
-    float outlineColor[3] = {rectangle->outlineColor.r / 255.0f, rectangle->outlineColor.g / 255.0f,
-                             rectangle->outlineColor.b / 255.0f};
-    bool filled = rectangle->isFilled;
+    float width = rectangle->param.outlineWidth;
+    float fillColor[3] = {rectangle->param.fillColor.r / 255.0f, rectangle->param.fillColor.g / 255.0f,
+                          rectangle->param.fillColor.b / 255.0f};
+    float outlineColor[3] = {rectangle->param.outlineColor.r / 255.0f, rectangle->param.outlineColor.g / 255.0f,
+                             rectangle->param.outlineColor.b / 255.0f};
+    bool filled = rectangle->param.isFilled;
 
     ImGui::Text("Epaisseur du contour :");
     if (ImGui::SliderFloat("Epaisseur du contour", &width, 1.0f, 30.0f))
     {
-        rectangle->outlineWidth = width;
+        rectangle->param.outlineWidth = width;
     }
 
     ImGui::Text("Couleur du contour :");
     if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
     {
-        rectangle->outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+        rectangle->param.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
     }
 
     ImGui::Text("Remplir :");
     if (ImGui::Checkbox("Remplir", &filled))
     {
-        rectangle->isFilled = filled;
+        rectangle->param.isFilled = filled;
     }
 
     if (filled)
@@ -467,35 +463,35 @@ void DrawingTools::drawRectangleProperties(plugin::primitive::Rectangle *rectang
         ImGui::Text("Couleur de remplissage :");
         if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
         {
-            rectangle->fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+            rectangle->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
 }
 
-void DrawingTools::drawEllipseProperties(plugin::primitive::Ellipse *ellipse)
+void DrawingTools::drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse)
 {
-    float width = ellipse->outlineWidth;
-    float fillColor[3] = {ellipse->fillColor.r / 255.0f, ellipse->fillColor.g / 255.0f, ellipse->fillColor.b / 255.0f};
-    float outlineColor[3] = {ellipse->outlineColor.r / 255.0f, ellipse->outlineColor.g / 255.0f,
-                             ellipse->outlineColor.b / 255.0f};
-    bool filled = ellipse->isFilled;
+    float width = ellipse->param.outlineWidth;
+    float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f, ellipse->param.fillColor.b / 255.0f};
+    float outlineColor[3] = {ellipse->param.outlineColor.r / 255.0f, ellipse->param.outlineColor.g / 255.0f,
+                             ellipse->param.outlineColor.b / 255.0f};
+    bool filled = ellipse->param.isFilled;
 
     ImGui::Text("Epaisseur du contour :");
     if (ImGui::SliderFloat("Epaisseur du contour", &width, 1.0f, 30.0f))
     {
-        ellipse->outlineWidth = width;
+        ellipse->param.outlineWidth = width;
     }
 
     ImGui::Text("Couleur du contour :");
     if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
     {
-        ellipse->outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+        ellipse->param.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
     }
 
     ImGui::Text("Remplir :");
     if (ImGui::Checkbox("Remplir", &filled))
     {
-        ellipse->isFilled = filled;
+        ellipse->param.isFilled = filled;
     }
 
     if (filled)
@@ -503,35 +499,35 @@ void DrawingTools::drawEllipseProperties(plugin::primitive::Ellipse *ellipse)
         ImGui::Text("Couleur de remplissage :");
         if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
         {
-            ellipse->fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+            ellipse->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
 }
 
-void DrawingTools::drawPolygonProperties(plugin::primitive::Polygon *polygon)
+void DrawingTools::drawPolygonProperties(const std::shared_ptr<Polygon> &polygon)
 {
-    float width = polygon->outlineWidth;
-    float fillColor[3] = {polygon->fillColor.r / 255.0f, polygon->fillColor.g / 255.0f, polygon->fillColor.b / 255.0f};
-    float outlineColor[3] = {polygon->outlineColor.r / 255.0f, polygon->outlineColor.g / 255.0f,
-                             polygon->outlineColor.b / 255.0f};
-    bool filled = polygon->isFilled;
+    float width = polygon->param.outlineWidth;
+    float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f, polygon->param.fillColor.b / 255.0f};
+    float outlineColor[3] = {polygon->param.outlineColor.r / 255.0f, polygon->param.outlineColor.g / 255.0f,
+                             polygon->param.outlineColor.b / 255.0f};
+    bool filled = polygon->param.isFilled;
 
     ImGui::Text("Epaisseur du contour :");
     if (ImGui::SliderFloat("Epaisseur du contour", &width, 1.0f, 30.0f))
     {
-        polygon->outlineWidth = width;
+        polygon->param.outlineWidth = width;
     }
 
     ImGui::Text("Couleur du contour :");
     if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
     {
-        polygon->outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+        polygon->param.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
     }
 
     ImGui::Text("Remplir :");
     if (ImGui::Checkbox("Remplir", &filled))
     {
-        polygon->isFilled = filled;
+        polygon->param.isFilled = filled;
     }
 
     if (filled)
@@ -539,7 +535,7 @@ void DrawingTools::drawPolygonProperties(plugin::primitive::Polygon *polygon)
         ImGui::Text("Couleur de remplissage :");
         if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
         {
-            polygon->fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+            polygon->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
 }

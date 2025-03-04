@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../Controller.hpp"
-#include "../Controller2D.hpp"
+#include "../Controller.hpp"
 #include "image.hpp"
 #include "ofMain.h"
 
@@ -48,7 +48,7 @@ public:
     void gotMessage(ofMessage msg);
 
 private:
-    Controller2D controller2D;
+    Controller controller;
     // Controller3D controller3D;
     Controller *currentController;
 

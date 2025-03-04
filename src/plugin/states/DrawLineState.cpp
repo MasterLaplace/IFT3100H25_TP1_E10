@@ -11,16 +11,15 @@ void DrawLineState::mousePressed(int x, int y, int button) {}
 void DrawLineState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
-    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
+    NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 
-    Primitive2DParams params;
-    params.position = mousePressedPosition;
+    PrimitiveParams params;
+    params.position = glm::vec3(mousePressedPosition.x, mousePressedPosition.y, 0.0f);
     params.fillColor = fillColor;
     params.outlineColor = outlineColor;
     params.outlineWidth = outlineWidth;
 
-    Line2D *line = new Line2D(params, mousePosition);
-    Node<Primitive2D> *node = new Node<Primitive2D>(line);
+    auto node = new NodePrimitive(std::make_shared<Line2D>(params, mousePosition), "Line");
 
     if (!parent)
     {

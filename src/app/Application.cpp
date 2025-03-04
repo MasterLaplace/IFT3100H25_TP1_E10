@@ -7,7 +7,7 @@ void Application::setup()
 
     ofLog() << "<app::setup>";
 
-    currentController = &controller2D;
+    currentController = &controller;
     currentController->setup();
 }
 

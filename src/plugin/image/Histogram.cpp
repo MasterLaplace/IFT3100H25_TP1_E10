@@ -133,7 +133,7 @@ vector<float> Histogram::getRelativeHistogram(vector<int> h)
     maxValue = *max_element(h.begin(), h.end()); // Les valeurs de l'histogramme relatif sont calculees en fonction de
                                                  // la valeur maximale de l'histogramme absolu.
 
-    for (int i = 0; i < h.size(); i++)
+    for (size_t i = 0; i < h.size(); i++)
     {
         float result = (h[i] / static_cast<float>(maxValue)) * (MAX_Y - OFFSET * 2);
         relativeHistogram[i] = result;
@@ -148,7 +148,7 @@ Brief : Permet de dessiner les barres verticales de l'histogramme relatif.
 
 void Histogram::drawHistogram()
 {
-    for (int i = 0; i < histogramRelative->size(); i++)
+    for (size_t i = 0; i < histogramRelative->size(); i++)
     {
         glm::vec2 barTop = glm::vec2(OFFSET + i * BAR_WIDTH, (MAX_Y - OFFSET) - (*histogramRelative)[i]);
 
@@ -272,7 +272,7 @@ Brief : Permet de dessiner un tooltip lorsqu'on survole une barre de l'histogram
 
 void Histogram::drawTooltip()
 {
-    for (int i = 0; i < histogramRelative->size(); i++)
+    for (size_t i = 0; i < histogramRelative->size(); i++)
     {
         float barHeight = (*histogramRelative)[i];
         int barTopX = OFFSET + i * BAR_WIDTH;

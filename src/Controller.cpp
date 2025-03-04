@@ -1,6 +1,6 @@
-#include "Controller2D.hpp"
+#include "Controller.hpp"
 
-void Controller2D::setup()
+void Controller::setup()
 {
     // On configure l'instance du Canvas dans la sc�ne par le singleton
     // pour qu'on puisse y acc�der de n'importe o�.
@@ -17,13 +17,13 @@ void Controller2D::setup()
     importer.setup();
 }
 
-void Controller2D::update()
+void Controller::update()
 {
     importer.update();
     stateMachine.update();
 }
 
-void Controller2D::draw()
+void Controller::draw()
 {
     // On dessine le canvas en premier.
     canvas->draw();
@@ -50,37 +50,29 @@ void Controller2D::draw()
     }
 }
 
-void Controller2D::exit() {}
+void Controller::exit() {}
 
-void Controller2D::keyReleased(int key)
+void Controller::keyReleased(int key)
 {
-
-    // C'est les racourcies claviers.
+    // C'est les raccourcis claviers.
     // Les input proviennent de Application.
-    if (key == 'p')
+    switch (key)
     {
+    case 'p':
         drawPointButtonPressed();
         gui.selectedTool = DrawingTools::tool::POINT;
-    }
-
-    if (key == 'l')
-    {
+        break;
+    case 'l':
         drawLineButtonPressed();
         gui.selectedTool = DrawingTools::tool::LINE;
-    }
-
-    if (key == 'i')
-    {
-        importer.importImage();
-    }
-
-    if (key == 'e')
-    {
-        exporter.exportImage();
+        break;
+    case 'i': importer.importImage(); break;
+    case 'e': exporter.exportImage(); break;
+    default: break;
     }
 }
 
-void Controller2D::mouseMoved(glm::vec2 pos)
+void Controller::mouseMoved(glm::vec2 pos)
 {
 
     // On transmet la position de la sourie � l'�tat.
@@ -88,16 +80,16 @@ void Controller2D::mouseMoved(glm::vec2 pos)
     stateMachine.mousePosition = pos;
 }
 
-void Controller2D::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
+void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller2D::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
+void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
 
-void Controller2D::importImage() { importer.importImage(); }
+void Controller::importImage() { importer.importImage(); }
 
-void Controller2D::exportImage() { exporter.exportImage(); }
+void Controller::exportImage() { exporter.exportImage(); }
 
 // Cette méthode change les propriétés de la primitive à dessiner.
-void Controller2D::onPrimitivePropertiesChanged(Primitive2DParams params)
+void Controller::onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params)
 {
     stateMachine.onOutlineWidthChanged(params.outlineWidth);
     stateMachine.onFillColorChanged(params.fillColor);
@@ -106,51 +98,48 @@ void Controller2D::onPrimitivePropertiesChanged(Primitive2DParams params)
 }
 
 // Cette méthode change les propriétés d'une primitive existante.
-void Controller2D::onPrimitivePropertiesChanged(int id, Primitive2DParams params)
+void Controller::onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params)
 {
-    Node<Primitive2D> *node = getNodeById(id);
-    if (node)
-    {
-        node->primitive->position = params.position;
-        node->primitive->fillColor = params.fillColor;
-        node->primitive->outlineColor = params.outlineColor;
-        node->primitive->outlineWidth = params.outlineWidth;
-        node->primitive->isFilled = params.isFilled;
-    }
+    NodePrimitive *node = getNodeById(id);
+    if (!node)
+        return;
+
+    node->getPrimitive()->param.position = params.position;
+    node->getPrimitive()->param.fillColor = params.fillColor;
+    node->getPrimitive()->param.outlineColor = params.outlineColor;
+    node->getPrimitive()->param.outlineWidth = params.outlineWidth;
+    node->getPrimitive()->param.isFilled = params.isFilled;
 }
 
-void Controller2D::onPrimitiveSelected(int id) { stateMachine.onPrimitiveSelected(id); }
+void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSelected(id); }
 
-std::vector<int> Controller2D::getPrimitiveId()
+std::vector<uint32_t> Controller::getPrimitiveId()
 {
-    std::vector<int> ids;
-    for (auto node : canvas->nodes)
+    std::vector<uint32_t> ids;
+    for (auto &node : canvas->nodes)
     {
         collectPrimitiveId(node, ids);
     }
     return ids;
 }
 
-std::vector<Node<Primitive2D> *> Controller2D::getCanvasNodes() { return canvas->nodes; }
+const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return canvas->nodes; }
 
-Node<Primitive2D> *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
+NodePrimitive *Controller::getNodeById(const uint32_t id) { return canvas->getChildById(id); }
 
-void Controller2D::collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids)
+void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids)
 {
-    if (node->primitive != nullptr)
-    {
-        ids.push_back(node->primitive->id);
-    }
+    ids.push_back(node->getId());
 
-    for (auto child : node->children)
+    for (auto &child : node->getChildren())
     {
         collectPrimitiveId(child, ids);
     }
 }
 
-int Controller2D::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
+int Controller::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
 
-void Controller2D::onToolSelected(DrawingTools::tool _tool)
+void Controller::onToolSelected(DrawingTools::tool _tool)
 {
     switch (_tool)
     {
@@ -163,25 +152,25 @@ void Controller2D::onToolSelected(DrawingTools::tool _tool)
     }
 }
 
-void Controller2D::selectionButtonPressed() { stateMachine.changeState(new SelectionState()); }
+void Controller::selectionButtonPressed() { stateMachine.changeState(new SelectionState()); }
 
-void Controller2D::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
+void Controller::drawPointButtonPressed() { stateMachine.changeState(new DrawPointState()); }
 
-void Controller2D::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
+void Controller::drawLineButtonPressed() { stateMachine.changeState(new DrawLineState()); }
 
-void Controller2D::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
+void Controller::drawRectangleButtonPressed() { stateMachine.changeState(new DrawRectangleState()); }
 
-void Controller2D::drawEllipseButtonPressed() { stateMachine.changeState(new DrawEllipseState()); }
+void Controller::drawEllipseButtonPressed() { stateMachine.changeState(new DrawEllipseState()); }
 
-void Controller2D::drawPolygonButtonPressed() { stateMachine.changeState(new DrawPolygonState()); }
+void Controller::drawPolygonButtonPressed() { stateMachine.changeState(new DrawPolygonState()); }
 
-void Controller2D::deletePrimitiveButtonPressed(int id)
+void Controller::deletePrimitiveButtonPressed(uint32_t id)
 {
     canvas->removeNode(id);
     stateMachine.onPrimitiveSelected(-1);
 }
 
-void Controller2D::drawHistogram(int color)
+void Controller::drawHistogram(int color)
 {
     if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) == nullptr)
     {
@@ -194,3 +183,9 @@ void Controller2D::drawHistogram(int color)
         state->setColor(color);
     }
 }
+
+// void Controller::load3DModel(const std::string& filePath)
+// {
+//     ObjModels objmodel(filePath);
+//     objmodels.emplace_back(objmodel);
+// }

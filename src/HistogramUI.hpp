@@ -2,16 +2,16 @@
 
 #include "ofxImGui.h"
 
-class Controller2D;
+class Controller;
 
 class HistogramUI {
 public:
-    void setup(Controller2D *_controller);
+    void setup(Controller *_controller);
     void draw();
 
 private:
     ofxImGui::Gui gui;
-    Controller2D *controller;
+    Controller *controller;
 
     void drawOptionPanel();
 };

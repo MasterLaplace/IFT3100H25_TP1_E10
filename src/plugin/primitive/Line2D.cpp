@@ -1,31 +1,30 @@
 #include "Line2D.hpp"
 
 namespace plugin::primitive {
-Line2D::Line2D(Primitive2DParams _params, glm::vec2 _endPosition) : Primitive2D(_params)
+Line2D::Line2D(PrimitiveParams _params, glm::vec2 _endPosition) : Primitive(_params)
 {
     startPosition = glm::vec2(0, 0);
-    endPosition = _endPosition - position;
-    name = "Ligne " + std::to_string(id);
+    endPosition = _endPosition - param.position;
 }
 
 void Line2D::draw()
 {
-    ofSetColor(fillColor);
-    ofSetLineWidth(outlineWidth);
-    ofDrawLine(position, endPosition + position);
+    ofSetColor(param.fillColor);
+    ofSetLineWidth(param.outlineWidth);
+    ofDrawLine(param.position, endPosition + param.position);
 }
 
-bool Line2D::isInside(glm::vec2 *point)
+bool Line2D::isInside(const glm::vec3 &point)
 {
     // On calcule la distance entre le clic et la ligne :https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
     // Si la distance est en-dessous d'une certaine limite, return true
     // Sinon, return false
 
-    float startx = position.x;
-    float starty = position.y;
+    float startx = param.position.x;
+    float starty = param.position.y;
 
-    float endx = endPosition.x + position.x;
-    float endy = endPosition.y + position.y;
+    float endx = endPosition.x + param.position.x;
+    float endy = endPosition.y + param.position.y;
 
     if (startx > endx && starty > endy)
     {
@@ -37,8 +36,8 @@ bool Line2D::isInside(glm::vec2 *point)
         endy = temp;
     }
 
-    float x = point->x;
-    float y = point->y;
+    float x = point.x;
+    float y = point.y;
 
     float num = abs((endy - starty) * x - (endx - startx) * y + endx * starty - endy * startx);
     float den = sqrt(pow(endy - starty, 2) + pow(endx - startx, 2));

@@ -7,7 +7,7 @@
     <ClCompile Include="src\Canvas.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Controller2D.cpp">
+    <ClCompile Include="src\Controller.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\DrawingTools.cpp">
@@ -31,7 +31,7 @@
     <ClCompile Include="src\plugin\primitive\Point2D.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
-    <ClCompile Include="src\plugin\primitive\Primitive2D.cpp">
+    <ClCompile Include="src\plugin\primitive\Primitive.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\states\DrawLineState.cpp">
@@ -125,7 +125,7 @@
     <ClInclude Include="src\Controller.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Controller2D.hpp">
+    <ClInclude Include="src\Controller.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\DrawingTools.hpp">
@@ -164,7 +164,10 @@
     <ClInclude Include="src\plugin\primitive\Point2D.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp">
+    <ClInclude Include="src\plugin\primitive\Primitive.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\primitive\primitive.hpp">

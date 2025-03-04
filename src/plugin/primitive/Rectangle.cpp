@@ -1,15 +1,14 @@
 #include "Rectangle.hpp"
 
 namespace plugin::primitive {
-Rectangle::Rectangle(Primitive2DParams _params, glm::vec2 _dimensions) : Primitive2D(_params)
+Rectangle::Rectangle(PrimitiveParams _params, glm::vec2 _dimensions) : Primitive(_params)
 {
     dimensions = _dimensions;
-    name = "Rectangle " + std::to_string(id);
 }
 
 void Rectangle::draw()
 {
-    if (isFilled)
+    if (param.isFilled)
     {
         drawFill();
     }
@@ -19,26 +18,26 @@ void Rectangle::draw()
 
 void Rectangle::drawFill()
 {
-    ofSetColor(fillColor);
+    ofSetColor(param.fillColor);
     ofSetLineWidth(1);
     ofFill();
 
-    ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
+    ofDrawRectangle(param.position.x, param.position.y, dimensions.x, dimensions.y);
 }
 
 void Rectangle::drawOutline()
 {
-    ofSetColor(outlineColor);
-    ofSetLineWidth(outlineWidth);
+    ofSetColor(param.outlineColor);
+    ofSetLineWidth(param.outlineWidth);
     ofNoFill();
 
-    ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
+    ofDrawRectangle(param.position.x, param.position.y, dimensions.x, dimensions.y);
 }
 
-bool Rectangle::isInside(glm::vec2 *point)
+bool Rectangle::isInside(const glm::vec3 &point)
 {
-    return point->x > position.x && point->x < position.x + dimensions.x && point->y > position.y &&
-           point->y < position.y + dimensions.y;
+    return point.x > param.position.x && point.x < param.position.x + dimensions.x && point.y > param.position.y &&
+           point.y < param.position.y + dimensions.y;
 }
 
 } // namespace plugin::primitive

@@ -2,22 +2,21 @@
 
 namespace plugin::primitive {
 
-Point2D::Point2D(Primitive2DParams _params, float _size) : Primitive2D(_params)
+Point2D::Point2D(PrimitiveParams _params, float _size) : Primitive(_params)
 {
     size = _size;
-    name = "Point " + std::to_string(id);
 }
 
 void Point2D::draw()
 {
-    ofSetColor(fillColor);
+    ofSetColor(param.fillColor);
     ofFill();
-    ofDrawCircle(position, size);
+    ofDrawCircle(param.position, size);
 }
 
-bool Point2D::isInside(glm::vec2 *point)
+bool Point2D::isInside(const glm::vec3 &point)
 {
-    float distance = glm::distance(position, *point);
+    float distance = glm::distance(param.position, point);
     return distance < size;
 }
 

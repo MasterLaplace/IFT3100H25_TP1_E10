@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Primitive2D.hpp"
+#include "Primitive.hpp"
 #include "ofMain.h"
 #include <vector>
 
 namespace plugin::primitive {
 
-class Polygon : public Primitive2D {
+class Polygon : public Primitive {
 public:
-    Polygon(Primitive2DParams params, vector<glm::vec2> _points);
+    Polygon(PrimitiveParams params, vector<glm::vec2> _points);
     ~Polygon() override = default;
 
     void draw() override;
-    bool isInside(glm::vec2 *point) override;
+    bool isInside(const glm::vec3 &point) override;
 
     vector<glm::vec2> points;
 

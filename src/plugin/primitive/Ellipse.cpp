@@ -2,16 +2,15 @@
 
 namespace plugin::primitive {
 
-Ellipse::Ellipse(Primitive2DParams _params, glm::vec2 _radius) : Primitive2D(_params)
+Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params)
 {
     radius = _radius;
-    name = "Ellipse " + std::to_string(id);
 }
 
 void Ellipse::draw()
 {
     ofEnableAntiAliasing();
-    if (isFilled)
+    if (param.isFilled)
     {
         drawFill();
     }
@@ -22,24 +21,24 @@ void Ellipse::draw()
 
 void Ellipse::drawOutline()
 {
-    ofLog() << outlineColor;
-    ofSetColor(outlineColor);
+    ofLog() << param.outlineColor;
+    ofSetColor(param.outlineColor);
     ofNoFill();
-    ofSetLineWidth(outlineWidth);
+    ofSetLineWidth(param.outlineWidth);
 
-    ofDrawEllipse(position.x, position.y, radius.x, radius.y);
+    ofDrawEllipse(param.position.x, param.position.y, radius.x, radius.y);
 }
 
 void Ellipse::drawFill()
 {
-    ofSetColor(fillColor);
+    ofSetColor(param.fillColor);
     ofSetLineWidth(1);
     ofFill();
 
-    ofDrawEllipse(position.x, position.y, radius.x, radius.y);
+    ofDrawEllipse(param.position.x, param.position.y, radius.x, radius.y);
 }
 
-bool Ellipse::isInside(glm::vec2 *point)
+bool Ellipse::isInside(const glm::vec3 &point)
 {
     // Voici ma méthode pour trouver l'intérieur d'une ellipse.
     // https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
@@ -47,11 +46,11 @@ bool Ellipse::isInside(glm::vec2 *point)
 
     float a = radius.x;
     float b = radius.y;
-    float h = position.x;
-    float k = position.y;
+    float h = param.position.x;
+    float k = param.position.y;
 
-    float x = point->x;
-    float y = point->y;
+    float x = point.x;
+    float y = point.y;
 
     float result = pow((x - h) / a, 2) + pow((y - k) / b, 2);
 

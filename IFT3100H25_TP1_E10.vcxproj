@@ -107,7 +107,7 @@
     <ClCompile Include="src\Importation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
-    <ClCompile Include="src\Controller2D.cpp" />
+    <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\DrawingTools.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
@@ -115,7 +115,7 @@
     <ClCompile Include="src\plugin\primitive\Ellipse.cpp" />
     <ClCompile Include="src\plugin\primitive\Line2D.cpp" />
     <ClCompile Include="src\plugin\primitive\Point2D.cpp" />
-    <ClCompile Include="src\plugin\primitive\Primitive2D.cpp" />
+    <ClCompile Include="src\plugin\primitive\Primitive.cpp" />
     <ClCompile Include="src\plugin\primitive\Rectangle.cpp" />
     <ClCompile Include="src\plugin\states\DrawLineState.cpp" />
     <ClCompile Include="src\plugin\states\DrawPointState.cpp" />
@@ -151,7 +151,7 @@
   <ItemGroup>
     <ClInclude Include="src\Canvas.hpp" />
     <ClInclude Include="src\Controller.hpp" />
-    <ClInclude Include="src\Controller2D.hpp" />
+    <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\Importation.hpp" />
     <ClInclude Include="src\Node.hpp" />
@@ -168,7 +168,8 @@
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />
     <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
     <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
-    <ClInclude Include="src\plugin\primitive\Primitive2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\Primitive.hpp" />
+    <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp"/>
     <ClInclude Include="src\plugin\primitive\Rectangle.hpp" />
     <ClInclude Include="src\plugin\primitive\primitive.hpp" />
     <ClInclude Include="src\plugin\states\DrawLineState.hpp" />

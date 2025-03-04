@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Primitive2D.hpp"
+#include "Primitive.hpp"
 #include "ofMain.h"
 
 namespace plugin::primitive {
 
-class Rectangle : public Primitive2D {
+class Rectangle : public Primitive {
 public:
-    Rectangle(Primitive2DParams _params, glm::vec2 _dimensions);
+    Rectangle(PrimitiveParams _params, glm::vec2 _dimensions);
     ~Rectangle() override = default;
 
     void draw() override;
-    bool isInside(glm::vec2 *point) override;
+    bool isInside(const glm::vec3 &point) override;
 
     glm::vec2 dimensions;
 

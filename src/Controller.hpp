@@ -1,21 +1,63 @@
 #pragma once
 
-/*
-Une classe virtuelle de controlleur pour pouvoir un controller2D et, éventuellement, un Controller3D.
-*/
+#include "Canvas.hpp"
+#include "Controller.hpp"
+#include "DrawingTools.hpp"
+#include "HistogramUI.hpp"
+#include "Importation.hpp"
+#include "plugin/image/image.hpp"
+#include "plugin/states/states.hpp"
+#include <string>
+#include <vector>
 
-#include "ofMain.h"
-#include "ofxImGui.h"
+using namespace plugin::states;
+using namespace plugin::image;
 
 class Controller {
 public:
-    virtual void setup() = 0;
-    virtual void update() = 0;
-    virtual void draw() = 0;
-    virtual void exit() = 0;
+    void setup();
+    void update();
+    void draw();
+    void exit();
 
-    virtual void keyReleased(int key) = 0;
-    virtual void mouseMoved(glm::vec2 pos) = 0;
-    virtual void mousePressed(int x, int y, int button) = 0;
-    virtual void mouseReleased(int x, int y, int button) = 0;
+    // Methodes pour que "Application.cpp" puisse parler au Controlleur.
+    void keyReleased(int key);
+    void mouseMoved(glm::vec2 pos);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+
+    // Methodes pour parler avec le gui.
+    void importImage();
+    void exportImage();
+
+    void onToolSelected(DrawingTools::tool tool);
+    void selectionButtonPressed();
+    void drawPointButtonPressed();
+    void drawLineButtonPressed();
+    void drawRectangleButtonPressed();
+    void drawEllipseButtonPressed();
+    void drawPolygonButtonPressed();
+    void deletePrimitiveButtonPressed(uint32_t id);
+    void drawHistogram(int color);
+
+    void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
+    void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
+
+    void onPrimitiveSelected(uint32_t id);
+    void onEndPositionChanged(uint32_t id, glm::vec2 newPos);
+
+    [[nodiscard]] std::vector<uint32_t> getPrimitiveId();
+    [[nodiscard]] const std::vector<NodePrimitive *> &getCanvasNodes();
+    [[nodiscard]] NodePrimitive *getNodeById(const uint32_t id);
+
+    void collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids);
+    [[nodiscard]] int getSelectedNodeId();
+
+private:
+    StateMachine stateMachine;
+    Canvas *canvas;
+    DrawingTools gui;
+    HistogramUI histogramUI;
+    Importation importer;
+    Exporting exporter;
 };

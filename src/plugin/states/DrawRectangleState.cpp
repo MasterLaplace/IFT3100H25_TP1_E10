@@ -1,5 +1,7 @@
 #include "DrawRectangleState.hpp"
 
+using namespace plugin::primitive;
+
 namespace plugin::states {
 
 void DrawRectangleState::enter() {}
@@ -15,7 +17,7 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
     float height = abs(mousePressedPosition.y - mousePosition.y);
 
     // Position is always the top left corner
-    glm::vec2 position = glm::vec2(mousePressedPosition.x, mousePressedPosition.y);
+    glm::vec3 position = glm::vec3(mousePressedPosition.x, mousePressedPosition.y, 0.0f);
 
     if (mousePosition.x < mousePressedPosition.x)
     {
@@ -26,16 +28,16 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
         position.y = mousePosition.y;
     }
 
-    Primitive2DParams params;
+    PrimitiveParams params;
     params.position = position;
     params.fillColor = fillColor;
     params.outlineColor = outlineColor;
     params.outlineWidth = outlineWidth;
     params.isFilled = isFilled;
 
-    plugin::primitive::Rectangle *rectangle = new plugin::primitive::Rectangle(params, glm::vec2(width, height));
-    Node<Primitive2D> *node = new Node<Primitive2D>(rectangle);
-    Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
+    auto rectangle = std::make_shared<Rectangle>(params, glm::vec2(width, height));
+    auto node = new NodePrimitive(rectangle, "Rectangle");
+    NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {
