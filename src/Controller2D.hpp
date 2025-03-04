@@ -31,6 +31,7 @@ public:
     void importImage();
     void exportImage();
 
+    void onToolSelected(DrawingTools::tool tool);
     void selectionButtonPressed();
     void drawPointButtonPressed();
     void drawLineButtonPressed();
@@ -39,19 +40,17 @@ public:
     void drawPolygonButtonPressed();
     void deletePrimitiveButtonPressed(int id);
     void drawHistogram(int color);
-
-    void onSizeChanged(float newSize);
-    void onSizeChanged(int id, float newSize);
-    void onColorChanged(float _newColor[3]);
-    void onColorChanged(int id, float _newColor[3]);
+    
+    void onPrimitivePropertiesChanged(Primitive2DParams params);
+    void onPrimitivePropertiesChanged(int id, Primitive2DParams params);
+    
     void onPrimitiveSelected(int id);
-    void onPositionChanged(int id, glm::vec2 newPos);
     void onEndPositionChanged(int id, glm::vec2 newPos);
 
     std::vector<int> getPrimitiveId();
     std::vector<Node<Primitive2D> *> getCanvasNodes();
     Node<Primitive2D> *getNodeById(const int id);
-    void getNodeColor(const int id, float color[3]);
+    
     void collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids);
     int getSelectedNodeId();
 

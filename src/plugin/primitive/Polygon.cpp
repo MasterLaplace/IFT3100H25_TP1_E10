@@ -2,7 +2,7 @@
 
 namespace plugin::primitive {
 
-Polygon::Polygon(glm::vec2 _position, ofColor _color, std::vector<glm::vec2> _points) : Primitive2D(_position, _color)
+Polygon::Polygon(Primitive2DParams params, vector<glm::vec2> _points) : Primitive2D(params)
 {
     points = _points;
     name = "Polygon " + std::to_string(id);
@@ -10,10 +10,36 @@ Polygon::Polygon(glm::vec2 _position, ofColor _color, std::vector<glm::vec2> _po
 
 void Polygon::draw()
 {
-    ofSetColor(color);
+    if (isFilled)
+    {
+        drawFill();
+    }
+    
+    drawOutline();
+}
+
+void Polygon::drawFill()
+{
+    ofSetColor(fillColor);
+    ofSetLineWidth(1);
     ofFill();
+
     ofBeginShape();
-    for (glm::vec2 &point : points)
+    for (auto &point : points)
+    {
+        ofVertex(point + position);
+    }
+    ofEndShape(true);
+}
+
+void Polygon::drawOutline()
+{
+    ofSetColor(outlineColor);
+    ofSetLineWidth(outlineWidth);
+    ofNoFill();
+
+    ofBeginShape();
+    for (auto &point : points)
     {
         ofVertex(point + position);
     }

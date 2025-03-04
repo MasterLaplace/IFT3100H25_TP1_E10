@@ -2,7 +2,7 @@
 
 namespace plugin::states {
 
-void DrawRectangleState::enter() { std::cout << "On entre dans le DrawRectangleState." << std::endl; }
+void DrawRectangleState::enter() {}
 
 void DrawRectangleState::mousePressed(int x, int y, int button) {}
 
@@ -25,9 +25,15 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
     {
         position.y = mousePosition.y;
     }
+    
+    Primitive2DParams params;
+    params.position = position;
+    params.fillColor = fillColor;
+    params.outlineColor = outlineColor;
+    params.outlineWidth = outlineWidth;
+    params.isFilled = isFilled;
 
-    plugin::primitive::Rectangle *rectangle =
-        new plugin::primitive::Rectangle(position, color, glm::vec2(width, height));
+    plugin::primitive::Rectangle *rectangle = new plugin::primitive::Rectangle(params, glm::vec2(width, height));
     Node<Primitive2D> *node = new Node<Primitive2D>(rectangle);
     Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
 
@@ -69,9 +75,9 @@ void DrawRectangleState::drawPreview()
     if (!isMousePressed)
         return;
 
-    ofColor previewColor = color;
-    previewColor.a = 127;
-    ofSetColor(previewColor);
+    ofColor fillPreview = fillColor;
+    fillPreview.a = 127;
+    ofSetColor(fillPreview);
 
     // On calcule la largeur et la hauteur du rectangle
     float width = abs(mousePressedPosition.x - mousePosition.x);
@@ -89,6 +95,13 @@ void DrawRectangleState::drawPreview()
         position.y = mousePosition.y;
     }
 
+    ofSetLineWidth(outlineWidth);
+    ofDrawRectangle(position, width, height);
+    
+    ofColor outlinePreview = outlineColor;
+    outlinePreview.a = 127;
+    ofSetColor(outlinePreview);
+    ofNoFill();
     ofDrawRectangle(position, width, height);
 }
 

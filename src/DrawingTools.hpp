@@ -7,6 +7,7 @@ C'est une classe temporaire de UI juste pour donner une idée de comment l'impl�
 #include "Node.hpp"
 #include "ofxImGui.h"
 #include <unordered_map>
+#include "plugin/primitive/primitive.hpp"
 
 class Controller2D;
 
@@ -35,15 +36,20 @@ private:
     void drawSceneGraph();
     void displayNode(Node<Primitive2D> *node, int indentLevel = 0);
     void drawProprietiesPanel();
+    
+    void onToolSelected(tool _tool);
+    
+    void drawPointProperties(Point2D* point);
+    void drawLineProperties(Line2D* line);
+    void drawRectangleProperties(Rectangle* rectangle);
+    void drawEllipseProperties(Ellipse* ellipse);
+    void drawPolygonProperties(plugin::primitive::Polygon* polygon);
 
     // Attributs générique
+    float outlineWidth = 1.0f;
     float fillColor[3] = {0.0f, 0.0f, 0.0f};
-
-    // Attributs du point.
-    float pointSize = 5.0f;
-    float pointColor[3] = {0.0f, 0.0f, 0.0f};
-
-    // Attributs de la ligne.
-    float lineWidth = 2.0f;
-    float lineColor[3] = {0.0f, 0.0f, 0.0f};
+    float outlineColor[3] = {0.0f, 0.0f, 0.0f};
+    bool isFilled = true;
+    
+    
 };

@@ -7,13 +7,16 @@ namespace plugin::primitive {
 
 class Rectangle : public Primitive2D {
 public:
-    Rectangle(glm::vec2 _position, ofColor _color, glm::vec2 _dimensions);
+    Rectangle(Primitive2DParams _params, glm::vec2 _dimensions);
     ~Rectangle() override = default;
 
     void draw() override;
     bool isInside(glm::vec2 *point) override;
 
     glm::vec2 dimensions;
+private:
+    void drawFill();
+    void drawOutline();
 };
 
 } // namespace plugin::primitive

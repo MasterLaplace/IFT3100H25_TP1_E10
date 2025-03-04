@@ -2,7 +2,7 @@
 
 namespace plugin::primitive {
 
-Ellipse::Ellipse(glm::vec2 _position, ofColor _color, glm::vec2 _radius) : Primitive2D(_position, _color)
+Ellipse::Ellipse(Primitive2DParams _params, glm::vec2 _radius) : Primitive2D(_params)
 {
     radius = _radius;
     name = "Ellipse " + std::to_string(id);
@@ -10,10 +10,35 @@ Ellipse::Ellipse(glm::vec2 _position, ofColor _color, glm::vec2 _radius) : Primi
 
 void Ellipse::draw()
 {
-    ofSetColor(color);
-    ofFill();
+    ofEnableAntiAliasing();
+    if (isFilled)
+    {
+        drawFill();
+    }
+    
+    drawOutline();
+    ofDisableAntiAliasing();
+}
+
+void Ellipse::drawOutline()
+{
+    ofLog() << outlineColor;
+    ofSetColor(outlineColor);
+    ofNoFill();
+    ofSetLineWidth(outlineWidth);
+    
     ofDrawEllipse(position.x, position.y, radius.x, radius.y);
 }
+
+void Ellipse::drawFill()
+{
+    ofSetColor(fillColor);
+    ofSetLineWidth(1);
+    ofFill();
+    
+    ofDrawEllipse(position.x, position.y, radius.x, radius.y);
+}
+
 
 bool Ellipse::isInside(glm::vec2 *point)
 {

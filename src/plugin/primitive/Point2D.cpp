@@ -2,7 +2,7 @@
 
 namespace plugin::primitive {
 
-Point2D::Point2D(glm::vec2 _position, ofColor _color, float _size) : Primitive2D(_position, _color)
+Point2D::Point2D(Primitive2DParams _params, float _size) : Primitive2D(_params)
 {
     size = _size;
     name = "Point " + std::to_string(id);
@@ -10,7 +10,8 @@ Point2D::Point2D(glm::vec2 _position, ofColor _color, float _size) : Primitive2D
 
 void Point2D::draw()
 {
-    ofSetColor(color);
+    ofSetColor(fillColor);
+    ofFill();
     ofDrawCircle(position, size);
 }
 

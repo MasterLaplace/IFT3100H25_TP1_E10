@@ -1,7 +1,7 @@
 #include "Rectangle.hpp"
 
 namespace plugin::primitive {
-Rectangle::Rectangle(glm::vec2 _position, ofColor _color, glm::vec2 _dimensions) : Primitive2D(_position, _color)
+Rectangle::Rectangle(Primitive2DParams _params, glm::vec2 _dimensions) : Primitive2D(_params)
 {
     dimensions = _dimensions;
     name = "Rectangle " + std::to_string(id);
@@ -9,9 +9,30 @@ Rectangle::Rectangle(glm::vec2 _position, ofColor _color, glm::vec2 _dimensions)
 
 void Rectangle::draw()
 {
-    ofSetColor(color);
+    if (isFilled)
+    {
+        drawFill();
+    }
+
+    drawOutline();
+}
+
+void Rectangle::drawFill()
+{
+    ofSetColor(fillColor);
+    ofSetLineWidth(1);
     ofFill();
-    ofDrawRectangle(position, dimensions.x, dimensions.y);
+    
+    ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
+}
+
+void Rectangle::drawOutline()
+{
+    ofSetColor(outlineColor);
+    ofSetLineWidth(outlineWidth);
+    ofNoFill();
+    
+    ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
 }
 
 bool Rectangle::isInside(glm::vec2 *point)

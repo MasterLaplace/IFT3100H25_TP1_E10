@@ -7,7 +7,7 @@ namespace plugin::primitive {
 
 class Line2D : public Primitive2D {
 public:
-    Line2D(glm::vec2 _position, glm::vec2 _endPosition, ofColor _color, float _strokeWidth);
+    Line2D(Primitive2DParams params, glm::vec2 _endPosition);
     ~Line2D() override = default;
 
     void draw() override;
@@ -15,7 +15,6 @@ public:
 
     glm::vec2 startPosition;
     glm::vec2 endPosition;
-    float strokeWidth;
 };
 
 } // namespace plugin::primitive

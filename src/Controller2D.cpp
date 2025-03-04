@@ -96,57 +96,31 @@ void Controller2D::importImage() { importer.importImage(); }
 
 void Controller2D::exportImage() { exporter.exportImage(); }
 
-void Controller2D::onSizeChanged(float newSize) { stateMachine.onStrokeSizeChanged(newSize); }
 
-void Controller2D::onSizeChanged(int id, float newSize)
+// Cette méthode change les propriétés de la primitive à dessiner.
+void Controller2D::onPrimitivePropertiesChanged(Primitive2DParams params)
 {
-    Node<Primitive2D> *node = getNodeById(id);
-    if (Point2D *p = dynamic_cast<Point2D *>(node->primitive))
-    {
-        p->size = newSize;
-    }
+    stateMachine.onOutlineWidthChanged(params.outlineWidth);
+    stateMachine.onFillColorChanged(params.fillColor);
+    stateMachine.onOutlineColorChanged(params.outlineColor);
+    stateMachine.onFilledChanged(params.isFilled);
 }
 
-// Cette m�thode re�oit un tableau de trois float parce que c'est ce que ImGui utilise.
-// On transforme ce tableau en un ofColor pour l'envoyer � l'�tat.
-void Controller2D::onColorChanged(float _newColor[3])
-{
-
-    ofColor newColor = ofColor(_newColor[0] * 255, _newColor[1] * 255, _newColor[2] * 255);
-    stateMachine.onColorChanged(newColor);
-}
-
-void Controller2D::onColorChanged(int id, float _newColor[3])
+// Cette méthode change les propriétés d'une primitive existante.
+void Controller2D::onPrimitivePropertiesChanged(int id, Primitive2DParams params)
 {
     Node<Primitive2D> *node = getNodeById(id);
     if (node)
     {
-        ofColor newColor = ofColor(_newColor[0] * 255, _newColor[1] * 255, _newColor[2] * 255);
-        node->primitive->color = newColor;
+        node->primitive->position = params.position;
+        node->primitive->fillColor = params.fillColor;
+        node->primitive->outlineColor = params.outlineColor;
+        node->primitive->outlineWidth = params.outlineWidth;
+        node->primitive->isFilled = params.isFilled;
     }
 }
 
 void Controller2D::onPrimitiveSelected(int id) { stateMachine.onPrimitiveSelected(id); }
-
-void Controller2D::onPositionChanged(int id, glm::vec2 newPos)
-{
-    Node<Primitive2D> *node = getNodeById(id);
-    if (node)
-
-    {
-        node->primitive->position = newPos;
-    }
-}
-
-void Controller2D::onEndPositionChanged(int id, glm::vec2 newPos)
-{
-    Node<Primitive2D> *node = getNodeById(id);
-    if (Line2D *line = dynamic_cast<Line2D *>(node->primitive))
-
-    {
-        line->endPosition = newPos;
-    }
-}
 
 std::vector<int> Controller2D::getPrimitiveId()
 {
@@ -162,18 +136,6 @@ std::vector<Node<Primitive2D> *> Controller2D::getCanvasNodes() { return canvas-
 
 Node<Primitive2D> *Controller2D::getNodeById(const int id) { return canvas->getChildById(id); }
 
-void Controller2D::getNodeColor(const int id, float color[3])
-{
-    Node<Primitive2D> *node = getNodeById(id);
-
-    if (node)
-    {
-        color[0] = node->primitive->color.r / 255.0f;
-        color[1] = node->primitive->color.g / 255.0f;
-        color[2] = node->primitive->color.b / 255.0f;
-    }
-}
-
 void Controller2D::collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids)
 {
     if (node->primitive != nullptr)
@@ -188,6 +150,31 @@ void Controller2D::collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> 
 }
 
 int Controller2D::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
+
+void Controller2D::onToolSelected(DrawingTools::tool _tool)
+{
+    switch (_tool)
+    {
+        case DrawingTools::tool::SELECT:
+            stateMachine.changeState(new SelectionState());
+            break;
+        case DrawingTools::tool::POINT:
+            stateMachine.changeState(new DrawPointState());
+            break;
+        case DrawingTools::tool::LINE:
+            stateMachine.changeState(new DrawLineState());
+            break;
+        case DrawingTools::tool::RECTANGLE:
+            stateMachine.changeState(new DrawRectangleState());
+            break;
+        case DrawingTools::tool::ELLIPSE:
+            stateMachine.changeState(new DrawEllipseState());
+            break;
+        case DrawingTools::tool::POLYGON:
+            stateMachine.changeState(new DrawPolygonState());
+            break;
+    }
+}
 
 void Controller2D::selectionButtonPressed() { stateMachine.changeState(new SelectionState()); }
 

@@ -7,7 +7,7 @@ namespace plugin::primitive {
 
 class Point2D : public Primitive2D {
 public:
-    Point2D(glm::vec2 _position, ofColor _color, float _size);
+    Point2D(Primitive2DParams params, float _size);
     ~Point2D() override = default;
 
     void draw() override;

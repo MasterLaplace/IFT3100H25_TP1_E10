@@ -31,9 +31,16 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
         points[i] -= position;
     }
     points[0] = glm::vec2(0, 0);
+    
+    Primitive2DParams params;
+    params.position = position;
+    params.fillColor = fillColor;
+    params.outlineColor = outlineColor;
+    params.outlineWidth = outlineWidth;
+    params.isFilled = isFilled;
 
     // On cree le polygone.
-    plugin::primitive::Polygon *polygon = new plugin::primitive::Polygon(position, color, points);
+    plugin::primitive::Polygon *polygon = new plugin::primitive::Polygon(params, points);
 
     // On cree le noeud.
     Node<Primitive2D> *node = new Node<Primitive2D>(polygon);
@@ -93,10 +100,10 @@ void DrawPolygonState::drawPreview()
         return;
     }
 
-    ofColor previewColor = color;
+    ofColor previewColor = fillColor;
     previewColor.a = 127;
-
     ofSetColor(previewColor);
+    ofSetLineWidth(outlineWidth);
 
     for (size_t i = 0; i < points.size(); i++)
     {
@@ -107,6 +114,7 @@ void DrawPolygonState::drawPreview()
     {
         ofDrawLine(points[i], points[i + 1]);
     }
+
 
     ofDrawLine(points[points.size() - 1], mousePosition);
 }

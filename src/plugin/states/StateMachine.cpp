@@ -65,9 +65,13 @@ void StateMachine::draw()
     }
 }
 
-void StateMachine::onStrokeSizeChanged(float newSize) { currentState->strokeSize = newSize; }
+void StateMachine::onOutlineWidthChanged(float newSize) { currentState->outlineWidth = newSize; }
 
-void StateMachine::onColorChanged(ofColor newColor) { currentState->color = newColor; }
+void StateMachine::onFillColorChanged(ofColor newColor) { currentState->fillColor = newColor; }
+
+void StateMachine::onOutlineColorChanged(ofColor newColor) { currentState->outlineColor = newColor; }
+
+void StateMachine::onFilledChanged(bool isFilled) { currentState->isFilled = isFilled; }
 
 void StateMachine::onPrimitiveSelected(int id) { currentState->selectedPrimitiveId = id; }
 

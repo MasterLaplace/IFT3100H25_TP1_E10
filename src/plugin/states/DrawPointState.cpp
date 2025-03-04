@@ -14,7 +14,15 @@ void DrawPointState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
     Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
-    Point2D *point = new Point2D(mousePosition, color, strokeSize);
+    
+    Primitive2DParams params;
+    params.position = mousePressedPosition;
+    params.fillColor = fillColor;
+    params.outlineColor = outlineColor;
+    params.outlineWidth = outlineWidth;
+    params.isFilled = isFilled;
+    
+    Point2D *point = new Point2D(params, outlineWidth);
     Node<Primitive2D> *node = new Node<Primitive2D>(point);
 
     if (!parent)
@@ -34,16 +42,16 @@ void DrawPointState::draw()
     drawPreview();
 }
 
-void DrawPointState::exit() { std::cout << "On sort du DrawPointState." << std::endl; }
+void DrawPointState::exit() { }
 
 void DrawPointState::drawCursor()
 {
-
     // Decallage du point par rapport au curseur.
     glm::vec2 offset = glm::vec2(30, 30);
 
     // Taille et couleur.
     ofSetColor(0);
+    ofFill();
     float radius = 10.0f;
 
     // On dessine le point.
@@ -53,11 +61,13 @@ void DrawPointState::drawCursor()
 // On dessine le preview du point avec de la transparence.
 void DrawPointState::drawPreview()
 {
-    ofColor previewColor = color;
+    ofColor previewColor = fillColor;
     previewColor.a = 127;
 
     ofSetColor(previewColor);
-    ofDrawCircle(mousePosition, strokeSize);
+    ofSetLineWidth(1);
+    ofFill();
+    ofDrawCircle(mousePosition, outlineWidth);
 }
 
 } // namespace plugin::states

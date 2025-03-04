@@ -4,12 +4,23 @@
 
 namespace plugin::primitive {
 
+struct Primitive2DParams {
+    glm::vec2 position;
+    float outlineWidth;
+    bool isFilled;
+    ofColor fillColor;
+    ofColor outlineColor;
+};
+
 class Primitive2D {
 public:
-    Primitive2D(glm::vec2 _position, ofColor _color)
+    Primitive2D(Primitive2DParams params)
     {
-        position = _position;
-        color = _color;
+        position = params.position;
+        outlineWidth = params.outlineWidth;
+        isFilled = params.isFilled;
+        outlineColor = params.outlineColor;
+        fillColor = params.fillColor;
         id = nextId;
         nextId++;
     }
@@ -21,7 +32,11 @@ public:
     int id;
     string name = "Primitive2D";
     glm::vec2 position;
-    ofColor color;
+    
+    float outlineWidth;
+    bool isFilled = false;
+    ofColor fillColor;
+    ofColor outlineColor;
 
 private:
     static int nextId;

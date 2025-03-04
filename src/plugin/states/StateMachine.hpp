@@ -22,8 +22,10 @@ public:
     void mouseReleased(int x, int y, int button);
     void draw();
 
-    void onStrokeSizeChanged(float newSize);
-    void onColorChanged(ofColor newColor);
+    void onOutlineWidthChanged(float newWidth);
+    void onFillColorChanged(ofColor newColor);
+    void onOutlineColorChanged(ofColor newColor);
+    void onFilledChanged(bool isFilled);
     void onPrimitiveSelected(int id);
     int getSelectedNodeId();
 

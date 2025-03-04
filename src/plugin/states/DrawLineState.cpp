@@ -4,7 +4,7 @@ using namespace plugin::primitive;
 
 namespace plugin::states {
 
-void DrawLineState::enter() { std::cout << "On entre dans le DrawLineState." << std::endl; }
+void DrawLineState::enter() {}
 
 void DrawLineState::mousePressed(int x, int y, int button) {}
 
@@ -12,7 +12,14 @@ void DrawLineState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
     Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
-    Line2D *line = new Line2D(mousePressedPosition, mousePosition, color, strokeSize);
+    
+    Primitive2DParams params;
+    params.position = mousePressedPosition;
+    params.fillColor = fillColor;
+    params.outlineColor = outlineColor;
+    params.outlineWidth = outlineWidth;
+
+    Line2D *line = new Line2D(params, mousePosition);
     Node<Primitive2D> *node = new Node<Primitive2D>(line);
 
     if (!parent)
@@ -34,7 +41,7 @@ void DrawLineState::draw()
     drawPreview();
 }
 
-void DrawLineState::exit() { std::cout << "On sort du DrawLineState." << std::endl; }
+void DrawLineState::exit() {}
 
 void DrawLineState::drawCursor()
 {
@@ -43,8 +50,7 @@ void DrawLineState::drawCursor()
     glm::vec2 upOffset = glm::vec2(50, 10);
     glm::vec2 downOffset = glm::vec2(25, 50);
 
-    // J'aurais aime faire un trait plus large mais meme si j'augmente a 100 ca ne change rien.
-    ofSetLineWidth(5);
+    ofSetLineWidth(1);
     ofSetColor(0);
 
     // On dessine la ligne.
@@ -55,10 +61,10 @@ void DrawLineState::drawPreview()
 {
     if (isMousePressed)
     {
-        ofColor previewColor = color;
+        ofColor previewColor = fillColor;
         previewColor.a = 127;
         ofSetColor(previewColor);
-        ofSetLineWidth(strokeSize);
+        ofSetLineWidth(outlineWidth);
         ofDrawLine(mousePressedPosition, mousePosition);
         std::cout << mousePosition << std::endl;
     }
