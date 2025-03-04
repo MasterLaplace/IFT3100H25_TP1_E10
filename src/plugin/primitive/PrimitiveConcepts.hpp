@@ -17,6 +17,7 @@
 
 #include <type_traits>
 
+#if __cplusplus >= 201703L
 template <typename T>
 concept IsPoint2D = std::is_base_of_v<plugin::primitive::Point2D, T>;
 
@@ -31,5 +32,6 @@ concept IsEllipse = std::is_base_of_v<plugin::primitive::Ellipse, T>;
 
 template <typename T>
 concept IsPolygon = std::is_base_of_v<plugin::primitive::Polygon, T>;
+#endif
 
 #endif /* !PRIMITIVECONCEPTS_HPP_ */
