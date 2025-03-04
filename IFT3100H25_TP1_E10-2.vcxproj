@@ -148,7 +148,7 @@
     <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
     <ClInclude Include="src\plugin\primitive\Primitive.hpp" />
     <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp"/>
-    <ClInclude Include="src\plugin\primitive\primitive.hpp" />
+    <ClInclude Include="src\plugin\primitive\primitives.hpp" />
     <ClInclude Include="src\plugin\states\DrawLineState.hpp" />
     <ClInclude Include="src\plugin\states\DrawPointState.hpp" />
     <ClInclude Include="src\plugin\states\State.hpp" />

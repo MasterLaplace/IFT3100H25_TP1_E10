@@ -170,7 +170,7 @@
     <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\primitive\primitive.hpp">
+    <ClInclude Include="src\plugin\primitive\primitives.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\states\DrawLineState.hpp">

@@ -6,7 +6,7 @@ C'est une classe temporaire de UI juste pour donner une id√©e de comment l'impl√
 
 #include "Node.hpp"
 #include "ofxImGui.h"
-#include "plugin/primitive/primitive.hpp"
+#include "plugin/primitive/primitives.hpp"
 #include <unordered_map>
 
 using namespace plugin::primitive;

@@ -2,7 +2,7 @@
 
 #include "Canvas.hpp"
 #include "State.hpp"
-#include "plugin/primitive/primitive.hpp"
+#include "plugin/primitive/primitives.hpp"
 
 namespace plugin::states {
 

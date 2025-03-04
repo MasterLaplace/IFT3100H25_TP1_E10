@@ -75,7 +75,7 @@ Project{
             'src/plugin/primitive/Primitive.hpp',
             'src/plugin/primitive/Rectangle.cpp',
             'src/plugin/primitive/Rectangle.hpp',
-            'src/plugin/primitive/primitive.hpp',
+            'src/plugin/primitive/primitives.hpp',
             'src/plugin/raytracing/GlobalLighting.hpp',
             'src/plugin/raytracing/Intersection.hpp',
             'src/plugin/raytracing/Reflection.hpp',

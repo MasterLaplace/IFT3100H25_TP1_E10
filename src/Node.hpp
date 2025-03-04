@@ -7,7 +7,7 @@ Chaque Node contient une Primitive et une liste de pointeurs sur des Node qui so
 #ifndef NODE_HPP_
 #define NODE_HPP_
 
-#include "plugin/primitive/primitive.hpp"
+#include "plugin/primitive/primitives.hpp"
 #include <memory>
 #include <queue>
 #include <vector>
