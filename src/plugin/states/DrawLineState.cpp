@@ -12,7 +12,7 @@ void DrawLineState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
     Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
-    
+
     Primitive2DParams params;
     params.position = mousePressedPosition;
     params.fillColor = fillColor;

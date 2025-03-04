@@ -14,7 +14,7 @@ void Polygon::draw()
     {
         drawFill();
     }
-    
+
     drawOutline();
 }
 

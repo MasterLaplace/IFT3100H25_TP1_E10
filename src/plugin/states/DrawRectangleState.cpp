@@ -25,7 +25,7 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
     {
         position.y = mousePosition.y;
     }
-    
+
     Primitive2DParams params;
     params.position = position;
     params.fillColor = fillColor;
@@ -97,7 +97,7 @@ void DrawRectangleState::drawPreview()
 
     ofSetLineWidth(outlineWidth);
     ofDrawRectangle(position, width, height);
-    
+
     ofColor outlinePreview = outlineColor;
     outlinePreview.a = 127;
     ofSetColor(outlinePreview);

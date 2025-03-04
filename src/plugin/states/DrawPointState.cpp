@@ -14,14 +14,14 @@ void DrawPointState::mouseReleased(int x, int y, int button)
 {
     Canvas *canvas = Canvas::getInstance();
     Node<Primitive2D> *parent = canvas->getChildById(selectedPrimitiveId);
-    
+
     Primitive2DParams params;
     params.position = mousePressedPosition;
     params.fillColor = fillColor;
     params.outlineColor = outlineColor;
     params.outlineWidth = outlineWidth;
     params.isFilled = isFilled;
-    
+
     Point2D *point = new Point2D(params, outlineWidth);
     Node<Primitive2D> *node = new Node<Primitive2D>(point);
 
@@ -42,7 +42,7 @@ void DrawPointState::draw()
     drawPreview();
 }
 
-void DrawPointState::exit() { }
+void DrawPointState::exit() {}
 
 void DrawPointState::drawCursor()
 {

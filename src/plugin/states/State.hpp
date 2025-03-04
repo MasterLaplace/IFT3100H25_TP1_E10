@@ -11,7 +11,7 @@ public:
     glm::vec2 mousePressedPosition;
     bool isMousePressed = false;
     int selectedPrimitiveId = -1;
-    
+
     float outlineWidth = 1.0f;
     ofColor fillColor = ofColor::black;
     ofColor outlineColor = ofColor::black;

@@ -22,7 +22,7 @@ void Rectangle::drawFill()
     ofSetColor(fillColor);
     ofSetLineWidth(1);
     ofFill();
-    
+
     ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
 }
 
@@ -31,7 +31,7 @@ void Rectangle::drawOutline()
     ofSetColor(outlineColor);
     ofSetLineWidth(outlineWidth);
     ofNoFill();
-    
+
     ofDrawRectangle(position.x, position.y, dimensions.x, dimensions.y);
 }
 

@@ -40,17 +40,17 @@ public:
     void drawPolygonButtonPressed();
     void deletePrimitiveButtonPressed(int id);
     void drawHistogram(int color);
-    
+
     void onPrimitivePropertiesChanged(Primitive2DParams params);
     void onPrimitivePropertiesChanged(int id, Primitive2DParams params);
-    
+
     void onPrimitiveSelected(int id);
     void onEndPositionChanged(int id, glm::vec2 newPos);
 
     std::vector<int> getPrimitiveId();
     std::vector<Node<Primitive2D> *> getCanvasNodes();
     Node<Primitive2D> *getNodeById(const int id);
-    
+
     void collectPrimitiveId(Node<Primitive2D> *node, std::vector<int> &ids);
     int getSelectedNodeId();
 

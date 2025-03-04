@@ -14,6 +14,7 @@ public:
     bool isInside(glm::vec2 *point) override;
 
     glm::vec2 dimensions;
+
 private:
     void drawFill();
     void drawOutline();

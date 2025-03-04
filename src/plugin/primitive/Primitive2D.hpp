@@ -32,7 +32,7 @@ public:
     int id;
     string name = "Primitive2D";
     glm::vec2 position;
-    
+
     float outlineWidth;
     bool isFilled = false;
     ofColor fillColor;

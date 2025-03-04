@@ -31,7 +31,7 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
         points[i] -= position;
     }
     points[0] = glm::vec2(0, 0);
-    
+
     Primitive2DParams params;
     params.position = position;
     params.fillColor = fillColor;
@@ -114,7 +114,6 @@ void DrawPolygonState::drawPreview()
     {
         ofDrawLine(points[i], points[i + 1]);
     }
-
 
     ofDrawLine(points[points.size() - 1], mousePosition);
 }

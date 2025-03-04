@@ -15,7 +15,7 @@ void Ellipse::draw()
     {
         drawFill();
     }
-    
+
     drawOutline();
     ofDisableAntiAliasing();
 }
@@ -26,7 +26,7 @@ void Ellipse::drawOutline()
     ofSetColor(outlineColor);
     ofNoFill();
     ofSetLineWidth(outlineWidth);
-    
+
     ofDrawEllipse(position.x, position.y, radius.x, radius.y);
 }
 
@@ -35,10 +35,9 @@ void Ellipse::drawFill()
     ofSetColor(fillColor);
     ofSetLineWidth(1);
     ofFill();
-    
+
     ofDrawEllipse(position.x, position.y, radius.x, radius.y);
 }
-
 
 bool Ellipse::isInside(glm::vec2 *point)
 {

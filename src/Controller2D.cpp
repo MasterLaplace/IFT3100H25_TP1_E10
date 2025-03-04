@@ -96,7 +96,6 @@ void Controller2D::importImage() { importer.importImage(); }
 
 void Controller2D::exportImage() { exporter.exportImage(); }
 
-
 // Cette méthode change les propriétés de la primitive à dessiner.
 void Controller2D::onPrimitivePropertiesChanged(Primitive2DParams params)
 {
@@ -155,24 +154,12 @@ void Controller2D::onToolSelected(DrawingTools::tool _tool)
 {
     switch (_tool)
     {
-        case DrawingTools::tool::SELECT:
-            stateMachine.changeState(new SelectionState());
-            break;
-        case DrawingTools::tool::POINT:
-            stateMachine.changeState(new DrawPointState());
-            break;
-        case DrawingTools::tool::LINE:
-            stateMachine.changeState(new DrawLineState());
-            break;
-        case DrawingTools::tool::RECTANGLE:
-            stateMachine.changeState(new DrawRectangleState());
-            break;
-        case DrawingTools::tool::ELLIPSE:
-            stateMachine.changeState(new DrawEllipseState());
-            break;
-        case DrawingTools::tool::POLYGON:
-            stateMachine.changeState(new DrawPolygonState());
-            break;
+    case DrawingTools::tool::SELECT: stateMachine.changeState(new SelectionState()); break;
+    case DrawingTools::tool::POINT: stateMachine.changeState(new DrawPointState()); break;
+    case DrawingTools::tool::LINE: stateMachine.changeState(new DrawLineState()); break;
+    case DrawingTools::tool::RECTANGLE: stateMachine.changeState(new DrawRectangleState()); break;
+    case DrawingTools::tool::ELLIPSE: stateMachine.changeState(new DrawEllipseState()); break;
+    case DrawingTools::tool::POLYGON: stateMachine.changeState(new DrawPolygonState()); break;
     }
 }
 

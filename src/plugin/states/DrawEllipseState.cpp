@@ -13,7 +13,7 @@ void DrawEllipseState::mouseReleased(int x, int y, int button)
     // On calcule le rayon de l'ellipse.
     float radiusX = abs(mousePressedPosition.x - mousePosition.x);
     float radiusY = abs(mousePressedPosition.y - mousePosition.y);
-    
+
     if (radiusX == 0 || radiusY == 0)
         return;
 
@@ -41,7 +41,7 @@ void DrawEllipseState::mouseReleased(int x, int y, int button)
     params.outlineWidth = outlineWidth;
     params.outlineColor = outlineColor;
     params.isFilled = isFilled;
-    
+
     plugin::primitive::Ellipse *ellipse = new plugin::primitive::Ellipse(params, glm::vec2(radiusX, radiusY));
 
     // On cree le noeud.
@@ -112,13 +112,12 @@ void DrawEllipseState::drawPreview()
     glm::vec2 center =
         glm::vec2(mousePressedPosition.x + invertX * radiusX / 2, mousePressedPosition.y + invertY * radiusY / 2);
 
-    
     ofDrawEllipse(center, radiusX, radiusY);
-    
+
     ofColor outlinePreview = outlineColor;
     outlinePreview.a = 127;
     ofSetColor(outlinePreview);
-    
+
     ofNoFill();
     ofDrawEllipse(center, radiusX, radiusY);
 }
