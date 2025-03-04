@@ -26,7 +26,7 @@ make
 cd ../../..
 
 ./scripts/linux/compileOF.sh -j3
-./scripts/linux/compilePG.sh
+sudo ./scripts/linux/compilePG.sh
 
 cd ../..
 

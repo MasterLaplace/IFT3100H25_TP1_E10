@@ -21,3 +21,42 @@ Cette application permet de construire, éditer et rendre des scènes visuelles 
 ./scripts/update_linux_project.sh
 make run
 ```
+
+
+## Sommaire
+
+Description sommaire du projet.
+une image.
+
+## Interactivité
+
+Racourcis clavier/souris. un tableau.
+
+## Technologie
+
+openframeworks, c++, xmake.
+
+## Compilation
+
+install openframeworks
+```bash
+sudo apt-get install openframeworks
+```
+
+```bash
+xmake
+```
+
+## Architecture
+
+image.svg de draw.io.
+
+## Fonctionnalités
+
+## Ressources
+
+citer les sources. ou dire quelle application a été utilisée.
+
+## Présentation
+
+présentation de l'équipe et de qui à fait quoi.
