@@ -2,10 +2,7 @@
 
 namespace plugin::primitive {
 
-Point2D::Point2D(PrimitiveParams _params, float _size) : Primitive(_params)
-{
-    size = _size;
-}
+Point2D::Point2D(PrimitiveParams _params, float _size) : Primitive(_params) { size = _size; }
 
 void Point2D::draw()
 {

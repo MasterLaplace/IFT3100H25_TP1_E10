@@ -2,10 +2,7 @@
 
 namespace plugin::primitive {
 
-Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params)
-{
-    radius = _radius;
-}
+Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params) { radius = _radius; }
 
 void Ellipse::draw()
 {

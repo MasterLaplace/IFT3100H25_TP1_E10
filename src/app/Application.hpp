@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../Controller.hpp"
-#include "../Controller.hpp"
 #include "image.hpp"
 #include "ofMain.h"
 

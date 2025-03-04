@@ -1,10 +1,7 @@
 #include "Rectangle.hpp"
 
 namespace plugin::primitive {
-Rectangle::Rectangle(PrimitiveParams _params, glm::vec2 _dimensions) : Primitive(_params)
-{
-    dimensions = _dimensions;
-}
+Rectangle::Rectangle(PrimitiveParams _params, glm::vec2 _dimensions) : Primitive(_params) { dimensions = _dimensions; }
 
 void Rectangle::draw()
 {

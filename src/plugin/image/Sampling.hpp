@@ -13,12 +13,12 @@
 namespace plugin::image {
 
 class Sampling {
-    public:
-        Sampling();
-        ~Sampling();
+public:
+    Sampling();
+    ~Sampling();
 
-    protected:
-    private:
+protected:
+private:
 };
 
 } // namespace plugin::image

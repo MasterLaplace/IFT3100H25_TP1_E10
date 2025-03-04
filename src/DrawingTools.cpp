@@ -386,7 +386,8 @@ void DrawingTools::onToolSelected(tool tool)
 void DrawingTools::drawPointProperties(const std::shared_ptr<Point2D> &point)
 {
     float size = point->size;
-    float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f, point->param.fillColor.b / 255.0f};
+    float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f,
+                      point->param.fillColor.b / 255.0f};
 
     ImGui::Text("Taille :");
     if (ImGui::SliderFloat("Taille", &size, 1.0f, 30.0f))
@@ -404,7 +405,8 @@ void DrawingTools::drawPointProperties(const std::shared_ptr<Point2D> &point)
 void DrawingTools::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
     float width = line->param.outlineWidth;
-    float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f, line->param.fillColor.b / 255.0f};
+    float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f,
+                      line->param.fillColor.b / 255.0f};
 
     ImGui::Text("Epaisseur :");
     if (ImGui::SliderFloat("Epaisseur", &width, 1.0f, 30.0f))
@@ -471,7 +473,8 @@ void DrawingTools::drawRectangleProperties(const std::shared_ptr<Rectangle> &rec
 void DrawingTools::drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse)
 {
     float width = ellipse->param.outlineWidth;
-    float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f, ellipse->param.fillColor.b / 255.0f};
+    float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f,
+                          ellipse->param.fillColor.b / 255.0f};
     float outlineColor[3] = {ellipse->param.outlineColor.r / 255.0f, ellipse->param.outlineColor.g / 255.0f,
                              ellipse->param.outlineColor.b / 255.0f};
     bool filled = ellipse->param.isFilled;
@@ -507,7 +510,8 @@ void DrawingTools::drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse
 void DrawingTools::drawPolygonProperties(const std::shared_ptr<Polygon> &polygon)
 {
     float width = polygon->param.outlineWidth;
-    float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f, polygon->param.fillColor.b / 255.0f};
+    float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f,
+                          polygon->param.fillColor.b / 255.0f};
     float outlineColor[3] = {polygon->param.outlineColor.r / 255.0f, polygon->param.outlineColor.g / 255.0f,
                              polygon->param.outlineColor.b / 255.0f};
     bool filled = polygon->param.isFilled;
