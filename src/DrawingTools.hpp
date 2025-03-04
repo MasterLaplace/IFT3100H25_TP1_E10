@@ -41,8 +41,8 @@ private:
 
     void drawPointProperties(Point2D *point);
     void drawLineProperties(Line2D *line);
-    void drawRectangleProperties(Rectangle *rectangle);
-    void drawEllipseProperties(Ellipse *ellipse);
+    void drawRectangleProperties(plugin::primitive::Rectangle *rectangle);
+    void drawEllipseProperties(plugin::primitive::Ellipse *ellipse);
     void drawPolygonProperties(plugin::primitive::Polygon *polygon);
 
     // Attributs générique

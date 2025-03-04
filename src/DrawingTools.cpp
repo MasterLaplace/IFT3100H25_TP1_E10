@@ -71,11 +71,15 @@ void DrawingTools::drawMenuBar()
 // Sert a dessiner le panel des outils de dessin
 void DrawingTools::drawToolsPanel()
 {
-    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(ofGetWidth() - 20, 100), ImGuiCond_FirstUseEver);
+    float sceneGraphWidth = ofGetWidth() / 6 + 20;
+    float propertiesPanelWidth = ofGetWidth() / 6 + 20;
+    float panelWidth = (ofGetWidth() - sceneGraphWidth - propertiesPanelWidth) / 2 - 15;
+    float panelHeight = 150;
+
+    ImGui::SetNextWindowPos(ImVec2(sceneGraphWidth, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Outils de dessin");
 
-    ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
     bool buttonClicked = false;
 
     if (ImGui::Button("Selection"))
@@ -117,8 +121,13 @@ void DrawingTools::drawToolsPanel()
 // Sert a dessiner le panel dynamique
 void DrawingTools::drawDynamicPanel()
 {
-    ImGui::SetNextWindowPos(ImVec2(10, 140), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(ofGetWidth() - 20, 200), ImGuiCond_FirstUseEver);
+    float sceneGraphWidth = ofGetWidth() / 6 + 20;
+    float propertiesPanelWidth = ofGetWidth() / 6 + 20;
+    float panelWidth = (ofGetWidth() - sceneGraphWidth - propertiesPanelWidth) / 2 - 15;
+    float panelHeight = 150;
+
+    ImGui::SetNextWindowPos(ImVec2(sceneGraphWidth + panelWidth + 10, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Option de dessin");
     bool propertiesChanged = false;
 
@@ -263,8 +272,8 @@ void DrawingTools::drawSceneGraph()
     float panelWidth = ofGetWidth() / 6;
     float panelHeight = ofGetHeight() - 40;
 
-    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Graphe de scene");
 
     ImGui::Text("Primitive :");
@@ -310,8 +319,8 @@ void DrawingTools::drawProprietiesPanel()
     float panelWidth = ofGetWidth() / 6;
     float panelHeight = ofGetHeight() - 40;
 
-    ImGui::SetNextWindowPos(ImVec2(ofGetWidth() - panelWidth - 10, 30), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(ofGetWidth() - panelWidth - 10, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Propriétés");
 
     ImGui::Text("Propriétés :");
@@ -339,12 +348,12 @@ void DrawingTools::drawProprietiesPanel()
             drawLineProperties(line);
         }
 
-        if (Rectangle *rectangle = dynamic_cast<Rectangle *>(node->primitive))
+        if (plugin::primitive::Rectangle *rectangle = dynamic_cast<plugin::primitive::Rectangle *>(node->primitive))
         {
             drawRectangleProperties(rectangle);
         }
 
-        if (Ellipse *ellipse = dynamic_cast<Ellipse *>(node->primitive))
+        if (plugin::primitive::Ellipse *ellipse = dynamic_cast<plugin::primitive::Ellipse *>(node->primitive))
         {
             drawEllipseProperties(ellipse);
         }
@@ -426,7 +435,7 @@ void DrawingTools::drawLineProperties(Line2D *line)
     }
 }
 
-void DrawingTools::drawRectangleProperties(Rectangle *rectangle)
+void DrawingTools::drawRectangleProperties(plugin::primitive::Rectangle *rectangle)
 {
     float width = rectangle->outlineWidth;
     float fillColor[3] = {rectangle->fillColor.r / 255.0f, rectangle->fillColor.g / 255.0f,
@@ -463,7 +472,7 @@ void DrawingTools::drawRectangleProperties(Rectangle *rectangle)
     }
 }
 
-void DrawingTools::drawEllipseProperties(Ellipse *ellipse)
+void DrawingTools::drawEllipseProperties(plugin::primitive::Ellipse *ellipse)
 {
     float width = ellipse->outlineWidth;
     float fillColor[3] = {ellipse->fillColor.r / 255.0f, ellipse->fillColor.g / 255.0f, ellipse->fillColor.b / 255.0f};
