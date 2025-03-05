@@ -17,7 +17,8 @@ void Controller::setup()
     auto node = new NodePrimitive(cube, "Cube");
     canvas3d->nodes.push_back(node);
 
-    auto ellipsoid = std::make_shared<plugin::primitive::Ellipsoid>(param, glm::vec3(10.0f, 10.0f, 10.0f), 50.0f, 50.0f);
+    auto ellipsoid =
+        std::make_shared<plugin::primitive::Ellipsoid>(param, glm::vec3(10.0f, 10.0f, 10.0f), 50.0f, 50.0f);
     auto node2 = new NodePrimitive(ellipsoid, "Ellipsoid");
     canvas3d->nodes.push_back(node2);
 
@@ -152,7 +153,10 @@ std::vector<uint32_t> Controller::getPrimitiveId()
 
 const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return (is3d) ? canvas3d->nodes : canvas2d->nodes; }
 
-NodePrimitive *Controller::getNodeById(const uint32_t id) { return (is3d) ? canvas3d->getChildById(id) : canvas2d->getChildById(id); }
+NodePrimitive *Controller::getNodeById(const uint32_t id)
+{
+    return (is3d) ? canvas3d->getChildById(id) : canvas2d->getChildById(id);
+}
 
 void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids)
 {
