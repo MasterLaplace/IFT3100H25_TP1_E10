@@ -83,15 +83,23 @@ void Controller::keyReleased(int key)
     switch (key)
     {
     case 'p':
+    case 'P':
         drawPointButtonPressed();
         gui.selectedTool = AppGui::tool::POINT;
         break;
     case 'l':
+    case 'L':
         drawLineButtonPressed();
         gui.selectedTool = AppGui::tool::LINE;
         break;
-    case 'i': importer.importImage(); break;
-    case 'e': exporter.exportImage(); break;
+    case 'i':
+    case 'I':
+        importer.importImage();
+        break;
+    case 'e':
+    case 'E':
+        exporter.exportImage();
+        break;
     default: break;
     }
 }
@@ -180,6 +188,8 @@ void Controller::onToolSelected(AppGui::tool _tool)
     case AppGui::tool::RECTANGLE: stateMachine.changeState(new DrawRectangleState()); break;
     case AppGui::tool::ELLIPSE: stateMachine.changeState(new DrawEllipseState()); break;
     case AppGui::tool::POLYGON: stateMachine.changeState(new DrawPolygonState()); break;
+    case AppGui::tool::BOX: stateMachine.changeState(new DrawBoxState()); break;
+    case AppGui::tool::ELLIPSOID: stateMachine.changeState(new DrawEllipsoidState()); break;
     default: break;
     }
 }

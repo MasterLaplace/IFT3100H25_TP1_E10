@@ -8,7 +8,9 @@
 #ifndef PRIMITIVECONCEPTS_HPP_
 #define PRIMITIVECONCEPTS_HPP_
 
+#include "Box.hpp"
 #include "Ellipse.hpp"
+#include "Ellipsoid.hpp"
 #include "Line2D.hpp"
 #include "Point2D.hpp"
 #include "Polygon.hpp"
@@ -32,6 +34,12 @@ concept IsEllipse = std::is_base_of_v<plugin::primitive::Ellipse, T>;
 
 template <typename T>
 concept IsPolygon = std::is_base_of_v<plugin::primitive::Polygon, T>;
+
+template <typename T>
+concept IsBox = std::is_base_of_v<plugin::primitive::Box, T>;
+
+template <typename T>
+concept IsEllipsoid = std::is_base_of_v<plugin::primitive::Ellipsoid, T>;
 #endif
 
 #endif /* !PRIMITIVECONCEPTS_HPP_ */

@@ -1,4 +1,6 @@
+#include "DrawBoxState.hpp"
 #include "DrawEllipseState.hpp"
+#include "DrawEllipsoidState.hpp"
 #include "DrawHistogramState.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"

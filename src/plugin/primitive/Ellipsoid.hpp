@@ -15,11 +15,14 @@ namespace plugin::primitive {
 
 class Ellipsoid : public Primitive {
 public:
-    Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices, int numStacks);
+    Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices = 50, int numStacks = 50);
     ~Ellipsoid() override = default;
 
     void draw() override;
     bool isInside(const glm::vec3 &point) override;
+
+    void setRadius(const glm::vec3 &radius) { _radius = radius; }
+    [[nodiscard]] glm::vec3 &getRadius() { return _radius; }
 
 private:
     void drawFill();

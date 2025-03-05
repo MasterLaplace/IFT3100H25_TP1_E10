@@ -22,6 +22,8 @@ public:
         RECTANGLE,
         ELLIPSE,
         POLYGON,
+        BOX,
+        ELLIPSOID,
         BACKGROUND
     };
     tool selectedTool;
@@ -34,8 +36,10 @@ private:
     Controller *controller;
 
     void drawMenuBar();
-    void drawToolsPanel();
-    void drawDynamicPanel();
+    void drawToolsPanel2D();
+    void drawToolsPanel3D();
+    void drawDynamicPanel2D();
+    void drawDynamicPanel3D();
     void drawSceneGraph();
     void displayNode(NodePrimitive *node, uint32_t indentLevel = 0);
     void drawProprietiesPanel();
@@ -49,6 +53,8 @@ private:
     void drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon);
     void drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive);
     void drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive);
+    void drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::Ellipsoid> &ellipsoid);
+    void drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box);
 
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};

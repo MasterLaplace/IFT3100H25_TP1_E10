@@ -12,14 +12,14 @@ void AppGui::draw()
 {
     gui.begin();
     drawMenuBar();
-    if (!controller->is3d)
-    {
-        drawToolsPanel();
-        drawDynamicPanel();
-    }
 
-    drawSceneGraph();
+    if (controller->is3d)
+        drawToolsPanel3D(), drawDynamicPanel3D();
+    else
+        drawToolsPanel2D(), drawDynamicPanel2D();
+
     drawProprietiesPanel();
+    drawSceneGraph();
     gui.end();
 }
 
@@ -92,7 +92,7 @@ void AppGui::drawMenuBar()
 }
 
 // Sert a dessiner le panel des outils de dessin
-void AppGui::drawToolsPanel()
+void AppGui::drawToolsPanel2D()
 {
     float sceneGraphWidth = ofGetWidth() / 6 + 20;
     float propertiesPanelWidth = ofGetWidth() / 6 + 20;
@@ -146,8 +146,42 @@ void AppGui::drawToolsPanel()
     ImGui::End();
 }
 
+void AppGui::drawToolsPanel3D()
+{
+    float sceneGraphWidth = ofGetWidth() / 6 + 20;
+    float propertiesPanelWidth = ofGetWidth() / 6 + 20;
+    float panelWidth = (ofGetWidth() - sceneGraphWidth - propertiesPanelWidth) / 2 - 15;
+    float panelHeight = 150;
+
+    ImGui::SetNextWindowPos(ImVec2(sceneGraphWidth, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
+    ImGui::Begin("Outils de dessin");
+
+    if (ImGui::Button("Selection"))
+    {
+        onToolSelected(tool::SELECT);
+    }
+
+    if (ImGui::Button("Arriere plan"))
+    {
+        onToolSelected(tool::BACKGROUND);
+    }
+
+    if (ImGui::Button("Box"))
+    {
+        onToolSelected(tool::BOX);
+    }
+
+    if (ImGui::Button("Ellipsoid"))
+    {
+        onToolSelected(tool::ELLIPSOID);
+    }
+
+    ImGui::End();
+}
+
 // Sert a dessiner le panel dynamique
-void AppGui::drawDynamicPanel()
+void AppGui::drawDynamicPanel2D()
 {
     float sceneGraphWidth = ofGetWidth() / 6 + 20;
     float propertiesPanelWidth = ofGetWidth() / 6 + 20;
@@ -302,6 +336,97 @@ void AppGui::drawDynamicPanel()
     ImGui::End();
 }
 
+void AppGui::drawDynamicPanel3D()
+{
+    float sceneGraphWidth = ofGetWidth() / 6 + 20;
+    float propertiesPanelWidth = ofGetWidth() / 6 + 20;
+    float panelWidth = (ofGetWidth() - sceneGraphWidth - propertiesPanelWidth) / 2 - 15;
+    float panelHeight = 150;
+
+    ImGui::SetNextWindowPos(ImVec2(sceneGraphWidth + panelWidth + 10, 30), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
+    ImGui::Begin("Option de dessin");
+    bool propertiesChanged = false;
+
+    switch (selectedTool)
+    {
+    case AppGui::SELECT: ImGui::Text("Selection");
+
+    case AppGui::BOX:
+        ImGui::Text("Option de box");
+
+        if (ImGui::Checkbox("Remplir", &isFilled))
+        {
+            propertiesChanged = true;
+        }
+
+        if (isFilled && ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+        {
+            propertiesChanged = true;
+        }
+
+        if (ImGui::SliderFloat("Epaisseur du contour", &outlineWidth, 1.0f, 10.0f))
+        {
+            propertiesChanged = true;
+        }
+
+        if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
+        {
+            propertiesChanged = true;
+        }
+        break;
+
+    case AppGui::ELLIPSOID:
+        ImGui::Text("Option de ellipsoid");
+
+        if (ImGui::Checkbox("Remplir", &isFilled))
+        {
+            propertiesChanged = true;
+        }
+
+        if (isFilled && ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+        {
+            propertiesChanged = true;
+        }
+
+        if (ImGui::SliderFloat("Epaisseur du contour", &outlineWidth, 1.0f, 10.0f))
+        {
+            propertiesChanged = true;
+        }
+
+        if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
+        {
+            propertiesChanged = true;
+        }
+        break;
+
+    case AppGui::BACKGROUND:
+        ImGui::Text("Option de fond");
+
+        if (ImGui::ColorEdit3("Couleur de fond", (float *) &backgroundColor))
+        {
+            controller->onBackgroundColorChanged(
+                ofColor(backgroundColor[0] * 255, backgroundColor[1] * 255, backgroundColor[2] * 255));
+        }
+        break;
+
+    default: break;
+    }
+
+    if (propertiesChanged)
+    {
+        PrimitiveParams params;
+        params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+        params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+        params.outlineWidth = outlineWidth;
+        params.isFilled = isFilled;
+
+        controller->onPrimitivePropertiesChanged(params);
+    }
+
+    ImGui::End();
+}
+
 // Sert a dessiner le graphe de scene
 void AppGui::drawSceneGraph()
 {
@@ -374,36 +499,6 @@ void AppGui::drawProprietiesPanel()
         ImGui::Separator();
         auto &primitive = node->getPrimitive();
 
-#if __cplusplus > 201703L
-        if constexpr (IsPoint2D<decltype(primitive)>)
-        {
-            drawPointProperties(std::dynamic_pointer_cast<Point2D>(primitive));
-        }
-        else if constexpr (IsLine2D<decltype(primitive)>)
-        {
-            drawLineProperties(std::dynamic_pointer_cast<Line2D>(primitive));
-        }
-        else if constexpr (IsRectangle<decltype(primitive)>)
-        {
-            drawRectangleProperties(std::dynamic_pointer_cast<Rectangle>(primitive));
-        }
-        else if constexpr (IsEllipse<decltype(primitive)>)
-        {
-            drawEllipseProperties(std::dynamic_pointer_cast<Ellipse>(primitive));
-        }
-        else if constexpr (IsPolygon<decltype(primitive)>)
-        {
-            drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
-        }
-        else if constexpr (IsCube<decltype(primitive)>)
-        {
-            drawTransformProperties3D(primitive);
-        }
-        else if constexpr (IsEllipsoid<decltype(primitive)>)
-        {
-            drawTransformProperties3D(primitive);
-        }
-#else
         if (dynamic_cast<Point2D *>(primitive.get()) != nullptr)
         {
             drawPointProperties(std::dynamic_pointer_cast<Point2D>(primitive));
@@ -424,15 +519,14 @@ void AppGui::drawProprietiesPanel()
         {
             drawPolygonProperties(std::dynamic_pointer_cast<plugin::primitive::Polygon>(primitive));
         }
-        else if (dynamic_cast<plugin::primitive::Cube *>(primitive.get()) != nullptr)
+        else if (dynamic_cast<plugin::primitive::Box *>(primitive.get()) != nullptr)
         {
-            drawTransformProperties3D(primitive);
+            drawBoxProperties(std::dynamic_pointer_cast<plugin::primitive::Box>(primitive));
         }
         else if (dynamic_cast<plugin::primitive::Ellipsoid *>(primitive.get()) != nullptr)
         {
-            drawTransformProperties3D(primitive);
+            drawEllipsoidProperties(std::dynamic_pointer_cast<plugin::primitive::Ellipsoid>(primitive));
         }
-#endif
 
         // Pour supprimer une primitive.
         if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
@@ -636,6 +730,90 @@ void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Poly
             polygon->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
+}
+
+void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::Ellipsoid> &ellipsoid)
+{
+    drawTransformProperties3D(ellipsoid);
+
+    float width = ellipsoid->param.outlineWidth;
+    float fillColor[3] = {ellipsoid->param.fillColor.r / 255.0f, ellipsoid->param.fillColor.g / 255.0f,
+                          ellipsoid->param.fillColor.b / 255.0f};
+    float outlineColor[3] = {ellipsoid->param.outlineColor.r / 255.0f, ellipsoid->param.outlineColor.g / 255.0f,
+                             ellipsoid->param.outlineColor.b / 255.0f};
+    bool filled = ellipsoid->param.isFilled;
+
+    ImGui::Text("Epaisseur du contour :");
+    if (ImGui::SliderFloat("Epaisseur du contour", &width, 1.0f, 30.0f))
+    {
+        ellipsoid->param.outlineWidth = width;
+    }
+
+    ImGui::Text("Couleur du contour :");
+    if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
+    {
+        ellipsoid->param.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+    }
+
+    ImGui::Text("Remplir :");
+    if (ImGui::Checkbox("Remplir", &filled))
+    {
+        ellipsoid->param.isFilled = filled;
+    }
+
+    if (filled)
+    {
+        ImGui::Text("Couleur de remplissage :");
+        if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+        {
+            ellipsoid->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+        }
+    }
+
+    ImGui::Text("Taille :");
+    if (ImGui::DragFloat3("Taille", &ellipsoid->getRadius().x, 0.1f));
+}
+
+void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box)
+{
+    drawTransformProperties3D(box);
+
+    float width = box->param.outlineWidth;
+    float fillColor[3] = {box->param.fillColor.r / 255.0f, box->param.fillColor.g / 255.0f,
+                          box->param.fillColor.b / 255.0f};
+    float outlineColor[3] = {box->param.outlineColor.r / 255.0f, box->param.outlineColor.g / 255.0f,
+                             box->param.outlineColor.b / 255.0f};
+    bool filled = box->param.isFilled;
+
+    ImGui::Text("Epaisseur du contour :");
+    if (ImGui::SliderFloat("Epaisseur du contour", &width, 1.0f, 30.0f))
+    {
+        box->param.outlineWidth = width;
+    }
+
+    ImGui::Text("Couleur du contour :");
+    if (ImGui::ColorEdit3("Couleur du contour", &outlineColor[0]))
+    {
+        box->param.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+    }
+
+    ImGui::Text("Remplir :");
+    if (ImGui::Checkbox("Remplir", &filled))
+    {
+        box->param.isFilled = filled;
+    }
+
+    if (filled)
+    {
+        ImGui::Text("Couleur de remplissage :");
+        if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+        {
+            box->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+        }
+    }
+
+    ImGui::Text("Taille :");
+    if (ImGui::DragFloat3("Taille", &box->getSize().x, 0.1f));
 }
 
 void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive)

@@ -5,13 +5,15 @@
 namespace plugin::primitive {
 
 struct PrimitiveParams {
-    glm::vec3 position;
+    glm::vec3 position = glm::vec3(0.0f);
     glm::vec3 rotation = glm::vec3(0.0f);
     glm::vec3 scale = glm::vec3(1.0f);
     float outlineWidth;
     bool isFilled;
     ofColor fillColor;
     ofColor outlineColor;
+
+    PrimitiveParams() : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black) {}
 };
 
 class Primitive {
