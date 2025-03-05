@@ -11,5 +11,4 @@ public:
     void update();
 
 private:
-
 };
