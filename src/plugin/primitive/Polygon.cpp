@@ -12,14 +12,14 @@ void Polygon::draw()
     ofRotateYDeg(param.rotation.y);
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
-    
+
     if (param.isFilled)
     {
         drawFill();
     }
 
     drawOutline();
-    
+
     ofPopMatrix();
 }
 
