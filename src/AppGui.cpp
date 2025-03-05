@@ -14,7 +14,8 @@ void AppGui::draw()
 {
     gui.begin();
     drawMenuBar();
-    if (!controller->is3d) {
+    if (!controller->is3d)
+    {
         drawToolsPanel();
         drawDynamicPanel();
         drawProprietiesPanel();
@@ -46,18 +47,17 @@ void AppGui::drawMenuBar()
             }
             ImGui::EndMenu();
         }
-        
+
         if (ImGui::BeginMenu("Vues"))
         {
             string view = controller->is3d ? "Aller 2D" : "Aller 3D";
-            
+
             if (ImGui::MenuItem(view.c_str()))
             {
                 controller->toggleCanvas();
             }
             ImGui::EndMenu();
         }
-        
 
         if (ImGui::BeginMenu("Histogram"))
         {

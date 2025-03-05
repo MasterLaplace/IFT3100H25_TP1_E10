@@ -20,7 +20,7 @@ void DrawHistogramState::exit() {}
 
 void DrawHistogramState::mousePressed(int x, int y, int button) {}
 
-void DrawHistogramState::mouseReleased(Canvas* canvas) {}
+void DrawHistogramState::mouseReleased(Canvas *canvas) {}
 
 void DrawHistogramState::setColor(int color)
 {

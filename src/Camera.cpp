@@ -14,7 +14,7 @@ Camera::Camera()
 void Camera::toggleProjection()
 {
     isOrthographic = !isOrthographic;
-    
+
     if (isOrthographic)
     {
         enableOrtho();
@@ -25,21 +25,26 @@ void Camera::toggleProjection()
     }
 }
 
-void Camera::update() {
+void Camera::update()
+{
     float speed = 1.0;
     glm::vec3 movement(0.0);
 
-    if (ofGetKeyPressed(OF_KEY_UP)) {
-        movement += getLookAtDir() * speed;  // Avancer
+    if (ofGetKeyPressed(OF_KEY_UP))
+    {
+        movement += getLookAtDir() * speed; // Avancer
     }
-    if (ofGetKeyPressed(OF_KEY_DOWN)) {
-        movement -= getLookAtDir() * speed;  // Reculer
+    if (ofGetKeyPressed(OF_KEY_DOWN))
+    {
+        movement -= getLookAtDir() * speed; // Reculer
     }
-    if (ofGetKeyPressed(OF_KEY_LEFT)) {
-        movement -= getSideDir() * speed;  // Gauche
+    if (ofGetKeyPressed(OF_KEY_LEFT))
+    {
+        movement -= getSideDir() * speed; // Gauche
     }
-    if (ofGetKeyPressed(OF_KEY_RIGHT)) {
-        movement += getSideDir() * speed;  // Droite
+    if (ofGetKeyPressed(OF_KEY_RIGHT))
+    {
+        movement += getSideDir() * speed; // Droite
     }
 
     move(movement);

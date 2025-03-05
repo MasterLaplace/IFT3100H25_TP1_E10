@@ -8,7 +8,7 @@ void DrawLineState::enter() {}
 
 void DrawLineState::mousePressed(int x, int y, int button) {}
 
-void DrawLineState::mouseReleased(Canvas* canvas)
+void DrawLineState::mouseReleased(Canvas *canvas)
 {
     NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 

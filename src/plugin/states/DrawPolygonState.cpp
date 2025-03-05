@@ -8,7 +8,7 @@ void DrawPolygonState::enter() {}
 
 void DrawPolygonState::mousePressed(int x, int y, int button) {}
 
-void DrawPolygonState::mouseReleased(Canvas* canvas)
+void DrawPolygonState::mouseReleased(Canvas *canvas)
 {
     if (points.size() < 3)
     {

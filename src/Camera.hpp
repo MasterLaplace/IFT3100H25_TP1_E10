@@ -8,7 +8,7 @@ public:
 
     void toggleProjection();
     void update();
-    
+
 private:
     bool isOrthographic = false;
 };

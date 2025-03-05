@@ -12,7 +12,7 @@ void SelectionState::exit() {}
 
 void SelectionState::mousePressed(int x, int y, int button) {}
 
-void SelectionState::mouseReleased(Canvas* canvas)
+void SelectionState::mouseReleased(Canvas *canvas)
 {
     selectedPrimitiveId = findSelectedNode(glm::vec3(mousePosition.x, mousePosition.y, 0), canvas->nodes);
 }

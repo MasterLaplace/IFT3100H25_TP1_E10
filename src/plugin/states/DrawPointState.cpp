@@ -10,7 +10,7 @@ void DrawPointState::update() {}
 
 void DrawPointState::mousePressed(int x, int y, int button) {}
 
-void DrawPointState::mouseReleased(Canvas* canvas)
+void DrawPointState::mouseReleased(Canvas *canvas)
 {
     NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 

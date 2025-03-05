@@ -26,6 +26,6 @@ public:
 
 private:
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
-    
+
     bool is3d = false;
 };

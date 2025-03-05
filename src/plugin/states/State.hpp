@@ -20,7 +20,7 @@ public:
     virtual void enter() = 0;
     virtual void update() = 0;
     virtual void mousePressed(int x, int y, int button) = 0;
-    virtual void mouseReleased(Canvas* canvas) = 0;
+    virtual void mouseReleased(Canvas *canvas) = 0;
     virtual void draw() = 0;
     virtual void exit() = 0;
 };

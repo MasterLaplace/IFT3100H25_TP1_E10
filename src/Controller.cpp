@@ -4,7 +4,7 @@ void Controller::setup()
 {
     canvas2d = new Canvas();
     canvas3d = new Canvas();
-    
+
     // Test pour voir un cube
     PrimitiveParams param;
     param.position = glm::vec3(0, 0, 0);
@@ -12,11 +12,11 @@ void Controller::setup()
     param.fillColor = ofColor(100, 100, 0);
     param.outlineColor = ofColor(0, 0, 0);
     param.isFilled = true;
-    
+
     auto cube = std::make_shared<plugin::primitive::Cube>(param, 10.0f);
     auto node = new NodePrimitive(cube, "Cube");
     canvas3d->nodes.push_back(node);
-    
+
     // On initialise l'�tat du Controlleur pour dessiner des points.
     // On pourrait changer l'�tat initial au besoin.
     stateMachine.changeState(new DrawPointState());
@@ -37,12 +37,14 @@ void Controller::update()
 
 void Controller::draw()
 {
-    if (is3d) {
+    if (is3d)
+    {
         camera.begin();
         canvas3d->draw();
         camera.end();
     }
-    else {
+    else
+    {
         canvas2d->draw();
         // On dessine ensuite l'image import�e.
         importer.draw();
@@ -101,11 +103,7 @@ void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePres
 
 void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(canvas2d); }
 
-void Controller::toggleCanvas()
-{
-    is3d = !is3d;
-}
-        
+void Controller::toggleCanvas() { is3d = !is3d; }
 
 void Controller::importImage() { importer.importImage(); }
 

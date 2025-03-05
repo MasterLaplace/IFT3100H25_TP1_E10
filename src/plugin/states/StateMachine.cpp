@@ -51,7 +51,7 @@ void StateMachine::mousePressed(int x, int y, int button)
     currentState->mousePressed(x, y, button);
 }
 
-void StateMachine::mouseReleased(Canvas* canvas)
+void StateMachine::mouseReleased(Canvas *canvas)
 {
     isMousePressed = false;
     currentState->mouseReleased(canvas);

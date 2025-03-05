@@ -16,7 +16,7 @@ public:
     void draw() override;
     void exit() override;
     void mousePressed(int x, int y, int button) override;
-    void mouseReleased(Canvas* canvas) override;
+    void mouseReleased(Canvas *canvas) override;
 
     void setColor(int color);
 

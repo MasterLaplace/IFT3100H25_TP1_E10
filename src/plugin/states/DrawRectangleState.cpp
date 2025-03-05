@@ -8,7 +8,7 @@ void DrawRectangleState::enter() {}
 
 void DrawRectangleState::mousePressed(int x, int y, int button) {}
 
-void DrawRectangleState::mouseReleased(Canvas* canvas)
+void DrawRectangleState::mouseReleased(Canvas *canvas)
 {
     // On calcule la largeur et la hauteur du rectangle.
     float width = abs(mousePressedPosition.x - mousePosition.x);
