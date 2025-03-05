@@ -4,7 +4,7 @@ Camera::Camera()
 {
     setPosition(glm::vec3(0.0f, 0.0f, 50.0f));
     lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
-    setFov(60.0f);
+    setFov(90.0f);
     setAspectRatio(ofGetWidth() / ofGetHeight());
     setNearClip(0.1f);
     setFarClip(10000.0f);
@@ -17,6 +17,7 @@ void Camera::toggleProjection()
 
     if (isOrthographic)
     {
+        setScale(0.5f);
         enableOrtho();
     }
     else

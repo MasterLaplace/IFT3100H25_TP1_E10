@@ -50,6 +50,9 @@ public:
 
     void onPrimitiveSelected(uint32_t id);
     void onEndPositionChanged(uint32_t id, glm::vec2 newPos);
+    
+    void toggleCameraProjection();
+    bool isCameraOrthographic();
 
     [[nodiscard]] std::vector<uint32_t> getPrimitiveId();
     [[nodiscard]] const std::vector<NodePrimitive *> &getCanvasNodes();

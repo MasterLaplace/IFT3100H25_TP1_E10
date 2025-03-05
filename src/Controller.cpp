@@ -216,6 +216,10 @@ void Controller::drawHistogram(int color)
     }
 }
 
+void Controller::toggleCameraProjection() { camera.toggleProjection(); }
+
+bool Controller::isCameraOrthographic() { return camera.isOrthographic; }
+
 // void Controller::load3DModel(const std::string& filePath)
 // {
 //     ObjModels objmodel(filePath);

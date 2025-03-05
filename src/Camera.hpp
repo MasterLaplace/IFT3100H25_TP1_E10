@@ -4,11 +4,12 @@
 
 class Camera : public ofCamera {
 public:
+    bool isOrthographic = false;
     Camera();
 
     void toggleProjection();
     void update();
 
 private:
-    bool isOrthographic = false;
+
 };

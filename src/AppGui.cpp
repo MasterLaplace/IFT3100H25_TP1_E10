@@ -56,6 +56,15 @@ void AppGui::drawMenuBar()
                 controller->onToolSelected(tool::SELECT);
                 controller->toggleCanvas();
             }
+            
+            if (controller->is3d)
+            {
+                string isOrthographic = controller->isCameraOrthographic() ? "Vers Perspective" : "Vers Orthographique";
+                if (ImGui::MenuItem(isOrthographic.c_str()))
+                {
+                    controller->toggleCameraProjection();
+                }
+            }
             ImGui::EndMenu();
         }
 
