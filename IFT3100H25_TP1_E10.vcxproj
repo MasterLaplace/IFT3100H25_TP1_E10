@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;src\plugin\primitive;src\plugin\states;src\plugin\transformation\history;..\..\..\addons\ofxAssimpModelLoader\libs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\emscripten;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Debug;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Release;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\license;..\..\..\addons\ofxAssimpModelLoader\src;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\geometry;src\plugin\image;src\plugin\primitive;src\plugin\shape;src\plugin\states;src\plugin\transformation\history;..\..\..\addons\ofxAssimpModelLoader\libs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\emscripten;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Debug;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Release;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\license;..\..\..\addons\ofxAssimpModelLoader\src;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\image;src\plugin\primitive;src\plugin\states;src\plugin\transformation\history;..\..\..\addons\ofxAssimpModelLoader\libs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\emscripten;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Debug;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Release;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\license;..\..\..\addons\ofxAssimpModelLoader\src;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\app;src\plugin\geometry;src\plugin\image;src\plugin\primitive;src\plugin\shape;src\plugin\states;src\plugin\transformation\history;..\..\..\addons\ofxAssimpModelLoader\libs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\emscripten;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Debug;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs\x64\Release;..\..\..\addons\ofxAssimpModelLoader\libs\assimp\license;..\..\..\addons\ofxAssimpModelLoader\src;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxImGui\libs;..\..\..\addons\ofxImGui\libs\imgui;..\..\..\addons\ofxImGui\libs\imgui\src;..\..\..\addons\ofxImGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -104,21 +104,29 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Importation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\DrawingTools.cpp" />
+    <ClCompile Include="src\HistogramUI.cpp" />
+    <ClCompile Include="src\Importation.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
+    <ClCompile Include="src\plugin\image\Exporting.cpp" />
     <ClCompile Include="src\plugin\image\Histogram.cpp" />
+    <ClCompile Include="src\plugin\image\Importing.cpp" />
     <ClCompile Include="src\plugin\primitive\Ellipse.cpp" />
     <ClCompile Include="src\plugin\primitive\Line2D.cpp" />
     <ClCompile Include="src\plugin\primitive\Point2D.cpp" />
-    <ClCompile Include="src\plugin\primitive\Primitive.cpp" />
+    <ClCompile Include="src\plugin\primitive\Polygon.cpp" />
     <ClCompile Include="src\plugin\primitive\Rectangle.cpp" />
+    <ClCompile Include="src\plugin\states\DrawEllipseState.cpp" />
+    <ClCompile Include="src\plugin\states\DrawHistogramState.cpp" />
     <ClCompile Include="src\plugin\states\DrawLineState.cpp" />
     <ClCompile Include="src\plugin\states\DrawPointState.cpp" />
+    <ClCompile Include="src\plugin\states\DrawPolygonState.cpp" />
+    <ClCompile Include="src\plugin\states\DrawRectangleState.cpp" />
+    <ClCompile Include="src\plugin\states\SelectionState.cpp" />
     <ClCompile Include="src\plugin\states\StateMachine.cpp" />
     <ClCompile Include="src\plugin\transformation\history\Invoker.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp" />
@@ -151,13 +159,14 @@
   <ItemGroup>
     <ClInclude Include="src\Canvas.hpp" />
     <ClInclude Include="src\Controller.hpp" />
-    <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
+    <ClInclude Include="src\HistogramUI.hpp" />
     <ClInclude Include="src\Importation.hpp" />
     <ClInclude Include="src\Node.hpp" />
     <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />
+    <ClInclude Include="src\plugin\geometry\ObjModels.hpp" />
     <ClInclude Include="src\plugin\image\ColourSpaces.hpp" />
     <ClInclude Include="src\plugin\image\ColourSpaces.inl" />
     <ClInclude Include="src\plugin\image\Exporting.hpp" />
@@ -168,12 +177,19 @@
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />
     <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
     <ClInclude Include="src\plugin\primitive\Point2D.hpp" />
+    <ClInclude Include="src\plugin\primitive\Polygon.hpp" />
     <ClInclude Include="src\plugin\primitive\Primitive.hpp" />
-    <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp"/>
+    <ClInclude Include="src\plugin\primitive\PrimitiveConcepts.hpp" />
     <ClInclude Include="src\plugin\primitive\Rectangle.hpp" />
     <ClInclude Include="src\plugin\primitive\primitives.hpp" />
+    <ClInclude Include="src\plugin\shape\Shape.hpp" />
+    <ClInclude Include="src\plugin\states\DrawEllipseState.hpp" />
+    <ClInclude Include="src\plugin\states\DrawHistogramState.hpp" />
     <ClInclude Include="src\plugin\states\DrawLineState.hpp" />
     <ClInclude Include="src\plugin\states\DrawPointState.hpp" />
+    <ClInclude Include="src\plugin\states\DrawPolygonState.hpp" />
+    <ClInclude Include="src\plugin\states\DrawRectangleState.hpp" />
+    <ClInclude Include="src\plugin\states\SelectionState.hpp" />
     <ClInclude Include="src\plugin\states\State.hpp" />
     <ClInclude Include="src\plugin\states\StateMachine.hpp" />
     <ClInclude Include="src\plugin\states\states.hpp" />

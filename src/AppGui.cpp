@@ -1,7 +1,7 @@
-#include "DrawingTools.hpp"
+#include "AppGui.hpp"
 #include "Controller.hpp"
 
-void DrawingTools::setup(Controller *_controller)
+void AppGui::setup(Controller *_controller)
 {
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
@@ -10,19 +10,22 @@ void DrawingTools::setup(Controller *_controller)
     // controller->onColorChanged(pointColor);
 }
 
-void DrawingTools::draw()
+void AppGui::draw()
 {
     gui.begin();
     drawMenuBar();
-    drawToolsPanel();
-    drawDynamicPanel();
+    if (!controller->is3d)
+    {
+        drawToolsPanel();
+        drawDynamicPanel();
+        drawProprietiesPanel();
+    }
     drawSceneGraph();
-    drawProprietiesPanel();
     gui.end();
 }
 
 // Sert a dessiner le menu de la barre de menu
-void DrawingTools::drawMenuBar()
+void AppGui::drawMenuBar()
 {
     if (ImGui::BeginMainMenuBar())
     {
@@ -41,6 +44,17 @@ void DrawingTools::drawMenuBar()
             if (ImGui::MenuItem("Quitter"))
             {
                 ofExit();
+            }
+            ImGui::EndMenu();
+        }
+
+        if (ImGui::BeginMenu("Vues"))
+        {
+            string view = controller->is3d ? "Aller 2D" : "Aller 3D";
+
+            if (ImGui::MenuItem(view.c_str()))
+            {
+                controller->toggleCanvas();
             }
             ImGui::EndMenu();
         }
@@ -69,7 +83,7 @@ void DrawingTools::drawMenuBar()
 }
 
 // Sert a dessiner le panel des outils de dessin
-void DrawingTools::drawToolsPanel()
+void AppGui::drawToolsPanel()
 {
     float sceneGraphWidth = ofGetWidth() / 6 + 20;
     float propertiesPanelWidth = ofGetWidth() / 6 + 20;
@@ -124,7 +138,7 @@ void DrawingTools::drawToolsPanel()
 }
 
 // Sert a dessiner le panel dynamique
-void DrawingTools::drawDynamicPanel()
+void AppGui::drawDynamicPanel()
 {
     float sceneGraphWidth = ofGetWidth() / 6 + 20;
     float propertiesPanelWidth = ofGetWidth() / 6 + 20;
@@ -138,9 +152,9 @@ void DrawingTools::drawDynamicPanel()
 
     switch (selectedTool)
     {
-    case DrawingTools::SELECT: ImGui::Text("Selection");
+    case AppGui::SELECT: ImGui::Text("Selection");
 
-    case DrawingTools::POINT:
+    case AppGui::POINT:
         ImGui::Text("Option pour le point");
 
         // Si on change la taille du point.
@@ -156,7 +170,7 @@ void DrawingTools::drawDynamicPanel()
         }
         break;
 
-    case DrawingTools::LINE:
+    case AppGui::LINE:
         ImGui::Text("Option de ligne");
 
         // Si on change la taille de la ligne.
@@ -172,7 +186,7 @@ void DrawingTools::drawDynamicPanel()
         }
         break;
 
-    case DrawingTools::RECTANGLE:
+    case AppGui::RECTANGLE:
         ImGui::Text("Option de rectangle");
 
         if (ImGui::Checkbox("Remplir", &isFilled))
@@ -199,7 +213,7 @@ void DrawingTools::drawDynamicPanel()
         }
         break;
 
-    case DrawingTools::ELLIPSE:
+    case AppGui::ELLIPSE:
         ImGui::Text("Option de ellipse");
 
         if (ImGui::Checkbox("Remplir", &isFilled))
@@ -225,7 +239,7 @@ void DrawingTools::drawDynamicPanel()
             propertiesChanged = true;
         }
         break;
-    case DrawingTools::POLYGON:
+    case AppGui::POLYGON:
         ImGui::Text("Option de polygone");
 
         if (ImGui::Checkbox("Remplir", &isFilled))
@@ -279,7 +293,7 @@ void DrawingTools::drawDynamicPanel()
 }
 
 // Sert a dessiner le graphe de scene
-void DrawingTools::drawSceneGraph()
+void AppGui::drawSceneGraph()
 {
     float panelWidth = ofGetWidth() / 6;
     float panelHeight = ofGetHeight() - 40;
@@ -306,7 +320,7 @@ void DrawingTools::drawSceneGraph()
 }
 
 // Sert a afficher les noeuds du graphe de scene
-void DrawingTools::displayNode(NodePrimitive *node, uint32_t indentLevel)
+void AppGui::displayNode(NodePrimitive *node, uint32_t indentLevel)
 {
     ImGui::Indent(indentLevel * 10.0f);
     std::string nodeLabel = node->getName();
@@ -324,7 +338,7 @@ void DrawingTools::displayNode(NodePrimitive *node, uint32_t indentLevel)
 }
 
 // Sert a dessiner le panel des proprietes
-void DrawingTools::drawProprietiesPanel()
+void AppGui::drawProprietiesPanel()
 {
     // Les settings de la fenetre
     float panelWidth = ofGetWidth() / 6;
@@ -404,7 +418,7 @@ void DrawingTools::drawProprietiesPanel()
     ImGui::End();
 }
 
-void DrawingTools::onToolSelected(tool tool)
+void AppGui::onToolSelected(tool tool)
 {
     selectedTool = tool;
     controller->onToolSelected(tool);
@@ -418,7 +432,7 @@ void DrawingTools::onToolSelected(tool tool)
     controller->onPrimitivePropertiesChanged(params);
 }
 
-void DrawingTools::drawPointProperties(const std::shared_ptr<Point2D> &point)
+void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
 {
     float size = point->size;
     float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f,
@@ -437,7 +451,7 @@ void DrawingTools::drawPointProperties(const std::shared_ptr<Point2D> &point)
     }
 }
 
-void DrawingTools::drawLineProperties(const std::shared_ptr<Line2D> &line)
+void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
     float width = line->param.outlineWidth;
     float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f,
@@ -468,7 +482,7 @@ void DrawingTools::drawLineProperties(const std::shared_ptr<Line2D> &line)
     }
 }
 
-void DrawingTools::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle)
+void AppGui::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle)
 {
     float width = rectangle->param.outlineWidth;
     float fillColor[3] = {rectangle->param.fillColor.r / 255.0f, rectangle->param.fillColor.g / 255.0f,
@@ -505,7 +519,7 @@ void DrawingTools::drawRectangleProperties(const std::shared_ptr<plugin::primiti
     }
 }
 
-void DrawingTools::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse)
+void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse)
 {
     float width = ellipse->param.outlineWidth;
     float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f,
@@ -542,7 +556,7 @@ void DrawingTools::drawEllipseProperties(const std::shared_ptr<plugin::primitive
     }
 }
 
-void DrawingTools::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon)
+void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon)
 {
     float width = polygon->param.outlineWidth;
     float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f,

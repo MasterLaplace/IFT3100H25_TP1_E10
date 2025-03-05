@@ -19,7 +19,7 @@ public:
     void changeState(State *newState);
     void update();
     void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
+    void mouseReleased(Canvas *canvas);
     void draw();
 
     void onOutlineWidthChanged(float newWidth);

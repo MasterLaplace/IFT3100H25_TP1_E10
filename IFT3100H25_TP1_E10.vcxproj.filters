@@ -13,6 +13,12 @@
     <ClCompile Include="src\DrawingTools.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\HistogramUI.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Importation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\app\Application.cpp">
       <Filter>src\app</Filter>
     </ClCompile>
@@ -22,7 +28,13 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\plugin\image\Exporting.cpp">
+      <Filter>src\plugin\image</Filter>
+    </ClCompile>
     <ClCompile Include="src\plugin\image\Histogram.cpp">
+      <Filter>src\plugin\image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\image\Importing.cpp">
       <Filter>src\plugin\image</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\primitive\Ellipse.cpp">
@@ -34,16 +46,31 @@
     <ClCompile Include="src\plugin\primitive\Point2D.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
-    <ClCompile Include="src\plugin\primitive\Primitive.cpp">
+    <ClCompile Include="src\plugin\primitive\Polygon.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\primitive\Rectangle.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawEllipseState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawHistogramState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
     <ClCompile Include="src\plugin\states\DrawLineState.cpp">
       <Filter>src\plugin\states</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\states\DrawPointState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawPolygonState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\DrawRectangleState.cpp">
+      <Filter>src\plugin\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\states\SelectionState.cpp">
       <Filter>src\plugin\states</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\states\StateMachine.cpp">
@@ -130,85 +157,88 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Importation.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\app">
-      <UniqueIdentifier>{1697268D--B41-E-4A-0D-9-F25-92338199C641}</UniqueIdentifier>
+      <UniqueIdentifier>{5771D889--EA3-A-47-9A-9-C24-187A4F1CEB72}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin">
-      <UniqueIdentifier>{5A2ACC00--691-6-4D-D6-B-E39-A7AE89F7FEA0}</UniqueIdentifier>
+      <UniqueIdentifier>{DE61603F--998-E-45-D5-8-BF2-1A7F2FD23421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin\geometry">
+      <UniqueIdentifier>{A6E26783--26C-E-4C-2D-8-701-0FC012240C3B}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\image">
-      <UniqueIdentifier>{B4657111--B6A-5-44-4B-B-610-7E2B46702B47}</UniqueIdentifier>
+      <UniqueIdentifier>{ED192924--21B-7-42-D9-B-2D8-B9FD7AA5847E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\primitive">
-      <UniqueIdentifier>{997E19B0--9B6-4-4B-DA-9-570-7C6A3B79AAA7}</UniqueIdentifier>
+      <UniqueIdentifier>{D353AC4F--C37-8-40-8E-9-A24-48DAA7E42FC8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\plugin\shape">
+      <UniqueIdentifier>{F8CE41BA--DA6-6-4E-B4-A-5E0-DFAAA28995B7}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\states">
-      <UniqueIdentifier>{285B721E--203-B-44-33-9-AAC-3E153DF90E50}</UniqueIdentifier>
+      <UniqueIdentifier>{7F520EE8--C04-B-43-D8-B-F02-F5AD40F00A35}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation">
-      <UniqueIdentifier>{DE38FCD0--1C8-C-41-A3-A-BDF-7821078FC359}</UniqueIdentifier>
+      <UniqueIdentifier>{0E3179A4--DCB-A-4F-86-9-74D-97D217C13C82}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation\history">
-      <UniqueIdentifier>{342CBB60--BE1-E-42-FC-B-433-4FA471746B92}</UniqueIdentifier>
+      <UniqueIdentifier>{70C67208--2C2-A-46-AF-8-9B4-5D359A2486CD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{C2C8E2C0--BF6-A-41-02-9-5E6-26699F2E945F}</UniqueIdentifier>
+      <UniqueIdentifier>{E5926EEA--052-7-41-E4-8-D6B-F5DA488121C3}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader">
-      <UniqueIdentifier>{F8516DA5--3DE-B-48-09-A-B84-8C3929AF84BB}</UniqueIdentifier>
+      <UniqueIdentifier>{21B2A48F--C03-C-41-2D-A-FA0-0712127DFE78}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\src">
-      <UniqueIdentifier>{14F57BA3--664-C-4C-2F-9-5E2-8C77195C1985}</UniqueIdentifier>
+      <UniqueIdentifier>{CC4EDEEC--788-C-44-9A-9-9A0-7EBE15FB4675}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs">
-      <UniqueIdentifier>{20748D77--47D-7-49-79-9-A0D-5AD4FCBF124D}</UniqueIdentifier>
+      <UniqueIdentifier>{E4838C15--D21-3-4B-BD-9-30B-9B472C65844C}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp">
-      <UniqueIdentifier>{1C998B5F--BD6-9-42-A0-A-FB9-73AFCF509E3B}</UniqueIdentifier>
+      <UniqueIdentifier>{D1A2BA5D--FE6-2-47-0D-8-92D-9F253C2657AA}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include">
-      <UniqueIdentifier>{225F4E72--5BF-8-4F-98-8-401-E666E180DD8E}</UniqueIdentifier>
+      <UniqueIdentifier>{310D141C--70D-4-44-F1-A-486-6EA99D4BB5C1}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp">
-      <UniqueIdentifier>{E0B72BB9--E33-1-45-9A-B-872-BC0F9B70979D}</UniqueIdentifier>
+      <UniqueIdentifier>{90C5E17A--676-F-4B-02-B-11A-52380A49ADF3}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler">
-      <UniqueIdentifier>{803CA0D5--F1A-4-4F-85-A-D3D-95113A3E001A}</UniqueIdentifier>
+      <UniqueIdentifier>{571F71F4--5C9-A-45-78-9-BB8-399CA2EBB47A}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port">
-      <UniqueIdentifier>{2542EDF7--122-4-40-F9-B-286-E8DE64EE33A1}</UniqueIdentifier>
+      <UniqueIdentifier>{224F18DB--49A-C-4C-A5-B-A0E-015BC653E654}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI">
-      <UniqueIdentifier>{DC1CAAD3--082-E-48-40-8-D7D-08A5E5F18C88}</UniqueIdentifier>
+      <UniqueIdentifier>{C50DA13B--B2E-4-48-64-A-7C6-B765EAF15BA1}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui">
-      <UniqueIdentifier>{5D684B5B--00C-A-41-6D-B-592-F3E538743FE0}</UniqueIdentifier>
+      <UniqueIdentifier>{C7B2B5D4--A81-E-42-6F-9-30A-F5F077853625}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui\src">
-      <UniqueIdentifier>{2EBD494C--883-C-4B-DF-9-2B5-F71E66613246}</UniqueIdentifier>
+      <UniqueIdentifier>{A08DC627--2F4-5-49-A4-9-7D5-46D7F28B4E3F}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui">
-      <UniqueIdentifier>{E0AEA745--AC4-0-45-92-8-25A-EB31808E21B1}</UniqueIdentifier>
+      <UniqueIdentifier>{C6D0A933--890-C-41-14-9-B7C-81F419EF3490}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\src">
-      <UniqueIdentifier>{301F68AF--971-D-4F-4B-9-E19-A6CD6DD9E383}</UniqueIdentifier>
+      <UniqueIdentifier>{F2BFCF1E--DDD-B-43-5A-9-5C2-84BAD8063D7A}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs">
-      <UniqueIdentifier>{33ADB63F--04B-7-4F-2C-A-0BF-4E4904D07549}</UniqueIdentifier>
+      <UniqueIdentifier>{B6C2B223--E19-7-48-F9-9-1F9-8D20675DB222}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui">
-      <UniqueIdentifier>{6C899689--879-D-47-30-9-FE9-30A509E37B3F}</UniqueIdentifier>
+      <UniqueIdentifier>{1D0E2F48--45A-4-48-81-B-76C-8C1F345C7264}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui\src">
-      <UniqueIdentifier>{B66F52FC--7AB-5-4A-65-9-1AC-FA5FBB63911B}</UniqueIdentifier>
+      <UniqueIdentifier>{3EAF0A37--928-5-43-EE-A-9C0-179EAA093B1C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -218,10 +248,13 @@
     <ClInclude Include="src\Controller.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Controller.hpp">
+    <ClInclude Include="src\DrawingTools.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\DrawingTools.hpp">
+    <ClInclude Include="src\HistogramUI.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Importation.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Node.hpp">
@@ -235,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="src\app\Renderer.hpp">
       <Filter>src\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\geometry\ObjModels.hpp">
+      <Filter>src\plugin\geometry</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\image\ColourSpaces.hpp">
       <Filter>src\plugin\image</Filter>
@@ -266,10 +302,13 @@
     <ClInclude Include="src\plugin\primitive\Point2D.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
+    <ClInclude Include="src\plugin\primitive\Polygon.hpp">
+      <Filter>src\plugin\primitive</Filter>
+    </ClInclude>
     <ClInclude Include="src\plugin\primitive\Primitive.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\primitive\rimitiveConcepts.hpp">
+    <ClInclude Include="src\plugin\primitive\PrimitiveConcepts.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\primitive\Rectangle.hpp">
@@ -278,10 +317,28 @@
     <ClInclude Include="src\plugin\primitive\primitives.hpp">
       <Filter>src\plugin\primitive</Filter>
     </ClInclude>
+    <ClInclude Include="src\plugin\shape\Shape.hpp">
+      <Filter>src\plugin\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawEllipseState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawHistogramState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
     <ClInclude Include="src\plugin\states\DrawLineState.hpp">
       <Filter>src\plugin\states</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\states\DrawPointState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawPolygonState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\DrawRectangleState.hpp">
+      <Filter>src\plugin\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\states\SelectionState.hpp">
       <Filter>src\plugin\states</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\states\State.hpp">
@@ -646,9 +703,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Importation.hpp">
-      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

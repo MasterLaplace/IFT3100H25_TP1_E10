@@ -8,10 +8,8 @@ void DrawEllipseState::enter() {}
 
 void DrawEllipseState::mousePressed(int x, int y, int button) {}
 
-void DrawEllipseState::mouseReleased(int x, int y, int button)
+void DrawEllipseState::mouseReleased(Canvas *canvas)
 {
-    Canvas *canvas = Canvas::getInstance();
-
     // On calcule le rayon de l'ellipse.
     float radiusX = abs(mousePressedPosition.x - mousePosition.x);
     float radiusY = abs(mousePressedPosition.y - mousePosition.y);

@@ -13,7 +13,7 @@ using namespace plugin::primitive;
 
 class Controller;
 
-class DrawingTools {
+class AppGui {
 public:
     enum tool {
         SELECT,
