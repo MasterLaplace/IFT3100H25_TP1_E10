@@ -6,5 +6,6 @@
 #include "Rectangle.hpp"
 
 #include "Cube.hpp"
+#include "Ellipsoid.hpp"
 
 #include "PrimitiveConcepts.hpp"

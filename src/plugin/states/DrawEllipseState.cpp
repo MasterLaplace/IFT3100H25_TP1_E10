@@ -17,18 +17,8 @@ void DrawEllipseState::mouseReleased(Canvas *canvas)
     if (radiusX == 0 || radiusY == 0)
         return;
 
-    int invertX = 1;
-    int invertY = 1;
-
-    if (mousePosition.x < mousePressedPosition.x)
-    {
-        invertX = -1;
-    }
-
-    if (mousePosition.y < mousePressedPosition.y)
-    {
-        invertY = -1;
-    }
+    int invertX = (mousePosition.x < mousePressedPosition.x) ? -1 : 1;
+    int invertY = (mousePosition.y < mousePressedPosition.y) ? -1 : 1;
 
     // On calcule le centre de l'ellipse.
     glm::vec3 center =
@@ -96,18 +86,8 @@ void DrawEllipseState::drawPreview()
 
     // Cette partie du code est un peu étrange
     // C'est pour placer le center de l'ellipse au bon endroit si jamais on dessine l'ellipse à l'envers.
-    int invertX = 1;
-    int invertY = 1;
-
-    if (mousePosition.x < mousePressedPosition.x)
-    {
-        invertX = -1;
-    }
-
-    if (mousePosition.y < mousePressedPosition.y)
-    {
-        invertY = -1;
-    }
+    int invertX = (mousePosition.x < mousePressedPosition.x) ? -1 : 1;
+    int invertY = (mousePosition.y < mousePressedPosition.y) ? -1 : 1;
 
     glm::vec2 center =
         glm::vec2(mousePressedPosition.x + invertX * radiusX / 2, mousePressedPosition.y + invertY * radiusY / 2);

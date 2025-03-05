@@ -17,6 +17,10 @@ void Controller::setup()
     auto node = new NodePrimitive(cube, "Cube");
     canvas3d->nodes.push_back(node);
 
+    auto ellipsoid = std::make_shared<plugin::primitive::Ellipsoid>(param, glm::vec3(10.0f, 10.0f, 10.0f), 50.0f, 50.0f);
+    auto node2 = new NodePrimitive(ellipsoid, "Ellipsoid");
+    canvas3d->nodes.push_back(node2);
+
     // On initialise l'�tat du Controlleur pour dessiner des points.
     // On pourrait changer l'�tat initial au besoin.
     stateMachine.changeState(new DrawPointState());
@@ -101,7 +105,7 @@ void Controller::mouseMoved(glm::vec2 pos)
 
 void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(canvas2d); }
+void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased((is3d) ? canvas3d : canvas2d); }
 
 void Controller::toggleCanvas() { is3d = !is3d; }
 
@@ -139,16 +143,16 @@ void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSele
 std::vector<uint32_t> Controller::getPrimitiveId()
 {
     std::vector<uint32_t> ids;
-    for (auto &node : canvas2d->nodes)
+    for (auto &node : (is3d) ? canvas3d->nodes : canvas2d->nodes)
     {
         collectPrimitiveId(node, ids);
     }
     return ids;
 }
 
-const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return canvas2d->nodes; }
+const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return (is3d) ? canvas3d->nodes : canvas2d->nodes; }
 
-NodePrimitive *Controller::getNodeById(const uint32_t id) { return canvas2d->getChildById(id); }
+NodePrimitive *Controller::getNodeById(const uint32_t id) { return (is3d) ? canvas3d->getChildById(id) : canvas2d->getChildById(id); }
 
 void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids)
 {
@@ -172,6 +176,7 @@ void Controller::onToolSelected(AppGui::tool _tool)
     case AppGui::tool::RECTANGLE: stateMachine.changeState(new DrawRectangleState()); break;
     case AppGui::tool::ELLIPSE: stateMachine.changeState(new DrawEllipseState()); break;
     case AppGui::tool::POLYGON: stateMachine.changeState(new DrawPolygonState()); break;
+    default: break;
     }
 }
 
@@ -189,7 +194,7 @@ void Controller::drawPolygonButtonPressed() { stateMachine.changeState(new DrawP
 
 void Controller::deletePrimitiveButtonPressed(uint32_t id)
 {
-    canvas2d->removeNode(id);
+    (is3d) ? canvas3d->removeNode(id) : canvas2d->removeNode(id);
     stateMachine.onPrimitiveSelected(-1);
 }
 
