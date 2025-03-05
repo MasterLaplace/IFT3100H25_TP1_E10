@@ -17,13 +17,18 @@ void Exporting::exportImage()
 
     string timestamp = ofGetTimestampString("-%y%m%d-%H%M%S-%i");
     std::string filePath = "exported" + timestamp + ".png";
-    if (image.save(filePath))
+    
+    auto result = ofSystemSaveDialog(filePath, "Enregistrer sous...");
+    if (result.bSuccess)
     {
-        std::cout << "Image exported with timestamp: " << timestamp << std::endl;
-    }
-    else
-    {
-        std::cerr << "Failed to save image to " << filePath << std::endl;
+        if (image.save(result.filePath))
+        {
+            std::cout << "Image exported with timestamp: " << timestamp << std::endl;
+        }
+        else
+        {
+            ofSystemAlertDialog("Erreur lors de l'exportation de l'image.");
+        }
     }
 }
 
