@@ -12,11 +12,9 @@ Chaque Node poss�de une Primitive ainsi qu'une liste de pointeurs vers d'autre
 
 class Canvas {
 public:
-    std::vector<NodePrimitive *> nodes;
+    std::vector<NodePrimitive *> nodes = {};
 
     ~Canvas();
-
-    static Canvas *getInstance();
 
     void addNode(NodePrimitive *node);
     void removeNode(const uint32_t id);
@@ -28,4 +26,6 @@ public:
 
 private:
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
+    
+    bool is3d = false;
 };

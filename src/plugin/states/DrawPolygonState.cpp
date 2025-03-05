@@ -8,7 +8,7 @@ void DrawPolygonState::enter() {}
 
 void DrawPolygonState::mousePressed(int x, int y, int button) {}
 
-void DrawPolygonState::mouseReleased(int x, int y, int button)
+void DrawPolygonState::mouseReleased(Canvas* canvas)
 {
     if (points.size() < 3)
     {
@@ -22,8 +22,6 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
         points.push_back(mousePosition);
         return;
     }
-
-    Canvas *canvas = Canvas::getInstance();
 
     glm::vec2 position = points[0];
 
@@ -43,7 +41,7 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
 
     // On cree le noeud.
     auto node = new NodePrimitive(std::make_shared<plugin::primitive::Polygon>(params, points), "Polygon");
-    NodePrimitive *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
+    NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 
     if (!parent)
     {

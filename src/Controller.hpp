@@ -2,11 +2,13 @@
 
 #include "Canvas.hpp"
 #include "Controller.hpp"
-#include "DrawingTools.hpp"
+#include "AppGui.hpp"
 #include "HistogramUI.hpp"
 #include "Importation.hpp"
 #include "plugin/image/image.hpp"
 #include "plugin/states/states.hpp"
+#include "Camera.hpp"
+#include "Node.hpp"
 #include <string>
 #include <vector>
 
@@ -25,12 +27,14 @@ public:
     void mouseMoved(glm::vec2 pos);
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
+    
+    void toggleCanvas();
 
     // Methodes pour parler avec le gui.
     void importImage();
     void exportImage();
 
-    void onToolSelected(DrawingTools::tool tool);
+    void onToolSelected(AppGui::tool tool);
     void selectionButtonPressed();
     void drawPointButtonPressed();
     void drawLineButtonPressed();
@@ -52,12 +56,16 @@ public:
 
     void collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids);
     [[nodiscard]] int getSelectedNodeId();
+    
+    bool is3d = false;
 
 private:
     StateMachine stateMachine;
-    Canvas *canvas;
-    DrawingTools gui;
+    Canvas *canvas2d;
+    Canvas *canvas3d;
+    AppGui gui;
     HistogramUI histogramUI;
     Importation importer;
     Exporting exporter;
+    Camera camera;
 };

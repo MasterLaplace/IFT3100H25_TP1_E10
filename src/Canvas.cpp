@@ -1,12 +1,5 @@
 #include "Canvas.hpp"
 
-// Méthode statique pour obtenir l'instance du Canvas.
-Canvas *Canvas::getInstance()
-{
-    static Canvas instance;
-    return &instance;
-}
-
 // A la destruction du Canvas, on s'assure qu'on d�truit l'arbre de Node.
 Canvas::~Canvas()
 {

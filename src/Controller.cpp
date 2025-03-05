@@ -2,10 +2,21 @@
 
 void Controller::setup()
 {
-    // On configure l'instance du Canvas dans la sc�ne par le singleton
-    // pour qu'on puisse y acc�der de n'importe o�.
-    canvas = Canvas::getInstance();
-
+    canvas2d = new Canvas();
+    canvas3d = new Canvas();
+    
+    // Test pour voir un cube
+    PrimitiveParams param;
+    param.position = glm::vec3(0, 0, 0);
+    param.outlineWidth = 1.0f;
+    param.fillColor = ofColor(100, 100, 0);
+    param.outlineColor = ofColor(0, 0, 0);
+    param.isFilled = true;
+    
+    auto cube = std::make_shared<plugin::primitive::Cube>(param, 10.0f);
+    auto node = new NodePrimitive(cube, "Cube");
+    canvas3d->nodes.push_back(node);
+    
     // On initialise l'�tat du Controlleur pour dessiner des points.
     // On pourrait changer l'�tat initial au besoin.
     stateMachine.changeState(new DrawPointState());
@@ -21,15 +32,21 @@ void Controller::update()
 {
     importer.update();
     stateMachine.update();
+    camera.update();
 }
 
 void Controller::draw()
 {
-    // On dessine le canvas en premier.
-    canvas->draw();
-
-    // On dessine ensuite l'image import�e.
-    importer.draw();
+    if (is3d) {
+        camera.begin();
+        canvas3d->draw();
+        camera.end();
+    }
+    else {
+        canvas2d->draw();
+        // On dessine ensuite l'image import�e.
+        importer.draw();
+    }
 
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
@@ -60,11 +77,11 @@ void Controller::keyReleased(int key)
     {
     case 'p':
         drawPointButtonPressed();
-        gui.selectedTool = DrawingTools::tool::POINT;
+        gui.selectedTool = AppGui::tool::POINT;
         break;
     case 'l':
         drawLineButtonPressed();
-        gui.selectedTool = DrawingTools::tool::LINE;
+        gui.selectedTool = AppGui::tool::LINE;
         break;
     case 'i': importer.importImage(); break;
     case 'e': exporter.exportImage(); break;
@@ -82,7 +99,13 @@ void Controller::mouseMoved(glm::vec2 pos)
 
 void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(x, y, button); }
+void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased(canvas2d); }
+
+void Controller::toggleCanvas()
+{
+    is3d = !is3d;
+}
+        
 
 void Controller::importImage() { importer.importImage(); }
 
@@ -116,16 +139,16 @@ void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSele
 std::vector<uint32_t> Controller::getPrimitiveId()
 {
     std::vector<uint32_t> ids;
-    for (auto &node : canvas->nodes)
+    for (auto &node : canvas2d->nodes)
     {
         collectPrimitiveId(node, ids);
     }
     return ids;
 }
 
-const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return canvas->nodes; }
+const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return canvas2d->nodes; }
 
-NodePrimitive *Controller::getNodeById(const uint32_t id) { return canvas->getChildById(id); }
+NodePrimitive *Controller::getNodeById(const uint32_t id) { return canvas2d->getChildById(id); }
 
 void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids)
 {
@@ -139,16 +162,16 @@ void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &
 
 int Controller::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
 
-void Controller::onToolSelected(DrawingTools::tool _tool)
+void Controller::onToolSelected(AppGui::tool _tool)
 {
     switch (_tool)
     {
-    case DrawingTools::tool::SELECT: stateMachine.changeState(new SelectionState()); break;
-    case DrawingTools::tool::POINT: stateMachine.changeState(new DrawPointState()); break;
-    case DrawingTools::tool::LINE: stateMachine.changeState(new DrawLineState()); break;
-    case DrawingTools::tool::RECTANGLE: stateMachine.changeState(new DrawRectangleState()); break;
-    case DrawingTools::tool::ELLIPSE: stateMachine.changeState(new DrawEllipseState()); break;
-    case DrawingTools::tool::POLYGON: stateMachine.changeState(new DrawPolygonState()); break;
+    case AppGui::tool::SELECT: stateMachine.changeState(new SelectionState()); break;
+    case AppGui::tool::POINT: stateMachine.changeState(new DrawPointState()); break;
+    case AppGui::tool::LINE: stateMachine.changeState(new DrawLineState()); break;
+    case AppGui::tool::RECTANGLE: stateMachine.changeState(new DrawRectangleState()); break;
+    case AppGui::tool::ELLIPSE: stateMachine.changeState(new DrawEllipseState()); break;
+    case AppGui::tool::POLYGON: stateMachine.changeState(new DrawPolygonState()); break;
     }
 }
 
@@ -166,7 +189,7 @@ void Controller::drawPolygonButtonPressed() { stateMachine.changeState(new DrawP
 
 void Controller::deletePrimitiveButtonPressed(uint32_t id)
 {
-    canvas->removeNode(id);
+    canvas2d->removeNode(id);
     stateMachine.onPrimitiveSelected(-1);
 }
 
