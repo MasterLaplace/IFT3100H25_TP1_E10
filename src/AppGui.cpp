@@ -771,7 +771,8 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
     }
 
     ImGui::Text("Taille :");
-    if (ImGui::DragFloat3("Taille", &ellipsoid->getRadius().x, 0.1f));
+    if (ImGui::DragFloat3("Taille", &ellipsoid->getRadius().x, 0.1f))
+        ;
 }
 
 void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box)
@@ -813,7 +814,8 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
     }
 
     ImGui::Text("Taille :");
-    if (ImGui::DragFloat3("Taille", &box->getSize().x, 0.1f));
+    if (ImGui::DragFloat3("Taille", &box->getSize().x, 0.1f))
+        ;
 }
 
 void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive)

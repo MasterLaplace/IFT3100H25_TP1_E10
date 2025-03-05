@@ -93,13 +93,9 @@ void Controller::keyReleased(int key)
         gui.selectedTool = AppGui::tool::LINE;
         break;
     case 'i':
-    case 'I':
-        importer.importImage();
-        break;
+    case 'I': importer.importImage(); break;
     case 'e':
-    case 'E':
-        exporter.exportImage();
-        break;
+    case 'E': exporter.exportImage(); break;
     default: break;
     }
 }
