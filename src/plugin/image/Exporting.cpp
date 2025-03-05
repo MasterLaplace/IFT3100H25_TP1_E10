@@ -17,7 +17,7 @@ void Exporting::exportImage()
 
     string timestamp = ofGetTimestampString("-%y%m%d-%H%M%S-%i");
     std::string filePath = "exported" + timestamp + ".png";
-    
+
     auto result = ofSystemSaveDialog(filePath, "Enregistrer sous...");
     if (result.bSuccess)
     {
