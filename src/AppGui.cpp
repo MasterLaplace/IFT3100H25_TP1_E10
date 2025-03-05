@@ -266,7 +266,7 @@ void AppGui::drawDynamicPanel()
         }
         break;
 
-    case DrawingTools::BACKGROUND:
+    case AppGui::BACKGROUND:
         ImGui::Text("Option de fond");
 
         if (ImGui::ColorEdit3("Couleur de fond", (float *) &backgroundColor))
