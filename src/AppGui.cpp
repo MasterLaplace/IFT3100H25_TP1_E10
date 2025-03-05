@@ -6,8 +6,6 @@ void AppGui::setup(Controller *_controller)
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
     gui.setup(); // On initialise le gui.
-    // controller->onSizeChanged(pointSize);
-    // controller->onColorChanged(pointColor);
 }
 
 void AppGui::draw()
@@ -18,9 +16,10 @@ void AppGui::draw()
     {
         drawToolsPanel();
         drawDynamicPanel();
-        drawProprietiesPanel();
     }
+    
     drawSceneGraph();
+    drawProprietiesPanel();
     gui.end();
 }
 
@@ -54,6 +53,7 @@ void AppGui::drawMenuBar()
 
             if (ImGui::MenuItem(view.c_str()))
             {
+                controller->onToolSelected(tool::SELECT);
                 controller->toggleCanvas();
             }
             ImGui::EndMenu();
@@ -386,6 +386,14 @@ void AppGui::drawProprietiesPanel()
         {
             drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
         }
+        else if constexpr (IsCube<decltype(primitive)>)
+        {
+            drawTransformProperties3D(primitive);
+        }
+        else if constexpr (IsEllipsoid<decltype(primitive)>)
+        {
+            drawTransformProperties3D(primitive);
+        }
 #else
         if (dynamic_cast<Point2D *>(primitive.get()) != nullptr)
         {
@@ -406,6 +414,14 @@ void AppGui::drawProprietiesPanel()
         else if (dynamic_cast<plugin::primitive::Polygon *>(primitive.get()) != nullptr)
         {
             drawPolygonProperties(std::dynamic_pointer_cast<plugin::primitive::Polygon>(primitive));
+        }
+        else if (dynamic_cast<plugin::primitive::Cube *>(primitive.get()) != nullptr)
+        {
+            drawTransformProperties3D(primitive);
+        }
+        else if (dynamic_cast<plugin::primitive::Ellipsoid *>(primitive.get()) != nullptr)
+        {
+            drawTransformProperties3D(primitive);
         }
 #endif
 
@@ -435,6 +451,8 @@ void AppGui::onToolSelected(tool tool)
 
 void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
 {
+    drawTransformProperties2D(point); // On dessine les proprietes de transformation generales.
+    
     float size = point->size;
     float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f,
                       point->param.fillColor.b / 255.0f};
@@ -454,6 +472,8 @@ void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
 
 void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
+    drawTransformProperties2D(line); // On dessine les proprietes de transformation generales.
+    
     float width = line->param.outlineWidth;
     float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f,
                       line->param.fillColor.b / 255.0f};
@@ -485,6 +505,8 @@ void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 
 void AppGui::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle)
 {
+    drawTransformProperties2D(rectangle); // On dessine les proprietes de transformation generales.
+    
     float width = rectangle->param.outlineWidth;
     float fillColor[3] = {rectangle->param.fillColor.r / 255.0f, rectangle->param.fillColor.g / 255.0f,
                           rectangle->param.fillColor.b / 255.0f};
@@ -522,6 +544,8 @@ void AppGui::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Re
 
 void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse)
 {
+    drawTransformProperties2D(ellipse); // On dessine les proprietes de transformation generales.
+    
     float width = ellipse->param.outlineWidth;
     float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f,
                           ellipse->param.fillColor.b / 255.0f};
@@ -555,10 +579,21 @@ void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Elli
             ellipse->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
+    
+    ImGui::Text("Rayon Horizontal :");
+    if (ImGui::DragFloat("Rayon Horizontal", &ellipse->radius.x, 0.1f))
+    {
+        ellipse->radius.x = ellipse->radius.x;
+    }
+    
+    ImGui::Text("Rayon Vertical :");
+    ImGui::DragFloat("Rayon Vertical", &ellipse->radius.y, 0.1f);
 }
 
 void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon)
 {
+    drawTransformProperties2D(polygon); // On dessine les proprietes de transformation generales.
+    
     float width = polygon->param.outlineWidth;
     float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f,
                           polygon->param.fillColor.b / 255.0f};
@@ -591,5 +626,55 @@ void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Poly
         {
             polygon->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
+    }
+}
+
+void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive) {
+    glm::vec3 position = primitive->param.position;
+    glm::vec3 rotation = primitive->param.rotation;
+    glm::vec3 scale = primitive->param.scale;
+
+    ImGui::Text("Position :");
+    if (ImGui::DragFloat2("Position", &position.x, 0.1f))
+    {
+        primitive->param.position = position;
+    }
+
+    ImGui::Text("Rotation :");
+    if (ImGui::DragFloat("Rotation", &rotation.z, 0.1f))
+    {
+        primitive->param.rotation.z = rotation.z;
+    }
+
+    ImGui::Text("Echelle :");
+    if (ImGui::DragFloat2("Echelle", &scale.x, 0.1f))
+    {
+        primitive->param.scale = scale;
+    }
+}
+
+
+void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive)
+{
+    glm::vec3 position = primitive->param.position;
+    glm::vec3 rotation = primitive->param.rotation;
+    glm::vec3 scale = primitive->param.scale;
+
+    ImGui::Text("Position :");
+    if (ImGui::DragFloat3("Position", &position.x, 0.1f))
+    {
+        primitive->param.position = position;
+    }
+
+    ImGui::Text("Rotation :");
+    if (ImGui::DragFloat3("Rotation", &rotation.x, 0.1f))
+    {
+        primitive->param.rotation = rotation;
+    }
+
+    ImGui::Text("Echelle :");
+    if (ImGui::DragFloat3("Echelle", &scale.x, 0.1f))
+    {
+        primitive->param.scale = scale;
     }
 }

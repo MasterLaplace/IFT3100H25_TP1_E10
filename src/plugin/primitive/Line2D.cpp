@@ -9,9 +9,18 @@ Line2D::Line2D(PrimitiveParams _params, glm::vec2 _endPosition) : Primitive(_par
 
 void Line2D::draw()
 {
+    ofPushMatrix();
+    ofTranslate(param.position.x, param.position.y);
+    ofRotateXDeg(param.rotation.x);
+    ofRotateYDeg(param.rotation.y);
+    ofRotateZDeg(param.rotation.z);
+    ofScale(param.scale.x, param.scale.y);
+    
     ofSetColor(param.fillColor);
     ofSetLineWidth(param.outlineWidth);
-    ofDrawLine(param.position, endPosition + param.position);
+    ofDrawLine(startPosition, endPosition);
+    
+    ofPopMatrix();
 }
 
 bool Line2D::isInside(const glm::vec3 &point)

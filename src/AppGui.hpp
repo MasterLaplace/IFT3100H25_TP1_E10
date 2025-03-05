@@ -47,6 +47,8 @@ private:
     void drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle);
     void drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse);
     void drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon);
+    void drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive);
+    void drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive);
 
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};

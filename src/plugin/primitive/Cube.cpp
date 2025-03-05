@@ -11,6 +11,10 @@ void Cube::drawFill()
     ofSetColor(param.fillColor);
     ofPushMatrix();
     ofTranslate(param.position);
+    ofRotateXDeg(param.rotation.x);
+    ofRotateYDeg(param.rotation.y);
+    ofRotateZDeg(param.rotation.z);
+    ofScale(param.scale.x, param.scale.y, param.scale.z);
 
     float halfSize = size / 2.0f;
 

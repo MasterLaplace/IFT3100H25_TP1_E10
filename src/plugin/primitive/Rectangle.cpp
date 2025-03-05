@@ -5,12 +5,21 @@ Rectangle::Rectangle(PrimitiveParams _params, glm::vec2 _dimensions) : Primitive
 
 void Rectangle::draw()
 {
+    ofPushMatrix();
+    ofTranslate(param.position.x, param.position.y);
+    ofRotateXDeg(param.rotation.x);
+    ofRotateYDeg(param.rotation.y);
+    ofRotateZDeg(param.rotation.z);
+    ofScale(param.scale.x, param.scale.y);
+    
     if (param.isFilled)
     {
         drawFill();
     }
 
     drawOutline();
+    
+    ofPopMatrix();
 }
 
 void Rectangle::drawFill()
@@ -19,7 +28,7 @@ void Rectangle::drawFill()
     ofSetLineWidth(1);
     ofFill();
 
-    ofDrawRectangle(param.position.x, param.position.y, dimensions.x, dimensions.y);
+    ofDrawRectangle(0, 0, dimensions.x, dimensions.y);
 }
 
 void Rectangle::drawOutline()
@@ -28,7 +37,7 @@ void Rectangle::drawOutline()
     ofSetLineWidth(param.outlineWidth);
     ofNoFill();
 
-    ofDrawRectangle(param.position.x, param.position.y, dimensions.x, dimensions.y);
+    ofDrawRectangle(0, 0, dimensions.x, dimensions.y);
 }
 
 bool Rectangle::isInside(const glm::vec3 &point)

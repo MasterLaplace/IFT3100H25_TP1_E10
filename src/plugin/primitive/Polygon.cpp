@@ -6,12 +6,21 @@ Polygon::Polygon(PrimitiveParams params, std::vector<glm::vec2> _points) : Primi
 
 void Polygon::draw()
 {
+    ofPushMatrix();
+    ofTranslate(param.position.x, param.position.y);
+    ofRotateXDeg(param.rotation.x);
+    ofRotateYDeg(param.rotation.y);
+    ofRotateZDeg(param.rotation.z);
+    ofScale(param.scale.x, param.scale.y);
+    
     if (param.isFilled)
     {
         drawFill();
     }
 
     drawOutline();
+    
+    ofPopMatrix();
 }
 
 void Polygon::drawFill()
@@ -23,7 +32,7 @@ void Polygon::drawFill()
     ofBeginShape();
     for (auto &point : points)
     {
-        ofVertex(point + param.position);
+        ofVertex(point);
     }
     ofEndShape(true);
 }
@@ -37,7 +46,7 @@ void Polygon::drawOutline()
     ofBeginShape();
     for (auto &point : points)
     {
-        ofVertex(point + param.position);
+        ofVertex(point);
     }
     ofEndShape(true);
 }

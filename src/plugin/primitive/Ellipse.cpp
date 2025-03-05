@@ -6,6 +6,13 @@ Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params
 
 void Ellipse::draw()
 {
+    ofPushMatrix();
+    ofTranslate(param.position.x, param.position.y);
+    ofRotateXDeg(param.rotation.x);
+    ofRotateYDeg(param.rotation.y);
+    ofRotateZDeg(param.rotation.z);
+    ofScale(param.scale.x, param.scale.y);
+    
     ofEnableAntiAliasing();
     if (param.isFilled)
     {
@@ -14,16 +21,17 @@ void Ellipse::draw()
 
     drawOutline();
     ofDisableAntiAliasing();
+    
+    ofPopMatrix();
 }
 
 void Ellipse::drawOutline()
 {
-    ofLog() << param.outlineColor;
     ofSetColor(param.outlineColor);
     ofNoFill();
     ofSetLineWidth(param.outlineWidth);
 
-    ofDrawEllipse(param.position.x, param.position.y, radius.x, radius.y);
+    ofDrawEllipse(0, 0, radius.x, radius.y);
 }
 
 void Ellipse::drawFill()
@@ -32,7 +40,7 @@ void Ellipse::drawFill()
     ofSetLineWidth(1);
     ofFill();
 
-    ofDrawEllipse(param.position.x, param.position.y, radius.x, radius.y);
+    ofDrawEllipse(0, 0, radius.x, radius.y);
 }
 
 bool Ellipse::isInside(const glm::vec3 &point)
