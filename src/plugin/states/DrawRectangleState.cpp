@@ -35,7 +35,7 @@ void DrawRectangleState::mouseReleased(int x, int y, int button)
     params.outlineWidth = outlineWidth;
     params.isFilled = isFilled;
 
-    auto rectangle = std::make_shared<Rectangle>(params, glm::vec2(width, height));
+    auto rectangle = std::make_shared<plugin::primitive::Rectangle>(params, glm::vec2(width, height));
     auto node = new NodePrimitive(rectangle, "Rectangle");
     NodePrimitive *parent = canvas->getChildById(selectedPrimitiveId);
 

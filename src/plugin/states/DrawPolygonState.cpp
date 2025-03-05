@@ -42,7 +42,7 @@ void DrawPolygonState::mouseReleased(int x, int y, int button)
     params.isFilled = isFilled;
 
     // On cree le noeud.
-    auto node = new NodePrimitive(std::make_shared<Polygon>(params, points), "Polygon");
+    auto node = new NodePrimitive(std::make_shared<plugin::primitive::Polygon>(params, points), "Polygon");
     NodePrimitive *parent = Canvas::getInstance()->getChildById(selectedPrimitiveId);
 
     if (!parent)

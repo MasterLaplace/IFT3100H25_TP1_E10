@@ -368,17 +368,17 @@ void DrawingTools::drawProprietiesPanel()
         {
             drawLineProperties(std::dynamic_pointer_cast<Line2D>(primitive));
         }
-        else if (dynamic_cast<Rectangle *>(primitive.get()) != nullptr)
+        else if (dynamic_cast<plugin::primitive::Rectangle *>(primitive.get()) != nullptr)
         {
-            drawRectangleProperties(std::dynamic_pointer_cast<Rectangle>(primitive));
+            drawRectangleProperties(std::dynamic_pointer_cast<plugin::primitive::Rectangle>(primitive));
         }
-        else if (dynamic_cast<Ellipse *>(primitive.get()) != nullptr)
+        else if (dynamic_cast<plugin::primitive::Ellipse *>(primitive.get()) != nullptr)
         {
-            drawEllipseProperties(std::dynamic_pointer_cast<Ellipse>(primitive));
+            drawEllipseProperties(std::dynamic_pointer_cast<plugin::primitive::Ellipse>(primitive));
         }
-        else if (dynamic_cast<Polygon *>(primitive.get()) != nullptr)
+        else if (dynamic_cast<plugin::primitive::Polygon *>(primitive.get()) != nullptr)
         {
-            drawPolygonProperties(std::dynamic_pointer_cast<Polygon>(primitive));
+            drawPolygonProperties(std::dynamic_pointer_cast<plugin::primitive::Polygon>(primitive));
         }
 #endif
 
@@ -456,7 +456,7 @@ void DrawingTools::drawLineProperties(const std::shared_ptr<Line2D> &line)
     }
 }
 
-void DrawingTools::drawRectangleProperties(const std::shared_ptr<Rectangle> &rectangle)
+void DrawingTools::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle)
 {
     float width = rectangle->param.outlineWidth;
     float fillColor[3] = {rectangle->param.fillColor.r / 255.0f, rectangle->param.fillColor.g / 255.0f,
@@ -493,7 +493,7 @@ void DrawingTools::drawRectangleProperties(const std::shared_ptr<Rectangle> &rec
     }
 }
 
-void DrawingTools::drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse)
+void DrawingTools::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse)
 {
     float width = ellipse->param.outlineWidth;
     float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f,
@@ -530,7 +530,7 @@ void DrawingTools::drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse
     }
 }
 
-void DrawingTools::drawPolygonProperties(const std::shared_ptr<Polygon> &polygon)
+void DrawingTools::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon)
 {
     float width = polygon->param.outlineWidth;
     float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f,

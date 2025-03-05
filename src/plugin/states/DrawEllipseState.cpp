@@ -44,7 +44,7 @@ void DrawEllipseState::mouseReleased(int x, int y, int button)
     params.outlineColor = outlineColor;
     params.isFilled = isFilled;
 
-    auto ellipse = std::make_shared<Ellipse>(params, glm::vec2(radiusX, radiusY));
+    auto ellipse = std::make_shared<plugin::primitive::Ellipse>(params, glm::vec2(radiusX, radiusY));
 
     // On cree le noeud.
     auto node = new NodePrimitive(ellipse, "Ellipse");

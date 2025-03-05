@@ -43,9 +43,9 @@ private:
 
     void drawPointProperties(const std::shared_ptr<Point2D> &point);
     void drawLineProperties(const std::shared_ptr<Line2D> &line);
-    void drawRectangleProperties(const std::shared_ptr<Rectangle> &rectangle);
-    void drawEllipseProperties(const std::shared_ptr<Ellipse> &ellipse);
-    void drawPolygonProperties(const std::shared_ptr<Polygon> &polygon);
+    void drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle);
+    void drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse);
+    void drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon);
 
     // Attributs générique
     float outlineWidth = 1.0f;
