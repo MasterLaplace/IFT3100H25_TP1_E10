@@ -266,12 +266,13 @@ void AppGui::drawDynamicPanel()
         }
         break;
 
-        case DrawingTools::BACKGROUND:
+    case DrawingTools::BACKGROUND:
         ImGui::Text("Option de fond");
 
         if (ImGui::ColorEdit3("Couleur de fond", (float *) &backgroundColor))
         {
-            controller->onBackgroundColorChanged(ofColor(backgroundColor[0] * 255, backgroundColor[1] * 255, backgroundColor[2] * 255));
+            controller->onBackgroundColorChanged(
+                ofColor(backgroundColor[0] * 255, backgroundColor[1] * 255, backgroundColor[2] * 255));
         }
         break;
 

@@ -7,10 +7,9 @@ Canvas *Canvas::getInstance()
     return &instance;
 }
 
-void Canvas::setBackgroundColor(const ofColor &color) 
-{ backgroundColor = color; }
+void Canvas::setBackgroundColor(const ofColor &color) { backgroundColor = color; }
 
-Canvas::Canvas() : backgroundColor(ofColor::white){}
+Canvas::Canvas() : backgroundColor(ofColor::white) {}
 
 // A la destruction du Canvas, on s'assure qu'on d�truit l'arbre de Node.
 Canvas::~Canvas()

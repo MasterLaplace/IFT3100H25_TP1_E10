@@ -31,6 +31,6 @@ public:
 
 private:
     ofColor backgroundColor;
-    
+
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
 };
