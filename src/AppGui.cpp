@@ -17,7 +17,7 @@ void AppGui::draw()
         drawToolsPanel();
         drawDynamicPanel();
     }
-    
+
     drawSceneGraph();
     drawProprietiesPanel();
     gui.end();
@@ -461,7 +461,7 @@ void AppGui::onToolSelected(tool tool)
 void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
 {
     drawTransformProperties2D(point); // On dessine les proprietes de transformation generales.
-    
+
     float size = point->size;
     float color[3] = {point->param.fillColor.r / 255.0f, point->param.fillColor.g / 255.0f,
                       point->param.fillColor.b / 255.0f};
@@ -482,7 +482,7 @@ void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
 void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
     drawTransformProperties2D(line); // On dessine les proprietes de transformation generales.
-    
+
     float width = line->param.outlineWidth;
     float color[3] = {line->param.fillColor.r / 255.0f, line->param.fillColor.g / 255.0f,
                       line->param.fillColor.b / 255.0f};
@@ -515,7 +515,7 @@ void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 void AppGui::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Rectangle> &rectangle)
 {
     drawTransformProperties2D(rectangle); // On dessine les proprietes de transformation generales.
-    
+
     float width = rectangle->param.outlineWidth;
     float fillColor[3] = {rectangle->param.fillColor.r / 255.0f, rectangle->param.fillColor.g / 255.0f,
                           rectangle->param.fillColor.b / 255.0f};
@@ -554,7 +554,7 @@ void AppGui::drawRectangleProperties(const std::shared_ptr<plugin::primitive::Re
 void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Ellipse> &ellipse)
 {
     drawTransformProperties2D(ellipse); // On dessine les proprietes de transformation generales.
-    
+
     float width = ellipse->param.outlineWidth;
     float fillColor[3] = {ellipse->param.fillColor.r / 255.0f, ellipse->param.fillColor.g / 255.0f,
                           ellipse->param.fillColor.b / 255.0f};
@@ -588,13 +588,13 @@ void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Elli
             ellipse->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         }
     }
-    
+
     ImGui::Text("Rayon Horizontal :");
     if (ImGui::DragFloat("Rayon Horizontal", &ellipse->radius.x, 0.1f))
     {
         ellipse->radius.x = ellipse->radius.x;
     }
-    
+
     ImGui::Text("Rayon Vertical :");
     ImGui::DragFloat("Rayon Vertical", &ellipse->radius.y, 0.1f);
 }
@@ -602,7 +602,7 @@ void AppGui::drawEllipseProperties(const std::shared_ptr<plugin::primitive::Elli
 void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon)
 {
     drawTransformProperties2D(polygon); // On dessine les proprietes de transformation generales.
-    
+
     float width = polygon->param.outlineWidth;
     float fillColor[3] = {polygon->param.fillColor.r / 255.0f, polygon->param.fillColor.g / 255.0f,
                           polygon->param.fillColor.b / 255.0f};
@@ -638,7 +638,8 @@ void AppGui::drawPolygonProperties(const std::shared_ptr<plugin::primitive::Poly
     }
 }
 
-void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive) {
+void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive)
+{
     glm::vec3 position = primitive->param.position;
     glm::vec3 rotation = primitive->param.rotation;
     glm::vec3 scale = primitive->param.scale;
@@ -661,7 +662,6 @@ void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primiti
         primitive->param.scale = scale;
     }
 }
-
 
 void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive)
 {

@@ -12,11 +12,11 @@ void Point2D::draw()
     ofRotateYDeg(param.rotation.y);
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
-    
+
     ofSetColor(param.fillColor);
     ofFill();
     ofDrawCircle(glm::vec3(0.0f), size);
-    
+
     ofPopMatrix();
 }
 

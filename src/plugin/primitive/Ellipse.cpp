@@ -12,7 +12,7 @@ void Ellipse::draw()
     ofRotateYDeg(param.rotation.y);
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
-    
+
     ofEnableAntiAliasing();
     if (param.isFilled)
     {
@@ -21,7 +21,7 @@ void Ellipse::draw()
 
     drawOutline();
     ofDisableAntiAliasing();
-    
+
     ofPopMatrix();
 }
 

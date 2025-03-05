@@ -15,11 +15,11 @@ void Line2D::draw()
     ofRotateYDeg(param.rotation.y);
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
-    
+
     ofSetColor(param.fillColor);
     ofSetLineWidth(param.outlineWidth);
     ofDrawLine(startPosition, endPosition);
-    
+
     ofPopMatrix();
 }
 
