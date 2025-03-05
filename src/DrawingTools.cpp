@@ -87,6 +87,11 @@ void DrawingTools::drawToolsPanel()
         onToolSelected(tool::SELECT);
     }
 
+    if (ImGui::Button("Arriere plan"))
+    {
+        onToolSelected(tool::BACKGROUND);
+    }
+
     // Si le bouton "Point" est activé.
     if (ImGui::Button("Point"))
     {
@@ -247,6 +252,15 @@ void DrawingTools::drawDynamicPanel()
         }
         break;
 
+        case DrawingTools::BACKGROUND:
+        ImGui::Text("Option de fond");
+
+        if (ImGui::ColorEdit3("Couleur de fond", (float *) &backgroundColor))
+        {
+            controller->onBackgroundColorChanged(ofColor(backgroundColor[0] * 255, backgroundColor[1] * 255, backgroundColor[2] * 255));
+        }
+        break;
+
     default: break;
     }
 
@@ -257,8 +271,6 @@ void DrawingTools::drawDynamicPanel()
         params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
         params.outlineWidth = outlineWidth;
         params.isFilled = isFilled;
-
-        ofLog() << params.outlineColor;
 
         controller->onPrimitivePropertiesChanged(params);
     }

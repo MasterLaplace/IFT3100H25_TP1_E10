@@ -46,14 +46,6 @@ void HistogramUI::drawOptionPanel()
     ImGui::Spacing();
 
     ImGui::SetNextItemWidth(180);
-    if (ImGui::Button("Exporter", ImVec2(180, 40)))
-    {
-        controller->exportImage();
-    }
-
-    ImGui::Spacing();
-
-    ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Retour", ImVec2(180, 40)))
     {
         controller->drawPointButtonPressed();

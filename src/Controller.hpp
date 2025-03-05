@@ -42,6 +42,7 @@ public:
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
+    void onBackgroundColorChanged(ofColor color);
 
     void onPrimitiveSelected(uint32_t id);
     void onEndPositionChanged(uint32_t id, glm::vec2 newPos);

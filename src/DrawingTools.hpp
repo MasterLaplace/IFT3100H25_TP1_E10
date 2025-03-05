@@ -21,7 +21,8 @@ public:
         LINE,
         RECTANGLE,
         ELLIPSE,
-        POLYGON
+        POLYGON,
+        BACKGROUND
     };
     tool selectedTool;
 
@@ -48,6 +49,7 @@ private:
     void drawPolygonProperties(const std::shared_ptr<plugin::primitive::Polygon> &polygon);
 
     // Attributs générique
+    float backgroundColor[3] = {1.0f, 1.0f, 1.0f};
     float outlineWidth = 1.0f;
     float fillColor[3] = {0.0f, 0.0f, 0.0f};
     float outlineColor[3] = {0.0f, 0.0f, 0.0f};

@@ -111,6 +111,11 @@ void Controller::onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::Pr
     node->getPrimitive()->param.isFilled = params.isFilled;
 }
 
+void Controller::onBackgroundColorChanged(ofColor color) 
+{
+    canvas->setBackgroundColor(color);
+}
+
 void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSelected(id); }
 
 std::vector<uint32_t> Controller::getPrimitiveId()

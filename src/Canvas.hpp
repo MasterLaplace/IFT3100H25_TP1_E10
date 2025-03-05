@@ -14,9 +14,12 @@ class Canvas {
 public:
     std::vector<NodePrimitive *> nodes;
 
+    Canvas();
     ~Canvas();
 
     static Canvas *getInstance();
+
+    void setBackgroundColor(const ofColor &color);
 
     void addNode(NodePrimitive *node);
     void removeNode(const uint32_t id);
@@ -27,5 +30,7 @@ public:
     int findMouseSelectedNode(const glm::vec3 &point, std::vector<NodePrimitive *> &nodesToCheck);
 
 private:
+    ofColor backgroundColor;
+    
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
 };

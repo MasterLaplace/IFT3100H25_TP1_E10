@@ -7,6 +7,11 @@ Canvas *Canvas::getInstance()
     return &instance;
 }
 
+void Canvas::setBackgroundColor(const ofColor &color) 
+{ backgroundColor = color; }
+
+Canvas::Canvas() : backgroundColor(ofColor::white){}
+
 // A la destruction du Canvas, on s'assure qu'on d�truit l'arbre de Node.
 Canvas::~Canvas()
 {
@@ -53,7 +58,7 @@ void Canvas::removeNode(const uint32_t id)
 // Pour dessiner à l'écran toutes les Primitive qui sont contenu dans chaques noeuds de l'arbre.
 void Canvas::draw()
 {
-    ofBackground(255);
+    ofBackground(backgroundColor);
 
     for (size_t i = 0; i < nodes.size(); i++)
     {
