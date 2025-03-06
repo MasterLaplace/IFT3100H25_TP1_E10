@@ -213,7 +213,8 @@ void Controller::deletePrimitiveButtonPressed(uint32_t id)
     stateMachine.onPrimitiveSelected(-1);
 }
 
-void Controller::createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive, const std::string &name)
+void Controller::createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,
+                                           const std::string &name)
 {
     bool result = plugin::image::ResourceManager::instance()->addPrefab(primitive, name);
     if (!result)

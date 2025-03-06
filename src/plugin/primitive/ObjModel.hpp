@@ -9,17 +9,15 @@
 #ifndef OBJMODEL_HPP_
 #define OBJMODEL_HPP_
 
-#include "ofxAssimpModelLoader.h"
 #include "Primitive.hpp"
+#include "ofxAssimpModelLoader.h"
 
 namespace plugin::primitive {
 
 class Model : public ofxAssimpModelLoader {
 public:
     Model() = default;
-    Model(const Model &other) {
-        *this = other;
-    }
+    Model(const Model &other) { *this = other; }
     ~Model() = default;
 
     // ajoute un operator= pour pouvoir copier le model

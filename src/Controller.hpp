@@ -71,7 +71,8 @@ public:
     void setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace);
 
     void createModelButtonPressed(const std::string &modelName);
-    void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive, const std::string &name);
+    void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,
+                                   const std::string &name);
 
     bool is3d = false;
 

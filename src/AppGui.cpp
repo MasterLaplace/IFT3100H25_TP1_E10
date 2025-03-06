@@ -696,7 +696,8 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
 #endif
 }
 
-void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model, const std::string &modelName)
+void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model,
+                                 const std::string &modelName)
 {
     char newModelName[128];
     strncpy(newModelName, modelName.c_str(), sizeof(modelName));

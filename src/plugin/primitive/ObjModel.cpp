@@ -4,7 +4,8 @@ namespace plugin::primitive {
 
 ObjModel::ObjModel(PrimitiveParams params) : Primitive(params){};
 
-ObjModel::ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primitive::ObjModel> &other) : Primitive(params)
+ObjModel::ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primitive::ObjModel> &other)
+    : Primitive(params)
 {
     yourModel = other->getModel();
 };
