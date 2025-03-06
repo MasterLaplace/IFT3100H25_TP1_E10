@@ -44,6 +44,12 @@ void Polygon::drawFill()
             ofFill();
         }
     }
+    else
+    {
+        ofSetColor(param.fillColor);
+        ofSetLineWidth(1);
+        ofFill();
+    }
 
     ofMesh mesh;
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
