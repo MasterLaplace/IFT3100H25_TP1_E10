@@ -69,17 +69,17 @@ void DrawPolygonState::exit() {}
 void DrawPolygonState::drawCursor()
 {
     // Le decallage de l'icone par rapport au curseur
-    glm::vec2 upOffset = glm::vec2(50, 10);
+    glm::vec2 upOffset = glm::vec2(30, 30);
 
     ofFill();
     ofSetColor(ofColor::black);
 
     // On dessine le polygone.
     glm::vec2 p1 = mousePosition + upOffset;
-    glm::vec2 p2 = mousePosition + upOffset + glm::vec2(10, 0);
-    glm::vec2 p3 = mousePosition + upOffset + glm::vec2(5, 5);
-    glm::vec2 p4 = mousePosition + upOffset + glm::vec2(10, 10);
-    glm::vec2 p5 = mousePosition + upOffset + glm::vec2(0, 10);
+    glm::vec2 p2 = mousePosition + upOffset + glm::vec2(20, 0);
+    glm::vec2 p3 = mousePosition + upOffset + glm::vec2(10, 10);
+    glm::vec2 p4 = mousePosition + upOffset + glm::vec2(20, 20);
+    glm::vec2 p5 = mousePosition + upOffset + glm::vec2(0, 20);
 
     ofBeginShape();
     ofVertex(p1.x, p1.y);

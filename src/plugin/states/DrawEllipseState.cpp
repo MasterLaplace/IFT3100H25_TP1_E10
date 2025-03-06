@@ -61,13 +61,13 @@ void DrawEllipseState::exit() {}
 void DrawEllipseState::drawCursor()
 {
     // Le decallage de l'icone par rapport au curseur
-    glm::vec2 upOffset = glm::vec2(50, 10);
+    glm::vec2 upOffset = glm::vec2(30, 30);
 
     ofFill();
     ofSetColor(ofColor::black);
 
     // On dessine l'ellipse.
-    ofDrawEllipse(mousePosition + upOffset, 10, 10);
+    ofDrawEllipse(mousePosition + upOffset, 30, 15);
 }
 
 void DrawEllipseState::drawPreview()

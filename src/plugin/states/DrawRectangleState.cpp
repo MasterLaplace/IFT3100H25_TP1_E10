@@ -60,7 +60,7 @@ void DrawRectangleState::exit() { std::cout << "On sort du DrawRectangleState." 
 void DrawRectangleState::drawCursor()
 {
     // Le decallage de l'icone par rapport au curseur
-    glm::vec2 upOffset = glm::vec2(50, 10);
+    glm::vec2 upOffset = glm::vec2(30, 30);
     // glm::vec2 downOffset = glm::vec2(25, 50);
 
     ofFill();
