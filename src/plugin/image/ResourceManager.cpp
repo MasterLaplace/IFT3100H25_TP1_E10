@@ -13,7 +13,7 @@ bool ResourceManager::addImage(const std::shared_ptr<Image> &image, const std::s
 
 void ResourceManager::removeImage(const std::string &name) { _images.erase(name); }
 
-bool ResourceManager::addModel(const std::shared_ptr<geometry::ObjModel> &model, const std::string &name)
+bool ResourceManager::addModel(const std::shared_ptr<primitive::ObjModel> &model, const std::string &name)
 {
     if (_models.find(name) != _models.end())
         return false;
@@ -69,7 +69,7 @@ std::optional<std::shared_ptr<Image>> ResourceManager::getImage(const std::strin
     return std::nullopt;
 }
 
-std::optional<std::shared_ptr<geometry::ObjModel>> ResourceManager::getModel(const std::string &name)
+std::optional<std::shared_ptr<primitive::ObjModel>> ResourceManager::getModel(const std::string &name)
 {
     if (_models.find(name) != _models.end())
         return _models[name];
@@ -84,7 +84,7 @@ std::optional<std::shared_ptr<primitive::Primitive>> ResourceManager::getPrefab(
 }
 
 std::map<std::string, std::shared_ptr<Image>> ResourceManager::getImages() { return _images; }
-std::map<std::string, std::shared_ptr<geometry::ObjModel>> ResourceManager::getModels() { return _models; }
+std::map<std::string, std::shared_ptr<primitive::ObjModel>> ResourceManager::getModels() { return _models; }
 std::map<std::string, std::shared_ptr<primitive::Primitive>> ResourceManager::getPrefabs() { return _prefabs; }
 
 } // namespace plugin::image

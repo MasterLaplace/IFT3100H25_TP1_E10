@@ -290,7 +290,7 @@
     <ClInclude Include="src\plugin\image\Sampling.hpp">
       <Filter>src\plugin\image</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\image\image.hpp">
+    <ClInclude Include="src\plugin\image\images.hpp">
       <Filter>src\plugin\image</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp">

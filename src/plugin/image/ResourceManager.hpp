@@ -24,7 +24,7 @@ public:
 
     [[nodiscard]] bool addImage(const std::shared_ptr<Image> &image, const std::string &name);
     void removeImage(const std::string &name);
-    [[nodiscard]] bool addModel(const std::shared_ptr<geometry::ObjModel> &model, const std::string &name);
+    [[nodiscard]] bool addModel(const std::shared_ptr<primitive::ObjModel> &model, const std::string &name);
     void removeModels(const std::string &name);
     [[nodiscard]] bool addPrefab(const std::shared_ptr<plugin::primitive::Primitive> &prefab, const std::string &name);
     void removePrefab(const std::string &name);
@@ -34,17 +34,17 @@ public:
     void renamePrefab(const std::string &oldName, const std::string &newName);
 
     [[nodiscard]] std::optional<std::shared_ptr<Image>> getImage(const std::string &name);
-    [[nodiscard]] std::optional<std::shared_ptr<geometry::ObjModel>> getModel(const std::string &name);
+    [[nodiscard]] std::optional<std::shared_ptr<primitive::ObjModel>> getModel(const std::string &name);
     [[nodiscard]] std::optional<std::shared_ptr<plugin::primitive::Primitive>> getPrefab(const std::string &name);
 
     [[nodiscard]] std::map<std::string, std::shared_ptr<Image>> getImages();
-    [[nodiscard]] std::map<std::string, std::shared_ptr<geometry::ObjModel>> getModels();
+    [[nodiscard]] std::map<std::string, std::shared_ptr<primitive::ObjModel>> getModels();
     [[nodiscard]] std::map<std::string, std::shared_ptr<plugin::primitive::Primitive>> getPrefabs();
 
 protected:
 private:
     std::map<std::string, std::shared_ptr<Image>> _images;
-    std::map<std::string, std::shared_ptr<geometry::ObjModel>> _models;
+    std::map<std::string, std::shared_ptr<primitive::ObjModel>> _models;
     std::map<std::string, std::shared_ptr<plugin::primitive::Primitive>> _prefabs;
 };
 

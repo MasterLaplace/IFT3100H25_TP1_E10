@@ -8,4 +8,6 @@
 #include "Box.hpp"
 #include "Ellipsoid.hpp"
 
+#include "ObjModel.hpp"
+
 #include "PrimitiveConcepts.hpp"

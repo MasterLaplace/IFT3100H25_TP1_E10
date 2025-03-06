@@ -10,7 +10,7 @@
 #ifndef IMPORTING_HPP_
 #define IMPORTING_HPP_
 
-#include "../geometry/ObjModel.hpp"
+#include "../primitive/ObjModel.hpp"
 #include "Image.hpp"
 #include "ofMain.h"
 

@@ -213,6 +213,15 @@ void Controller::deletePrimitiveButtonPressed(uint32_t id)
     stateMachine.onPrimitiveSelected(-1);
 }
 
+void Controller::createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive, const std::string &name)
+{
+    bool result = plugin::image::ResourceManager::instance()->addPrefab(primitive, name);
+    if (!result)
+    {
+        ofLogError("Controller") << "Failed to create prefab";
+    }
+}
+
 void Controller::drawHistogram(int color)
 {
     if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) == nullptr)
@@ -237,5 +246,22 @@ void Controller::setImageColorSpace(const std::string &name, plugin::image::Colo
     if (image.has_value())
     {
         image->get()->convert(colorSpace);
+    }
+}
+
+void Controller::createModelButtonPressed(const std::string &modelName)
+{
+    auto model = plugin::image::ResourceManager::instance()->getModel(modelName);
+    if (model.has_value())
+    {
+        PrimitiveParams params;
+        params.position = glm::vec3(0, 0, 0);
+        params.fillColor = ofColor(100, 100, 0);
+        params.outlineColor = ofColor(0, 0, 0);
+        params.outlineWidth = 1.0f;
+        params.isFilled = true;
+
+        auto node = new NodePrimitive(std::make_shared<plugin::primitive::ObjModel>(params, *model), "Model");
+        (is3d) ? canvas3d->addNode(node) : canvas2d->addNode(node);
     }
 }

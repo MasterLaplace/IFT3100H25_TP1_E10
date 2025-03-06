@@ -26,7 +26,14 @@ bool importModel()
     if (!result.bSuccess)
         return false;
 
-    auto model = std::make_shared<geometry::ObjModel>();
+    primitive::PrimitiveParams params;
+    params.position = glm::vec3(0.0f, 0.0f, 0.0f);
+    params.fillColor = ofColor::white;
+    params.outlineColor = ofColor::black;
+    params.outlineWidth = 1;
+    params.isFilled = true;
+
+    auto model = std::make_shared<primitive::ObjModel>(params);
 
     if (model->load(result.getPath()))
     {

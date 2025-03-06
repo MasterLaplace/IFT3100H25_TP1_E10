@@ -55,8 +55,9 @@ private:
     void drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive);
     void drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::Ellipsoid> &ellipsoid);
     void drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box);
+    void drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model);
     void drawImageProperties(const std::shared_ptr<plugin::image::Image> &image, const std::string &imageName);
-    void drawModelProperties(const std::shared_ptr<plugin::geometry::ObjModel> &model, const std::string &modelName);
+    void drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model, const std::string &modelName);
 
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};

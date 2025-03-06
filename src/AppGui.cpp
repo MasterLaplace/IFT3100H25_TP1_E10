@@ -569,6 +569,15 @@ void AppGui::drawProprietiesPanel()
         {
             drawEllipsoidProperties(std::dynamic_pointer_cast<plugin::primitive::Ellipsoid>(primitive));
         }
+        else if (dynamic_cast<plugin::primitive::ObjModel *>(primitive.get()) != nullptr)
+        {
+            drawObjModelProperties(std::dynamic_pointer_cast<plugin::primitive::ObjModel>(primitive));
+        }
+
+        if (ImGui::Button("Creer Prefab", ImVec2((ofGetWidth() / 6) - 20, 50)))
+        {
+            controller->createPrefabButtonPressed(primitive, node->getName());
+        }
 
         // Pour supprimer une primitive.
         if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
@@ -687,7 +696,7 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
 #endif
 }
 
-void AppGui::drawModelProperties(const std::shared_ptr<plugin::geometry::ObjModel> &model, const std::string &modelName)
+void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model, const std::string &modelName)
 {
     char newModelName[128];
     strncpy(newModelName, modelName.c_str(), sizeof(modelName));
@@ -699,8 +708,13 @@ void AppGui::drawModelProperties(const std::shared_ptr<plugin::geometry::ObjMode
         plugin::image::ResourceManager::instance()->renameModel(modelName, newModelName);
     }
 
-    ImGui::Text("Nombre de vertices : %d", model->getNumVertices());
-    ImGui::Text("Nombre de faces : %d", model->getNumFaces());
+    ImGui::Text("Vertices : %d", model->getNumVertices());
+    ImGui::Text("Faces : %d", model->getNumFaces());
+
+    if (ImGui::Button("Creer", ImVec2((ofGetWidth() / 6) - 20, 50)))
+    {
+        controller->createModelButtonPressed(modelName);
+    }
 }
 
 void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
@@ -946,6 +960,11 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
     ImGui::Text("Taille :");
     if (ImGui::DragFloat3("Taille", &box->getSize().x, 0.1f))
         ;
+}
+
+void AppGui::drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model)
+{
+    drawTransformProperties3D(model);
 }
 
 void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive)

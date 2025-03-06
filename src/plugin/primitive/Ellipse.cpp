@@ -1,4 +1,5 @@
 #include "Ellipse.hpp"
+#include "../image/ResourceManager.hpp"
 
 namespace plugin::primitive {
 
@@ -14,12 +15,7 @@ void Ellipse::draw()
     ofScale(param.scale.x, param.scale.y);
 
     ofEnableAntiAliasing();
-    if (param.isFilled)
-    {
-        drawFill();
-    }
-
-    drawOutline();
+    (param.isFilled) ? drawFill() : drawOutline();
     ofDisableAntiAliasing();
 
     ofPopMatrix();
@@ -36,11 +32,53 @@ void Ellipse::drawOutline()
 
 void Ellipse::drawFill()
 {
-    ofSetColor(param.fillColor);
-    ofSetLineWidth(1);
-    ofFill();
+    bool hasTexture = false;
+    std::optional<std::shared_ptr<ofImage>> image;
+    if (!param.imageName.empty())
+    {
+        image = image::ResourceManager::instance()->getImage(param.imageName);
+        if (image.has_value())
+        {
+            ofSetColor(255);
+            image->get()->getTexture().bind();
+            hasTexture = true;
+        }
+        else
+        {
+            ofSetColor(param.fillColor);
+            ofSetLineWidth(1);
+            ofFill();
+        }
+    }
 
-    ofDrawEllipse(0, 0, radius.x, radius.y);
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+
+    mesh.addVertex(glm::vec3(0, 0, 0));
+
+    if (hasTexture)
+        mesh.addTexCoord(glm::vec2(image->get()->getWidth() / 2, image->get()->getHeight() / 2));
+
+    int numSegments = 100;
+    for (int i = 0; i <= numSegments; ++i)
+    {
+        float theta = 2.0f * PI * float(i) / float(numSegments);
+        float x = radius.x * cosf(theta);
+        float y = radius.y * sinf(theta);
+
+        mesh.addVertex(glm::vec3(x, y, 0));
+        if (hasTexture)
+        {
+            float u = (x / radius.x + 1.0f) * 0.5f * image->get()->getWidth();
+            float v = (y / radius.y + 1.0f) * 0.5f * image->get()->getHeight();
+            mesh.addTexCoord(glm::vec2(u, v));
+        }
+    }
+
+    mesh.draw();
+
+    if (hasTexture)
+        image->get()->getTexture().unbind();
 }
 
 bool Ellipse::isInside(const glm::vec3 &point)

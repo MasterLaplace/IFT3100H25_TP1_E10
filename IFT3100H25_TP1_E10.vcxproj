@@ -173,7 +173,7 @@
     <ClInclude Include="src\plugin\image\Histogram.hpp" />
     <ClInclude Include="src\plugin\image\Importing.hpp" />
     <ClInclude Include="src\plugin\image\Sampling.hpp" />
-    <ClInclude Include="src\plugin\image\image.hpp" />
+    <ClInclude Include="src\plugin\image\images.hpp" />
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />
     <ClInclude Include="src\plugin\primitive\Line2D.hpp" />
     <ClInclude Include="src\plugin\primitive\Point2D.hpp" />

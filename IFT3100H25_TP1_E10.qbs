@@ -57,7 +57,7 @@ Project{
             'src/plugin/image/Histogram.hpp',
             'src/plugin/image/Importing.hpp',
             'src/plugin/image/Sampling.hpp',
-            'src/plugin/image/image.hpp',
+            'src/plugin/image/images.hpp',
             'src/plugin/modern-lighting/DeferredRendering.hpp',
             'src/plugin/modern-lighting/EnvironmentalLight.hpp',
             'src/plugin/modern-lighting/Metallicity.hpp',

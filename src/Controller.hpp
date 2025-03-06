@@ -7,7 +7,7 @@
 #include "HistogramUI.hpp"
 #include "Importation.hpp"
 #include "Node.hpp"
-#include "plugin/image/image.hpp"
+#include "plugin/image/images.hpp"
 #include "plugin/states/states.hpp"
 #include <string>
 #include <vector>
@@ -69,6 +69,9 @@ public:
     [[nodiscard]] std::string &getSelectedPrefabName();
 
     void setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace);
+
+    void createModelButtonPressed(const std::string &modelName);
+    void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive, const std::string &name);
 
     bool is3d = false;
 

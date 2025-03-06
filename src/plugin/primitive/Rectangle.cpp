@@ -25,23 +25,19 @@ void Rectangle::drawFill()
     std::optional<std::shared_ptr<ofImage>> image;
     if (!param.imageName.empty())
     {
-        std::cout << "Rectangle::drawFill() - imageName: " << param.imageName;
         image = image::ResourceManager::instance()->getImage(param.imageName);
         if (image.has_value())
         {
             ofSetColor(255);
             image->get()->getTexture().bind();
             hasTexture = true;
-            std::cout << " - hasTexture: true";
         }
         else
         {
             ofSetColor(param.fillColor);
             ofSetLineWidth(1);
             ofFill();
-            std::cout << " - hasTexture: false";
         }
-        std::cout << std::endl;
     }
 
     ofMesh mesh;
