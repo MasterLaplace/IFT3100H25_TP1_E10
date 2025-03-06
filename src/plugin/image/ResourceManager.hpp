@@ -12,6 +12,7 @@
 #include "Exporting.hpp"
 #include "Importing.hpp"
 #include <ofSingleton.hpp>
+#include "optional"
 
 namespace plugin::image {
 
