@@ -14,10 +14,12 @@ void Polygon::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
 
+    ofSetColor(param.fillColor);
+    ofSetLineWidth(1);
+    ofFill();
+
     if (param.isFilled)
-    {
         drawFill();
-    }
 
     drawOutline();
 
@@ -37,18 +39,6 @@ void Polygon::drawFill()
             image->get()->getTexture().bind();
             hasTexture = true;
         }
-        else
-        {
-            ofSetColor(param.fillColor);
-            ofSetLineWidth(1);
-            ofFill();
-        }
-    }
-    else
-    {
-        ofSetColor(param.fillColor);
-        ofSetLineWidth(1);
-        ofFill();
     }
 
     ofMesh mesh;

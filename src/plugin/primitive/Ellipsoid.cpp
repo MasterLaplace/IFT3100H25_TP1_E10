@@ -24,7 +24,14 @@ void Ellipsoid::draw()
     light.setPosition(param.position.x, param.position.y, param.position.z + 500); // Positionner la lumière
     light.enable();
 
-    (param.isFilled) ? drawFill() : drawOutline();
+    ofSetColor(param.fillColor);
+    ofSetLineWidth(1);
+    ofFill();
+
+    if (param.isFilled)
+        drawFill();
+
+    drawOutline();
 
     light.disable();
 
@@ -44,12 +51,6 @@ void Ellipsoid::drawFill()
             ofSetColor(255);
             image->get()->getTexture().bind();
             hasTexture = true;
-        }
-        else
-        {
-            ofSetColor(param.fillColor);
-            ofSetLineWidth(1);
-            ofFill();
         }
     }
 

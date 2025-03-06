@@ -15,9 +15,15 @@ void Ellipse::draw()
     ofScale(param.scale.x, param.scale.y);
 
     ofEnableAntiAliasing();
+
+    ofSetColor(param.fillColor);
+    ofSetLineWidth(1);
+    ofFill();
+
     if (param.isFilled)
         drawFill();
     drawOutline();
+
     ofDisableAntiAliasing();
 
     ofPopMatrix();
@@ -42,23 +48,9 @@ void Ellipse::drawFill()
         if (image.has_value())
         {
             ofSetColor(255);
-            ofSetLineWidth(1);
             image->get()->getTexture().bind();
             hasTexture = true;
         }
-        else
-        {
-            ofSetColor(param.fillColor);
-            ofSetLineWidth(1);
-            ofFill();
-        }
-    }
-
-    else
-    {
-        ofSetColor(param.fillColor);
-        ofSetLineWidth(1);
-        ofFill();
     }
 
     ofMesh mesh;
