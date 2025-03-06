@@ -54,60 +54,64 @@ void Box::drawFill()
     std::array<glm::vec3, 24> vertices = {
         // Front face
         glm::vec3(-halfWidth, -halfHeight, halfDepth),
-        {halfWidth, -halfHeight, halfDepth},
-        {halfWidth, halfHeight, halfDepth},
-        {-halfWidth, halfHeight, halfDepth},
+        {halfWidth,  -halfHeight, halfDepth },
+        {halfWidth,  halfHeight,  halfDepth },
+        {-halfWidth, halfHeight,  halfDepth },
 
         // Back face
         {-halfWidth, -halfHeight, -halfDepth},
-        {halfWidth, -halfHeight, -halfDepth},
-        {halfWidth, halfHeight, -halfDepth},
-        {-halfWidth, halfHeight, -halfDepth},
+        {halfWidth,  -halfHeight, -halfDepth},
+        {halfWidth,  halfHeight,  -halfDepth},
+        {-halfWidth, halfHeight,  -halfDepth},
 
         // Left face
         {-halfWidth, -halfHeight, -halfDepth},
-        {-halfWidth, -halfHeight, halfDepth},
-        {-halfWidth, halfHeight, halfDepth},
-        {-halfWidth, halfHeight, -halfDepth},
+        {-halfWidth, -halfHeight, halfDepth },
+        {-halfWidth, halfHeight,  halfDepth },
+        {-halfWidth, halfHeight,  -halfDepth},
 
         // Right face
-        {halfWidth, -halfHeight, -halfDepth},
-        {halfWidth, -halfHeight, halfDepth},
-        {halfWidth, halfHeight, halfDepth},
-        {halfWidth, halfHeight, -halfDepth},
+        {halfWidth,  -halfHeight, -halfDepth},
+        {halfWidth,  -halfHeight, halfDepth },
+        {halfWidth,  halfHeight,  halfDepth },
+        {halfWidth,  halfHeight,  -halfDepth},
 
         // Top face
-        {-halfWidth, halfHeight, -halfDepth},
-        {halfWidth, halfHeight, -halfDepth},
-        {halfWidth, halfHeight, halfDepth},
-        {-halfWidth, halfHeight, halfDepth},
+        {-halfWidth, halfHeight,  -halfDepth},
+        {halfWidth,  halfHeight,  -halfDepth},
+        {halfWidth,  halfHeight,  halfDepth },
+        {-halfWidth, halfHeight,  halfDepth },
 
         // Bottom face
         {-halfWidth, -halfHeight, -halfDepth},
-        {halfWidth, -halfHeight, -halfDepth},
-        {halfWidth, -halfHeight, halfDepth},
-        {-halfWidth, -halfHeight, halfDepth}
+        {halfWidth,  -halfHeight, -halfDepth},
+        {halfWidth,  -halfHeight, halfDepth },
+        {-halfWidth, -halfHeight, halfDepth }
     };
 
-    for (const auto& v : vertices) {
+    for (const auto &v : vertices)
+    {
         mesh.addVertex(v);
     }
 
     vector<unsigned int> indices = {
-        0, 1, 2,  0, 2, 3,    // Front
-        4, 6, 5,  4, 7, 6,    // Back
-        8, 9, 10,  8, 10, 11,  // Left
-        12, 14, 13,  12, 15, 14,  // Right
-        16, 17, 18,  16, 18, 19,  // Top
-        20, 22, 21,  20, 23, 22   // Bottom
+        0,  1,  2,  0,  2,  3,  // Front
+        4,  6,  5,  4,  7,  6,  // Back
+        8,  9,  10, 8,  10, 11, // Left
+        12, 14, 13, 12, 15, 14, // Right
+        16, 17, 18, 16, 18, 19, // Top
+        20, 22, 21, 20, 23, 22  // Bottom
     };
 
-    for (const auto& i : indices) {
+    for (const auto &i : indices)
+    {
         mesh.addIndex(i);
     }
 
-    if (hasTexture) {
-        for (int i = 0; i < 6; i++) {
+    if (hasTexture)
+    {
+        for (int i = 0; i < 6; i++)
+        {
             mesh.addTexCoord(glm::vec2(0, 0));
             mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
             mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
