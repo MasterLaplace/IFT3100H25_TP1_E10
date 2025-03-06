@@ -28,7 +28,7 @@ void Camera::toggleProjection()
 
 void Camera::update()
 {
-    float speed = 1.0;
+    float speed = 5.0;
     glm::vec3 movement(0.0);
 
     if (ofGetKeyPressed(OF_KEY_UP))

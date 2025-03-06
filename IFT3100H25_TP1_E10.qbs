@@ -47,7 +47,7 @@ Project{
             'src/plugin/geometry/BoundaryBox.hpp',
             'src/plugin/geometry/GeometricPrimitives.hpp',
             'src/plugin/geometry/Instance.hpp',
-            'src/plugin/geometry/ObjModels.hpp',
+            'src/plugin/geometry/ObjModel.hpp',
             'src/plugin/geometry/geometry.hpp',
             'src/plugin/image/ColourSpaces.hpp',
             'src/plugin/image/ColourSpaces.inl',

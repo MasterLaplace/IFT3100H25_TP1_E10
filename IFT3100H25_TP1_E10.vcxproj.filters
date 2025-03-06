@@ -269,7 +269,7 @@
     <ClInclude Include="src\app\Renderer.hpp">
       <Filter>src\app</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\geometry\ObjModels.hpp">
+    <ClInclude Include="src\plugin\geometry\ObjModel.hpp">
       <Filter>src\plugin\geometry</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\image\ColourSpaces.hpp">

@@ -5,7 +5,8 @@ void AppGui::setup(Controller *_controller)
 {
     controller = _controller; // Pointeur vers le controlleur pour communiquer avec lui.
     selectedTool = tool::POINT;
-    gui.setup(); // On initialise le gui.
+    gui.setup();                                 // On initialise le gui.
+    plugin::image::ResourceManager::construct(); // On initialise le gestionnaire de ressources.
 }
 
 void AppGui::draw()
@@ -33,6 +34,11 @@ void AppGui::drawMenuBar()
             if (ImGui::MenuItem("Importer image"))
             {
                 controller->importImage();
+            }
+
+            if (ImGui::MenuItem("Importer model"))
+            {
+                controller->importModel();
             }
 
             if (ImGui::MenuItem("Exporter image"))
@@ -437,13 +443,45 @@ void AppGui::drawSceneGraph()
     ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Graphe de scene");
 
-    ImGui::Text("Primitive :");
+    ImGui::Text("Primitives :");
     ImGui::Separator();
 
     for (auto &node : controller->getCanvasNodes())
     {
         displayNode(node, 0);
-        // cout << "Node : " << node->primitive->id << endl;
+    }
+
+    ImGui::Separator();
+    ImGui::Text("Images Importe :");
+
+    for (auto &node : plugin::image::ResourceManager::instance()->getImages())
+    {
+        if (ImGui::Selectable(node.first.c_str()))
+        {
+            controller->onImageSelected(node.first);
+        }
+    }
+
+    ImGui::Separator();
+    ImGui::Text("Models Importe :");
+
+    for (auto &node : plugin::image::ResourceManager::instance()->getModels())
+    {
+        if (ImGui::Selectable(node.first.c_str()))
+        {
+            controller->onModelSelected(node.first);
+        }
+    }
+
+    ImGui::Separator();
+    ImGui::Text("Prefabs Importe :");
+
+    for (auto &node : plugin::image::ResourceManager::instance()->getPrefabs())
+    {
+        if (ImGui::Selectable(node.first.c_str()))
+        {
+            controller->onPrefabSelected(node.first);
+        }
     }
 
     if (ImGui::Button("deselectionner"))
@@ -489,15 +527,19 @@ void AppGui::drawProprietiesPanel()
     // On va chercher la node selectionnee.
     int selectedNodeId = controller->getSelectedNodeId();
     NodePrimitive *node = controller->getNodeById(selectedNodeId);
+    std::string &imageName = controller->getSelectedImageName();
+    std::string &modelName = controller->getSelectedModelName();
+    std::string &prefabName = controller->getSelectedPrefabName();
 
     // On s'occupe des proprietes generiques en premier.
 
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
-    if (node != nullptr)
+    if (node != nullptr || !prefabName.empty())
     {
         ImGui::Text(node->getName().c_str());
         ImGui::Separator();
-        auto &primitive = node->getPrimitive();
+        const auto &primitive = (node != nullptr) ? node->getPrimitive() :
+                                                    *plugin::image::ResourceManager::instance()->getPrefab(prefabName);
 
         if (dynamic_cast<Point2D *>(primitive.get()) != nullptr)
         {
@@ -532,6 +574,22 @@ void AppGui::drawProprietiesPanel()
         if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
         {
             controller->deletePrimitiveButtonPressed(selectedNodeId);
+        }
+    }
+    else if (!imageName.empty())
+    {
+        auto image = plugin::image::ResourceManager::instance()->getImage(imageName);
+        if (image.has_value())
+        {
+            drawImageProperties(*image, imageName);
+        }
+    }
+    else if (!modelName.empty())
+    {
+        auto model = plugin::image::ResourceManager::instance()->getModel(modelName);
+        if (model.has_value())
+        {
+            drawModelProperties(*model, modelName);
         }
     }
 
@@ -571,6 +629,78 @@ void AppGui::drawPointProperties(const std::shared_ptr<Point2D> &point)
     {
         point->param.fillColor = ofColor(color[0] * 255, color[1] * 255, color[2] * 255);
     }
+}
+
+void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &image, const std::string &imageName)
+{
+    char newImageName[128];
+    strncpy(newImageName, imageName.c_str(), sizeof(imageName));
+    newImageName[sizeof(imageName) - 1] = '\0';
+
+    ImGui::Text("Nom :");
+    if (ImGui::InputText("Nom", newImageName, sizeof(imageName)))
+    {
+        plugin::image::ResourceManager::instance()->renameImage(imageName, newImageName);
+    }
+
+    ImGui::Text("Taille : %.2fx%.2f", image->getWidth(), image->getHeight());
+
+    ImGui::Text("Espace de Couleur :");
+    if (ImGui::BeginCombo("Espace de Couleur", "RGB"))
+    {
+        if (ImGui::Selectable("RGB"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::RGB);
+        }
+        if (ImGui::Selectable("Grayscale"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::Grayscale);
+        }
+        if (ImGui::Selectable("HSB"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::HSB);
+        }
+        if (ImGui::Selectable("YUV"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::YUV);
+        }
+        if (ImGui::Selectable("YCoCg"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::YCoCg);
+        }
+        if (ImGui::Selectable("CoCg_Y"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::CoCg_Y);
+        }
+        ImGui::EndCombo();
+    }
+
+    ImGui::Text("Prévisualisation :");
+#if 0
+    ImGui::Image((ImTextureID)(intptr_t)image->getTexture().getTextureData().textureID, ImVec2(image->getWidth(), image->getHeight()));
+#else
+    ImGui::Text("<-");
+    ofSetColor(255);
+    float x = (ofGetWidth() - image->getWidth()) / 2;
+    float y = (ofGetHeight() - image->getHeight()) / 2;
+    image->draw(x, y);
+#endif
+}
+
+void AppGui::drawModelProperties(const std::shared_ptr<plugin::geometry::ObjModel> &model, const std::string &modelName)
+{
+    char newModelName[128];
+    strncpy(newModelName, modelName.c_str(), sizeof(modelName));
+    newModelName[sizeof(modelName) - 1] = '\0';
+
+    ImGui::Text("Nom :");
+    if (ImGui::InputText("Nom", newModelName, sizeof(modelName)))
+    {
+        plugin::image::ResourceManager::instance()->renameModel(modelName, newModelName);
+    }
+
+    ImGui::Text("Nombre de vertices : %d", model->getNumVertices());
+    ImGui::Text("Nombre de faces : %d", model->getNumFaces());
 }
 
 void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
@@ -823,6 +953,9 @@ void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primiti
     glm::vec3 position = primitive->param.position;
     glm::vec3 rotation = primitive->param.rotation;
     glm::vec3 scale = primitive->param.scale;
+    char imageName[128];
+    strncpy(imageName, primitive->param.imageName.c_str(), sizeof(imageName));
+    imageName[sizeof(imageName) - 1] = '\0';
 
     ImGui::Text("Position :");
     if (ImGui::DragFloat2("Position", &position.x, 0.1f))
@@ -841,6 +974,12 @@ void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primiti
     {
         primitive->param.scale = scale;
     }
+
+    ImGui::Text("Image :");
+    if (ImGui::InputText("Image", imageName, sizeof(imageName)))
+    {
+        primitive->param.imageName = imageName;
+    }
 }
 
 void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive)
@@ -848,6 +987,9 @@ void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primiti
     glm::vec3 position = primitive->param.position;
     glm::vec3 rotation = primitive->param.rotation;
     glm::vec3 scale = primitive->param.scale;
+    char imageName[128];
+    strncpy(imageName, primitive->param.imageName.c_str(), sizeof(imageName));
+    imageName[sizeof(imageName) - 1] = '\0';
 
     ImGui::Text("Position :");
     if (ImGui::DragFloat3("Position", &position.x, 0.1f))
@@ -865,5 +1007,11 @@ void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primiti
     if (ImGui::DragFloat3("Echelle", &scale.x, 0.1f))
     {
         primitive->param.scale = scale;
+    }
+
+    ImGui::Text("Image :");
+    if (ImGui::InputText("Image", imageName, sizeof(imageName)))
+    {
+        primitive->param.imageName = imageName;
     }
 }

@@ -10,14 +10,15 @@
 #ifndef IMPORTING_HPP_
 #define IMPORTING_HPP_
 
-#include "../geometry/ObjModels.hpp"
+#include "../geometry/ObjModel.hpp"
+#include "Image.hpp"
 #include "ofMain.h"
 
 namespace plugin::image::Importing {
 
-bool importImage(ofImage &image);
+bool importImage();
 
-bool importModel(geometry::ObjModels &model);
+bool importModel();
 
 } // namespace plugin::image::Importing
 

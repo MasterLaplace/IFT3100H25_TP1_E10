@@ -27,7 +27,14 @@ public:
     void onOutlineColorChanged(ofColor newColor);
     void onFilledChanged(bool isFilled);
     void onPrimitiveSelected(int id);
-    int getSelectedNodeId();
+    void onImageSelected(const std::string &name);
+    void onModelSelected(const std::string &name);
+    void onPrefabSelected(const std::string &name);
+
+    [[nodiscard]] int getSelectedNodeId();
+    [[nodiscard]] std::string &getSelectedImageName();
+    [[nodiscard]] std::string &getSelectedModelName();
+    [[nodiscard]] std::string &getSelectedPrefabName();
 
 private:
     State *currentState;

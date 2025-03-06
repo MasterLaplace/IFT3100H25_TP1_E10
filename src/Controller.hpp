@@ -32,6 +32,7 @@ public:
 
     // Methodes pour parler avec le gui.
     void importImage();
+    void importModel();
     void exportImage();
 
     void onToolSelected(AppGui::tool tool);
@@ -49,6 +50,9 @@ public:
     void onBackgroundColorChanged(ofColor color);
 
     void onPrimitiveSelected(uint32_t id);
+    void onImageSelected(const std::string &name);
+    void onModelSelected(const std::string &name);
+    void onPrefabSelected(const std::string &name);
     void onEndPositionChanged(uint32_t id, glm::vec2 newPos);
 
     void toggleCameraProjection();
@@ -60,6 +64,11 @@ public:
 
     void collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids);
     [[nodiscard]] int getSelectedNodeId();
+    [[nodiscard]] std::string &getSelectedImageName();
+    [[nodiscard]] std::string &getSelectedModelName();
+    [[nodiscard]] std::string &getSelectedPrefabName();
+
+    void setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace);
 
     bool is3d = false;
 

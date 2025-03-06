@@ -6,7 +6,7 @@ C'est une classe temporaire de UI juste pour donner une idée de comment l'impl�
 
 #include "Node.hpp"
 #include "ofxImGui.h"
-#include "plugin/primitive/primitives.hpp"
+#include "plugin/image/ResourceManager.hpp"
 #include <unordered_map>
 
 using namespace plugin::primitive;
@@ -55,6 +55,8 @@ private:
     void drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive);
     void drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::Ellipsoid> &ellipsoid);
     void drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box);
+    void drawImageProperties(const std::shared_ptr<plugin::image::Image> &image, const std::string &imageName);
+    void drawModelProperties(const std::shared_ptr<plugin::geometry::ObjModel> &model, const std::string &modelName);
 
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};

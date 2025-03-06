@@ -2,3 +2,4 @@
 #include "Histogram.hpp"
 #include "Importing.hpp"
 #include "Sampling.hpp"
+#include "ResourceManager.hpp"

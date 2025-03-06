@@ -13,14 +13,18 @@
 
 namespace plugin::geometry {
 
-class ObjModels {
+class ObjModel {
 public:
-    ObjModels() = default;
-    ~ObjModels() = default;
+    ObjModel() = default;
+    ~ObjModel() = default;
 
     bool load(const std::string &path) { return yourModel.load(path); }
 
     void draw() { yourModel.draw(OF_MESH_FILL); }
+
+    int getNumVertices() { return yourModel.getMesh(0).getNumVertices(); }
+
+    int getNumFaces() { return yourModel.getMesh(0).getNumIndices() / 3; }
 
 protected:
 public:

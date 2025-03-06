@@ -1,4 +1,5 @@
 #include "Polygon.hpp"
+#include "../image/ResourceManager.hpp"
 
 namespace plugin::primitive {
 
@@ -25,16 +26,49 @@ void Polygon::draw()
 
 void Polygon::drawFill()
 {
-    ofSetColor(param.fillColor);
-    ofSetLineWidth(1);
-    ofFill();
-
-    ofBeginShape();
-    for (auto &point : points)
+    bool hasTexture = false;
+    std::optional<std::shared_ptr<ofImage>> image;
+    if (!param.imageName.empty())
     {
-        ofVertex(point);
+        image = image::ResourceManager::instance()->getImage(param.imageName);
+        if (image.has_value())
+        {
+            ofSetColor(255);
+            image->get()->getTexture().bind();
+            hasTexture = true;
+        }
+        else
+        {
+            ofSetColor(param.fillColor);
+            ofSetLineWidth(1);
+            ofFill();
+        }
     }
-    ofEndShape(true);
+
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+
+    for (const auto &point : points)
+    {
+        mesh.addVertex(glm::vec3(point, 0));
+    }
+
+    if (hasTexture)
+    {
+        for (const auto &point : points)
+        {
+            float u = (point.x - param.position.x) / param.scale.x * image->get()->getWidth();
+            float v = (point.y - param.position.y) / param.scale.y * image->get()->getHeight();
+            mesh.addTexCoord(glm::vec2(u, v));
+        }
+    }
+
+    mesh.draw();
+
+    if (hasTexture)
+    {
+        image->get()->getTexture().unbind();
+    }
 }
 
 void Polygon::drawOutline()

@@ -1,6 +1,8 @@
 #include "Rectangle.hpp"
+#include "../image/ResourceManager.hpp"
 
 namespace plugin::primitive {
+
 Rectangle::Rectangle(PrimitiveParams _params, glm::vec2 _dimensions) : Primitive(_params) { dimensions = _dimensions; }
 
 void Rectangle::draw()
@@ -12,23 +14,58 @@ void Rectangle::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
 
-    if (param.isFilled)
-    {
-        drawFill();
-    }
-
-    drawOutline();
+    (param.isFilled) ? drawFill() : drawOutline();
 
     ofPopMatrix();
 }
 
 void Rectangle::drawFill()
 {
-    ofSetColor(param.fillColor);
-    ofSetLineWidth(1);
-    ofFill();
+    bool hasTexture = false;
+    std::optional<std::shared_ptr<ofImage>> image;
+    if (!param.imageName.empty())
+    {
+        std::cout << "Rectangle::drawFill() - imageName: " << param.imageName;
+        image = image::ResourceManager::instance()->getImage(param.imageName);
+        if (image.has_value())
+        {
+            ofSetColor(255);
+            image->get()->getTexture().bind();
+            hasTexture = true;
+            std::cout << " - hasTexture: true";
+        }
+        else
+        {
+            ofSetColor(param.fillColor);
+            ofSetLineWidth(1);
+            ofFill();
+            std::cout << " - hasTexture: false";
+        }
+        std::cout << std::endl;
+    }
 
-    ofDrawRectangle(0, 0, dimensions.x, dimensions.y);
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+
+    mesh.addVertex(glm::vec3(0, 0, 0));
+    mesh.addVertex(glm::vec3(dimensions.x, 0, 0));
+    mesh.addVertex(glm::vec3(dimensions.x, dimensions.y, 0));
+    mesh.addVertex(glm::vec3(0, dimensions.y, 0));
+
+    if (hasTexture)
+    {
+        mesh.addTexCoord(glm::vec2(0, 0));
+        mesh.addTexCoord(glm::vec2(image->get()->getWidth(), 0));
+        mesh.addTexCoord(glm::vec2(image->get()->getWidth(), image->get()->getHeight()));
+        mesh.addTexCoord(glm::vec2(0, image->get()->getHeight()));
+    }
+
+    mesh.draw();
+
+    if (hasTexture)
+    {
+        image->get()->getTexture().unbind();
+    }
 }
 
 void Rectangle::drawOutline()

@@ -166,7 +166,7 @@
     <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />
-    <ClInclude Include="src\plugin\geometry\ObjModels.hpp" />
+    <ClInclude Include="src\plugin\geometry\ObjModel.hpp" />
     <ClInclude Include="src\plugin\image\ColourSpaces.hpp" />
     <ClInclude Include="src\plugin\image\ColourSpaces.inl" />
     <ClInclude Include="src\plugin\image\Exporting.hpp" />

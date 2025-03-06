@@ -43,7 +43,7 @@ void StateMachine::update()
 
 void StateMachine::mousePressed(int x, int y, int button)
 {
-    // On transmet la position de la sourie à l'état.
+    // On transmet la position de la sourie ï¿½ l'ï¿½tat.
     // L'input provient de Application.
     mousePressedPosition = glm::vec2(x, y);
     isMousePressed = true;
@@ -73,8 +73,38 @@ void StateMachine::onOutlineColorChanged(ofColor newColor) { currentState->outli
 
 void StateMachine::onFilledChanged(bool isFilled) { currentState->isFilled = isFilled; }
 
-void StateMachine::onPrimitiveSelected(int id) { currentState->selectedPrimitiveId = id; }
+void StateMachine::onPrimitiveSelected(int id)
+{
+    currentState->selectedPrimitiveId = id;
+    currentState->selectedImageName = "";
+    currentState->selectedModelName = "";
+    currentState->selectedPrefabName = "";
+}
+void StateMachine::onImageSelected(const std::string &name)
+{
+    currentState->selectedPrimitiveId = -1;
+    currentState->selectedImageName = name;
+    currentState->selectedModelName = "";
+    currentState->selectedPrefabName = "";
+}
+void StateMachine::onModelSelected(const std::string &name)
+{
+    currentState->selectedPrimitiveId = -1;
+    currentState->selectedImageName = "";
+    currentState->selectedModelName = name;
+    currentState->selectedPrefabName = "";
+}
+void StateMachine::onPrefabSelected(const std::string &name)
+{
+    currentState->selectedPrimitiveId = -1;
+    currentState->selectedImageName = "";
+    currentState->selectedModelName = "";
+    currentState->selectedPrefabName = name;
+}
 
 int StateMachine::getSelectedNodeId() { return currentState->selectedPrimitiveId; }
+std::string &StateMachine::getSelectedImageName() { return currentState->selectedImageName; }
+std::string &StateMachine::getSelectedModelName() { return currentState->selectedModelName; }
+std::string &StateMachine::getSelectedPrefabName() { return currentState->selectedPrefabName; }
 
 } // namespace plugin::states

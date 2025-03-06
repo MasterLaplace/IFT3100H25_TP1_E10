@@ -13,15 +13,6 @@ void Controller::setup()
     param.outlineColor = ofColor(0, 0, 0);
     param.isFilled = true;
 
-    auto cube = std::make_shared<plugin::primitive::Cube>(param, 10.0f);
-    auto node = new NodePrimitive(cube, "Cube");
-    canvas3d->nodes.push_back(node);
-
-    auto ellipsoid =
-        std::make_shared<plugin::primitive::Ellipsoid>(param, glm::vec3(10.0f, 10.0f, 10.0f), 50.0f, 50.0f);
-    auto node2 = new NodePrimitive(ellipsoid, "Ellipsoid");
-    canvas3d->nodes.push_back(node2);
-
     // On initialise l'�tat du Controlleur pour dessiner des points.
     // On pourrait changer l'�tat initial au besoin.
     stateMachine.changeState(new DrawPointState());
@@ -114,7 +105,9 @@ void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseRel
 
 void Controller::toggleCanvas() { is3d = !is3d; }
 
-void Controller::importImage() { importer.importImage(); }
+void Controller::importImage() { plugin::image::Importing::importImage(); }
+
+void Controller::importModel() { plugin::image::Importing::importModel(); }
 
 void Controller::exportImage() { exporter.exportImage(); }
 
@@ -141,9 +134,15 @@ void Controller::onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::Pr
     node->getPrimitive()->param.isFilled = params.isFilled;
 }
 
-void Controller::onBackgroundColorChanged(ofColor color) { canvas2d->setBackgroundColor(color); }
+void Controller::onBackgroundColorChanged(ofColor color)
+{
+    (is3d) ? canvas3d->setBackgroundColor(color) : canvas2d->setBackgroundColor(color);
+}
 
 void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSelected(id); }
+void Controller::onImageSelected(const std::string &name) { stateMachine.onImageSelected(name); }
+void Controller::onModelSelected(const std::string &name) { stateMachine.onModelSelected(name); }
+void Controller::onPrefabSelected(const std::string &name) { stateMachine.onPrefabSelected(name); }
 
 std::vector<uint32_t> Controller::getPrimitiveId()
 {
@@ -173,6 +172,12 @@ void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &
 }
 
 int Controller::getSelectedNodeId() { return stateMachine.getSelectedNodeId(); }
+
+std::string &Controller::getSelectedImageName() { return stateMachine.getSelectedImageName(); }
+
+std::string &Controller::getSelectedModelName() { return stateMachine.getSelectedModelName(); }
+
+std::string &Controller::getSelectedPrefabName() { return stateMachine.getSelectedPrefabName(); }
 
 void Controller::onToolSelected(AppGui::tool _tool)
 {
@@ -226,8 +231,12 @@ void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
 bool Controller::isCameraOrthographic() { return camera.isOrthographic; }
 
-// void Controller::load3DModel(const std::string& filePath)
-// {
-//     ObjModels objmodel(filePath);
-//     objmodels.emplace_back(objmodel);
-// }
+
+void Controller::setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace)
+{
+    auto image = plugin::image::ResourceManager::instance()->getImage(name);
+    if (image.has_value())
+    {
+        image->get()->convert(colorSpace);
+    }
+}

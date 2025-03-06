@@ -48,18 +48,7 @@ public:
 
 private:
     Controller controller;
-    // Controller3D controller3D;
     Controller *currentController;
 
     bool isInterceptedByImGui();
-
-    /*
-    Vestige de l'histogramme.
-    Une fois l'histogramme bien implémenté je vais retirer ça.
-
-    ofImage _image;
-    image::Histogram _histogram;
-    bool _is_histogram_drawn = false;
-    char _histogram_color = 'r';
-    */
 };

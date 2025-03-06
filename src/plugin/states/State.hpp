@@ -11,6 +11,9 @@ public:
     glm::vec2 mousePressedPosition;
     bool isMousePressed = false;
     int selectedPrimitiveId = -1;
+    std::string selectedImageName = "";
+    std::string selectedModelName = "";
+    std::string selectedPrefabName = "";
 
     float outlineWidth = 1.0f;
     ofColor fillColor = ofColor::black;

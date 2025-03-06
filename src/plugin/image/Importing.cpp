@@ -1,25 +1,38 @@
 #include "Importing.hpp"
+#include "ResourceManager.hpp"
 
 namespace plugin::image::Importing {
 
-bool importImage(ofImage &image)
+bool importImage()
 {
     ofFileDialogResult result = ofSystemLoadDialog("Importer l'image");
 
     if (!result.bSuccess)
         return false;
 
-    return image.load(result.getPath());
+    auto image = std::make_shared<Image>();
+
+    if (image->load(result.getPath()))
+    {
+        return ResourceManager::instance()->addImage(image, result.getName());
+    }
+    return false;
 }
 
-bool importModel(geometry::ObjModels &model)
+bool importModel()
 {
     ofFileDialogResult result = ofSystemLoadDialog("Importer le modèle");
 
     if (!result.bSuccess)
         return false;
 
-    return model.load(result.getPath());
+    auto model = std::make_shared<geometry::ObjModel>();
+
+    if (model->load(result.getPath()))
+    {
+        return ResourceManager::instance()->addModel(model, result.getName());
+    }
+    return false;
 }
 
 } // namespace plugin::image::Importing

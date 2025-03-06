@@ -1,4 +1,5 @@
 #include "Ellipsoid.hpp"
+#include "../image/ResourceManager.hpp"
 
 namespace plugin::primitive {
 
@@ -12,12 +13,6 @@ Ellipsoid::Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices, in
 void Ellipsoid::draw()
 {
     ofEnableAntiAliasing();
-    (param.isFilled) ? drawFill() : drawOutline();
-    ofDisableAntiAliasing();
-}
-
-void Ellipsoid::drawFill()
-{
     ofPushMatrix();
     ofTranslate(param.position);
     ofRotateXDeg(param.rotation.x);
@@ -25,9 +20,41 @@ void Ellipsoid::drawFill()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
-    ofSetColor(param.fillColor);
-    ofSetLineWidth(1);
-    ofFill();
+    ofLight light;
+    light.setPosition(param.position.x, param.position.y, param.position.z + 500); // Positionner la lumière
+    light.enable();
+
+    (param.isFilled) ? drawFill() : drawOutline();
+
+    light.disable();
+
+    ofPopMatrix();
+    ofDisableAntiAliasing();
+}
+
+void Ellipsoid::drawFill()
+{
+    bool hasTexture = false;
+    std::optional<std::shared_ptr<ofImage>> image;
+    if (!param.imageName.empty())
+    {
+        image = image::ResourceManager::instance()->getImage(param.imageName);
+        if (image.has_value())
+        {
+            ofSetColor(255);
+            image->get()->getTexture().bind();
+            hasTexture = true;
+        }
+        else
+        {
+            ofSetColor(param.fillColor);
+            ofSetLineWidth(1);
+            ofFill();
+        }
+    }
+
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 
     for (int i = 0; i <= _numStacks; ++i)
     {
@@ -39,27 +66,53 @@ void Ellipsoid::drawFill()
         float z1 = sin(lat1);
         float zr1 = cos(lat1);
 
-        ofBeginShape();
         for (int j = 0; j <= _numSlices; ++j)
         {
             float lng = 2 * PI * (float) (j - 1) / _numSlices;
             float x = cos(lng);
             float y = sin(lng);
 
-            ofVertex(x * zr0 * _radius.x, y * zr0 * _radius.y, z0 * _radius.z);
-            ofVertex(x * zr1 * _radius.x, y * zr1 * _radius.y, z1 * _radius.z);
+            glm::vec3 v0 = glm::vec3(x * zr0 * _radius.x, y * zr0 * _radius.y, z0 * _radius.z);
+            glm::vec3 v1 = glm::vec3(x * zr1 * _radius.x, y * zr1 * _radius.y, z1 * _radius.z);
+
+            mesh.addVertex(v0);
+            mesh.addVertex(v1);
+
+            if (hasTexture)
+            {
+                float u0 = (float) j / _numSlices;
+                float v0 = (float) (i - 1) / _numStacks;
+                float u1 = (float) j / _numSlices;
+                float v1 = (float) i / _numStacks;
+
+                mesh.addTexCoord(ofVec2f(u0 * image->get()->getWidth(), v0 * image->get()->getHeight()));
+                mesh.addTexCoord(ofVec2f(u1 * image->get()->getWidth(), v1 * image->get()->getHeight()));
+            }
         }
-        ofEndShape(true);
     }
 
-    ofPopMatrix();
+    for (size_t i = 0; i < mesh.getNumVertices() - 2; i += 2)
+    {
+        mesh.addIndex(i);
+        mesh.addIndex(i + 1);
+        mesh.addIndex(i + 2);
+
+        mesh.addIndex(i + 1);
+        mesh.addIndex(i + 2);
+        mesh.addIndex(i + 3);
+    }
+
+    mesh.draw();
+
+    if (hasTexture)
+    {
+        image->get()->getTexture().unbind();
+    }
 }
 
 void Ellipsoid::drawOutline()
 {
     // https://stackoverflow.com/questions/28806871/how-to-render-sphere-using-open-gl-c-and-not-glut-glu
-    ofPushMatrix();
-    ofTranslate(param.position);
     ofSetColor(param.outlineColor);
     ofSetLineWidth(param.outlineWidth);
     ofNoFill();
@@ -86,8 +139,6 @@ void Ellipsoid::drawOutline()
         }
         ofEndShape(true);
     }
-
-    ofPopMatrix();
 }
 
 bool Ellipsoid::isInside(const glm::vec3 &point)
