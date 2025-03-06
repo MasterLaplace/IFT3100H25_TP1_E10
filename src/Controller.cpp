@@ -231,7 +231,6 @@ void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
 bool Controller::isCameraOrthographic() { return camera.isOrthographic; }
 
-
 void Controller::setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace)
 {
     auto image = plugin::image::ResourceManager::instance()->getImage(name);

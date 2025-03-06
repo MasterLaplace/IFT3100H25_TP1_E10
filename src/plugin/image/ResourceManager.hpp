@@ -8,9 +8,9 @@
 #ifndef RESOURCEMANAGER_HPP_
 #define RESOURCEMANAGER_HPP_
 
+#include "../primitive/Primitive.hpp"
 #include "Exporting.hpp"
 #include "Importing.hpp"
-#include "../primitive/Primitive.hpp"
 #include <ofSingleton.hpp>
 
 namespace plugin::image {

@@ -13,16 +13,14 @@
 namespace plugin::image {
 
 class Image : public ofImage {
-    public:
-        Image() : ofImage() {
-            type = OF_IMAGE_COLOR_ALPHA;
-        }
-        ~Image() = default;
+public:
+    Image() : ofImage() { type = OF_IMAGE_COLOR_ALPHA; }
+    ~Image() = default;
 
-        void convert(ColourSpaces::Type ntype);
+    void convert(ColourSpaces::Type ntype);
 
-    private:
-        ColourSpaces::Type _type = ColourSpaces::Type::RGBA;
+private:
+    ColourSpaces::Type _type = ColourSpaces::Type::RGBA;
 };
 
 } // namespace plugin::image
