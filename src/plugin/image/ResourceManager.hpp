@@ -11,8 +11,8 @@
 #include "../primitive/Primitive.hpp"
 #include "Exporting.hpp"
 #include "Importing.hpp"
-#include <ofSingleton.hpp>
 #include "optional"
+#include <ofSingleton.hpp>
 
 namespace plugin::image {
 
