@@ -14,7 +14,9 @@ void Rectangle::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y);
 
-    (param.isFilled) ? drawFill() : drawOutline();
+    if (param.isFilled)
+        drawFill();
+    drawOutline();
 
     ofPopMatrix();
 }
@@ -39,7 +41,12 @@ void Rectangle::drawFill()
             ofFill();
         }
     }
-
+    else
+    {
+        ofSetColor(param.fillColor);
+        ofSetLineWidth(1);
+        ofFill();
+    }
     ofMesh mesh;
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
