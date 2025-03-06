@@ -15,7 +15,8 @@ void Ellipse::draw()
     ofScale(param.scale.x, param.scale.y);
 
     ofEnableAntiAliasing();
-    if (param.isFilled) drawFill();
+    if (param.isFilled)
+        drawFill();
     drawOutline();
     ofDisableAntiAliasing();
 
@@ -65,8 +66,8 @@ void Ellipse::drawFill()
     for (int i = 0; i <= numSegments; ++i)
     {
         float theta = 2.0f * PI * float(i) / float(numSegments);
-            float x = radius.x * 0.5f * cosf(theta);
-            float y = radius.y * 0.5f * sinf(theta);
+        float x = radius.x * 0.5f * cosf(theta);
+        float y = radius.y * 0.5f * sinf(theta);
 
         mesh.addVertex(glm::vec3(x, y, 0));
         if (hasTexture)
