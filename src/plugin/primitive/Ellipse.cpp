@@ -15,7 +15,8 @@ void Ellipse::draw()
     ofScale(param.scale.x, param.scale.y);
 
     ofEnableAntiAliasing();
-    (param.isFilled) ? drawFill() : drawOutline();
+    if (param.isFilled) drawFill();
+    drawOutline();
     ofDisableAntiAliasing();
 
     ofPopMatrix();
@@ -24,8 +25,8 @@ void Ellipse::draw()
 void Ellipse::drawOutline()
 {
     ofSetColor(param.outlineColor);
-    ofNoFill();
     ofSetLineWidth(param.outlineWidth);
+    ofNoFill();
 
     ofDrawEllipse(0, 0, radius.x, radius.y);
 }
@@ -40,6 +41,7 @@ void Ellipse::drawFill()
         if (image.has_value())
         {
             ofSetColor(255);
+            ofSetLineWidth(1);
             image->get()->getTexture().bind();
             hasTexture = true;
         }
@@ -63,8 +65,8 @@ void Ellipse::drawFill()
     for (int i = 0; i <= numSegments; ++i)
     {
         float theta = 2.0f * PI * float(i) / float(numSegments);
-        float x = radius.x * cosf(theta);
-        float y = radius.y * sinf(theta);
+            float x = radius.x * 0.5f * cosf(theta);
+            float y = radius.y * 0.5f * sinf(theta);
 
         mesh.addVertex(glm::vec3(x, y, 0));
         if (hasTexture)
