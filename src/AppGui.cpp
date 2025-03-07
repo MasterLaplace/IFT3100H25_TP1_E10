@@ -974,6 +974,10 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
 void AppGui::drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model)
 {
     drawTransformProperties3D(model);
+
+    ImGui::Text("Remplir :");
+    if (ImGui::Checkbox("Remplir", &(model->param.isFilled)))
+        ;
 }
 
 void AppGui::drawTransformProperties2D(const std::shared_ptr<Primitive> &primitive)
