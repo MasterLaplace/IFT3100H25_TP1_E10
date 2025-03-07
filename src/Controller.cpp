@@ -89,7 +89,7 @@ void Controller::keyReleased(int key)
         gui.selectedTool = AppGui::tool::RECTANGLE;
         break;
     case 'e':
-    case 'E': 
+    case 'E':
         drawEllipseButtonPressed();
         gui.selectedTool = AppGui::tool::ELLIPSE;
         break;
