@@ -12,13 +12,10 @@ void Controller::setup()
     // C'est ici qu'on va initialiser l'interface pour le 2D.
     gui.setup(this);
     histogramUI.setup(this);
-
-    importer.setup();
 }
 
 void Controller::update()
 {
-    importer.update();
     stateMachine.update();
     camera.update();
 }
@@ -34,8 +31,6 @@ void Controller::draw()
     else
     {
         canvas2d->draw();
-        // On dessine ensuite l'image import�e.
-        importer.draw();
     }
 
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris

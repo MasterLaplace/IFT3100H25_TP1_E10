@@ -109,7 +109,6 @@
     <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\DrawingTools.cpp" />
     <ClCompile Include="src\HistogramUI.cpp" />
-    <ClCompile Include="src\Importation.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
     <ClCompile Include="src\plugin\image\Exporting.cpp" />
@@ -161,7 +160,6 @@
     <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\DrawingTools.hpp" />
     <ClInclude Include="src\HistogramUI.hpp" />
-    <ClInclude Include="src\Importation.hpp" />
     <ClInclude Include="src\Node.hpp" />
     <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\app\Application.hpp" />

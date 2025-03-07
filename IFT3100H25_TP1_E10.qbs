@@ -21,8 +21,6 @@ Project{
             'src/DrawingTools.hpp',
             'src/HistogramUI.cpp',
             'src/HistogramUI.hpp',
-            'src/Importation.cpp',
-            'src/Importation.hpp',
             'src/Node.inl',
             'src/Node.hpp',
             'src/app/Application.cpp',

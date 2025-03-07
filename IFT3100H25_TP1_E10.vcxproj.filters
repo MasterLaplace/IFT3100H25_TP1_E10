@@ -16,9 +16,6 @@
     <ClCompile Include="src\HistogramUI.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Importation.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\app\Application.cpp">
       <Filter>src\app</Filter>
     </ClCompile>
@@ -252,9 +249,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\HistogramUI.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Importation.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Node.hpp">

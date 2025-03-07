@@ -5,7 +5,6 @@
 #include "Canvas.hpp"
 #include "Controller.hpp"
 #include "HistogramUI.hpp"
-#include "Importation.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
 #include "plugin/states/states.hpp"
@@ -82,7 +81,6 @@ private:
     Canvas *canvas3d;
     AppGui gui;
     HistogramUI histogramUI;
-    Importation importer;
     Exporting exporter;
     Camera camera;
 };
