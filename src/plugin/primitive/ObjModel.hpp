@@ -12,7 +12,6 @@
 #include "../geometry/BoundaryBox.hpp"
 #include "Primitive.hpp"
 #include "ofxAssimpModelLoader.h"
-#include "../geometry/BoundaryBox.hpp"
 
 namespace plugin::primitive {
 
