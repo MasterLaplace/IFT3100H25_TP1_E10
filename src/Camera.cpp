@@ -62,5 +62,31 @@ void Camera::update()
         movement += getSideDir() * speed; // Droite
     }
 
+    if (ofGetKeyPressed('1'))
+    {
+        setPosition(glm::vec3(0.0f, 0.0f, 50.0f)); // Front view
+        lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    }
+    if (ofGetKeyPressed('2'))
+    {
+        setPosition(glm::vec3(50.0f, 0.0f, 0.0f)); // Right view
+        lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    }
+    if (ofGetKeyPressed('3'))
+    {
+        setPosition(glm::vec3(-50.0f, 0.0f, 0.0f)); // Left view
+        lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    }
+    if (ofGetKeyPressed('4'))
+    {
+        setPosition(glm::vec3(0.0f, 50.0f, 0.0f)); // Top view
+        lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    }
+    if (ofGetKeyPressed('5'))
+    {
+        setPosition(glm::vec3(0.0f, -50.0f, 0.0f)); // Bottom view
+        lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
+    }
+
     move(movement);
 }
