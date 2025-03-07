@@ -661,6 +661,10 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
         {
             controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::RGB);
         }
+        if (ImGui::Selectable("RGBA"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::RGBA);
+        }
         if (ImGui::Selectable("Grayscale"))
         {
             controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::Grayscale);
@@ -668,6 +672,10 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
         if (ImGui::Selectable("HSB"))
         {
             controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::HSB);
+        }
+        if (ImGui::Selectable("HLS"))
+        {
+            controller->setImageColorSpace(imageName, plugin::image::ColourSpaces::Type::HLS);
         }
         if (ImGui::Selectable("YUV"))
         {

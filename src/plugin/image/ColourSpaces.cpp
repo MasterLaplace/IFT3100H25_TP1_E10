@@ -2,10 +2,25 @@
 
 namespace plugin::image::ColourSpaces {
 
+std::string type_to_string(Type type)
+{
+    switch (type)
+    {
+    case Type::RGB: return "RGB";
+    case Type::RGBA: return "RGBA";
+    case Type::YUV: return "YUV";
+    case Type::YCoCg: return "YCoCg";
+    case Type::CoCg_Y: return "CoCg_Y";
+    case Type::Grayscale: return "Grayscale";
+    case Type::HSB: return "HSB";
+    case Type::HLS: return "HLS";
+    default: return "Unknown";
+    }
+}
+
 void convert_rgb_to_rgba(ofImage &dst, const ofImage &src, int width, int height)
 {
     dst.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
-#if 0
     const ofPixels &srcPixels = src.getPixels();
     ofPixels &dstPixels = dst.getPixels();
 
@@ -14,16 +29,12 @@ void convert_rgb_to_rgba(ofImage &dst, const ofImage &src, int width, int height
         ofColor color = srcPixels.getColor(i % width, i / width);
         dstPixels.setColor(i % width, i / width, ofColor(color.r, color.g, color.b, 255));
     }
-#else
-    dst.setFromPixels(src.getPixels());
-#endif
     dst.update();
 }
 
 void convert_rgba_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
 {
     dst.allocate(width, height, OF_IMAGE_COLOR);
-#if 0
     const ofPixels &srcPixels = src.getPixels();
     ofPixels &dstPixels = dst.getPixels();
 
@@ -32,15 +43,12 @@ void convert_rgba_to_rgb(ofImage &dst, const ofImage &src, int width, int height
         ofColor color = srcPixels.getColor(i % width, i / width);
         dstPixels.setColor(i % width, i / width, ofColor(color.r, color.g, color.b));
     }
-#else
-    dst.setFromPixels(src.getPixels());
-#endif
     dst.update();
 }
 
 void convert_rgb_to_yuv(ofImage &dst, const ofImage &src, int width, int height)
 {
-    dst.allocate(width, height, OF_IMAGE_COLOR);
+    dst.allocate(width, height, OF_IMAGE_UNDEFINED);
     const ofPixels &srcPixels = src.getPixels();
     ofPixels &dstPixels = dst.getPixels();
 
@@ -90,7 +98,7 @@ void convert_yuv_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
 
 void convert_rgb_to_YCoCg(ofImage &dst, const ofImage &src, int width, int height)
 {
-    dst.allocate(width, height, OF_IMAGE_COLOR);
+    dst.allocate(width, height, OF_IMAGE_UNDEFINED);
     for (int i = 0; i < width * height; i++)
     {
         ofColor color = src.getColor(i % width, i / width);
@@ -124,7 +132,7 @@ void convert_YCoCg_to_rgb(ofImage &dst, const ofImage &src, int width, int heigh
 
 void convert_rgb_to_CoCg_Y(ofImage &dst, const ofImage &src, int width, int height)
 {
-    dst.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
+    dst.allocate(width, height, OF_IMAGE_UNDEFINED);
     for (int i = 0; i < width * height; i++)
     {
         ofColor color = src.getColor(i % width, i / width);
@@ -157,7 +165,7 @@ void convert_CoCg_Y_to_rgb(ofImage &dst, const ofImage &src, int width, int heig
 
 void convert_rgb_to_hsb(ofImage &dst, const ofImage &src, int width, int height)
 {
-    dst.allocate(width, height, OF_IMAGE_COLOR);
+    dst.allocate(width, height, OF_IMAGE_UNDEFINED);
     const ofPixels &srcPixels = src.getPixels();
     ofPixels &dstPixels = dst.getPixels();
 
@@ -222,7 +230,7 @@ void convert_hsb_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
             float q = v * (1.0f - f * s);
             float t = v * (1.0f - (1.0f - f) * s);
 
-            float r, g, b;
+            float r, g, b = 0;
             switch (i % 6)
             {
             case 0: r = v, g = t, b = p; break;
@@ -242,7 +250,6 @@ void convert_hsb_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
 void convert_rgb_to_grayscale(ofImage &dst, const ofImage &src, int width, int height)
 {
     dst.allocate(width, height, OF_IMAGE_GRAYSCALE);
-#if 0
     const ofPixels &srcPixels = src.getPixels();
     ofPixels &dstPixels = dst.getPixels();
 
@@ -255,9 +262,102 @@ void convert_rgb_to_grayscale(ofImage &dst, const ofImage &src, int width, int h
             dstPixels.setColor(x, y, ofColor(gray));
         }
     }
-#else
-    dst.setFromPixels(src.getPixels());
-#endif
+    dst.update();
+}
+
+void convert_rgb_to_hls(ofImage &dst, const ofImage &src, int width, int height)
+{
+    dst.allocate(width, height, OF_IMAGE_UNDEFINED);
+    const ofPixels &srcPixels = src.getPixels();
+    ofPixels &dstPixels = dst.getPixels();
+
+    for (int y = 0; y < height; ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            ofColor color = srcPixels.getColor(x, y);
+            float r = color.r / 255.0f;
+            float g = color.g / 255.0f;
+            float b = color.b / 255.0f;
+
+            float max = std::max({r, g, b});
+            float min = std::min({r, g, b});
+            float delta = max - min;
+
+            float h = 0.0f;
+            float l = (max + min) / 2.0f;
+            float s = (max == min) ? 0.0f : (l <= 0.5f ? delta / (max + min) : delta / (2.0f - max - min));
+
+            if (delta != 0.0f)
+            {
+                if (max == r)
+                {
+                    h = (g - b) / delta + (g < b ? 6.0f : 0.0f);
+                }
+                else if (max == g)
+                {
+                    h = (b - r) / delta + 2.0f;
+                }
+                else if (max == b)
+                {
+                    h = (r - g) / delta + 4.0f;
+                }
+                h /= 6.0f;
+            }
+
+            dstPixels.setColor(x, y, ofColor(h * 255, l * 255, s * 255));
+        }
+    }
+    dst.update();
+}
+
+void convert_hls_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
+{
+    dst.allocate(width, height, OF_IMAGE_COLOR);
+    const ofPixels &srcPixels = src.getPixels();
+    ofPixels &dstPixels = dst.getPixels();
+
+    for (int y = 0; y < height; ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            ofColor color = srcPixels.getColor(x, y);
+            float h = color.r / 255.0f;
+            float l = color.g / 255.0f;
+            float s = color.b / 255.0f;
+
+            float r, g, b;
+
+            if (s == 0.0f)
+            {
+                r = g = b = l; // achromatic
+            }
+            else
+            {
+                auto hue2rgb = [](float p, float q, float t) {
+                    if (t < 0.0f)
+                        t += 1.0f;
+                    if (t > 1.0f)
+                        t -= 1.0f;
+                    if (t < 1.0f / 6.0f)
+                        return p + (q - p) * 6.0f * t;
+                    if (t < 1.0f / 2.0f)
+                        return q;
+                    if (t < 2.0f / 3.0f)
+                        return p + (q - p) * (2.0f / 3.0f - t) * 6.0f;
+                    return p;
+                };
+
+                float q = l < 0.5f ? l * (1.0f + s) : l + s - l * s;
+                float p = 2.0f * l - q;
+                r = hue2rgb(p, q, h + 1.0f / 3.0f);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1.0f / 3.0f);
+            }
+
+            dstPixels.setColor(x, y, ofColor(r * 255, g * 255, b * 255));
+        }
+    }
     dst.update();
 }
 

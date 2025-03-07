@@ -4,6 +4,10 @@
 ** File description:
 ** L’application permet de manière interactive de choisir et de convertir des
 ** couleurs dans l’espace RGB et HSB pour au moins 2 éléments distincts.
+**
+** Source:
+** https://stackoverflow.com/questions/12524623/what-are-the-practical-differences-when-working-with-colors-in-a-linear-vs-a-no
+** https://github.com/DustinHLand/vkDOOM3/blob/master/neo/renderer/Color/ColorSpace.cpp
 */
 
 #ifndef COLOURSPACES_HPP_
@@ -39,8 +43,17 @@ enum class Type {
     YCoCg,
     CoCg_Y,
     Grayscale,
-    HSB
+    HSB,
+    HLS
 };
+
+/**
+ * @brief return the string representation of the type
+ *
+ * @param type  the type
+ * @return std::string  the string representation of the type
+ */
+std::string type_to_string(Type type);
 
 /**
  * @brief convert rgb to rgba image
@@ -107,6 +120,18 @@ void convert_hsb_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
  *
  */
 void convert_rgb_to_grayscale(ofImage &dst, const ofImage &src, int width, int height);
+
+/**
+ * @brief convert rgb to hls image
+ *
+ */
+void convert_rgb_to_hls(ofImage &dst, const ofImage &src, int width, int height);
+
+/**
+ * @brief convert hls to rgb image
+ *
+ */
+void convert_hls_to_rgb(ofImage &dst, const ofImage &src, int width, int height);
 
 } // namespace plugin::image::ColourSpaces
 
