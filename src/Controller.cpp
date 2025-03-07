@@ -83,10 +83,21 @@ void Controller::keyReleased(int key)
         drawLineButtonPressed();
         gui.selectedTool = AppGui::tool::LINE;
         break;
-    case 'i':
-    case 'I': importer.importImage(); break;
+    case 'r':
+    case 'R':
+        drawRectangleButtonPressed();
+        gui.selectedTool = AppGui::tool::RECTANGLE;
+        break;
     case 'e':
-    case 'E': exporter.exportImage(); break;
+    case 'E': 
+        drawEllipseButtonPressed();
+        gui.selectedTool = AppGui::tool::ELLIPSE;
+        break;
+    case 'g':
+    case 'G':
+        drawPolygonButtonPressed();
+        gui.selectedTool = AppGui::tool::POLYGON;
+        break;
     default: break;
     }
 }
