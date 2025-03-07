@@ -44,13 +44,13 @@ void Camera::update()
     }
     else
     {
-    if (ofGetKeyPressed(OF_KEY_UP))
-    {
-        movement += getLookAtDir() * speed; // Avancer
-    }
-    if (ofGetKeyPressed(OF_KEY_DOWN))
-    {
-        movement -= getLookAtDir() * speed; // Reculer
+        if (ofGetKeyPressed(OF_KEY_UP))
+        {
+            movement += getLookAtDir() * speed; // Avancer
+        }
+        if (ofGetKeyPressed(OF_KEY_DOWN))
+        {
+            movement -= getLookAtDir() * speed; // Reculer
         }
     }
     if (ofGetKeyPressed(OF_KEY_LEFT))
