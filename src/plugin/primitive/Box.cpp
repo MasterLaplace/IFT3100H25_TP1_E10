@@ -21,7 +21,7 @@ void Box::draw()
     if (param.isFilled)
         drawFill();
 
-    // drawOutline();
+    drawOutline();
 
     ofPopMatrix();
 }
@@ -94,7 +94,7 @@ void Box::drawFill()
         mesh.addVertex(v);
     }
 
-    vector<unsigned int> indices = {
+    std::vector<unsigned int> indices = {
         0,  1,  2,  0,  2,  3,  // Front
         4,  6,  5,  4,  7,  6,  // Back
         8,  9,  10, 8,  10, 11, // Left
@@ -125,102 +125,6 @@ void Box::drawFill()
     {
         img->getTexture().unbind();
     }
-
-    // glEnable(GL_CULL_FACE);
-    // glCullFace(GL_BACK);
-
-    // Front face
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // // Back face
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, -halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // // Left face
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, -halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // // Right face
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, -halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // // Top face
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, halfHeight, halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // // Bottom face
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, -halfDepth));
-    // mesh.addVertex(glm::vec3(halfWidth, -halfHeight, halfDepth));
-    // mesh.addVertex(glm::vec3(-halfWidth, -halfHeight, halfDepth));
-
-    // if (hasTexture)
-    // {
-    //     mesh.addTexCoord(glm::vec2(0, 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), 0));
-    //     mesh.addTexCoord(glm::vec2(img->getWidth(), img->getHeight()));
-    //     mesh.addTexCoord(glm::vec2(0, img->getHeight()));
-    // }
-
-    // mesh.draw();
-
-    // if (hasTexture)
-    // {
-    //     img->getTexture().unbind();
-    // }
-
-    // glDisable(GL_CULL_FACE);
 }
 
 void Box::drawOutline()

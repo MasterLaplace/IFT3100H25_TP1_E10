@@ -22,6 +22,10 @@ void ObjModel::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
+    ofSetColor(param.fillColor);
+    ofSetLineWidth(param.outlineWidth);
+    ofFill();
+
     if (param.isFilled)
         yourModel.draw(OF_MESH_FILL);
     else

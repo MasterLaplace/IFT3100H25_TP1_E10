@@ -29,7 +29,7 @@ bool ResourceManager::addPrefab(const std::shared_ptr<primitive::Primitive> &pre
     if (_prefabs.find(name) != _prefabs.end())
         return false;
 
-    _prefabs[name] = prefab;
+    _prefabs[std::string("Prefab_") + name] = prefab;
     return true;
 }
 

@@ -31,6 +31,19 @@ void Camera::update()
     float speed = 5.0;
     glm::vec3 movement(0.0);
 
+    if (isOrthographic)
+    {
+        if (ofGetKeyPressed(OF_KEY_UP))
+        {
+            movement -= glm::vec3(0.0f, speed, 0.0f); // Monter
+        }
+        if (ofGetKeyPressed(OF_KEY_DOWN))
+        {
+            movement += glm::vec3(0.0f, speed, 0.0f); // Descendre
+        }
+    }
+    else
+    {
     if (ofGetKeyPressed(OF_KEY_UP))
     {
         movement += getLookAtDir() * speed; // Avancer
@@ -38,6 +51,7 @@ void Camera::update()
     if (ofGetKeyPressed(OF_KEY_DOWN))
     {
         movement -= getLookAtDir() * speed; // Reculer
+        }
     }
     if (ofGetKeyPressed(OF_KEY_LEFT))
     {
