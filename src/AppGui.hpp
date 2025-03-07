@@ -58,7 +58,8 @@ private:
     void drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model);
     void drawImageProperties(const std::shared_ptr<plugin::image::Image> &image, const std::string &imageName);
     void drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model, const std::string &modelName);
-    void drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primitive> &prefab, const std::string &prefabName);
+    void drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primitive> &prefab,
+                              const std::string &prefabName);
 
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};

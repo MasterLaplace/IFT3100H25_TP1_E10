@@ -526,7 +526,7 @@ void AppGui::drawProprietiesPanel()
 
     // On va chercher la node selectionnee.
     int selectedNodeId = controller->getSelectedNodeId();
-    
+
     NodePrimitive *node = controller->getNodeById(selectedNodeId);
     std::string &imageName = controller->getSelectedImageName();
     std::string &modelName = controller->getSelectedModelName();
@@ -586,9 +586,11 @@ void AppGui::drawProprietiesPanel()
             controller->deletePrimitiveButtonPressed(selectedNodeId);
         }
     }
-    else if (!prefabName.empty()) {
+    else if (!prefabName.empty())
+    {
         auto prefab = plugin::image::ResourceManager::instance()->getPrefab(prefabName);
-        if (prefab.has_value()) {
+        if (prefab.has_value())
+        {
             drawPrefabProperties(*prefab, prefabName);
         }
     }
@@ -717,16 +719,16 @@ void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjMod
     char newModelName[128];
     strncpy(newModelName, modelName.c_str(), sizeof(modelName));
     newModelName[sizeof(modelName) - 1] = '\0';
-    
+
     ImGui::Text("Nom :");
     if (ImGui::InputText("Nom", newModelName, sizeof(modelName)))
     {
         plugin::image::ResourceManager::instance()->renameModel(modelName, newModelName);
     }
-    
+
     ImGui::Text("Vertices : %d", model->getNumVertices());
     ImGui::Text("Faces : %d", model->getNumFaces());
-    
+
     if (ImGui::Button("Creer", ImVec2((ofGetWidth() / 6) - 20, 50)))
     {
         controller->createModelButtonPressed(modelName);
@@ -734,17 +736,18 @@ void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjMod
 }
 
 void AppGui::drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primitive> &prefab,
-                                  const std::string &prefabName) {
+                                  const std::string &prefabName)
+{
     char newPrefabName[128];
     strncpy(newPrefabName, prefabName.c_str(), sizeof(prefabName));
     newPrefabName[sizeof(prefabName) - 1] = '\0';
-    
+
     ImGui::Text("Nom :");
     if (ImGui::InputText("Nom", newPrefabName, sizeof(prefabName)))
     {
         plugin::image::ResourceManager::instance()->renameModel(prefabName, newPrefabName);
     }
-    
+
     if (dynamic_cast<Point2D *>(prefab.get()) != nullptr)
     {
         drawPointProperties(std::dynamic_pointer_cast<Point2D>(prefab));
