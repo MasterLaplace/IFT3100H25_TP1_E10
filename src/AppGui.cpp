@@ -526,6 +526,7 @@ void AppGui::drawProprietiesPanel()
 
     // On va chercher la node selectionnee.
     int selectedNodeId = controller->getSelectedNodeId();
+    
     NodePrimitive *node = controller->getNodeById(selectedNodeId);
     std::string &imageName = controller->getSelectedImageName();
     std::string &modelName = controller->getSelectedModelName();
@@ -534,7 +535,7 @@ void AppGui::drawProprietiesPanel()
     // On s'occupe des proprietes generiques en premier.
 
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
-    if (node != nullptr || !prefabName.empty())
+    if (node != nullptr)
     {
         ImGui::Text(node->getName().c_str());
         ImGui::Separator();
@@ -583,6 +584,12 @@ void AppGui::drawProprietiesPanel()
         if (ImGui::Button("Supprimer", ImVec2(panelWidth - 20, 50)))
         {
             controller->deletePrimitiveButtonPressed(selectedNodeId);
+        }
+    }
+    else if (!prefabName.empty()) {
+        auto prefab = plugin::image::ResourceManager::instance()->getPrefab(prefabName);
+        if (prefab.has_value()) {
+            drawPrefabProperties(*prefab, prefabName);
         }
     }
     else if (!imageName.empty())
@@ -710,19 +717,65 @@ void AppGui::drawModelProperties(const std::shared_ptr<plugin::primitive::ObjMod
     char newModelName[128];
     strncpy(newModelName, modelName.c_str(), sizeof(modelName));
     newModelName[sizeof(modelName) - 1] = '\0';
-
+    
     ImGui::Text("Nom :");
     if (ImGui::InputText("Nom", newModelName, sizeof(modelName)))
     {
         plugin::image::ResourceManager::instance()->renameModel(modelName, newModelName);
     }
-
+    
     ImGui::Text("Vertices : %d", model->getNumVertices());
     ImGui::Text("Faces : %d", model->getNumFaces());
-
+    
     if (ImGui::Button("Creer", ImVec2((ofGetWidth() / 6) - 20, 50)))
     {
         controller->createModelButtonPressed(modelName);
+    }
+}
+
+void AppGui::drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primitive> &prefab,
+                                  const std::string &prefabName) {
+    char newPrefabName[128];
+    strncpy(newPrefabName, prefabName.c_str(), sizeof(prefabName));
+    newPrefabName[sizeof(prefabName) - 1] = '\0';
+    
+    ImGui::Text("Nom :");
+    if (ImGui::InputText("Nom", newPrefabName, sizeof(prefabName)))
+    {
+        plugin::image::ResourceManager::instance()->renameModel(prefabName, newPrefabName);
+    }
+    
+    if (dynamic_cast<Point2D *>(prefab.get()) != nullptr)
+    {
+        drawPointProperties(std::dynamic_pointer_cast<Point2D>(prefab));
+    }
+    else if (dynamic_cast<Line2D *>(prefab.get()) != nullptr)
+    {
+        drawLineProperties(std::dynamic_pointer_cast<Line2D>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::Rectangle *>(prefab.get()) != nullptr)
+    {
+        drawRectangleProperties(std::dynamic_pointer_cast<plugin::primitive::Rectangle>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::Ellipse *>(prefab.get()) != nullptr)
+    {
+        drawEllipseProperties(std::dynamic_pointer_cast<plugin::primitive::Ellipse>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::Polygon *>(prefab.get()) != nullptr)
+    {
+        drawPolygonProperties(std::dynamic_pointer_cast<plugin::primitive::Polygon>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::Box *>(prefab.get()) != nullptr)
+    {
+        drawBoxProperties(std::dynamic_pointer_cast<plugin::primitive::Box>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::Ellipsoid *>(prefab.get()) != nullptr)
+    {
+        drawEllipsoidProperties(std::dynamic_pointer_cast<plugin::primitive::Ellipsoid>(prefab));
+    }
+    else if (dynamic_cast<plugin::primitive::ObjModel *>(prefab.get()) != nullptr)
+    {
+        drawObjModelProperties(std::dynamic_pointer_cast<plugin::primitive::ObjModel>(prefab));
     }
 }
 

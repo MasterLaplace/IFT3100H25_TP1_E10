@@ -2,7 +2,7 @@
 
 Camera::Camera()
 {
-    setPosition(glm::vec3(0.0f, 0.0f, 50.0f));
+    setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     lookAt(glm::vec3(0.0f, 0.0f, 0.0f));
     setFov(90.0f);
     setAspectRatio(ofGetWidth() / ofGetHeight());
