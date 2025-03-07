@@ -230,7 +230,7 @@ void convert_hsb_to_rgb(ofImage &dst, const ofImage &src, int width, int height)
             float q = v * (1.0f - f * s);
             float t = v * (1.0f - (1.0f - f) * s);
 
-            float r, g, b = 0;
+            float r = 0, g = 0, b = 0;
             switch (i % 6)
             {
             case 0: r = v, g = t, b = p; break;

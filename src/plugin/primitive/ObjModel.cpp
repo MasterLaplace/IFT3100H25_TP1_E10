@@ -14,7 +14,6 @@ bool ObjModel::load(const std::string &path) { return yourModel.load(path); }
 
 void ObjModel::draw()
 {
-    ofSetColor(param.fillColor);
     ofPushMatrix();
     ofTranslate(param.position);
     ofRotateXDeg(param.rotation.x);
