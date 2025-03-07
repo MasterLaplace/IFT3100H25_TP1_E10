@@ -1102,4 +1102,8 @@ void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primiti
     {
         primitive->param.imageName = imageName;
     }
+
+    ImGui::Text("Boîte de délimitation :");
+    if (ImGui::Checkbox("Dessiner", &(primitive->param.drawGizmo)))
+        ;
 }

@@ -1,4 +1,5 @@
 #include "BoundaryBox.hpp"
+#include "ofMain.h"
 
 namespace plugin::geometry {
 

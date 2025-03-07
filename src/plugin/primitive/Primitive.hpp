@@ -13,6 +13,7 @@ struct PrimitiveParams {
     ofColor fillColor;
     ofColor outlineColor;
     std::string imageName = "";
+    bool drawGizmo = false;
 
     PrimitiveParams() : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black) {}
 };

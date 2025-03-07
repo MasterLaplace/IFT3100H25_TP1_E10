@@ -9,6 +9,7 @@
 #ifndef OBJMODEL_HPP_
 #define OBJMODEL_HPP_
 
+#include "../geometry/BoundaryBox.hpp"
 #include "Primitive.hpp"
 #include "ofxAssimpModelLoader.h"
 
@@ -57,6 +58,7 @@ class ObjModel : public Primitive {
 public:
     ObjModel(PrimitiveParams params);
     ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primitive::ObjModel> &other);
+    // ObjModel(const ObjModel &other);
     ~ObjModel() override = default;
 
     bool load(const std::string &path);
@@ -74,6 +76,7 @@ public:
 protected:
 public:
     Model yourModel;
+    // geometry::BoundaryBox bbox;
 };
 
 } // namespace plugin::primitive

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../geometry/BoundaryBox.hpp"
 #include "Primitive.hpp"
 #include "ofMain.h"
 
@@ -8,6 +9,7 @@ namespace plugin::primitive {
 class Box : public Primitive {
 public:
     Box(PrimitiveParams params, glm::vec3 size);
+    // Box(const Box &other);
     ~Box() override = default;
 
     void draw() override;
@@ -23,6 +25,7 @@ private:
 
 private:
     glm::vec3 _size;
+    // geometry::BoundaryBox bbox;
 };
 
 } // namespace plugin::primitive

@@ -577,3 +577,15 @@ classical-lighting/
 topology/
 raytracing/
 modern-lighting/
+transformation/
+vector-drawing/
+camera/
+geometry/
+controller/
+shaders/
+.github/
+xmake*
+assets/
+.vscode/
+doc/
+*.make

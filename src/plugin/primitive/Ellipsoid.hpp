@@ -8,6 +8,7 @@
 #ifndef ELLIPSOID_HPP_
 #define ELLIPSOID_HPP_
 
+#include "../geometry/BoundaryBox.hpp"
 #include "Primitive.hpp"
 #include "ofMain.h"
 
@@ -16,6 +17,7 @@ namespace plugin::primitive {
 class Ellipsoid : public Primitive {
 public:
     Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices = 50, int numStacks = 50);
+    // Ellipsoid(const Ellipsoid &other);
     ~Ellipsoid() override = default;
 
     void draw() override;
@@ -30,8 +32,9 @@ private:
 
 private:
     glm::vec3 _radius;
-    int _numSlices;
-    int _numStacks;
+    int _numSlices = 50;
+    int _numStacks = 50;
+    // geometry::BoundaryBox bbox;
 };
 
 } // namespace plugin::primitive
