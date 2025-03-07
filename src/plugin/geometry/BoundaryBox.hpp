@@ -14,15 +14,22 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+#include "ofxAssimpModelLoader.h"
+
 namespace plugin::geometry {
 
 class BoundaryBox {
 public:
-    BoundaryBox(const std::vector<glm::vec3> &points);
+    BoundaryBox() = default;
     ~BoundaryBox() = default;
+
+    void load(const ofxAssimpMeshHelper &mesh);
+    void load(const ofMesh &mesh);
 
     [[nodiscard]] glm::vec3 getMin() const;
     [[nodiscard]] glm::vec3 getMax() const;
+
+    void draw() const;
 
 private:
     glm::vec3 min;

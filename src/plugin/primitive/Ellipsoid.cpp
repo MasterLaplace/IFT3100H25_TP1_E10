@@ -103,6 +103,12 @@ void Ellipsoid::drawFill()
         mesh.addIndex(i + 3);
     }
 
+    if (param.drawGizmo)
+    {
+        bbox.load(mesh);
+        bbox.draw();
+    }
+
     mesh.draw();
 
     if (hasTexture)

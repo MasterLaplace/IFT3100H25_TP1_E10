@@ -34,7 +34,7 @@ private:
     glm::vec3 _radius;
     int _numSlices = 50;
     int _numStacks = 50;
-    // geometry::BoundaryBox bbox;
+    geometry::BoundaryBox bbox;
 };
 
 } // namespace plugin::primitive

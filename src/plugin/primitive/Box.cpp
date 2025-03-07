@@ -14,6 +14,15 @@ void Box::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
+    if (param.drawGizmo)
+    {
+        ofSetColor(ofColor::green);
+        ofSetLineWidth(1);
+        ofNoFill();
+
+        drawBox();
+    }
+
     ofSetColor(param.fillColor);
     ofSetLineWidth(1);
     ofFill();

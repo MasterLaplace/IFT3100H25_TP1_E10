@@ -12,6 +12,7 @@
 #include "../geometry/BoundaryBox.hpp"
 #include "Primitive.hpp"
 #include "ofxAssimpModelLoader.h"
+#include "../geometry/BoundaryBox.hpp"
 
 namespace plugin::primitive {
 
@@ -76,7 +77,7 @@ public:
 protected:
 public:
     Model yourModel;
-    // geometry::BoundaryBox bbox;
+    geometry::BoundaryBox bbox;
 };
 
 } // namespace plugin::primitive
