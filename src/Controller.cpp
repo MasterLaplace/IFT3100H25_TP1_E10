@@ -22,6 +22,7 @@ void Controller::update()
 
 void Controller::draw()
 {
+    ofEnableDepthTest();
     if (is3d)
     {
         camera.begin();
@@ -32,6 +33,7 @@ void Controller::draw()
     {
         canvas2d->draw();
     }
+    ofDisableDepthTest();
 
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();

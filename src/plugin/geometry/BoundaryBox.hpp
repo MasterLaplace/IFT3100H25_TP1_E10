@@ -29,6 +29,11 @@ public:
     [[nodiscard]] glm::vec3 getMin() const;
     [[nodiscard]] glm::vec3 getMax() const;
 
+    void setMin(const glm::vec3 &m);
+    void setMax(const glm::vec3 &m);
+
+    ofMesh getMesh() const;
+
     void draw() const;
 
 private:

@@ -16,8 +16,7 @@ namespace plugin::primitive {
 
 class Ellipsoid : public Primitive {
 public:
-    Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices = 50, int numStacks = 50);
-    // Ellipsoid(const Ellipsoid &other);
+    Ellipsoid(PrimitiveParams params, glm::vec3 radius);
     ~Ellipsoid() override = default;
 
     void draw() override;
@@ -32,8 +31,8 @@ private:
 
 private:
     glm::vec3 _radius;
-    int _numSlices = 50;
-    int _numStacks = 50;
+    const int _numSlices = 50;
+    const int _numStacks = 50;
     geometry::BoundaryBox bbox;
 };
 

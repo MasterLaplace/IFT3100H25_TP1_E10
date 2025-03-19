@@ -21,6 +21,14 @@ public:
     Model(const Model &other) { *this = other; }
     ~Model() = default;
 
+    void getBoundingBox(aiVector3D *min, aiVector3D *max)
+    {
+        if (scene)
+        {
+            getBoundingBoxWithMinVector(min, max);
+        }
+    }
+
     // ajoute un operator= pour pouvoir copier le model
     Model &operator=(const Model &other)
     {
@@ -58,7 +66,6 @@ class ObjModel : public Primitive {
 public:
     ObjModel(PrimitiveParams params);
     ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primitive::ObjModel> &other);
-    // ObjModel(const ObjModel &other);
     ~ObjModel() override = default;
 
     bool load(const std::string &path);
@@ -71,12 +78,12 @@ public:
 
     [[nodiscard]] int getNumFaces();
 
-    [[nodiscard]] Model getModel() { return yourModel; }
+    [[nodiscard]] Model getModel() { return _yourModel; }
 
 protected:
 public:
-    Model yourModel;
-    geometry::BoundaryBox bbox;
+    Model _yourModel;
+    geometry::BoundaryBox _bbox;
 };
 
 } // namespace plugin::primitive

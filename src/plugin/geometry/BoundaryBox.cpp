@@ -54,6 +54,48 @@ glm::vec3 BoundaryBox::getMin() const { return min; }
 
 glm::vec3 BoundaryBox::getMax() const { return max; }
 
+void BoundaryBox::setMin(const glm::vec3 &m) { min = m; }
+
+void BoundaryBox::setMax(const glm::vec3 &m) { max = m; }
+
+ofMesh BoundaryBox::getMesh() const
+{
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_LINES);
+
+    // face avant
+    mesh.addVertex(glm::vec3(min.x, min.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(min.x, min.y, min.z));
+
+    // face arrière
+    mesh.addVertex(glm::vec3(min.x, min.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, max.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, max.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, max.z));
+    mesh.addVertex(glm::vec3(min.x, min.y, max.z));
+
+    // arêtes
+    mesh.addVertex(glm::vec3(min.x, min.y, min.z));
+    mesh.addVertex(glm::vec3(min.x, min.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, min.y, max.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(max.x, max.y, max.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, min.z));
+    mesh.addVertex(glm::vec3(min.x, max.y, max.z));
+
+    return mesh;
+}
+
 void BoundaryBox::draw() const
 {
     ofSetColor(ofColor::green);

@@ -3,12 +3,7 @@
 
 namespace plugin::primitive {
 
-Ellipsoid::Ellipsoid(PrimitiveParams params, glm::vec3 radius, int numSlices, int numStacks) : Primitive(params)
-{
-    _radius = radius;
-    _numSlices = 50;
-    _numStacks = 50;
-}
+Ellipsoid::Ellipsoid(PrimitiveParams params, glm::vec3 radius) : Primitive(params) { _radius = radius; }
 
 void Ellipsoid::draw()
 {
