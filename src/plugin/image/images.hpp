@@ -3,3 +3,4 @@
 #include "Importing.hpp"
 #include "ResourceManager.hpp"
 #include "Sampling.hpp"
+#include "ToneMapping.hpp"

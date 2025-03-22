@@ -37,4 +37,69 @@ void Image::convert(ColourSpaces::Type nType)
     }
 }
 
+void Image::draw(float x, float y) const 
+{
+    if (_toneMapping == ToneMapping::Type::None)
+    {
+        ofShader tonalShader;
+        if (tonalShader.load("tone_mapping_330_vs.glsl", "none_330_fs.glsl"))
+        {
+            tonalShader.begin();
+
+            tonalShader.setUniformTexture("image", getTexture(), 0);
+            tonalShader.setUniform1f("exposure", _exposure);
+            tonalShader.setUniform1f("gamma", _gamma);
+
+            ofImage::draw(x, y);
+
+            tonalShader.end();
+        }
+        else
+        {
+            std::cerr << "Erreur dans le chargement du shader de None." << std::endl;
+        }
+    }
+    
+    else if (_toneMapping == ToneMapping::Type::Reinhard)
+    {
+        ofShader tonalShader;
+        if (tonalShader.load("tone_mapping_330_vs.glsl", "reinhard_330_fs.glsl"))
+        {
+            tonalShader.begin();
+
+            tonalShader.setUniformTexture("image", getTexture(), 0);
+            tonalShader.setUniform1f("exposure", _exposure);
+            tonalShader.setUniform1f("gamma", _gamma);
+
+            ofImage::draw(x, y);
+
+            tonalShader.end();
+        }
+        else
+        {
+            std::cerr << "Erreur dans le chargement du shader de Reinhard." << std::endl;
+        }
+    }
+    else if (_toneMapping == ToneMapping::Type::Filmic)
+    {
+        ofShader tonalShader;
+        if (tonalShader.load("tone_mapping_330_vs.glsl", "filmic_330_fs.glsl"))
+        {
+            tonalShader.begin();
+
+            tonalShader.setUniformTexture("image", getTexture(), 0);
+            tonalShader.setUniform1f("exposure", _exposure);
+            tonalShader.setUniform1f("gamma", _gamma);
+
+            ofImage::draw(x, y);
+
+            tonalShader.end();
+        }
+        else
+        {
+            std::cerr << "Erreur dans le chargement du shader Filmic." << std::endl;
+        }
+    }
+}
+
 } // namespace plugin::image

@@ -661,6 +661,55 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
         plugin::image::ResourceManager::instance()->renameImage(imageName, newImageName);
     }
 
+    // On dessine les sliders pour l'exposition et le gamma.
+    static float exposure = 1.0f;
+    static float gamma = 2.2f;
+
+    ImGui::Text("Exposition :");
+    if (ImGui::SliderFloat("Exposition", &exposure, 0.1f, 10.0f))
+    {
+        controller->setImageExposure(imageName, exposure);
+    }
+
+    ImGui::Text("Gamma :");
+    if (ImGui::SliderFloat("Gamma", &gamma, 0.1f, 5.0f))
+    {
+        controller->setImageGamma(imageName, gamma);
+    }
+
+    // On dessine le menu pour le mappage tonal.
+    static int currentToneMapping = 0;
+
+    ImGui::Text("Mappage tonal :");
+    const char *toneMappingNames[] = {"Aucun", "Reinhard", "Filmic"};
+    if (ImGui::BeginCombo("Mappage tonal", toneMappingNames[currentToneMapping]))
+    {
+        for (int n = 0; n < IM_ARRAYSIZE(toneMappingNames); n++)
+        {
+            bool isSelected = (currentToneMapping == n);
+            if (ImGui::Selectable(toneMappingNames[n], isSelected))
+            {
+                currentToneMapping = n;
+                switch (currentToneMapping)
+                {
+                case 0:
+                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::None);
+                    break;
+                case 1:
+                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Reinhard);
+                    break;
+                case 2:
+                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Filmic);
+                    break;
+                }
+            }
+            if (isSelected)
+                ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+
+    // On dessine le menu pour l'espace de couleur.
     ImGui::Text("Taille : %.2fx%.2f", image->getWidth(), image->getHeight());
 
     ImGui::Text("Espace de Couleur :");
@@ -701,6 +750,7 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
         ImGui::EndCombo();
     }
 
+    // On dessine le preview de l'image.
     ImGui::Text("Prévisualisation :");
 #if 0
     ImGui::Image((ImTextureID)(intptr_t)image->getTexture().getTextureData().textureID, ImVec2(image->getWidth(), image->getHeight()));

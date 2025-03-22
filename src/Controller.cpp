@@ -250,6 +250,33 @@ void Controller::setImageColorSpace(const std::string &name, plugin::image::Colo
     }
 }
 
+void Controller::setImageExposure(const std::string &name, float exposure) 
+{
+    auto image = plugin::image::ResourceManager::instance()->getImage(name);
+    if (image.has_value())
+    {
+        image->get()->setExposure(exposure);
+    }
+}
+
+void Controller::setImageGamma(const std::string &name, float gamma) 
+{
+    auto image = plugin::image::ResourceManager::instance()->getImage(name);
+    if (image.has_value())
+    {
+        image->get()->setGamma(gamma);
+    }
+}
+
+void Controller::setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping) 
+{
+    auto image = plugin::image::ResourceManager::instance()->getImage(name);
+    if (image.has_value())
+    {
+        image->get()->setToneMapping(toneMapping);
+    }
+}
+
 void Controller::createModelButtonPressed(const std::string &modelName)
 {
     auto model = plugin::image::ResourceManager::instance()->getModel(modelName);

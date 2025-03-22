@@ -68,6 +68,9 @@ public:
     [[nodiscard]] std::string &getSelectedPrefabName();
 
     void setImageColorSpace(const std::string &name, plugin::image::ColourSpaces::Type colorSpace);
+    void setImageExposure(const std::string &name, float exposure);
+    void setImageGamma(const std::string &name, float gamma);
+    void setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping);
 
     void createModelButtonPressed(const std::string &modelName);
     void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,
@@ -84,3 +87,16 @@ private:
     Exporting exporter;
     Camera camera;
 };
+    #pragma once
+
+    namespace plugin {
+    namespace image {
+
+    enum class ToneMappingType {
+        Linear,
+        Reinhard,
+        ACES
+    };
+
+    } // namespace image
+    } // namespace plugin
