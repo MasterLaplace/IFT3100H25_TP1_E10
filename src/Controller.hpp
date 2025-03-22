@@ -87,16 +87,16 @@ private:
     Exporting exporter;
     Camera camera;
 };
-    #pragma once
+#pragma once
 
-    namespace plugin {
-    namespace image {
+namespace plugin {
+namespace image {
 
-    enum class ToneMappingType {
-        Linear,
-        Reinhard,
-        ACES
-    };
+enum class ToneMappingType {
+    Linear,
+    Reinhard,
+    ACES
+};
 
-    } // namespace image
-    } // namespace plugin
+} // namespace image
+} // namespace plugin

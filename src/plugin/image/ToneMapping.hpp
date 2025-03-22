@@ -8,5 +8,4 @@ enum class Type {
     Filmic
 };
 
-} // namespace plugin::image::ToneMApping
-
+} // namespace plugin::image::ToneMapping

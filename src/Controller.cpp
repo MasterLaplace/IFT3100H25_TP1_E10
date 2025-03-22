@@ -250,7 +250,7 @@ void Controller::setImageColorSpace(const std::string &name, plugin::image::Colo
     }
 }
 
-void Controller::setImageExposure(const std::string &name, float exposure) 
+void Controller::setImageExposure(const std::string &name, float exposure)
 {
     auto image = plugin::image::ResourceManager::instance()->getImage(name);
     if (image.has_value())
@@ -259,7 +259,7 @@ void Controller::setImageExposure(const std::string &name, float exposure)
     }
 }
 
-void Controller::setImageGamma(const std::string &name, float gamma) 
+void Controller::setImageGamma(const std::string &name, float gamma)
 {
     auto image = plugin::image::ResourceManager::instance()->getImage(name);
     if (image.has_value())
@@ -268,7 +268,7 @@ void Controller::setImageGamma(const std::string &name, float gamma)
     }
 }
 
-void Controller::setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping) 
+void Controller::setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping)
 {
     auto image = plugin::image::ResourceManager::instance()->getImage(name);
     if (image.has_value())

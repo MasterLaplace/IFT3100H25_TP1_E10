@@ -37,7 +37,7 @@ void Image::convert(ColourSpaces::Type nType)
     }
 }
 
-void Image::draw(float x, float y) const 
+void Image::draw(float x, float y) const
 {
     if (_toneMapping == ToneMapping::Type::None)
     {
@@ -59,7 +59,7 @@ void Image::draw(float x, float y) const
             std::cerr << "Erreur dans le chargement du shader de None." << std::endl;
         }
     }
-    
+
     else if (_toneMapping == ToneMapping::Type::Reinhard)
     {
         ofShader tonalShader;

@@ -692,15 +692,9 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
                 currentToneMapping = n;
                 switch (currentToneMapping)
                 {
-                case 0:
-                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::None);
-                    break;
-                case 1:
-                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Reinhard);
-                    break;
-                case 2:
-                    controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Filmic);
-                    break;
+                case 0: controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::None); break;
+                case 1: controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Reinhard); break;
+                case 2: controller->setImageToneMapping(imageName, plugin::image::ToneMapping::Type::Filmic); break;
                 }
             }
             if (isSelected)
