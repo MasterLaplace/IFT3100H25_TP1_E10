@@ -277,13 +277,10 @@ void Controller::setImageToneMapping(const std::string &name, plugin::image::Ton
     }
 }
 
-plugin::light::LightModel::Type Controller::getLightModel() 
-{ 
-    return canvas3d->getLightModel(); 
-}
+plugin::light::LightModel::Type Controller::getLightModel() { return canvas3d->getLightModel(); }
 
-float* Controller::getAmbientColor() 
-{ 
+float *Controller::getAmbientColor()
+{
     float *color = new float[3];
     glm::vec3 ambientColor = canvas3d->getAmbientColor();
     color[0] = ambientColor.r;
@@ -292,8 +289,8 @@ float* Controller::getAmbientColor()
     return color;
 }
 
-float *Controller::getDiffuseColor() 
-{ 
+float *Controller::getDiffuseColor()
+{
     float *color = new float[3];
     glm::vec3 diffuseColor = canvas3d->getDiffuseColor();
     color[0] = diffuseColor.r;
@@ -302,11 +299,10 @@ float *Controller::getDiffuseColor()
     return color;
 }
 
-void Controller::setLightModel(plugin::light::LightModel::Type lightModel) 
-{ canvas3d->setLightModel(lightModel); }
+void Controller::setLightModel(plugin::light::LightModel::Type lightModel) { canvas3d->setLightModel(lightModel); }
 
-void Controller::setAmbientColor(const float * ambientColor) 
-{ 
+void Controller::setAmbientColor(const float *ambientColor)
+{
     glm::vec3 color;
     color.r = ambientColor[0];
     color.g = ambientColor[1];
@@ -314,7 +310,7 @@ void Controller::setAmbientColor(const float * ambientColor)
     canvas3d->setAmbientColor(color);
 }
 
-void Controller::setDiffuseColor(const float *diffuseColor) 
+void Controller::setDiffuseColor(const float *diffuseColor)
 {
     glm::vec3 color;
     color.r = diffuseColor[0];

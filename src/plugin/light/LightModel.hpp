@@ -32,7 +32,7 @@ private:
     Type _model = Type::None;
     glm::vec3 _ambientColor{0.2, 0.2, 0.2};
     glm::vec3 _diffuseColor{0.8, 0.8, 0.8};
-    
+
     // Shader pour l'eclairage.
     ofShader lambert;
     ofShader phong;

@@ -362,7 +362,7 @@ void AppGui::drawDynamicPanel3D()
     ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Option de dessin");
     bool propertiesChanged = false;
-    
+
     // Pour permettre de conserver les changements de selection du modele d'eclairage.
     const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
     static int currentLightningModel = 0;
@@ -371,12 +371,9 @@ void AppGui::drawDynamicPanel3D()
     float *ambientColor = controller->getAmbientColor();
     float *diffuseColor = controller->getDiffuseColor();
 
-
     switch (selectedTool)
     {
-    case AppGui::SELECT: 
-        ImGui::Text("Selection");
-        break;
+    case AppGui::SELECT: ImGui::Text("Selection"); break;
 
     case AppGui::BOX:
         ImGui::Text("Option de box");
@@ -436,9 +433,9 @@ void AppGui::drawDynamicPanel3D()
         }
         break;
 
-    case AppGui::LIGHT: 
-        ImGui::Text("Option de lumiere"); 
-        
+    case AppGui::LIGHT:
+        ImGui::Text("Option de lumiere");
+
         ImGui::Text("Type de modele d'eclairage :");
         if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
         {
@@ -450,24 +447,16 @@ void AppGui::drawDynamicPanel3D()
                     currentLightningModel = n;
                     switch (currentLightningModel)
                     {
-                    case 0:
-                        controller->setLightModel(plugin::light::LightModel::Type::None);
-                        break;
-                    case 1:
-                        controller->setLightModel(plugin::light::LightModel::Type::Lambert);
-                        break;
-                    case 2: 
-                        controller->setLightModel(plugin::light::LightModel::Type::Phong); 
-                        break;
-                    case 3: 
-                        controller->setLightModel(plugin::light::LightModel::Type::BlinnPhong); 
-                        break;
+                    case 0: controller->setLightModel(plugin::light::LightModel::Type::None); break;
+                    case 1: controller->setLightModel(plugin::light::LightModel::Type::Lambert); break;
+                    case 2: controller->setLightModel(plugin::light::LightModel::Type::Phong); break;
+                    case 3: controller->setLightModel(plugin::light::LightModel::Type::BlinnPhong); break;
                     }
                 }
                 if (isSelected)
-                ImGui::SetItemDefaultFocus();
+                    ImGui::SetItemDefaultFocus();
             }
-        ImGui::EndCombo();
+            ImGui::EndCombo();
         }
 
         ImGui::Text("Couleur ambiante :");

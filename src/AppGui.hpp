@@ -24,7 +24,7 @@ public:
         POLYGON,
         BOX,
         ELLIPSOID,
-        BACKGROUND, 
+        BACKGROUND,
         LIGHT
     };
     tool selectedTool;

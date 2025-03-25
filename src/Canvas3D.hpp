@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Canvas.hpp"
-#include "plugin/light/light.hpp"
 #include "ofLight.h"
 #include "ofShader.h"
+#include "plugin/light/light.hpp"
 
 class Canvas3D : public Canvas {
-public :
+public:
     Canvas3D();
 
     plugin::light::LightModel::Type getLightModel();
@@ -19,11 +19,10 @@ public :
 
     void draw();
 
-private :
+private:
     // Modele de lumière.
     plugin::light::LightModel lightModel;
 
     // Lumière.
     ofLight light;
-
 };
