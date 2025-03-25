@@ -163,6 +163,8 @@ void AppGui::drawToolsPanel3D()
     ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Outils de dessin");
 
+    ImGui::Columns(2, nullptr, false);
+
     if (ImGui::Button("Selection"))
     {
         onToolSelected(tool::SELECT);
@@ -181,6 +183,13 @@ void AppGui::drawToolsPanel3D()
     if (ImGui::Button("Ellipsoid"))
     {
         onToolSelected(tool::ELLIPSOID);
+    }
+
+    ImGui::NextColumn();
+
+    if (ImGui::Button("Lumiere"))
+    {
+        onToolSelected(tool::LIGHT);
     }
 
     ImGui::End();
@@ -353,10 +362,21 @@ void AppGui::drawDynamicPanel3D()
     ImGui::SetNextWindowSize(ImVec2(panelWidth, panelHeight), ImGuiCond_Always);
     ImGui::Begin("Option de dessin");
     bool propertiesChanged = false;
+    
+    // Pour permettre de conserver les changements de selection du modele d'eclairage.
+    const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
+    static int currentLightningModel = 0;
+
+    // Pour permettre de passer les couleurs de l'ambiante et de la diffuse.
+    float *ambientColor = controller->getAmbientColor();
+    float *diffuseColor = controller->getDiffuseColor();
+
 
     switch (selectedTool)
     {
-    case AppGui::SELECT: ImGui::Text("Selection");
+    case AppGui::SELECT: 
+        ImGui::Text("Selection");
+        break;
 
     case AppGui::BOX:
         ImGui::Text("Option de box");
@@ -416,7 +436,54 @@ void AppGui::drawDynamicPanel3D()
         }
         break;
 
-    default: break;
+    case AppGui::LIGHT: 
+        ImGui::Text("Option de lumiere"); 
+        
+        ImGui::Text("Type de modele d'eclairage :");
+        if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
+        {
+            for (int n = 0; n < IM_ARRAYSIZE(lightningModels); n++)
+            {
+                bool isSelected = (currentLightningModel == n);
+                if (ImGui::Selectable(lightningModels[n], isSelected))
+                {
+                    currentLightningModel = n;
+                    switch (currentLightningModel)
+                    {
+                    case 0:
+                        controller->setLightModel(plugin::light::LightModel::Type::None);
+                        break;
+                    case 1:
+                        controller->setLightModel(plugin::light::LightModel::Type::Lambert);
+                        break;
+                    case 2: 
+                        controller->setLightModel(plugin::light::LightModel::Type::Phong); 
+                        break;
+                    case 3: 
+                        controller->setLightModel(plugin::light::LightModel::Type::BlinnPhong); 
+                        break;
+                    }
+                }
+                if (isSelected)
+                ImGui::SetItemDefaultFocus();
+            }
+        ImGui::EndCombo();
+        }
+
+        ImGui::Text("Couleur ambiante :");
+        if (ImGui::ColorEdit3("Ambiante", ambientColor))
+        {
+            controller->setAmbientColor(ambientColor);
+            propertiesChanged = true;
+        }
+
+        ImGui::Text("Couleur diffuse :");
+        if (ImGui::ColorEdit3("Diffuse", diffuseColor))
+        {
+            controller->setDiffuseColor(diffuseColor);
+            propertiesChanged = true;
+        }
+        break;
     }
 
     if (propertiesChanged)

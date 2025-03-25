@@ -13,6 +13,7 @@ Chaque Node poss�de une Primitive ainsi qu'une liste de pointeurs vers d'autre
 class Canvas {
 public:
     std::vector<NodePrimitive *> nodes;
+    ofColor backgroundColor;
 
     Canvas();
     ~Canvas();
@@ -30,7 +31,6 @@ public:
     int findMouseSelectedNode(const glm::vec3 &point, std::vector<NodePrimitive *> &nodesToCheck);
 
 private:
-    ofColor backgroundColor;
-
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
 };
+    #pragma once

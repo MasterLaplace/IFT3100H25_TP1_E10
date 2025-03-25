@@ -3,7 +3,7 @@
 void Controller::setup()
 {
     canvas2d = new Canvas();
-    canvas3d = new Canvas();
+    canvas3d = new Canvas3D();
 
     // On initialise l'�tat du Controlleur pour dessiner des points.
     // On pourrait changer l'�tat initial au besoin.
@@ -275,6 +275,52 @@ void Controller::setImageToneMapping(const std::string &name, plugin::image::Ton
     {
         image->get()->setToneMapping(toneMapping);
     }
+}
+
+plugin::light::LightModel::Type Controller::getLightModel() 
+{ 
+    return canvas3d->getLightModel(); 
+}
+
+float* Controller::getAmbientColor() 
+{ 
+    float *color = new float[3];
+    glm::vec3 ambientColor = canvas3d->getAmbientColor();
+    color[0] = ambientColor.r;
+    color[1] = ambientColor.g;
+    color[2] = ambientColor.b;
+    return color;
+}
+
+float *Controller::getDiffuseColor() 
+{ 
+    float *color = new float[3];
+    glm::vec3 diffuseColor = canvas3d->getDiffuseColor();
+    color[0] = diffuseColor.r;
+    color[1] = diffuseColor.g;
+    color[2] = diffuseColor.b;
+    return color;
+}
+
+void Controller::setLightModel(plugin::light::LightModel::Type lightModel) 
+{ canvas3d->setLightModel(lightModel); }
+
+void Controller::setAmbientColor(const float * ambientColor) 
+{ 
+    glm::vec3 color;
+    color.r = ambientColor[0];
+    color.g = ambientColor[1];
+    color.b = ambientColor[2];
+    canvas3d->setAmbientColor(color);
+}
+
+void Controller::setDiffuseColor(const float *diffuseColor) 
+{
+    glm::vec3 color;
+    color.r = diffuseColor[0];
+    color.g = diffuseColor[1];
+    color.b = diffuseColor[2];
+    canvas3d->setDiffuseColor(color);
 }
 
 void Controller::createModelButtonPressed(const std::string &modelName)

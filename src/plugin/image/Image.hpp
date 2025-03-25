@@ -26,6 +26,7 @@ public:
     void setGamma(float gamma) { _gamma = gamma; }
     void setToneMapping(ToneMapping::Type toneMapping) { _toneMapping = toneMapping; }
 
+    // J'ai redéfini la méthode draw pour y ajouter le tonemapping.
     void draw(float x, float y) const override;
 
 private:
