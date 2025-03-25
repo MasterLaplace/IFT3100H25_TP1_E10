@@ -40,7 +40,7 @@ void AppGui::drawMenuBar()
             {
                 controller->importModel();
             }
-            
+
             if (ImGui::MenuItem("Importer cubemap"))
             {
                 controller->importCubemap();
@@ -477,10 +477,10 @@ void AppGui::drawSceneGraph()
             controller->onModelSelected(node.first);
         }
     }
-    
+
     ImGui::Separator();
     ImGui::Text("Cubemaps Importe :");
-    
+
     for (auto &node : plugin::image::ResourceManager::instance()->getCubeMaps())
     {
         if (ImGui::Selectable(node.first.c_str()))

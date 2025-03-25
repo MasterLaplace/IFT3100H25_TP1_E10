@@ -35,7 +35,7 @@ void Controller::draw()
         canvas2d->draw();
     }
     ofDisableDepthTest();
-    
+
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
 
@@ -146,10 +146,7 @@ void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSele
 void Controller::onImageSelected(const std::string &name) { stateMachine.onImageSelected(name); }
 void Controller::onModelSelected(const std::string &name) { stateMachine.onModelSelected(name); }
 void Controller::onPrefabSelected(const std::string &name) { stateMachine.onPrefabSelected(name); }
-void Controller::onCubeMapSelected(const std::string &name)
-{
-    skybox.load(name);
-}
+void Controller::onCubeMapSelected(const std::string &name) { skybox.load(name); }
 
 std::vector<uint32_t> Controller::getPrimitiveId()
 {

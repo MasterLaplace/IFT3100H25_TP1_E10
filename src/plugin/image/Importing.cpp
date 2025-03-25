@@ -48,21 +48,22 @@ bool importModel()
 bool importCubeMap()
 {
     ofFileDialogResult result = ofSystemLoadDialog("Importer le cubemap");
-    
+
     // On vérifie si l'utilisateur a bien sélectionné un fichier
     if (!result.bSuccess)
         return false;
-    
+
     // On vérifie si l'image a bien été chargée
     ofImage crossImage;
     if (!crossImage.load(result.getPath()))
         return false;
-    
+
     int width = crossImage.getWidth();
     int height = crossImage.getHeight();
 
     // Vérifie si l'image est bien au format croix (rapport 4:3)
-    if (width / 4 != height / 3) {
+    if (width / 4 != height / 3)
+    {
         ofLogError() << "Format d'image non valide ! Elle doit être au format 4:3.";
         return false;
     }
@@ -80,13 +81,15 @@ bool importCubeMap()
         {0, 1}  // Back
     };
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
+    {
         ofPixels pixels;
-        crossImage.getPixels().cropTo(pixels, facePositions[i].x * faceSize, facePositions[i].y * faceSize, faceSize, faceSize);
+        crossImage.getPixels().cropTo(pixels, facePositions[i].x * faceSize, facePositions[i].y * faceSize, faceSize,
+                                      faceSize);
         textures->at(i).allocate(faceSize, faceSize, GL_RGB);
         textures->at(i).loadData(pixels);
     }
-    
+
     // Without extension
     string name = result.getName();
     name = name.substr(0, name.find_last_of('.'));

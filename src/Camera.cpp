@@ -52,14 +52,14 @@ void Camera::update()
         {
             movement -= getLookAtDir() * speed; // Reculer
         }
-        
+
         // When a is pressed, the camera will rotate to the left
         if (ofGetKeyPressed('a'))
         {
             glm::vec3 newLookAtDir = glm::rotate(getLookAtDir(), glm::radians(speed), getUpDir());
             lookAt(getPosition() + newLookAtDir);
         }
-        
+
         // When d is pressed, the camera will rotate to the right
         if (ofGetKeyPressed('d'))
         {
