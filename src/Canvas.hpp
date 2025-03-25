@@ -33,4 +33,4 @@ public:
 private:
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
 };
-    #pragma once
+#pragma once
