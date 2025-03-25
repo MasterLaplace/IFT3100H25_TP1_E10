@@ -1,8 +1,8 @@
 #include "Canvas3D.hpp"
 
 // Constructeur
-Canvas3D::Canvas3D() 
-{ 
+Canvas3D::Canvas3D()
+{
     light.setGlobalPosition({0, 50, 0});
     light.setDiffuseColor(ofFloatColor(1.0, 1.0, 1.0));
     light.setAmbientColor(ofFloatColor(0.2, 0.2, 0.2));
@@ -12,20 +12,11 @@ Canvas3D::Canvas3D()
 }
 
 // Getter
-plugin::light::LightModel::Type Canvas3D::getLightModel() 
-{ 
-    return lightModel.getLightModel(); 
-}
+plugin::light::LightModel::Type Canvas3D::getLightModel() { return lightModel.getLightModel(); }
 
-glm::vec3 Canvas3D::getAmbientColor() 
-{ 
-    return lightModel.getAmbientColor(); 
-}
+glm::vec3 Canvas3D::getAmbientColor() { return lightModel.getAmbientColor(); }
 
-glm::vec3 Canvas3D::getDiffuseColor() 
-{ 
-    return lightModel.getDiffuseColor(); 
-}
+glm::vec3 Canvas3D::getDiffuseColor() { return lightModel.getDiffuseColor(); }
 
 // Setter
 void Canvas3D::setLightModel(plugin::light::LightModel::Type model)
@@ -44,18 +35,12 @@ void Canvas3D::setLightModel(plugin::light::LightModel::Type model)
     }
 }
 
-void Canvas3D::setAmbientColor(const glm::vec3 &color) 
-{ 
-    lightModel.setAmbientColor(color); 
-}
+void Canvas3D::setAmbientColor(const glm::vec3 &color) { lightModel.setAmbientColor(color); }
 
-void Canvas3D::setDiffuseColor(const glm::vec3 &color)
-{
-    lightModel.setDiffuseColor(color); 
-}
+void Canvas3D::setDiffuseColor(const glm::vec3 &color) { lightModel.setDiffuseColor(color); }
 
 // Redefinition de la methode draw pour prendre en consideration la lumiere.
-void Canvas3D::draw() 
+void Canvas3D::draw()
 {
     ofBackground(backgroundColor);
 
@@ -73,6 +58,3 @@ void Canvas3D::draw()
     light.disable();
     ofDisableLighting();
 }
-
-
-

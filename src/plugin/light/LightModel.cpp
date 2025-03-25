@@ -1,6 +1,6 @@
 #include "LightModel.hpp"
 
-plugin::light::LightModel::LightModel() 
+plugin::light::LightModel::LightModel()
 {
     if (lambert.load("lightning_330_vs.glsl", "lambert_330_fs.glsl") == false)
     {
@@ -18,7 +18,7 @@ plugin::light::LightModel::LightModel()
     }
 }
 
-void plugin::light::LightModel::begin(glm::vec3 lightPosition) 
+void plugin::light::LightModel::begin(glm::vec3 lightPosition)
 {
     if (_model == Type::None)
     {
@@ -36,8 +36,8 @@ void plugin::light::LightModel::begin(glm::vec3 lightPosition)
             lightShader->setUniform3f("lightPosition", lightPosition);
             break;
 
-        case plugin::light::LightModel::Type::Phong: 
-            lightShader = &phong; 
+        case plugin::light::LightModel::Type::Phong:
+            lightShader = &phong;
             lightShader->begin();
             lightShader->setUniform3f("color_ambient", _ambientColor);
             lightShader->setUniform3f("color_diffuse", _diffuseColor);
@@ -46,17 +46,14 @@ void plugin::light::LightModel::begin(glm::vec3 lightPosition)
             lightShader->setUniform1f("brightness", 32.0);
             break;
 
-        case plugin::light::LightModel::Type::BlinnPhong: 
-            lightShader = &blinnPhong; 
-            break;
+        case plugin::light::LightModel::Type::BlinnPhong: lightShader = &blinnPhong; break;
 
-        default: 
-            break;
+        default: break;
         }
     }
 }
 
-void plugin::light::LightModel::end() 
+void plugin::light::LightModel::end()
 {
     if (_model != Type::None)
     {
