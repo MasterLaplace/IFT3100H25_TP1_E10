@@ -4,6 +4,11 @@
 Canvas3D::Canvas3D() 
 { 
     light.setGlobalPosition({0, 50, 0});
+    light.setDiffuseColor(ofFloatColor(1.0, 1.0, 1.0));
+    light.setAmbientColor(ofFloatColor(0.2, 0.2, 0.2));
+
+    sphere.setRadius(50);
+    sphere.setPosition({0, 50, 0});
 }
 
 // Getter
@@ -54,7 +59,9 @@ void Canvas3D::draw()
 {
     ofBackground(backgroundColor);
 
-   lightModel.begin(light.getPosition());
+    lightModel.begin(light.getPosition());
+
+    sphere.draw();
 
     for (size_t i = 0; i < nodes.size(); i++)
     {

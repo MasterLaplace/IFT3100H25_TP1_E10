@@ -38,6 +38,12 @@ void plugin::light::LightModel::begin(glm::vec3 lightPosition)
 
         case plugin::light::LightModel::Type::Phong: 
             lightShader = &phong; 
+            lightShader->begin();
+            lightShader->setUniform3f("color_ambient", _ambientColor);
+            lightShader->setUniform3f("color_diffuse", _diffuseColor);
+            lightShader->setUniform3f("lightPosition", lightPosition);
+            lightShader->setUniform3f("color_specular", glm::vec3(1.0, 1.0, 1.0));
+            lightShader->setUniform1f("brightness", 32.0);
             break;
 
         case plugin::light::LightModel::Type::BlinnPhong: 

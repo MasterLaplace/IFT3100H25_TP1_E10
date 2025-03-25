@@ -15,9 +15,9 @@ void Ellipsoid::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
-    ofLight light;
-    light.setPosition(param.position.x, param.position.y, param.position.z + 500); // Positionner la lumière
-    light.enable();
+    //ofLight light;
+    //light.setPosition(param.position.x, param.position.y, param.position.z + 500); // Positionner la lumière
+    //light.enable();
 
     ofSetColor(param.fillColor);
     ofSetLineWidth(1);
@@ -28,7 +28,7 @@ void Ellipsoid::draw()
 
     drawOutline();
 
-    light.disable();
+    //light.disable();
 
     ofPopMatrix();
     ofDisableAntiAliasing();

@@ -25,5 +25,4 @@ private :
 
     // Lumière.
     ofLight light;
-
 };
