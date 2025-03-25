@@ -589,3 +589,8 @@ assets/
 .vscode/
 doc/
 *.make
+IFT3100H25_TP1_E10.xcodeproj
+.DS_Store
+Project.xcconfig
+of.entitlements
+openFrameworks-Info.plist

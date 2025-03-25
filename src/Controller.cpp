@@ -27,6 +27,7 @@ void Controller::draw()
     {
         camera.begin();
         canvas3d->draw();
+        skybox.draw(camera.getPosition());
         camera.end();
     }
     else
@@ -34,7 +35,7 @@ void Controller::draw()
         canvas2d->draw();
     }
     ofDisableDepthTest();
-
+    
     // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
     exporter.setPixels();
 
@@ -111,6 +112,8 @@ void Controller::importModel() { plugin::image::Importing::importModel(); }
 
 void Controller::exportImage() { exporter.exportImage(); }
 
+void Controller::importCubemap() { plugin::image::Importing::importCubeMap(); }
+
 // Cette méthode change les propriétés de la primitive à dessiner.
 void Controller::onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params)
 {
@@ -143,6 +146,10 @@ void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSele
 void Controller::onImageSelected(const std::string &name) { stateMachine.onImageSelected(name); }
 void Controller::onModelSelected(const std::string &name) { stateMachine.onModelSelected(name); }
 void Controller::onPrefabSelected(const std::string &name) { stateMachine.onPrefabSelected(name); }
+void Controller::onCubeMapSelected(const std::string &name)
+{
+    skybox.load(name);
+}
 
 std::vector<uint32_t> Controller::getPrimitiveId()
 {

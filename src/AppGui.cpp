@@ -40,6 +40,11 @@ void AppGui::drawMenuBar()
             {
                 controller->importModel();
             }
+            
+            if (ImGui::MenuItem("Importer cubemap"))
+            {
+                controller->importCubemap();
+            }
 
             if (ImGui::MenuItem("Exporter image"))
             {
@@ -472,6 +477,17 @@ void AppGui::drawSceneGraph()
             controller->onModelSelected(node.first);
         }
     }
+    
+    ImGui::Separator();
+    ImGui::Text("Cubemaps Importe :");
+    
+    for (auto &node : plugin::image::ResourceManager::instance()->getCubeMaps())
+    {
+        if (ImGui::Selectable(node.first.c_str()))
+        {
+            controller->onCubeMapSelected(node.first);
+        }
+    }
 
     ImGui::Separator();
     ImGui::Text("Prefabs Importe :");
@@ -537,7 +553,7 @@ void AppGui::drawProprietiesPanel()
     // Si la node selectionnee est valide on affiche les proprietes de base des Primitives2D.
     if (node != nullptr)
     {
-        ImGui::Text(node->getName().c_str());
+        ImGui::Text("%s", node->getName().c_str());
         ImGui::Separator();
         const auto &primitive = (node != nullptr) ? node->getPrimitive() :
                                                     *plugin::image::ResourceManager::instance()->getPrefab(prefabName);
