@@ -56,7 +56,7 @@ void Box::drawFill()
     }
 
     ofMesh mesh;
-    mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+    mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 
     glm::vec3 halfSize = _size * 0.5f;
 
