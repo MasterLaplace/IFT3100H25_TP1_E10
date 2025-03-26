@@ -25,4 +25,6 @@ private:
 
     // Lumière.
     ofLight light;
+
+    ofSpherePrimitive sphere;
 };

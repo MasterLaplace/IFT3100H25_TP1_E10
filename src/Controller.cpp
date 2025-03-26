@@ -26,8 +26,10 @@ void Controller::draw()
     if (is3d)
     {
         camera.begin();
-        canvas3d->draw();
+
         skybox.draw(camera.getPosition());
+        canvas3d->draw();
+
         camera.end();
     }
     else

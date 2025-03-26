@@ -49,6 +49,7 @@ void Skybox::draw(glm::vec3 position)
     if (!isLoaded)
         return;
 
+    ofDisableDepthTest();
     ofEnableArbTex();
     ofEnableNormalizedTexCoords();
     ofSetColor(255);
@@ -96,6 +97,7 @@ void Skybox::draw(glm::vec3 position)
         textures[i].unbind();
     }
 
+    ofEnableDepthTest();    
     ofDisableNormalizedTexCoords();
     ofDisableArbTex();
 }

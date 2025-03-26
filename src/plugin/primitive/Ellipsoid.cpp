@@ -15,10 +15,6 @@ void Ellipsoid::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
-    // ofLight light;
-    // light.setPosition(param.position.x, param.position.y, param.position.z + 500); // Positionner la lumière
-    // light.enable();
-
     ofSetColor(param.fillColor);
     ofSetLineWidth(1);
     ofFill();
@@ -26,9 +22,8 @@ void Ellipsoid::draw()
     if (param.isFilled)
         drawFill();
 
-    drawOutline();
-
-    // light.disable();
+    else
+        drawOutline();
 
     ofPopMatrix();
     ofDisableAntiAliasing();
@@ -73,6 +68,13 @@ void Ellipsoid::drawFill()
 
             mesh.addVertex(v0);
             mesh.addVertex(v1);
+
+            // Le calcule des normales.
+            glm::vec3 n0 = glm::normalize(glm::vec3(x * zr0 / _radius.x, y * zr0 / _radius.y, z0 / _radius.z));
+            glm::vec3 n1 = glm::normalize(glm::vec3(x * zr1 / _radius.x, y * zr1 / _radius.y, z1 / _radius.z));
+
+            mesh.addNormal(n0);
+            mesh.addNormal(n1);
 
             if (hasTexture)
             {

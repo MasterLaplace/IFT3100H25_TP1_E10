@@ -7,6 +7,7 @@ Box::Box(PrimitiveParams param, glm::vec3 size) : Primitive(param), _size(size) 
 
 void Box::draw()
 {
+    ofEnableAntiAliasing();
     ofPushMatrix();
     ofTranslate(param.position);
     ofRotateXDeg(param.rotation.x);
@@ -30,9 +31,11 @@ void Box::draw()
     if (param.isFilled)
         drawFill();
 
-    drawOutline();
+    else
+        drawOutline();
 
     ofPopMatrix();
+    ofDisableAntiAliasing();
 }
 
 void Box::drawFill()
@@ -55,63 +58,100 @@ void Box::drawFill()
     ofMesh mesh;
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
 
-    float halfWidth = _size.x / 2.0f;
-    float halfHeight = _size.y / 2.0f;
-    float halfDepth = _size.z / 2.0f;
+    glm::vec3 halfSize = _size * 0.5f;
 
-    // Définition des sommets
-    std::array<glm::vec3, 24> vertices = {
+    // Definition des sommets
+    std::vector<glm::vec3> vertices = {
         // Front face
-        glm::vec3(-halfWidth, -halfHeight, halfDepth),
-        {halfWidth,  -halfHeight, halfDepth },
-        {halfWidth,  halfHeight,  halfDepth },
-        {-halfWidth, halfHeight,  halfDepth },
-
+        {-halfSize.x, -halfSize.y, halfSize.z },
+        {halfSize.x,  -halfSize.y, halfSize.z },
+        {halfSize.x,  halfSize.y,  halfSize.z },
+        {-halfSize.x, halfSize.y,  halfSize.z },
         // Back face
-        {-halfWidth, -halfHeight, -halfDepth},
-        {halfWidth,  -halfHeight, -halfDepth},
-        {halfWidth,  halfHeight,  -halfDepth},
-        {-halfWidth, halfHeight,  -halfDepth},
-
+        {-halfSize.x, -halfSize.y, -halfSize.z},
+        {halfSize.x,  -halfSize.y, -halfSize.z},
+        {halfSize.x,  halfSize.y,  -halfSize.z},
+        {-halfSize.x, halfSize.y,  -halfSize.z},
         // Left face
-        {-halfWidth, -halfHeight, -halfDepth},
-        {-halfWidth, -halfHeight, halfDepth },
-        {-halfWidth, halfHeight,  halfDepth },
-        {-halfWidth, halfHeight,  -halfDepth},
-
+        {-halfSize.x, -halfSize.y, -halfSize.z},
+        {-halfSize.x, -halfSize.y, halfSize.z },
+        {-halfSize.x, halfSize.y,  halfSize.z },
+        {-halfSize.x, halfSize.y,  -halfSize.z},
         // Right face
-        {halfWidth,  -halfHeight, -halfDepth},
-        {halfWidth,  -halfHeight, halfDepth },
-        {halfWidth,  halfHeight,  halfDepth },
-        {halfWidth,  halfHeight,  -halfDepth},
-
+        {halfSize.x,  -halfSize.y, -halfSize.z},
+        {halfSize.x,  -halfSize.y, halfSize.z },
+        {halfSize.x,  halfSize.y,  halfSize.z },
+        {halfSize.x,  halfSize.y,  -halfSize.z},
         // Top face
-        {-halfWidth, halfHeight,  -halfDepth},
-        {halfWidth,  halfHeight,  -halfDepth},
-        {halfWidth,  halfHeight,  halfDepth },
-        {-halfWidth, halfHeight,  halfDepth },
-
+        {-halfSize.x, halfSize.y,  -halfSize.z},
+        {halfSize.x,  halfSize.y,  -halfSize.z},
+        {halfSize.x,  halfSize.y,  halfSize.z },
+        {-halfSize.x, halfSize.y,  halfSize.z },
         // Bottom face
-        {-halfWidth, -halfHeight, -halfDepth},
-        {halfWidth,  -halfHeight, -halfDepth},
-        {halfWidth,  -halfHeight, halfDepth },
-        {-halfWidth, -halfHeight, halfDepth }
+        {-halfSize.x, -halfSize.y, -halfSize.z},
+        {halfSize.x,  -halfSize.y, -halfSize.z},
+        {halfSize.x,  -halfSize.y, halfSize.z },
+        {-halfSize.x, -halfSize.y, halfSize.z }
     };
 
-    for (const auto &v : vertices)
+    // Definition des normales
+    std::vector<glm::vec3> normals = {
+        // Front face
+        {0.0f,  0.0f,  1.0f },
+        {0.0f,  0.0f,  1.0f },
+        {0.0f,  0.0f,  1.0f },
+        {0.0f,  0.0f,  1.0f },
+        // Back face
+        {0.0f,  0.0f,  -1.0f},
+        {0.0f,  0.0f,  -1.0f},
+        {0.0f,  0.0f,  -1.0f},
+        {0.0f,  0.0f,  -1.0f},
+        // Left face
+        {-1.0f, 0.0f,  0.0f },
+        {-1.0f, 0.0f,  0.0f },
+        {-1.0f, 0.0f,  0.0f },
+        {-1.0f, 0.0f,  0.0f },
+        // Right face
+        {1.0f,  0.0f,  0.0f },
+        {1.0f,  0.0f,  0.0f },
+        {1.0f,  0.0f,  0.0f },
+        {1.0f,  0.0f,  0.0f },
+        // Top face
+        {0.0f,  1.0f,  0.0f },
+        {0.0f,  1.0f,  0.0f },
+        {0.0f,  1.0f,  0.0f },
+        {0.0f,  1.0f,  0.0f },
+        // Bottom face
+        {0.0f,  -1.0f, 0.0f },
+        {0.0f,  -1.0f, 0.0f },
+        {0.0f,  -1.0f, 0.0f },
+        {0.0f,  -1.0f, 0.0f }
+    };
+
+    // Ajout des sommets et des normales au mesh
+    for (size_t i = 0; i < vertices.size(); ++i)
     {
-        mesh.addVertex(v);
+        mesh.addVertex(vertices[i]);
+        mesh.addNormal(normals[i]);
     }
 
-    std::vector<unsigned int> indices = {
-        0,  1,  2,  0,  2,  3,  // Front
-        4,  6,  5,  4,  7,  6,  // Back
-        8,  9,  10, 8,  10, 11, // Left
-        12, 14, 13, 12, 15, 14, // Right
-        16, 17, 18, 16, 18, 19, // Top
-        20, 22, 21, 20, 23, 22  // Bottom
-    };
+    // Definition des indices
+   std::vector<ofIndexType> indices = {
+       // Front face
+       0, 1, 2, 2, 3, 0,
+       // Back face
+       4, 5, 6, 6, 7, 4,
+       // Left face
+       8, 9, 10, 10, 11, 8,
+       // Right face
+       12, 13, 14, 14, 15, 12,
+       // Top face
+       16, 17, 18, 18, 19, 16,
+       // Bottom face
+       20, 21, 22, 22, 23, 20
+   };
 
+   // Ajout des indices au mesh
     for (const auto &i : indices)
     {
         mesh.addIndex(i);
