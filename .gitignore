@@ -592,8 +592,6 @@ doc/
 src/plugin/.DS_Store
 src/.DS_Store
 .DS_Store
-IFT3100H25_TP1_E10.xcodeproj
 Project.xcconfig
 of.entitlements
 openFrameworks-Info.plist
-Makefile
