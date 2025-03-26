@@ -35,6 +35,17 @@ bool ResourceManager::addPrefab(const std::shared_ptr<primitive::Primitive> &pre
 
 void ResourceManager::removePrefab(const std::string &name) { _prefabs.erase(name); }
 
+bool ResourceManager::addCubeMap(const std::shared_ptr<std::array<ofTexture, 6>> &cubmap, const std::string &name)
+{
+    if (_cubeMaps.find(name) != _cubeMaps.end())
+        return false;
+
+    _cubeMaps[name] = cubmap;
+    return true;
+}
+
+void ResourceManager::removeCubeMap(const std::string &name) { _cubeMaps.erase(name); }
+
 void ResourceManager::renameImage(const std::string &oldName, const std::string &newName)
 {
     if (_images.find(oldName) != _images.end())
@@ -62,6 +73,15 @@ void ResourceManager::renamePrefab(const std::string &oldName, const std::string
     }
 }
 
+void ResourceManager::renameCubeMap(const std::string &oldName, const std::string &newName)
+{
+    if (_cubeMaps.find(oldName) != _cubeMaps.end())
+    {
+        _cubeMaps[newName] = _cubeMaps[oldName];
+        _cubeMaps.erase(oldName);
+    }
+}
+
 std::optional<std::shared_ptr<Image>> ResourceManager::getImage(const std::string &name)
 {
     if (_images.find(name) != _images.end())
@@ -83,8 +103,16 @@ std::optional<std::shared_ptr<primitive::Primitive>> ResourceManager::getPrefab(
     return std::nullopt;
 }
 
+std::optional<std::shared_ptr<std::array<ofTexture, 6>>> ResourceManager::getCubeMap(const std::string &name)
+{
+    if (_cubeMaps.find(name) != _cubeMaps.end())
+        return _cubeMaps[name];
+    return std::nullopt;
+}
+
 std::map<std::string, std::shared_ptr<Image>> ResourceManager::getImages() { return _images; }
 std::map<std::string, std::shared_ptr<primitive::ObjModel>> ResourceManager::getModels() { return _models; }
 std::map<std::string, std::shared_ptr<primitive::Primitive>> ResourceManager::getPrefabs() { return _prefabs; }
+std::map<std::string, std::shared_ptr<std::array<ofTexture, 6>>> ResourceManager::getCubeMaps() { return _cubeMaps; }
 
 } // namespace plugin::image

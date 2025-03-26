@@ -10,11 +10,13 @@
 #include "plugin/image/images.hpp"
 #include "plugin/light/light.hpp"
 #include "plugin/states/states.hpp"
+#include "plugin/texture/texture.hpp"
 #include <string>
 #include <vector>
 
 using namespace plugin::states;
 using namespace plugin::image;
+using namespace plugin::texture;
 
 class Controller {
 public:
@@ -34,6 +36,7 @@ public:
     // Methodes pour parler avec le gui.
     void importImage();
     void importModel();
+    void importCubemap();
     void exportImage();
 
     void onToolSelected(AppGui::tool tool);
@@ -54,6 +57,7 @@ public:
     void onImageSelected(const std::string &name);
     void onModelSelected(const std::string &name);
     void onPrefabSelected(const std::string &name);
+    void onCubeMapSelected(const std::string &name);
     void onEndPositionChanged(uint32_t id, glm::vec2 newPos);
 
     void toggleCameraProjection();
@@ -99,5 +103,6 @@ private:
     HistogramUI histogramUI;
     Exporting exporter;
     Camera camera;
+    Skybox skybox;
 };
 #pragma once

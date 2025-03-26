@@ -29,24 +29,30 @@ public:
     void removeModels(const std::string &name);
     [[nodiscard]] bool addPrefab(const std::shared_ptr<plugin::primitive::Primitive> &prefab, const std::string &name);
     void removePrefab(const std::string &name);
+    [[nodiscard]] bool addCubeMap(const std::shared_ptr<std::array<ofTexture, 6>> &cubeMap, const std::string &name);
+    void removeCubeMap(const std::string &name);
 
     void renameImage(const std::string &oldName, const std::string &newName);
     void renameModel(const std::string &oldName, const std::string &newName);
     void renamePrefab(const std::string &oldName, const std::string &newName);
+    void renameCubeMap(const std::string &oldName, const std::string &newName);
 
     [[nodiscard]] std::optional<std::shared_ptr<Image>> getImage(const std::string &name);
     [[nodiscard]] std::optional<std::shared_ptr<primitive::ObjModel>> getModel(const std::string &name);
     [[nodiscard]] std::optional<std::shared_ptr<plugin::primitive::Primitive>> getPrefab(const std::string &name);
+    [[nodiscard]] std::optional<std::shared_ptr<std::array<ofTexture, 6>>> getCubeMap(const std::string &name);
 
     [[nodiscard]] std::map<std::string, std::shared_ptr<Image>> getImages();
     [[nodiscard]] std::map<std::string, std::shared_ptr<primitive::ObjModel>> getModels();
     [[nodiscard]] std::map<std::string, std::shared_ptr<plugin::primitive::Primitive>> getPrefabs();
+    [[nodiscard]] std::map<std::string, std::shared_ptr<std::array<ofTexture, 6>>> getCubeMaps();
 
 protected:
 private:
     std::map<std::string, std::shared_ptr<Image>> _images;
     std::map<std::string, std::shared_ptr<primitive::ObjModel>> _models;
     std::map<std::string, std::shared_ptr<plugin::primitive::Primitive>> _prefabs;
+    std::map<std::string, std::shared_ptr<std::array<ofTexture, 6>>> _cubeMaps;
 };
 
 } // namespace plugin::image

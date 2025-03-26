@@ -20,6 +20,8 @@ bool importImage();
 
 bool importModel();
 
+bool importCubeMap();
+
 } // namespace plugin::image::Importing
 
 #endif /* !IMPORTING_HPP_ */
