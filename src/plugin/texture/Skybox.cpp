@@ -97,7 +97,7 @@ void Skybox::draw(glm::vec3 position)
         textures[i].unbind();
     }
 
-    ofEnableDepthTest();    
+    ofEnableDepthTest();
     ofDisableNormalizedTexCoords();
     ofDisableArbTex();
 }
