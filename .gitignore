@@ -580,7 +580,6 @@ vector-drawing/
 camera/
 geometry/
 controller/
-shaders/
 .github/
 xmake*
 assets/
