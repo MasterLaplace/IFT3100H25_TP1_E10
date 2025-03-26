@@ -569,7 +569,6 @@ _deps
 *.app
 
 # Other
-build/
 .Test/
 of_*_release/
 texture/
