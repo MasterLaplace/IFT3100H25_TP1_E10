@@ -571,7 +571,6 @@ _deps
 # Other
 .Test/
 of_*_release/
-texture/
 classical-lighting/
 topology/
 raytracing/
