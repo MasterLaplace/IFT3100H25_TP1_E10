@@ -73,12 +73,12 @@ bool importCubeMap()
     int faceSize = crossImage.getWidth() / 4;
 
     std::vector<glm::vec2> facePositions = {
-        {3, 1}, // Right
-        {1, 1}, // Left
+        {0, 1}, // Left
+        {1, 1}, // Front
+        {2, 1}, // Right
+        {3, 1}, // Back
         {1, 0}, // Top
-        {1, 2}, // Bottom
-        {2, 1}, // Front
-        {0, 1}  // Back
+        {1, 2} // Bottom
     };
 
     for (int i = 0; i < 6; i++)
