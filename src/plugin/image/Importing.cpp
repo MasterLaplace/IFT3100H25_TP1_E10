@@ -78,7 +78,7 @@ bool importCubeMap()
         {2, 1}, // Right
         {3, 1}, // Back
         {1, 0}, // Top
-        {1, 2} // Bottom
+        {1, 2}  // Bottom
     };
 
     for (int i = 0; i < 6; i++)
