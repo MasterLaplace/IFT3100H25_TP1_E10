@@ -285,6 +285,16 @@ void Controller::setImageToneMapping(const std::string &name, plugin::image::Ton
 
 plugin::light::LightModel::Type Controller::getLightModel() { return canvas3d->getLightModel(); }
 
+float *Controller::getLightPosition() 
+{ 
+    float *position = new float[3];
+    glm::vec3 lightPosition = canvas3d->getLightPosition();
+    position[0] = lightPosition.x;
+    position[1] = lightPosition.y;
+    position[2] = lightPosition.z;
+    return position;
+}
+
 float *Controller::getAmbientColor()
 {
     float *color = new float[3];
@@ -305,7 +315,28 @@ float *Controller::getDiffuseColor()
     return color;
 }
 
+float *Controller::getSpecularColor() 
+{ 
+    float *color = new float[3];
+    glm::vec3 specularColor = canvas3d->getSpecularColor();
+    color[0] = specularColor.r;
+    color[1] = specularColor.g;
+    color[2] = specularColor.b;
+    return color;
+}
+
+float Controller::getShininess() { return canvas3d->getShininess(); }
+
 void Controller::setLightModel(plugin::light::LightModel::Type lightModel) { canvas3d->setLightModel(lightModel); }
+
+void Controller::setLightPosition(const float *lightPosition) 
+{
+    glm::vec3 position;
+    position.x = lightPosition[0];
+    position.y = lightPosition[1];
+    position.z = lightPosition[2];
+    canvas3d->setLightPosition(position);
+}
 
 void Controller::setAmbientColor(const float *ambientColor)
 {
@@ -324,6 +355,17 @@ void Controller::setDiffuseColor(const float *diffuseColor)
     color.b = diffuseColor[2];
     canvas3d->setDiffuseColor(color);
 }
+
+void Controller::setSpecularColor(const float *specularColor) 
+{
+    glm::vec3 color;
+    color.r = specularColor[0];
+    color.g = specularColor[1];
+    color.b = specularColor[2];
+    canvas3d->setSpecularColor(color);
+}
+
+void Controller::setShininess(float shininess) { canvas3d->setShininess(shininess); }
 
 void Controller::createModelButtonPressed(const std::string &modelName)
 {

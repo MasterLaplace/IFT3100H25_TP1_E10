@@ -18,7 +18,7 @@ plugin::light::LightModel::LightModel()
     }
 }
 
-void plugin::light::LightModel::begin(glm::vec3 lightPosition)
+void plugin::light::LightModel::begin()
 {
     if (_model == Type::None)
     {
@@ -33,7 +33,7 @@ void plugin::light::LightModel::begin(glm::vec3 lightPosition)
             lightShader->begin();
             lightShader->setUniform3f("color_ambient", _ambientColor);
             lightShader->setUniform3f("color_diffuse", _diffuseColor);
-            lightShader->setUniform3f("lightPosition", lightPosition);
+            lightShader->setUniform3f("light_position", _lightPosition);
             break;
 
         case plugin::light::LightModel::Type::Phong:
@@ -41,12 +41,20 @@ void plugin::light::LightModel::begin(glm::vec3 lightPosition)
             lightShader->begin();
             lightShader->setUniform3f("color_ambient", _ambientColor);
             lightShader->setUniform3f("color_diffuse", _diffuseColor);
-            lightShader->setUniform3f("lightPosition", lightPosition);
-            lightShader->setUniform3f("color_specular", glm::vec3(1.0, 1.0, 1.0));
-            lightShader->setUniform1f("brightness", 32.0);
+            lightShader->setUniform3f("light_position", _lightPosition);
+            lightShader->setUniform3f("color_specular", _specularColor);
+            lightShader->setUniform1f("brightness", _shininess);
             break;
 
-        case plugin::light::LightModel::Type::BlinnPhong: lightShader = &blinnPhong; break;
+        case plugin::light::LightModel::Type::BlinnPhong: 
+            lightShader = &blinnPhong; 
+            lightShader->begin();
+            lightShader->setUniform3f("color_ambient", _ambientColor);
+            lightShader->setUniform3f("color_diffuse", _diffuseColor);
+            lightShader->setUniform3f("light_position", _lightPosition);
+            lightShader->setUniform3f("color_specular", _specularColor);
+            lightShader->setUniform1f("brightness", _shininess);
+            break;
 
         default: break;
         }

@@ -368,14 +368,6 @@ void AppGui::drawDynamicPanel3D()
     ImGui::Begin("Option de dessin");
     bool propertiesChanged = false;
 
-    // Pour permettre de conserver les changements de selection du modele d'eclairage.
-    const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
-    static int currentLightningModel = 0;
-
-    // Pour permettre de passer les couleurs de l'ambiante et de la diffuse.
-    float *ambientColor = controller->getAmbientColor();
-    float *diffuseColor = controller->getDiffuseColor();
-
     switch (selectedTool)
     {
     case AppGui::SELECT: ImGui::Text("Selection"); break;
@@ -441,6 +433,10 @@ void AppGui::drawDynamicPanel3D()
     case AppGui::LIGHT:
         ImGui::Text("Option de lumiere");
 
+        // Pour permettre de conserver les changements de selection du modele d'eclairage.
+        const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
+        static int currentLightningModel = 0;      
+
         ImGui::Text("Type de modele d'eclairage :");
         if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
         {
@@ -464,6 +460,23 @@ void AppGui::drawDynamicPanel3D()
             ImGui::EndCombo();
         }
 
+        // S'il n'y a aucun eclairage selectionne, on n'affiche pas les options.
+        if (currentLightningModel == 0)
+            break;
+
+        // Pour permettre de conserver les changements de position de la lumiere.
+        float *lightPosition = controller->getLightPosition();
+
+        ImGui::Text("Position de la lumiere :");
+        if (ImGui::SliderFloat3("Position", lightPosition, -100.0f, 100.0f))
+        {
+            controller->setLightPosition(lightPosition);
+            propertiesChanged = true;
+        }
+
+        // Pour permettre de conserver les changements de couleur de la lumiere ambiante.
+        float *ambientColor = controller->getAmbientColor();
+
         ImGui::Text("Couleur ambiante :");
         if (ImGui::ColorEdit3("Ambiante", ambientColor))
         {
@@ -471,11 +484,37 @@ void AppGui::drawDynamicPanel3D()
             propertiesChanged = true;
         }
 
+        // Pour permettre de conserver les changements de couleur de la lumiere diffuse.
+        float *diffuseColor = controller->getDiffuseColor();
         ImGui::Text("Couleur diffuse :");
         if (ImGui::ColorEdit3("Diffuse", diffuseColor))
         {
             controller->setDiffuseColor(diffuseColor);
             propertiesChanged = true;
+        }
+
+        // On affiche uniquement si le modele d'eclairage est Phong ou Blinn-Phong.
+        if (currentLightningModel == 2 || currentLightningModel == 3)
+        {
+            // Pour permettre de conserver les changements de couleur de la lumiere speculaire.
+            float *specularColor = controller->getSpecularColor();
+
+            ImGui::Text("Couleur speculaire :");
+            if (ImGui::ColorEdit3("Speculaire", specularColor))
+            {
+                controller->setSpecularColor(specularColor);
+                propertiesChanged = true;
+            }
+
+            // Pour permettre de conserver les changements de brillance.
+            float shininess = controller->getShininess();
+
+            ImGui::Text("Brillance :");
+            if (ImGui::SliderFloat("Brillance", &shininess, 0.0f, 128.0f))
+            {
+                controller->setShininess(shininess);
+                propertiesChanged = true;
+            }
         }
         break;
     }

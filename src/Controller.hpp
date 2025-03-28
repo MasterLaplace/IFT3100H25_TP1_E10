@@ -81,13 +81,19 @@ public:
 
     // Getter pour la lumiere.
     plugin::light::LightModel::Type getLightModel();
+    float *getLightPosition();
     float *getAmbientColor();
     float *getDiffuseColor();
+    float *getSpecularColor();
+    float getShininess();
 
     // Setter pour la lumiere.
     void setLightModel(plugin::light::LightModel::Type lightModel);
+    void setLightPosition(const float *lightPosition);
     void setAmbientColor(const float *ambientColor);
     void setDiffuseColor(const float *diffuseColor);
+    void setSpecularColor(const float *specularColor);
+    void setShininess(float shininess);
 
     void createModelButtonPressed(const std::string &modelName);
     void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,

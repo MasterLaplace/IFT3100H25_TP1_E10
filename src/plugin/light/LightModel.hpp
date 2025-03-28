@@ -17,21 +17,30 @@ public:
     LightModel();
 
     Type getLightModel() const { return _model; }
+    glm::vec3 getLightPosition() const { return _lightPosition; }
     glm::vec3 getAmbientColor() { return _ambientColor; }
     glm::vec3 getDiffuseColor() const { return _diffuseColor; }
+    glm::vec3 getSpecularColor() const { return _specularColor; }
+    float getShininess() const { return _shininess; }
 
     void setLightModel(Type model) { _model = model; }
+    void setLightPosition(const glm::vec3 &position) { _lightPosition = position; }
     void setAmbientColor(const glm::vec3 &color) { _ambientColor = color; }
     void setDiffuseColor(const glm::vec3 &color) { _diffuseColor = color; }
+    void setSpecularColor(const glm::vec3 &color) { _specularColor = color; }
+    void setShininess(float shininess) { _shininess = shininess; }
 
-    void begin(glm::vec3 lightPosition);
+    void begin();
     void end();
 
 private:
     // Les proprietes de l'eclairage.
     Type _model = Type::None;
+    glm::vec3 _lightPosition{0.0, 0.0, 0.0};
     glm::vec3 _ambientColor{0.2, 0.2, 0.2};
     glm::vec3 _diffuseColor{0.8, 0.8, 0.8};
+    glm::vec3 _specularColor{1.0, 1.0, 1.0};
+    float _shininess = 32.0;
 
     // Shader pour l'eclairage.
     ofShader lambert;
