@@ -285,8 +285,8 @@ void Controller::setImageToneMapping(const std::string &name, plugin::image::Ton
 
 plugin::light::LightModel::Type Controller::getLightModel() { return canvas3d->getLightModel(); }
 
-float *Controller::getLightPosition() 
-{ 
+float *Controller::getLightPosition()
+{
     float *position = new float[3];
     glm::vec3 lightPosition = canvas3d->getLightPosition();
     position[0] = lightPosition.x;
@@ -315,8 +315,8 @@ float *Controller::getDiffuseColor()
     return color;
 }
 
-float *Controller::getSpecularColor() 
-{ 
+float *Controller::getSpecularColor()
+{
     float *color = new float[3];
     glm::vec3 specularColor = canvas3d->getSpecularColor();
     color[0] = specularColor.r;
@@ -329,7 +329,7 @@ float Controller::getShininess() { return canvas3d->getShininess(); }
 
 void Controller::setLightModel(plugin::light::LightModel::Type lightModel) { canvas3d->setLightModel(lightModel); }
 
-void Controller::setLightPosition(const float *lightPosition) 
+void Controller::setLightPosition(const float *lightPosition)
 {
     glm::vec3 position;
     position.x = lightPosition[0];
@@ -356,7 +356,7 @@ void Controller::setDiffuseColor(const float *diffuseColor)
     canvas3d->setDiffuseColor(color);
 }
 
-void Controller::setSpecularColor(const float *specularColor) 
+void Controller::setSpecularColor(const float *specularColor)
 {
     glm::vec3 color;
     color.r = specularColor[0];

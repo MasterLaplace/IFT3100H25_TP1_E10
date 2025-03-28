@@ -46,8 +46,8 @@ void plugin::light::LightModel::begin()
             lightShader->setUniform1f("brightness", _shininess);
             break;
 
-        case plugin::light::LightModel::Type::BlinnPhong: 
-            lightShader = &blinnPhong; 
+        case plugin::light::LightModel::Type::BlinnPhong:
+            lightShader = &blinnPhong;
             lightShader->begin();
             lightShader->setUniform3f("color_ambient", _ambientColor);
             lightShader->setUniform3f("color_diffuse", _diffuseColor);

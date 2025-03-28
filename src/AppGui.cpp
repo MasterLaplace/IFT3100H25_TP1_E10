@@ -435,7 +435,7 @@ void AppGui::drawDynamicPanel3D()
 
         // Pour permettre de conserver les changements de selection du modele d'eclairage.
         const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
-        static int currentLightningModel = 0;      
+        static int currentLightningModel = 0;
 
         ImGui::Text("Type de modele d'eclairage :");
         if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
