@@ -5,7 +5,7 @@ Canvas3D::Canvas3D()
 {
     glPatchParameteri(GL_PATCH_VERTICES, 4);
 
-    if (!tesShader.loadTessellation("tesselation_control_410.glsl", "tesselation_evaluation_410.glsl"))
+    if (!tesShader.loadTessellation("tessellation_control_410.glsl", "tessellation_evaluation_410.glsl"))
         std::cerr << "Erreur dans le chargement du shader de None." << std::endl;
 }
 
@@ -55,12 +55,14 @@ void Canvas3D::draw()
     ofBackground(backgroundColor);
 
     lightModel.begin();
+    tesShader.begin();
 
     for (size_t i = 0; i < nodes.size(); i++)
     {
         nodes[i]->draw();
     }
 
+    tesShader.end();
     lightModel.end();
 
     light.disable();
