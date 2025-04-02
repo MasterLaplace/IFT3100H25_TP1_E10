@@ -2,8 +2,8 @@
 
 #include "Canvas.hpp"
 #include "ofLight.h"
-#include "plugin/topology/TessellationShader.hpp"
 #include "plugin/light/light.hpp"
+#include "plugin/topology/TessellationShader.hpp"
 
 class Canvas3D : public Canvas {
 public:

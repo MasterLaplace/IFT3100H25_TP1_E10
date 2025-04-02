@@ -61,32 +61,32 @@ void Box::drawFill()
 
     // Definition des sommets
     std::array<glm::vec3, 24> vertices = {
-  // Front face
+        // Front face
         glm::vec3(-halfSize.x, -halfSize.y, halfSize.z),
         {halfSize.x,  -halfSize.y, halfSize.z },
         {halfSize.x,  halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
- // Back face
+        // Back face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  halfSize.y,  -halfSize.z},
         {-halfSize.x, halfSize.y,  -halfSize.z},
- // Left face
+        // Left face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {-halfSize.x, -halfSize.y, halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  -halfSize.z},
- // Right face
+        // Right face
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, halfSize.z },
         {halfSize.x,  halfSize.y,  halfSize.z },
         {halfSize.x,  halfSize.y,  -halfSize.z},
- // Top face
+        // Top face
         {-halfSize.x, halfSize.y,  -halfSize.z},
         {halfSize.x,  halfSize.y,  -halfSize.z},
         {halfSize.x,  halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
- // Bottom face
+        // Bottom face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, halfSize.z },
@@ -95,32 +95,32 @@ void Box::drawFill()
 
     // Definition des normales
     std::array<glm::vec3, 24> normals = {
-  // Front face
+        // Front face
         glm::vec3(0.0f, 0.0f, 1.0f),
         {0.0f,  0.0f,  1.0f },
         {0.0f,  0.0f,  1.0f },
         {0.0f,  0.0f,  1.0f },
- // Back face
+        // Back face
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
- // Left face
+        // Left face
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
- // Right face
+        // Right face
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
- // Top face
+        // Top face
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
- // Bottom face
+        // Bottom face
         {0.0f,  -1.0f, 0.0f },
         {0.0f,  -1.0f, 0.0f },
         {0.0f,  -1.0f, 0.0f },
