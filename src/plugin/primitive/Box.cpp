@@ -31,8 +31,7 @@ void Box::draw()
     if (param.isFilled)
         drawFill();
 
-    else
-        drawOutline();
+    drawOutline();
 
     ofPopMatrix();
     ofDisableAntiAliasing();
@@ -61,33 +60,33 @@ void Box::drawFill()
     glm::vec3 halfSize = _size * 0.5f;
 
     // Definition des sommets
-    std::vector<glm::vec3> vertices = {
-        // Front face
-        {-halfSize.x, -halfSize.y, halfSize.z },
+    std::array<glm::vec3, 24> vertices = {
+  // Front face
+        glm::vec3(-halfSize.x, -halfSize.y, halfSize.z),
         {halfSize.x,  -halfSize.y, halfSize.z },
         {halfSize.x,  halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
-        // Back face
+ // Back face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  halfSize.y,  -halfSize.z},
         {-halfSize.x, halfSize.y,  -halfSize.z},
-        // Left face
+ // Left face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {-halfSize.x, -halfSize.y, halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  -halfSize.z},
-        // Right face
+ // Right face
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, halfSize.z },
         {halfSize.x,  halfSize.y,  halfSize.z },
         {halfSize.x,  halfSize.y,  -halfSize.z},
-        // Top face
+ // Top face
         {-halfSize.x, halfSize.y,  -halfSize.z},
         {halfSize.x,  halfSize.y,  -halfSize.z},
         {halfSize.x,  halfSize.y,  halfSize.z },
         {-halfSize.x, halfSize.y,  halfSize.z },
-        // Bottom face
+ // Bottom face
         {-halfSize.x, -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, -halfSize.z},
         {halfSize.x,  -halfSize.y, halfSize.z },
@@ -95,33 +94,33 @@ void Box::drawFill()
     };
 
     // Definition des normales
-    std::vector<glm::vec3> normals = {
-        // Front face
+    std::array<glm::vec3, 24> normals = {
+  // Front face
+        glm::vec3(0.0f, 0.0f, 1.0f),
         {0.0f,  0.0f,  1.0f },
         {0.0f,  0.0f,  1.0f },
         {0.0f,  0.0f,  1.0f },
-        {0.0f,  0.0f,  1.0f },
-        // Back face
+ // Back face
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
         {0.0f,  0.0f,  -1.0f},
-        // Left face
+ // Left face
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
         {-1.0f, 0.0f,  0.0f },
-        // Right face
+ // Right face
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
         {1.0f,  0.0f,  0.0f },
-        // Top face
+ // Top face
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
         {0.0f,  1.0f,  0.0f },
-        // Bottom face
+ // Bottom face
         {0.0f,  -1.0f, 0.0f },
         {0.0f,  -1.0f, 0.0f },
         {0.0f,  -1.0f, 0.0f },
@@ -136,18 +135,18 @@ void Box::drawFill()
     }
 
     // Definition des indices
-    std::vector<ofIndexType> indices = {// Front face
-                                        0, 1, 2, 2, 3, 0,
-                                        // Back face
-                                        4, 5, 6, 6, 7, 4,
-                                        // Left face
-                                        8, 9, 10, 10, 11, 8,
-                                        // Right face
-                                        12, 13, 14, 14, 15, 12,
-                                        // Top face
-                                        16, 17, 18, 18, 19, 16,
-                                        // Bottom face
-                                        20, 21, 22, 22, 23, 20};
+    std::array<ofIndexType, 36> indices = {// Front face
+                                           0, 1, 2, 2, 3, 0,
+                                           // Back face
+                                           4, 5, 6, 6, 7, 4,
+                                           // Left face
+                                           8, 9, 10, 10, 11, 8,
+                                           // Right face
+                                           12, 13, 14, 14, 15, 12,
+                                           // Top face
+                                           16, 17, 18, 18, 19, 16,
+                                           // Bottom face
+                                           20, 21, 22, 22, 23, 20};
 
     // Ajout des indices au mesh
     for (const auto &i : indices)

@@ -3,8 +3,10 @@
 // Constructeur
 Canvas3D::Canvas3D()
 {
-    sphere.setRadius(50);
-    sphere.setPosition({0, 50, 0});
+    glPatchParameteri(GL_PATCH_VERTICES, 4);
+
+    if (!tesShader.loadTesselation("tesselation_control_410.glsl", "tesselation_evaluation_410.glsl"))
+        std::cerr << "Erreur dans le chargement du shader de None." << std::endl;
 }
 
 // Getter
@@ -53,8 +55,6 @@ void Canvas3D::draw()
     ofBackground(backgroundColor);
 
     lightModel.begin();
-
-    sphere.draw();
 
     for (size_t i = 0; i < nodes.size(); i++)
     {

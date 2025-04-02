@@ -855,7 +855,7 @@ void AppGui::drawImageProperties(const std::shared_ptr<plugin::image::Image> &im
         ImGui::EndCombo();
     }
 
-    // On dessine le preview de l'image.
+    // On dessine la preview de l'image.
     ImGui::Text("Prévisualisation :");
 #if 0
     ImGui::Image((ImTextureID)(intptr_t)image->getTexture().getTextureData().textureID, ImVec2(image->getWidth(), image->getHeight()));

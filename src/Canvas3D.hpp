@@ -2,7 +2,7 @@
 
 #include "Canvas.hpp"
 #include "ofLight.h"
-#include "ofShader.h"
+#include "plugin/topology/TesselationShader.hpp"
 #include "plugin/light/light.hpp"
 
 class Canvas3D : public Canvas {
@@ -26,11 +26,12 @@ public:
     void draw();
 
 private:
-    // Modele de lumière.
+    // Modele de lumiï¿½re.
     plugin::light::LightModel lightModel;
 
-    // Lumière.
+    // LumiÃ¨re.
     ofLight light;
 
-    ofSpherePrimitive sphere;
+    // Shader de tessellation.
+    TesselationShader tesShader;
 };

@@ -103,6 +103,7 @@ Project{
             'src/plugin/topology/ReliefEffect.hpp',
             'src/plugin/topology/TessellationShader.hpp',
             'src/plugin/topology/Triangulation.hpp',
+            'src/plugin/topology/TesselationShader.hpp',
             'src/plugin/transformation/CoordinateSystem.hpp',
             'src/plugin/transformation/InteractiveTransformation.hpp',
             'src/plugin/transformation/MultiSelection.hpp',

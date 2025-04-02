@@ -15,7 +15,7 @@ class Controller;
 
 class AppGui {
 public:
-    enum tool {
+    enum tool : uint8_t {
         SELECT,
         POINT,
         LINE,

@@ -22,8 +22,7 @@ void Ellipsoid::draw()
     if (param.isFilled)
         drawFill();
 
-    else
-        drawOutline();
+    drawOutline();
 
     ofPopMatrix();
     ofDisableAntiAliasing();

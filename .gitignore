@@ -572,7 +572,6 @@ _deps
 .Test/
 of_*_release/
 classical-lighting/
-topology/
 raytracing/
 modern-lighting/
 transformation/
