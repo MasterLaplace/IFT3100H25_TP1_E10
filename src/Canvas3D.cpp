@@ -5,7 +5,7 @@ Canvas3D::Canvas3D()
 {
     glPatchParameteri(GL_PATCH_VERTICES, 4);
 
-    if (!tesShader.loadTesselation("tesselation_control_410.glsl", "tesselation_evaluation_410.glsl"))
+    if (!tesShader.loadTessellation("tesselation_control_410.glsl", "tesselation_evaluation_410.glsl"))
         std::cerr << "Erreur dans le chargement du shader de None." << std::endl;
 }
 

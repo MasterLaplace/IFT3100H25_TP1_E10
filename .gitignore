@@ -581,7 +581,6 @@ geometry/
 controller/
 .github/
 xmake*
-assets/
 .vscode/
 doc/
 *.make
