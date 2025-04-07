@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include <iostream>
+#include "Canvas.hpp"
 
 namespace plugin::states {
 

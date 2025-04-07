@@ -12,6 +12,7 @@ void Controller::setup()
     // C'est ici qu'on va initialiser l'interface pour le 2D.
     gui.setup(this);
     histogramUI.setup(this);
+    curveUI.setup(this);
 }
 
 void Controller::update()
@@ -49,6 +50,11 @@ void Controller::draw()
     if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) != nullptr)
     {
         histogramUI.draw();
+    }
+
+    else if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) != nullptr)
+    {
+        curveUI.draw();
     }
 
     else
@@ -243,6 +249,8 @@ void Controller::drawHistogram(int color)
     }
 }
 
+void Controller::drawCurve() { stateMachine.changeState(new DrawCoonsState()); }
+
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
 bool Controller::isCameraOrthographic() { return camera.isOrthographic; }
@@ -366,6 +374,35 @@ void Controller::setSpecularColor(const float *specularColor)
 }
 
 void Controller::setShininess(float shininess) { canvas3d->setShininess(shininess); }
+
+ofPoint Controller::getCurvePoint() 
+{ 
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction getCurvePoint() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState." << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        return state->getSelectedPoint();
+    }
+}
+
+void Controller::setCurvePoint(ofPoint newPoint) 
+{
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction setCurvePoint() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState."
+                  << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        return state->setPoint(newPoint);
+    }
+}
 
 void Controller::createModelButtonPressed(const std::string &modelName)
 {

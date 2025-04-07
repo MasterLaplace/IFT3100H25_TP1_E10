@@ -98,6 +98,25 @@ void AppGui::drawMenuBar()
 
             ImGui::EndMenu();
         }
+
+        if (ImGui::BeginMenu("Courbe / Surface"))
+        {
+            if (ImGui::MenuItem("Bezier"))
+            {
+                // controller->drawBezierCurve();
+            }
+
+            if (ImGui::MenuItem("Catmull-Rom"))
+            {
+                // controller->drawCatmullRomCurve();
+            }
+
+            if (ImGui::MenuItem("Coons"))
+            {
+                controller->drawCurve();
+            }
+            ImGui::EndMenu();
+        }
         ImGui::EndMainMenuBar();
     }
 }

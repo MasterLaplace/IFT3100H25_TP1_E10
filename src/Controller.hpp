@@ -6,6 +6,7 @@
 #include "Canvas3D.hpp"
 #include "Controller.hpp"
 #include "HistogramUI.hpp"
+#include "CurveUI.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
 #include "plugin/light/light.hpp"
@@ -48,6 +49,7 @@ public:
     void drawPolygonButtonPressed();
     void deletePrimitiveButtonPressed(uint32_t id);
     void drawHistogram(int color);
+    void drawCurve();
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
@@ -95,6 +97,12 @@ public:
     void setSpecularColor(const float *specularColor);
     void setShininess(float shininess);
 
+    // Getter pour les courbes.
+    ofPoint getCurvePoint();
+
+    // Setter pour les courbes.
+    void setCurvePoint(ofPoint newPoint);
+
     void createModelButtonPressed(const std::string &modelName);
     void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,
                                    const std::string &name);
@@ -107,6 +115,7 @@ private:
     Canvas3D *canvas3d;
     AppGui gui;
     HistogramUI histogramUI;
+    CurveUI curveUI;
     Exporting exporter;
     Camera camera;
     Skybox skybox;

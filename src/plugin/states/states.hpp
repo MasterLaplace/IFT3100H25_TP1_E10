@@ -2,6 +2,7 @@
 #include "DrawEllipseState.hpp"
 #include "DrawEllipsoidState.hpp"
 #include "DrawHistogramState.hpp"
+#include "DrawCoonsState.hpp"
 #include "DrawLineState.hpp"
 #include "DrawPointState.hpp"
 #include "DrawPolygonState.hpp"
