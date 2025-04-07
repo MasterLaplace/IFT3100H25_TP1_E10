@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ofPoint.h"
 #include "ofMain.h"
+#include "ofPoint.h"
 #include <array>
 
 namespace plugin::topology {

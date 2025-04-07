@@ -375,12 +375,13 @@ void Controller::setSpecularColor(const float *specularColor)
 
 void Controller::setShininess(float shininess) { canvas3d->setShininess(shininess); }
 
-ofPoint Controller::getCurvePoint() 
-{ 
+ofPoint Controller::getCurvePoint()
+{
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
     {
         std::cerr << "Erreur : La fonction getCurvePoint() du controleur ne peut pas etre appelee si l'etat n'est "
-                     "pas un DrawCoonsState." << std::endl;
+                     "pas un DrawCoonsState."
+                  << std::endl;
     }
     else
     {
@@ -389,7 +390,7 @@ ofPoint Controller::getCurvePoint()
     }
 }
 
-void Controller::setCurvePoint(ofPoint newPoint) 
+void Controller::setCurvePoint(ofPoint newPoint)
 {
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
     {

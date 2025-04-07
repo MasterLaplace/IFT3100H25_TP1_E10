@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Canvas.hpp"
 #include "ofMain.h"
 #include <iostream>
-#include "Canvas.hpp"
 
 namespace plugin::states {
 

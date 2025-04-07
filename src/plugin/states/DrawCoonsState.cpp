@@ -1,8 +1,9 @@
 #include "DrawCoonsState.hpp"
 
 plugin::states::DrawCoonsState::DrawCoonsState()
-   : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)) {}
-
+    : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f))
+{
+}
 
 void plugin::states::DrawCoonsState::enter()
 {
@@ -23,8 +24,8 @@ void plugin::states::DrawCoonsState::enter()
     windowResized(w, h);
 }
 
-void plugin::states::DrawCoonsState::update() 
-{ 
+void plugin::states::DrawCoonsState::update()
+{
     if (isDragging)
     {
         ofPoint newPoint(mousePosition.x, mousePosition.y, selectedPoint.z);
@@ -32,18 +33,12 @@ void plugin::states::DrawCoonsState::update()
     }
 }
 
-void plugin::states::DrawCoonsState::draw() 
-{ 
-    coons.draw();
-}
+void plugin::states::DrawCoonsState::draw() { coons.draw(); }
 
-void plugin::states::DrawCoonsState::exit() 
-{ 
-    coons.~Coons(); 
-}
+void plugin::states::DrawCoonsState::exit() { coons.~Coons(); }
 
-void plugin::states::DrawCoonsState::mouseDragged(int x, int y, int button) 
-{ 
+void plugin::states::DrawCoonsState::mouseDragged(int x, int y, int button)
+{
     if (isDragging)
     {
         ofPoint newPoint(x, y, selectedPoint.z);
@@ -70,28 +65,15 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
     }
 }
 
-void plugin::states::DrawCoonsState::mouseReleased(Canvas *canvas) 
-{ isDragging = false; }
+void plugin::states::DrawCoonsState::mouseReleased(Canvas *canvas) { isDragging = false; }
 
-const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const 
-{
-    return coons.getPoint(); 
-}
+const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const { return coons.getPoint(); }
 
-const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const 
-{ 
-    return coons.getPoints(); 
-}
+const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const { return coons.getPoints(); }
 
-void plugin::states::DrawCoonsState::setPoint(ofPoint p) 
-{ 
-    coons.setPoint(p); 
-}
+void plugin::states::DrawCoonsState::setPoint(ofPoint p) { coons.setPoint(p); }
 
-void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p) 
-{
-    coons.setPoints(p);
-}
+void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p) { coons.setPoints(p); }
 
 void plugin::states::DrawCoonsState::windowResized(int w, int h)
 {
@@ -99,8 +81,8 @@ void plugin::states::DrawCoonsState::windowResized(int w, int h)
     float offsetY = h / 2 - 200;
 }
 
-bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos) 
-{ 
+bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos)
+{
     float dx = mousePosition.x - pointPos.x;
     float dy = mousePosition.y - pointPos.y;
     float distanceSquared = dx * dx + dy * dy;

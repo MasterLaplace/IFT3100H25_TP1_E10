@@ -1,20 +1,20 @@
 #include "CurveUI.hpp"
 #include "Controller.hpp"
 
-void CurveUI::setup(Controller *_controller) 
+void CurveUI::setup(Controller *_controller)
 {
     controller = _controller;
     gui.setup();
 }
 
-void CurveUI::draw() 
+void CurveUI::draw()
 {
     gui.begin();
     drawOptionPanel();
     gui.end();
 }
 
-void CurveUI::drawOptionPanel() 
+void CurveUI::drawOptionPanel()
 {
     ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x - 200, 0), ImGuiCond_Always);
     ImGui::SetNextWindowSize(ImVec2(200, ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
@@ -27,7 +27,6 @@ void CurveUI::drawOptionPanel()
     ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Bezier quadratique", ImVec2(180, 40)))
     {
-        
     }
 
     ImGui::Spacing();
@@ -35,7 +34,6 @@ void CurveUI::drawOptionPanel()
     ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Bezier Cubique", ImVec2(180, 40)))
     {
-        
     }
 
     ImGui::Spacing();
@@ -43,7 +41,6 @@ void CurveUI::drawOptionPanel()
     ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Coons", ImVec2(180, 40)))
     {
-        
     }
 
     ImGui::Spacing();
@@ -70,7 +67,6 @@ void CurveUI::drawOptionPanel()
             controller->setCurvePoint(selectedPoint);
         }
     }
-
 
     ImGui::End();
 }

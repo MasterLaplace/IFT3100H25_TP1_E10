@@ -31,7 +31,8 @@ const ofPoint Coons::getPoint(int index) const { return points[index]; }
     Retourne le point selectionne.
     Si aucun point n'est selectionne, on retourne un point (-1, -1, -1).
 */
-const ofPoint Coons::getPoint() const { 
+const ofPoint Coons::getPoint() const
+{
     if (selectedPoint == -1)
     {
         return ofPoint{-1, -1, -1};
@@ -39,9 +40,8 @@ const ofPoint Coons::getPoint() const {
 
     else
     {
-        return points[selectedPoint]; 
+        return points[selectedPoint];
     }
-    
 }
 
 /*
@@ -83,10 +83,7 @@ void Coons::setPoint(ofPoint p, int index)
     updatePoints();
 }
 
-void Coons::setPoint(ofPoint p) 
-{ 
-    setPoint(p, selectedPoint); 
-}
+void Coons::setPoint(ofPoint p) { setPoint(p, selectedPoint); }
 
 void Coons::setSelectedPoint(int index) { selectedPoint = index; }
 
@@ -145,7 +142,7 @@ void Coons::draw()
         else
         {
             ofSetColor(ofColor::red);
-        }  
+        }
         ofDrawCircle(points[i], pointRadius);
     }
 }

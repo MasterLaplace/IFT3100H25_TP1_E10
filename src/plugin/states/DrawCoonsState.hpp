@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Canvas.hpp"
 #include "State.hpp"
 #include "plugin/topology/Coons.hpp"
-#include "Canvas.hpp"
 
 namespace plugin::states {
 
