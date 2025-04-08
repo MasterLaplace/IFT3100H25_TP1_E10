@@ -103,7 +103,7 @@ void AppGui::drawMenuBar()
         {
             if (ImGui::MenuItem("Bezier"))
             {
-                controller->drawCurve(plugin::states::BEZIER_QUAD);
+                controller->drawCurve(plugin::states::BEZIER);
             }
 
             if (ImGui::MenuItem("Catmull-Rom"))

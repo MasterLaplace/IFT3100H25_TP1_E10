@@ -7,7 +7,7 @@
 namespace plugin::states {
 
     enum curveType {
-    BEZIER_QUAD,
+    BEZIER,
     COONS
 };
 
@@ -24,12 +24,15 @@ public:
     void mousePressed(int x, int y, int button) override;
     void mouseReleased(Canvas *canvas) override;
 
+    const curveType getCurveType() const;
     const ofPoint getSelectedPoint() const;
     const std::vector<ofPoint> getPoints() const;
 
     void setCurveType(curveType _type);
     void setPoint(ofPoint p);
     void setPoints(std::vector<ofPoint> p);
+
+    void convertCurve();
 
 private:
     curveType type;

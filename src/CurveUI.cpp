@@ -25,16 +25,9 @@ void CurveUI::drawOptionPanel()
     ImGui::Text("Type de courbes : ");
 
     ImGui::SetNextItemWidth(180);
-    if (ImGui::Button("Bezier quadratique", ImVec2(180, 40)))
+    if (ImGui::Button("Bezier", ImVec2(180, 40)))
     {
-        controller->setCurveType(plugin::states::BEZIER_QUAD);
-    }
-
-    ImGui::Spacing();
-
-    ImGui::SetNextItemWidth(180);
-    if (ImGui::Button("Bezier Cubique", ImVec2(180, 40)))
-    {
+        controller->setCurveType(plugin::states::BEZIER);
     }
 
     ImGui::Spacing();
@@ -67,6 +60,15 @@ void CurveUI::drawOptionPanel()
             ImGui::SliderFloat("Z", &selectedPoint.z, 0.0f, 1000.0f))
         {
             controller->setCurvePoint(selectedPoint);
+        }
+    }
+
+    if (controller->getCurveType() == plugin::states::BEZIER)
+    {
+        ImGui::SetNextItemWidth(180);
+        if (ImGui::Button("Convertir", ImVec2(180, 40)))
+        {
+            controller->convertCurve();
         }
     }
 

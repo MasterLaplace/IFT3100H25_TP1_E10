@@ -98,11 +98,13 @@ public:
     void setShininess(float shininess);
 
     // Getter pour les courbes.
+    curveType getCurveType();
     ofPoint getCurvePoint();
 
     // Setter pour les courbes.
     void setCurveType(curveType _type);
     void setCurvePoint(ofPoint newPoint);
+    void convertCurve();
 
     void createModelButtonPressed(const std::string &modelName);
     void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,

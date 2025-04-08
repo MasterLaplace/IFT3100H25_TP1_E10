@@ -42,7 +42,7 @@ void plugin::states::DrawCoonsState::update()
 
         switch (type)
         {
-            case plugin::states::BEZIER_QUAD: bezier.setPoint(newPoint); break;
+            case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
             case plugin::states::COONS: coons.setPoint(newPoint); break;
             default: break;
         }
@@ -54,7 +54,7 @@ void plugin::states::DrawCoonsState::draw()
 { 
     switch (type)
     {
-        case plugin::states::BEZIER_QUAD: bezier.drawWithPoints(100); break;
+        case plugin::states::BEZIER: bezier.drawWithPoints(100); break;
         case plugin::states::COONS: coons.draw(); break;
         default: break;
     }
@@ -75,7 +75,7 @@ void plugin::states::DrawCoonsState::mouseDragged(int x, int y, int button)
         
         switch (type)
         {
-            case plugin::states::BEZIER_QUAD: bezier.setPoint(newPoint); break;
+            case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
             case plugin::states::COONS: coons.setPoint(newPoint); break;
             default: break;
         }
@@ -86,7 +86,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
 {
     switch (type)
     {
-    case plugin::states::BEZIER_QUAD:
+    case plugin::states::BEZIER:
         for (int i = 0; i < bezier.getPoints().size(); ++i)
         {
             if (isInside(bezier.getPoint(i)))
@@ -103,6 +103,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
             }
         }
         break;
+
     case plugin::states::COONS:
         for (int i = 0; i < coons.getPoints().size(); ++i)
         {
@@ -119,16 +120,19 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
                 isDragging = false;
             }
         }
+        break;
     }
 }
 
 void plugin::states::DrawCoonsState::mouseReleased(Canvas *canvas) { isDragging = false; }
 
-const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const 
+const plugin::states::curveType plugin::states::DrawCoonsState::getCurveType() const { return type; }
+
+const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const
 { 
     switch (type)
     {
-        case plugin::states::BEZIER_QUAD: return bezier.getPoint(); break;
+        case plugin::states::BEZIER: return bezier.getPoint(); break;
         case plugin::states::COONS: return coons.getPoint(); break;
         default: break;
     }
@@ -139,7 +143,7 @@ const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const
 { 
     switch (type)
     {
-        case plugin::states::BEZIER_QUAD: 
+        case plugin::states::BEZIER: 
         {
             const auto &pointsArray = bezier.getPoints();
             return std::vector<ofPoint>(pointsArray.begin(), pointsArray.end());
@@ -156,7 +160,7 @@ void plugin::states::DrawCoonsState::setPoint(ofPoint p)
 { 
     switch (type)
     {
-        case plugin::states::BEZIER_QUAD: bezier.setPoint(p); break;
+        case plugin::states::BEZIER: bezier.setPoint(p); break;
         case plugin::states::COONS: coons.setPoint(p); break;
         default: break;
     }
@@ -166,7 +170,7 @@ void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p)
 { 
     switch (type)
     {
-    case plugin::states::BEZIER_QUAD:
+    case plugin::states::BEZIER:
         if (p.size() == 3) 
         {
             std::array<ofPoint, 3> pointsArray = {p[0], p[1], p[2]};
@@ -178,6 +182,18 @@ void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p)
     default: break;
     }
 
+}
+
+void plugin::states::DrawCoonsState::convertCurve() 
+{ 
+    if (bezier.isQuad)
+    {
+        bezier.toCubic();
+    }
+    else
+    {
+        bezier.toQuadratic();
+    }
 }
 
 void plugin::states::DrawCoonsState::windowResized(int w, int h)
@@ -195,7 +211,7 @@ bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos)
     float radiusSquared;
     switch (type) 
     { 
-        case plugin::states::BEZIER_QUAD: radiusSquared = bezier.pointRadius * bezier.pointRadius; break;
+        case plugin::states::BEZIER: radiusSquared = bezier.pointRadius * bezier.pointRadius; break;
         case plugin::states::COONS: radiusSquared = coons.pointRadius * coons.pointRadius; break;
         default: break;
     }

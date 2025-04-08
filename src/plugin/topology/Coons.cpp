@@ -203,7 +203,7 @@ void Coons::updatePoints()
 {
     points.clear();
 
-    std::array<ofPoint, 3> p = curve1.getPoints();
+    std::vector<ofPoint> p = curve1.getPoints();
     for (int i = 0; i < p.size(); i++)
     {
         points.push_back(p[i]);

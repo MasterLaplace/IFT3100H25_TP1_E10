@@ -375,6 +375,21 @@ void Controller::setSpecularColor(const float *specularColor)
 
 void Controller::setShininess(float shininess) { canvas3d->setShininess(shininess); }
 
+curveType Controller::getCurveType()
+{
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction getCurveType() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState."
+                  << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        return state->getCurveType();
+    }
+}
+
 ofPoint Controller::getCurvePoint()
 {
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
@@ -417,6 +432,21 @@ void Controller::setCurvePoint(ofPoint newPoint)
     {
         DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
         state->setPoint(newPoint);
+    }
+}
+
+void Controller::convertCurve()
+{
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction convertCurve() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState."
+                  << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        state->convertCurve();
     }
 }
 
