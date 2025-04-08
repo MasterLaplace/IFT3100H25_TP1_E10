@@ -1,8 +1,8 @@
 #include "BezierQuadratique.hpp"
 
 namespace plugin::topology {
-BezierQuadratique::BezierQuadratique(ofPoint c1, ofPoint c2) 
-{ 
+BezierQuadratique::BezierQuadratique(ofPoint c1, ofPoint c2)
+{
     C1 = c1;
     C3 = c2;
     C2 = ofPoint((C1.x + C3.x) / 2, (C1.y + C3.y) / 2, (C1.z + C3.z) / 2);
@@ -67,8 +67,8 @@ const ofPoint BezierQuadratique::getPoint() const
     }
 }
 
-const ofPoint BezierQuadratique::getPoint(int index) const 
-{ 
+const ofPoint BezierQuadratique::getPoint(int index) const
+{
     if (isQuad)
     {
         switch (index)
@@ -98,8 +98,8 @@ const ofPoint BezierQuadratique::getPoint(int index) const
     }
 }
 
-const std::vector<ofPoint> BezierQuadratique::getPoints() const 
-{ 
+const std::vector<ofPoint> BezierQuadratique::getPoints() const
+{
     if (isQuad)
     {
         return pointsQuad;
@@ -159,7 +159,7 @@ void BezierQuadratique::setPoint(ofPoint p)
             break;
         }
     }
-    
+
     updatePoints();
 }
 
@@ -171,7 +171,7 @@ void BezierQuadratique::setPoints(const std::array<ofPoint, 3> p)
     updatePoints();
 }
 
-void BezierQuadratique::toCubic() 
+void BezierQuadratique::toCubic()
 {
     if (isQuad)
     {
@@ -184,7 +184,7 @@ void BezierQuadratique::toCubic()
     updatePoints();
 }
 
-void BezierQuadratique::toQuadratic() 
+void BezierQuadratique::toQuadratic()
 {
     if (!isQuad)
     {
@@ -212,7 +212,7 @@ void BezierQuadratique::draw(int precision) const
 void BezierQuadratique::drawWithPoints(int precision) const
 {
     draw(precision);
-    
+
     std::vector<ofPoint> points;
 
     if (isQuad)
@@ -238,7 +238,6 @@ void BezierQuadratique::drawWithPoints(int precision) const
     }
 }
 
-
 ofPoint BezierQuadratique::nlerpPoint(float t) const
 {
     if (isQuad)
@@ -259,18 +258,18 @@ ofPoint BezierQuadratique::nlerpPoint(float t) const
     }
 }
 
-void BezierQuadratique::updatePoints() 
-{ 
-    pointsQuad = {C1, C2, C3}; 
+void BezierQuadratique::updatePoints()
+{
+    pointsQuad = {C1, C2, C3};
     pointsCubic = {P1, P2, P3, P4};
 }
 
 float BezierQuadratique::nlerpQuad(float a, float b, float c, float t) const
 {
-   return pow(1 - t, 2) * a + 2 * (1 - t) * t * b + pow(t, 2) * c;    
+    return pow(1 - t, 2) * a + 2 * (1 - t) * t * b + pow(t, 2) * c;
 }
-float BezierQuadratique::nlerpCubic(float a, float b, float c, float d, float t) const 
+float BezierQuadratique::nlerpCubic(float a, float b, float c, float d, float t) const
 {
-    return pow((1 - t), 3) * a + 3 * pow((1 - t), 2) * t * b + 3 * (1 - t) * pow(t,2) * c + pow(t,3) * d;
+    return pow((1 - t), 3) * a + 3 * pow((1 - t), 2) * t * b + 3 * (1 - t) * pow(t, 2) * c + pow(t, 3) * d;
 }
 } // namespace plugin::topology

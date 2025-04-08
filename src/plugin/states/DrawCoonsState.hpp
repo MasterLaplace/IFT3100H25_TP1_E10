@@ -6,7 +6,7 @@
 
 namespace plugin::states {
 
-    enum curveType {
+enum curveType {
     BEZIER,
     COONS
 };
