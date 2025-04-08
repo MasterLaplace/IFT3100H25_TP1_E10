@@ -27,6 +27,7 @@ void CurveUI::drawOptionPanel()
     ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Bezier quadratique", ImVec2(180, 40)))
     {
+        controller->setCurveType(plugin::states::BEZIER_QUAD);
     }
 
     ImGui::Spacing();
@@ -41,6 +42,7 @@ void CurveUI::drawOptionPanel()
     ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Coons", ImVec2(180, 40)))
     {
+        controller->setCurveType(plugin::states::COONS);
     }
 
     ImGui::Spacing();

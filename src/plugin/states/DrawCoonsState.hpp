@@ -6,9 +6,14 @@
 
 namespace plugin::states {
 
+    enum curveType {
+    BEZIER_QUAD,
+    COONS
+};
+
 class DrawCoonsState : public State {
 public:
-    DrawCoonsState();
+    DrawCoonsState(curveType _type);
 
     void enter() override;
     void update() override;
@@ -22,11 +27,15 @@ public:
     const ofPoint getSelectedPoint() const;
     const std::vector<ofPoint> getPoints() const;
 
+    void setCurveType(curveType _type);
     void setPoint(ofPoint p);
     void setPoints(std::vector<ofPoint> p);
 
 private:
+    curveType type;
+
     plugin::topology::Coons coons;
+    plugin::topology::BezierQuadratique bezier;
 
     bool isDragging = false;
     ofPoint selectedPoint;

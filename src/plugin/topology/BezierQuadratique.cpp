@@ -1,7 +1,14 @@
 #include "BezierQuadratique.hpp"
 
 namespace plugin::topology {
+BezierQuadratique::BezierQuadratique(ofPoint c1, ofPoint c2) 
+{ 
+    C1 = c1;
+    C3 = c2;
+    C2 = ofPoint((C1.x + C3.x) / 2, (C1.y + C3.y) / 2, (C1.z + C3.z) / 2);
 
+    updatePoints();
+}
 BezierQuadratique::BezierQuadratique(ofPoint c1, ofPoint c2, ofPoint c3)
 {
     C1 = c1;
@@ -16,6 +23,32 @@ const ofPoint BezierQuadratique::getC1() const { return C1; }
 const ofPoint BezierQuadratique::getC2() const { return C2; }
 
 const ofPoint BezierQuadratique::getC3() const { return C3; }
+
+const ofPoint BezierQuadratique::getPoint() const
+{
+    switch (selectedPoint)
+    {
+        case -1: return ofPoint{-1, -1, -1}; break;
+        case 0: return C1; break;
+        case 1: return C2; break;
+        case 2: return C3; break;
+        default:
+            std::cerr << "Erreur BezierQuadratique::getPoint() : index de point invalide (" << selectedPoint << ")."
+                      << std::endl;
+            return ofPoint{-1, -1, -1};
+    }
+}
+
+const ofPoint BezierQuadratique::getPoint(int index) const 
+{ 
+    switch (index)
+    {
+        case 0: return C1; break;
+        case 1: return C2; break;
+        case 2: return C3; break;
+        default: break;
+    }
+}
 
 const std::array<ofPoint, 3> BezierQuadratique::getPoints() const { return points; }
 
@@ -37,6 +70,20 @@ void BezierQuadratique::setC3(const ofPoint p)
     updatePoints();
 }
 
+void BezierQuadratique::setSelectedPoint(int index) { selectedPoint = index; }
+
+void BezierQuadratique::setPoint(ofPoint p)
+{
+    switch (selectedPoint)
+    {
+        case 0: C1 = p; break;
+        case 1: C2 = p; break;
+        case 2: C3 = p; break;
+        default: std::cerr << "Erreur BezierQuadratique::setPoint(ofPoint p) : index de point invalide (" << selectedPoint << ")." << std::endl; break;
+    }
+    updatePoints();
+}
+
 void BezierQuadratique::setPoints(const std::array<ofPoint, 3> p)
 {
     C1 = p[0];
@@ -55,6 +102,24 @@ void BezierQuadratique::draw(int precision) const
         ofPoint p1 = nlerpPoint(t1);
         ofPoint p2 = nlerpPoint(t2);
         ofDrawLine(p1, p2);
+    }
+}
+
+void BezierQuadratique::drawWithPoints(int precision) const 
+{
+    draw(precision);
+    
+    for (int i = 0; i < points.size(); i++)
+    {
+        if (i == selectedPoint)
+        {
+            ofSetColor(ofColor::green);
+        }
+        else
+        {
+            ofSetColor(ofColor::red);
+        }
+        ofDrawCircle(points[i], pointRadius);
     }
 }
 

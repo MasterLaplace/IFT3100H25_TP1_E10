@@ -103,7 +103,7 @@ void AppGui::drawMenuBar()
         {
             if (ImGui::MenuItem("Bezier"))
             {
-                // controller->drawBezierCurve();
+                controller->drawCurve(plugin::states::BEZIER_QUAD);
             }
 
             if (ImGui::MenuItem("Catmull-Rom"))
@@ -113,7 +113,7 @@ void AppGui::drawMenuBar()
 
             if (ImGui::MenuItem("Coons"))
             {
-                controller->drawCurve();
+                controller->drawCurve(plugin::states::COONS);
             }
             ImGui::EndMenu();
         }

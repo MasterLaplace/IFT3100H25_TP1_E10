@@ -1,8 +1,10 @@
 #include "DrawCoonsState.hpp"
 
-plugin::states::DrawCoonsState::DrawCoonsState()
-    : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f))
+plugin::states::DrawCoonsState::DrawCoonsState(curveType _type)
+    : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
+      bezier(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f))
 {
+    type = _type;
 }
 
 void plugin::states::DrawCoonsState::enter()
@@ -13,6 +15,14 @@ void plugin::states::DrawCoonsState::enter()
     float w = ofGetWidth();
     float h = ofGetHeight();
 
+    // On instancie Bezier
+    ofPoint b1 = {100.0f, h / 2, 0.0f};
+    ofPoint b2 = {w - 300.0f, h / 2, 0.0f};
+
+    bezier.~BezierQuadratique();
+    new (&bezier) plugin::topology::BezierQuadratique(b1, b2);
+
+    // On instancie Coons
     ofPoint c1 = {100.0f, 100.0f, 0.0f};         // Point en haut a gauche.
     ofPoint c2 = {w - 300.0f, 100.0f, 0.0f};     // Point en haut a droite.
     ofPoint c3 = {w - 300.0f, h - 100.0f, 0.0f}; // Point en bas a droite.
@@ -29,51 +39,146 @@ void plugin::states::DrawCoonsState::update()
     if (isDragging)
     {
         ofPoint newPoint(mousePosition.x, mousePosition.y, selectedPoint.z);
-        coons.setPoint(newPoint);
+
+        switch (type)
+        {
+            case plugin::states::BEZIER_QUAD: bezier.setPoint(newPoint); break;
+            case plugin::states::COONS: coons.setPoint(newPoint); break;
+            default: break;
+        }
+        
     }
 }
 
-void plugin::states::DrawCoonsState::draw() { coons.draw(); }
+void plugin::states::DrawCoonsState::draw() 
+{ 
+    switch (type)
+    {
+        case plugin::states::BEZIER_QUAD: bezier.drawWithPoints(100); break;
+        case plugin::states::COONS: coons.draw(); break;
+        default: break;
+    }
+    
+}
 
-void plugin::states::DrawCoonsState::exit() { coons.~Coons(); }
+void plugin::states::DrawCoonsState::exit() 
+{
+    bezier.~BezierQuadratique();
+    coons.~Coons();
+}
 
 void plugin::states::DrawCoonsState::mouseDragged(int x, int y, int button)
 {
     if (isDragging)
     {
         ofPoint newPoint(x, y, selectedPoint.z);
-        coons.setPoint(newPoint);
+        
+        switch (type)
+        {
+            case plugin::states::BEZIER_QUAD: bezier.setPoint(newPoint); break;
+            case plugin::states::COONS: coons.setPoint(newPoint); break;
+            default: break;
+        }
     }
 }
 
 void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
 {
-    for (int i = 0; i < coons.getPoints().size(); ++i)
+    switch (type)
     {
-        if (isInside(coons.getPoint(i)))
+    case plugin::states::BEZIER_QUAD:
+        for (int i = 0; i < bezier.getPoints().size(); ++i)
         {
-            coons.setSelectedPoint(i);
-            selectedPoint = coons.getPoint();
-            isDragging = true;
-            break;
+            if (isInside(bezier.getPoint(i)))
+            {
+                bezier.setSelectedPoint(i);
+                selectedPoint = bezier.getPoint();
+                isDragging = true;
+                break;
+            }
+            else
+            {
+                bezier.setSelectedPoint(-1);
+                isDragging = false;
+            }
         }
-        else
+        break;
+    case plugin::states::COONS:
+        for (int i = 0; i < coons.getPoints().size(); ++i)
         {
-            coons.setSelectedPoint(-1);
-            isDragging = false;
+            if (isInside(coons.getPoint(i)))
+            {
+                coons.setSelectedPoint(i);
+                selectedPoint = coons.getPoint();
+                isDragging = true;
+                break;
+            }
+            else
+            {
+                coons.setSelectedPoint(-1);
+                isDragging = false;
+            }
         }
     }
 }
 
 void plugin::states::DrawCoonsState::mouseReleased(Canvas *canvas) { isDragging = false; }
 
-const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const { return coons.getPoint(); }
+const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const 
+{ 
+    switch (type)
+    {
+        case plugin::states::BEZIER_QUAD: return bezier.getPoint(); break;
+        case plugin::states::COONS: return coons.getPoint(); break;
+        default: break;
+    }
+    
+}
 
-const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const { return coons.getPoints(); }
+const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const 
+{ 
+    switch (type)
+    {
+        case plugin::states::BEZIER_QUAD: 
+        {
+            const auto &pointsArray = bezier.getPoints();
+            return std::vector<ofPoint>(pointsArray.begin(), pointsArray.end());
+            break;
+        }
+        case plugin::states::COONS: return coons.getPoints(); break;
+        default: break;
+    }
+}
 
-void plugin::states::DrawCoonsState::setPoint(ofPoint p) { coons.setPoint(p); }
+void plugin::states::DrawCoonsState::setCurveType(curveType _type) { type = _type; }
 
-void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p) { coons.setPoints(p); }
+void plugin::states::DrawCoonsState::setPoint(ofPoint p) 
+{ 
+    switch (type)
+    {
+        case plugin::states::BEZIER_QUAD: bezier.setPoint(p); break;
+        case plugin::states::COONS: coons.setPoint(p); break;
+        default: break;
+    }
+}
+
+void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p) 
+{ 
+    switch (type)
+    {
+    case plugin::states::BEZIER_QUAD:
+        if (p.size() == 3) 
+        {
+            std::array<ofPoint, 3> pointsArray = {p[0], p[1], p[2]};
+            bezier.setPoints(pointsArray);
+        }
+        break;
+
+    case plugin::states::COONS: coons.setPoints(p); break;
+    default: break;
+    }
+
+}
 
 void plugin::states::DrawCoonsState::windowResized(int w, int h)
 {
@@ -86,7 +191,14 @@ bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos)
     float dx = mousePosition.x - pointPos.x;
     float dy = mousePosition.y - pointPos.y;
     float distanceSquared = dx * dx + dy * dy;
-    float radiusSquared = coons.pointRadius * coons.pointRadius;
+
+    float radiusSquared;
+    switch (type) 
+    { 
+        case plugin::states::BEZIER_QUAD: radiusSquared = bezier.pointRadius * bezier.pointRadius; break;
+        case plugin::states::COONS: radiusSquared = coons.pointRadius * coons.pointRadius; break;
+        default: break;
+    }
 
     return distanceSquared <= radiusSquared;
 }

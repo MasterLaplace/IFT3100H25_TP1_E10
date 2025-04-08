@@ -249,7 +249,7 @@ void Controller::drawHistogram(int color)
     }
 }
 
-void Controller::drawCurve() { stateMachine.changeState(new DrawCoonsState()); }
+void Controller::drawCurve(curveType type) { stateMachine.changeState(new DrawCoonsState(type)); }
 
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
@@ -390,6 +390,21 @@ ofPoint Controller::getCurvePoint()
     }
 }
 
+void Controller::setCurveType(curveType _type)
+{
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction setCurveType() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState."
+                  << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        state->setCurveType(_type);
+    }
+}
+
 void Controller::setCurvePoint(ofPoint newPoint)
 {
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
@@ -401,7 +416,7 @@ void Controller::setCurvePoint(ofPoint newPoint)
     else
     {
         DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
-        return state->setPoint(newPoint);
+        state->setPoint(newPoint);
     }
 }
 

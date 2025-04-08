@@ -49,7 +49,7 @@ public:
     void drawPolygonButtonPressed();
     void deletePrimitiveButtonPressed(uint32_t id);
     void drawHistogram(int color);
-    void drawCurve();
+    void drawCurve(curveType type);
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
@@ -101,6 +101,7 @@ public:
     ofPoint getCurvePoint();
 
     // Setter pour les courbes.
+    void setCurveType(curveType _type);
     void setCurvePoint(ofPoint newPoint);
 
     void createModelButtonPressed(const std::string &modelName);
