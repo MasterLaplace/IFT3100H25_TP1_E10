@@ -78,7 +78,10 @@ void Coons::setPoint(ofPoint p, int index)
         break;
     case 6: curve3.setC2(p); break;
     case 7: curve4.setC2(p); break;
-    default: std::cerr << "Erreur : Conns::setPoint(ofPoint p, int index) -> index de point invalide (" << index << ")." << std::endl; break;
+    default:
+        std::cerr << "Erreur : Conns::setPoint(ofPoint p, int index) -> index de point invalide (" << index << ")."
+                  << std::endl;
+        break;
     }
     updatePoints();
 }
