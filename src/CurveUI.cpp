@@ -33,6 +33,14 @@ void CurveUI::drawOptionPanel()
     ImGui::Spacing();
 
     ImGui::SetNextItemWidth(180);
+    if (ImGui::Button("Catmull-Rom", ImVec2(180, 40)))
+    {
+        controller->setCurveType(plugin::states::CATMULL_ROM);
+    }
+
+    ImGui::Spacing();
+
+    ImGui::SetNextItemWidth(180);
     if (ImGui::Button("Coons", ImVec2(180, 40)))
     {
         controller->setCurveType(plugin::states::COONS);

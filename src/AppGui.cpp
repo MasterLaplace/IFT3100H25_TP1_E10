@@ -108,7 +108,7 @@ void AppGui::drawMenuBar()
 
             if (ImGui::MenuItem("Catmull-Rom"))
             {
-                // controller->drawCatmullRomCurve();
+                controller->drawCurve(plugin::states::CATMULL_ROM);
             }
 
             if (ImGui::MenuItem("Coons"))

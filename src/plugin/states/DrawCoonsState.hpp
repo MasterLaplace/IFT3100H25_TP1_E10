@@ -2,12 +2,14 @@
 
 #include "Canvas.hpp"
 #include "State.hpp"
+#include "plugin/topology/CatmullRom.hpp"
 #include "plugin/topology/Coons.hpp"
 
 namespace plugin::states {
 
     enum curveType {
     BEZIER,
+    CATMULL_ROM,
     COONS
 };
 
@@ -37,8 +39,9 @@ public:
 private:
     curveType type;
 
-    plugin::topology::Coons coons;
     plugin::topology::BezierQuadratique bezier;
+    plugin::topology::Coons coons;
+    plugin::topology::CatmullRom catmull;
 
     bool isDragging = false;
     ofPoint selectedPoint;
