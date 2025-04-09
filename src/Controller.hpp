@@ -104,6 +104,7 @@ public:
     // Setter pour les courbes.
     void setCurveType(curveType _type);
     void setCurvePoint(ofPoint newPoint);
+    void addPoint();
     void convertCurve();
 
     void createModelButtonPressed(const std::string &modelName);

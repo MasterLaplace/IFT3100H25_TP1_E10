@@ -23,6 +23,9 @@ public:
     // Fonction de dessin
     void draw() const;
 
+    // Fonction pour ajouter un point a la courbe.
+    void addPoint();
+
     const float pointRadius = 15.0f;
 
 private:
@@ -31,7 +34,6 @@ private:
     std::vector<ofPoint> points;
 
     ofPoint catmullRom(float t, const ofPoint &p0, const ofPoint &p1, const ofPoint &p2, const ofPoint &p3) const;
-    ofPoint nlerp(float t, int index) const;
 };
 
 } // namespace plugin::topology

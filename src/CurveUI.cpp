@@ -80,5 +80,14 @@ void CurveUI::drawOptionPanel()
         }
     }
 
+    if (controller->getCurveType() == plugin::states::CATMULL_ROM)
+    {
+        ImGui::SetNextItemWidth(180);
+        if (ImGui::Button("Ajouter un point", ImVec2(180, 40)))
+        {
+            controller->addPoint();
+        }
+    }
+
     ImGui::End();
 }

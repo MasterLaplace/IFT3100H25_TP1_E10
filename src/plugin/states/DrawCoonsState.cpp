@@ -219,6 +219,21 @@ void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p)
 
 }
 
+void plugin::states::DrawCoonsState::addPoint() 
+{ 
+    if (type != plugin::states::CATMULL_ROM)
+    {
+        std::cerr << "Erreur : DrawCoonsState::addPoint() -> cette fonction ne peut etre appelee que si la courbe "
+                     "active est Catmull-Rom."
+                  << std::endl;
+        return;
+    }
+    else
+    {
+        catmull.addPoint();
+    }
+}
+
 void plugin::states::DrawCoonsState::convertCurve() 
 { 
     if (bezier.isQuad)

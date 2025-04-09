@@ -435,6 +435,21 @@ void Controller::setCurvePoint(ofPoint newPoint)
     }
 }
 
+void Controller::addPoint() 
+{
+    if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
+    {
+        std::cerr << "Erreur : La fonction addPoint() du controleur ne peut pas etre appelee si l'etat n'est "
+                     "pas un DrawCoonsState."
+                  << std::endl;
+    }
+    else
+    {
+        DrawCoonsState *state = dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState());
+        state->addPoint();
+    }
+}
+
 void Controller::convertCurve()
 {
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)

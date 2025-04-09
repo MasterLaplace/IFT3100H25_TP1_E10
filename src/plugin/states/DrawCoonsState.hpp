@@ -33,6 +33,7 @@ public:
     void setCurveType(curveType _type);
     void setPoint(ofPoint p);
     void setPoints(std::vector<ofPoint> p);
+    void addPoint();
 
     void convertCurve();
 
