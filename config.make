@@ -8,7 +8,7 @@
 #   The location of your root openFrameworks installation
 #       (default) OF_ROOT = ThirdParty/of_v0.12.0_linux64gcc6_release
 ################################################################################
-OF_ROOT = ThirdParty/of_v0.12.0_linux64gcc6_release
+OF_ROOT = ../../..
 
 ################################################################################
 # PROJECT ROOT
