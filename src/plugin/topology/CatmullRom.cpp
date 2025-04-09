@@ -60,7 +60,7 @@ void plugin::topology::CatmullRom::setPoints(std::vector<ofPoint> p)
 
 void plugin::topology::CatmullRom::setSelectedPoint(int index)
 {
-    if (index < 0 || index > points.size() - 1)
+    if (index < -1 || index > points.size() - 1)
     {
         std::cerr << "Erreur : CatmullRom::setSelectedPoint() -> index est en dehors des limites du vecteur points."
                   << std::endl;
@@ -71,17 +71,67 @@ void plugin::topology::CatmullRom::setSelectedPoint(int index)
 
 void plugin::topology::CatmullRom::draw() const
 {
-    // On dessine la courbe
+    // On dessine la courbe.
     ofSetColor(ofColor::black);
 
-    for (int i = 0; i < points.size() - 3; ++i)
+    // Cas special pour le premier segment.
+    for (float t = 0.0f; t <= 1.0f; t += 0.01f)
     {
-        ofPoint prevPoint = nlerp(0.0f, i);
-        for (float t = 0.01f; t < 1.0f; t += 0.01f)
+        ofPoint p0 = points[points.size() - 1]; // Le premier point est le dernier du vecteur.
+        ofPoint p1 = points[0]; // C'est le premier point du vecteur, c'est lui qu'on traite dans ce cas special.
+        ofPoint p2 = points[1];
+        ofPoint p3 = points[2];
+
+        // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom.
+        ofPoint p = catmullRom(t, p0, p1, p2, p3);
+
+        // Dessiner la courbe avec les points interpolés.
+        if (t > 0.0f)
         {
-            ofPoint p = nlerp(t, i);
+            ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);
             ofDrawLine(prevPoint, p);
-            prevPoint = p;
+        }
+    }
+
+    // Cas pour les segments intermediaires.
+    for (int i = 1; i < points.size() - 2; ++i)
+    {
+        for (float t = 0.0f; t <= 1.0f; t += 0.01f)
+        {
+            ofPoint p0 = points[i - 1];
+            ofPoint p1 = points[i]; // C'est le point qu'on traite actuellement
+            ofPoint p2 = points[i + 1];
+            ofPoint p3 = points[i + 2];
+
+            // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom
+            ofPoint p = catmullRom(t, p0, p1, p2, p3);
+
+            // Dessiner la courbe avec les points interpolés
+            if (t > 0.0f)
+            {
+                ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);
+                ofDrawLine(prevPoint, p);
+            }
+        }
+    }
+
+    // Cas special pour le dernier segment.
+    for (float t = 0.0f; t <= 1.0f; t += 0.01f)
+    {
+        int n = points.size();
+        ofPoint p0 = points[n - 3];
+        ofPoint p1 = points[n - 2]; // C'est l'avant dernier point du vecteur. C'est celui qu'on traite en dernier.
+        ofPoint p2 = points[n - 1];
+        ofPoint p3 = points[0];
+
+        // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom
+        ofPoint p = catmullRom(t, p0, p1, p2, p3);
+
+        // Dessiner la courbe avec les points interpolés
+        if (t > 0.0f)
+        {
+            ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);
+            ofDrawLine(prevPoint, p);
         }
     }
 
@@ -100,6 +150,17 @@ void plugin::topology::CatmullRom::draw() const
     }
 }
 
+void plugin::topology::CatmullRom::addPoint()
+{
+    float x = ofGetWidth() / 2;
+    float y = ofGetHeight() / 2;
+    float z = 0.0f;
+
+    ofPoint p(x, y, z);
+
+    points.push_back(p);
+}
+
 ofPoint plugin::topology::CatmullRom::catmullRom(float t, const ofPoint &p0, const ofPoint &p1, const ofPoint &p2,
                                                  const ofPoint &p3) const
 {
@@ -109,34 +170,4 @@ ofPoint plugin::topology::CatmullRom::catmullRom(float t, const ofPoint &p0, con
     // Formule de Catmull-Rom generee par ChatGPT.
     return 0.5 * ((2.0 * p1) + (-p0 + p2) * t + (2.0 * p0 - 5.0 * p1 + 4.0 * p2 - p3) * t2 +
                   (-p0 + 3.0 * p1 - 3.0 * p2 + p3) * t3);
-}
-
-ofPoint plugin::topology::CatmullRom::nlerp(float t, int index) const
-{
-    if (points.size() < 4)
-    {
-        return ofPoint(0, 0);
-    }
-
-    if (index < 0 || index >= points.size() - 3)
-    {
-        return ofPoint(0, 0);
-    }
-
-    ofPoint p0 = points[index];
-    ofPoint p1 = points[index + 1];
-    ofPoint p2 = points[index + 2];
-    ofPoint p3 = points[index + 3];
-
-    if (t == 0.0f)
-    {
-        return p0;
-    }
-
-    if (t == 1.0f)
-    {
-        return p3;
-    }
-
-    return catmullRom(t, p0, p1, p2, p3);
 }
