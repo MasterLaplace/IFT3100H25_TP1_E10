@@ -43,7 +43,7 @@ private:
     ofPoint C1;
     ofPoint C2;
     ofPoint C3;
-    
+
     // Les points de controle cubiques.
     ofPoint P1;
     ofPoint P2;
