@@ -435,7 +435,7 @@ void Controller::setCurvePoint(ofPoint newPoint)
     }
 }
 
-void Controller::addPoint() 
+void Controller::addPoint()
 {
     if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) == nullptr)
     {
