@@ -3,7 +3,8 @@
 plugin::states::DrawCoonsState::DrawCoonsState(curveType _type)
     : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
       bezier(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
-      catmull(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f))
+      catmull(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f),
+              ofPoint(0.0f, 0.0f, 0.0f))
 {
     type = _type;
 }
@@ -52,28 +53,26 @@ void plugin::states::DrawCoonsState::update()
 
         switch (type)
         {
-            case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
-            case plugin::states::CATMULL_ROM: catmull.setPoint(newPoint); break;
-            case plugin::states::COONS: coons.setPoint(newPoint); break;
-            default: break;
+        case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
+        case plugin::states::CATMULL_ROM: catmull.setPoint(newPoint); break;
+        case plugin::states::COONS: coons.setPoint(newPoint); break;
+        default: break;
         }
-        
     }
 }
 
-void plugin::states::DrawCoonsState::draw() 
-{ 
+void plugin::states::DrawCoonsState::draw()
+{
     switch (type)
     {
-        case plugin::states::BEZIER: bezier.drawWithPoints(100); break;
-        case plugin::states::CATMULL_ROM: catmull.draw(); break;
-        case plugin::states::COONS: coons.draw(); break;
-        default: break;
+    case plugin::states::BEZIER: bezier.drawWithPoints(100); break;
+    case plugin::states::CATMULL_ROM: catmull.draw(); break;
+    case plugin::states::COONS: coons.draw(); break;
+    default: break;
     }
-    
 }
 
-void plugin::states::DrawCoonsState::exit() 
+void plugin::states::DrawCoonsState::exit()
 {
     bezier.~BezierQuadratique();
     catmull.~CatmullRom();
@@ -85,13 +84,13 @@ void plugin::states::DrawCoonsState::mouseDragged(int x, int y, int button)
     if (isDragging)
     {
         ofPoint newPoint(x, y, selectedPoint.z);
-        
+
         switch (type)
         {
-            case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
-            case plugin::states::CATMULL_ROM: catmull.setPoint(newPoint); break;
-            case plugin::states::COONS: coons.setPoint(newPoint); break;
-            default: break;
+        case plugin::states::BEZIER: bezier.setPoint(newPoint); break;
+        case plugin::states::CATMULL_ROM: catmull.setPoint(newPoint); break;
+        case plugin::states::COONS: coons.setPoint(newPoint); break;
+        default: break;
         }
     }
 }
@@ -118,7 +117,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
         }
         break;
 
-    case plugin::states::CATMULL_ROM: 
+    case plugin::states::CATMULL_ROM:
         for (int i = 0; i < catmull.getPoints().size(); ++i)
         {
             if (isInside(catmull.getPoint(i)))
@@ -161,52 +160,50 @@ void plugin::states::DrawCoonsState::mouseReleased(Canvas *canvas) { isDragging 
 const plugin::states::curveType plugin::states::DrawCoonsState::getCurveType() const { return type; }
 
 const ofPoint plugin::states::DrawCoonsState::getSelectedPoint() const
-{ 
+{
     switch (type)
     {
-        case plugin::states::BEZIER: return bezier.getPoint(); break;
-        case plugin::states::CATMULL_ROM: return catmull.getPoint(); break;
-        case plugin::states::COONS: return coons.getPoint(); break;
-        default: break;
+    case plugin::states::BEZIER: return bezier.getPoint(); break;
+    case plugin::states::CATMULL_ROM: return catmull.getPoint(); break;
+    case plugin::states::COONS: return coons.getPoint(); break;
+    default: break;
     }
-    
 }
 
-const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const 
-{ 
+const std::vector<ofPoint> plugin::states::DrawCoonsState::getPoints() const
+{
     switch (type)
     {
-        case plugin::states::BEZIER: 
-        {
-            const auto &pointsArray = bezier.getPoints();
-            return std::vector<ofPoint>(pointsArray.begin(), pointsArray.end());
-            break;
-        }
-        case plugin::states::CATMULL_ROM: return catmull.getPoints(); break;
-        case plugin::states::COONS: return coons.getPoints(); break;
-        default: break;
+    case plugin::states::BEZIER: {
+        const auto &pointsArray = bezier.getPoints();
+        return std::vector<ofPoint>(pointsArray.begin(), pointsArray.end());
+        break;
+    }
+    case plugin::states::CATMULL_ROM: return catmull.getPoints(); break;
+    case plugin::states::COONS: return coons.getPoints(); break;
+    default: break;
     }
 }
 
 void plugin::states::DrawCoonsState::setCurveType(curveType _type) { type = _type; }
 
-void plugin::states::DrawCoonsState::setPoint(ofPoint p) 
-{ 
+void plugin::states::DrawCoonsState::setPoint(ofPoint p)
+{
     switch (type)
     {
-        case plugin::states::BEZIER: bezier.setPoint(p); break;
-        case plugin::states::CATMULL_ROM: catmull.setPoint(p); break;
-        case plugin::states::COONS: coons.setPoint(p); break;
-        default: break;
+    case plugin::states::BEZIER: bezier.setPoint(p); break;
+    case plugin::states::CATMULL_ROM: catmull.setPoint(p); break;
+    case plugin::states::COONS: coons.setPoint(p); break;
+    default: break;
     }
 }
 
-void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p) 
-{ 
+void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p)
+{
     switch (type)
     {
     case plugin::states::BEZIER:
-        if (p.size() == 3) 
+        if (p.size() == 3)
         {
             std::array<ofPoint, 3> pointsArray = {p[0], p[1], p[2]};
             bezier.setPoints(pointsArray);
@@ -216,11 +213,10 @@ void plugin::states::DrawCoonsState::setPoints(std::vector<ofPoint> p)
     case plugin::states::COONS: coons.setPoints(p); break;
     default: break;
     }
-
 }
 
-void plugin::states::DrawCoonsState::convertCurve() 
-{ 
+void plugin::states::DrawCoonsState::convertCurve()
+{
     if (bezier.isQuad)
     {
         bezier.toCubic();
@@ -244,12 +240,12 @@ bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos)
     float distanceSquared = dx * dx + dy * dy;
 
     float radiusSquared;
-    switch (type) 
-    { 
-        case plugin::states::BEZIER: radiusSquared = bezier.pointRadius * bezier.pointRadius; break;
-        case plugin::states::CATMULL_ROM: radiusSquared = catmull.pointRadius * catmull.pointRadius; break;
-        case plugin::states::COONS: radiusSquared = coons.pointRadius * coons.pointRadius; break;
-        default: break;
+    switch (type)
+    {
+    case plugin::states::BEZIER: radiusSquared = bezier.pointRadius * bezier.pointRadius; break;
+    case plugin::states::CATMULL_ROM: radiusSquared = catmull.pointRadius * catmull.pointRadius; break;
+    case plugin::states::COONS: radiusSquared = coons.pointRadius * coons.pointRadius; break;
+    default: break;
     }
 
     return distanceSquared <= radiusSquared;
