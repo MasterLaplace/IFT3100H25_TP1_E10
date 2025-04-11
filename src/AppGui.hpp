@@ -6,8 +6,8 @@ C'est une classe temporaire de UI juste pour donner une id√©e de comment l'impl√
 
 #include "Node.hpp"
 #include "ofxImGui.h"
-#include "plugin/light/Light.hpp"
 #include "plugin/image/ResourceManager.hpp"
+#include "plugin/light/Light.hpp"
 #include <unordered_map>
 
 using namespace plugin::primitive;

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "C:\Code\of_v0.12.0_vs_release\libs\openFrameworks\gl\ofLight.h"
-#include "LightTypes.hpp"
 #include "LightModel.hpp"
+#include "LightTypes.hpp"
 
 namespace plugin::light {
 
@@ -30,7 +30,7 @@ public:
 
     // Getter pour le modele.
     plugin::light::LightModel::Type getLightModel();
-    glm::vec3& getAmbientColor() { return _model.getAmbientColor(); }
+    glm::vec3 &getAmbientColor() { return _model.getAmbientColor(); }
     glm::vec3 getDiffuseColor() { return _model.getDiffuseColor(); }
     glm::vec3 getSpecularColor() { return _model.getSpecularColor(); }
     float getShininess() { return _model.getShininess(); }

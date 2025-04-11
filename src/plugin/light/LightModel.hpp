@@ -18,7 +18,7 @@ public:
 
     Type getLightModel() const { return _model; }
     glm::vec3 getLightPosition() const { return _lightPosition; }
-    glm::vec3& getAmbientColor() { return _ambientColor; }
+    glm::vec3 &getAmbientColor() { return _ambientColor; }
     glm::vec3 getDiffuseColor() const { return _diffuseColor; }
     glm::vec3 getSpecularColor() const { return _specularColor; }
     float getShininess() const { return _shininess; }

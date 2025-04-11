@@ -20,11 +20,11 @@ glm::vec3 Canvas3D::getLightPosition(int i) { return lights[i]->getLightPosition
 
 glm::vec3 Canvas3D::getLightColor(int i) { return lights[i]->getLightColor(); }
 
-glm::vec3& Canvas3D::getAmbientColor(int i) { return lights[i]->getAmbientColor(); }
+glm::vec3 &Canvas3D::getAmbientColor(int i) { return lights[i]->getAmbientColor(); }
 
 glm::vec3 Canvas3D::getDiffuseColor(int i) { return lights[i]->getDiffuseColor(); }
 
-glm::vec3 Canvas3D::getSpecularColor(int i) {return lights[i]->getSpecularColor(); }
+glm::vec3 Canvas3D::getSpecularColor(int i) { return lights[i]->getSpecularColor(); }
 
 float Canvas3D::getShininess(int i) { return lights[i]->getShininess(); }
 
@@ -73,15 +73,15 @@ void Canvas3D::setLightAngle(float angle, int i) { lights[i]->setLightAngle(angl
 
 void Canvas3D::setLightIntensity(float intensity, int i) { lights[i]->setLightIntensity(intensity); }
 
-void Canvas3D::addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model) 
-{ 
-    plugin::light::Light *l = new plugin::light::Light(type, model); 
+void Canvas3D::addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model)
+{
+    plugin::light::Light *l = new plugin::light::Light(type, model);
     lights.push_back(l);
     lights.back()->id = lights.size() - 1;
 }
 
-void Canvas3D::deleteLight(int i) 
-{ 
+void Canvas3D::deleteLight(int i)
+{
     delete lights[i];
 
     for (int i = 0; i < lights.size(); i++)
@@ -98,7 +98,7 @@ void Canvas3D::draw()
     // On active l'eclairage dynamique.
     ofEnableLighting();
 
-    // On active toutes les lumieres et leurs shaders. 
+    // On active toutes les lumieres et leurs shaders.
     for (int i = 0; i < lights.size(); i++)
     {
         lights[i]->apply();
@@ -127,9 +127,9 @@ void Canvas3D::draw()
 }
 
 plugin::light::Light *Canvas3D::getLight(int id)
-{ 
+{
     plugin::light::Light *l = nullptr;
-    
+
     for (int i = 0; i < lights.size(); i++)
     {
         if (lights[i]->id == id)
@@ -142,7 +142,4 @@ plugin::light::Light *Canvas3D::getLight(int id)
     return l;
 }
 
-int Canvas3D::getLightId(int i) 
-{
-    return lights[i]->id; 
-}
+int Canvas3D::getLightId(int i) { return lights[i]->id; }
