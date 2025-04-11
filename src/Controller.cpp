@@ -389,7 +389,11 @@ void Controller::addLight(plugin::light::Light::lightType type, plugin::light::L
     canvas3d->addLight(type, model);
 }
 
-void Controller::deleteLight(int i) { canvas3d->deleteLight(i); }
+void Controller::deleteLight(int i) 
+{ 
+    canvas3d->deleteLight(i); 
+    stateMachine.getCurrentState()->selectedLight = -1;
+}
 
 curveType Controller::getCurveType()
 {

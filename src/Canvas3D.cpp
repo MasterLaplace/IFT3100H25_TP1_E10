@@ -82,11 +82,24 @@ void Canvas3D::addLight(plugin::light::Light::lightType type, plugin::light::Lig
 
 void Canvas3D::deleteLight(int i) 
 { 
-    delete lights[i];
-
-    for (int i = 0; i < lights.size(); i++)
+    // Vérifier si l'indice est valide avant tout accès à lights[i]
+    if (i >= 0 && i < lights.size())
     {
-        lights[i]->id = i;
+        // Supprimer l'objet de la mémoire
+        delete lights[i];
+
+        // Retirer l'élément du vecteur
+        lights.erase(lights.begin() + i);
+
+        // Si tu veux réindexer les lumières restantes
+        for (int j = 0; j < lights.size(); j++)
+        {
+            lights[j]->id = j;
+        }
+    }
+    else
+    {
+        std::cerr << "Erreur : tentative de suppression d'une lumière avec un indice invalide : " << i << std::endl;
     }
 }
 

@@ -1359,6 +1359,11 @@ void AppGui::drawLightProperties(int i)
             controller->setShininess(shininess, i);
         }
     }
+
+    if (ImGui::Button("Supprimer"))
+    {
+        controller->deleteLight(i);
+    }
     
 }
 
