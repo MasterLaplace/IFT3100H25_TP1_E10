@@ -362,10 +362,10 @@ void Controller::addLight(plugin::light::Light::lightType type, plugin::light::L
     canvas3d->addLight(type, model);
 }
 
-void Controller::deleteLight(int i) 
-{ 
+void Controller::deleteLight(int i)
+{
     // Commentaire inutile
-    canvas3d->deleteLight(i); 
+    canvas3d->deleteLight(i);
     stateMachine.getCurrentState()->selectedLight = -1;
 }
 

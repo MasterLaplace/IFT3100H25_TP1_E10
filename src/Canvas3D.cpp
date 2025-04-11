@@ -81,8 +81,8 @@ void Canvas3D::addLight(plugin::light::Light::lightType type, plugin::light::Lig
 }
 
 <<<<<<< HEAD
-void Canvas3D::deleteLight(int i) 
-{ 
+void Canvas3D::deleteLight(int i)
+{
     // Vérifier si l'indice est valide avant tout accès à lights[i]
     if (i >= 0 && i < lights.size())
 =======
