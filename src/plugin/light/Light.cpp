@@ -1,16 +1,16 @@
 #include "Light.hpp"
 
-plugin::light::Light::Light(lightType type, plugin::light::LightModel::Type model) 
-{ 
-	_type = type;
+plugin::light::Light::Light(lightType type, plugin::light::LightModel::Type model)
+{
+    _type = type;
     _model.setLightModel(model);
     updateLightType();
     id = _nextId;
     _nextId++;
 }
 
-glm::vec3 plugin::light::Light::getLightDirection() 
-{ 
+glm::vec3 plugin::light::Light::getLightDirection()
+{
     glm::vec3 p = {0, 0, 0};
 
     switch (_type)
@@ -28,7 +28,7 @@ glm::vec3 plugin::light::Light::getLightDirection()
 glm::vec3 plugin::light::Light::getLightColor() { return ambient.color; }
 
 float plugin::light::Light::getCutOffAngle()
-{ 
+{
     if (_type == plugin::light::Light::lightType::SPOT)
     {
         return spot.cutoffAngle;
@@ -38,7 +38,7 @@ float plugin::light::Light::getCutOffAngle()
 }
 
 float plugin::light::Light::getIntensity()
-{ 
+{
     float intensity = -1.0f;
 
     switch (_type)
@@ -56,39 +56,39 @@ float plugin::light::Light::getIntensity()
 plugin::light::LightModel::Type plugin::light::Light::getLightModel() { return _model.getLightModel(); }
 
 void plugin::light::Light::setLightPosition(glm::vec3 lightPosition)
-{ 
-	_model.setLightPosition(lightPosition); 
+{
+    _model.setLightPosition(lightPosition);
 
-	switch (_type)
-	{
+    switch (_type)
+    {
     case plugin::light::Light::lightType::AMBIENT: break;
     case plugin::light::Light::lightType::DIRECTIONAL: break;
     case plugin::light::Light::lightType::POINT_LIGHT: point.position = lightPosition; break;
     case plugin::light::Light::lightType::SPOT: spot.position = lightPosition; break;
     default: break;
-	}
+    }
 }
 
 void plugin::light::Light::setLightType(lightType type)
-{ 
-	if (type == plugin::light::Light::lightType::AMBIENT)
-	{
-        if (_model.getLightModel() == plugin::light::LightModel::Type::Phong || 
-			_model.getLightModel() == plugin::light::LightModel::Type::BlinnPhong)
-		{
+{
+    if (type == plugin::light::Light::lightType::AMBIENT)
+    {
+        if (_model.getLightModel() == plugin::light::LightModel::Type::Phong ||
+            _model.getLightModel() == plugin::light::LightModel::Type::BlinnPhong)
+        {
             std::cerr << "Une lumiere ambiante ne produit pas de reflexion speculaire. Il est inutile d'appliquer "
                          "Phong ou Blinn-Phong."
                       << std::endl;
             _model.setLightModel(plugin::light::LightModel::Type::Lambert);
-		}
-	}
+        }
+    }
 
-	else
-	{
+    else
+    {
         _type = type;
-	}
+    }
 
-	updateLightType();
+    updateLightType();
 }
 
 void plugin::light::Light::setLightDirection(glm::vec3 lightDirection)
@@ -104,7 +104,7 @@ void plugin::light::Light::setLightDirection(glm::vec3 lightDirection)
 }
 
 void plugin::light::Light::setLightColor(glm::vec3 lightColor)
-{ 
+{
     ambient.color = lightColor;
     directional.color = lightColor;
     point.color = lightColor;
@@ -136,28 +136,28 @@ void plugin::light::Light::setLightIntensity(float intensity)
 }
 
 void plugin::light::Light::setLightModel(plugin::light::LightModel::Type model)
-{ 
-	if (_type == plugin::light::Light::lightType::AMBIENT)
-	{
+{
+    if (_type == plugin::light::Light::lightType::AMBIENT)
+    {
         if (_model.getLightModel() == plugin::light::LightModel::Type::Phong ||
             _model.getLightModel() == plugin::light::LightModel::Type::BlinnPhong)
-		{
+        {
             std::cerr << "Une lumiere ambiante ne produit pas de reflexion speculaire. Il est inutile d'appliquer "
                          "Phong ou Blinn-Phong."
                       << std::endl;
             _model.setLightModel(plugin::light::LightModel::Type::Lambert);
-		}
-	}
+        }
+    }
 
-	else
-	{
+    else
+    {
         _model.setLightModel(model);
-	}
+    }
 }
 
 void plugin::light::Light::apply()
-{ 
-	_model.begin();
+{
+    _model.begin();
     ptrType->apply();
 }
 
@@ -168,13 +168,13 @@ void plugin::light::Light::close()
 }
 
 void plugin::light::Light::updateLightType()
-{ 
-	switch (_type)
+{
+    switch (_type)
     {
     case plugin::light::Light::lightType::AMBIENT: ptrType = &ambient; break;
     case plugin::light::Light::lightType::POINT_LIGHT: ptrType = &point; break;
     case plugin::light::Light::lightType::DIRECTIONAL: ptrType = &directional; break;
     case plugin::light::Light::lightType::SPOT: ptrType = &spot; break;
-        default: break;
+    default: break;
     }
 }

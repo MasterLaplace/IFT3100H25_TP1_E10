@@ -81,7 +81,7 @@ void StateMachine::onPrimitiveSelected(int id)
     currentState->selectedModelName = "";
     currentState->selectedPrefabName = "";
 }
-void StateMachine::onLightSelected(int i) 
+void StateMachine::onLightSelected(int i)
 {
     currentState->selectedPrimitiveId = -1;
     currentState->selectedLight = i;

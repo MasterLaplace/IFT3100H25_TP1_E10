@@ -474,11 +474,10 @@ void AppGui::drawDynamicPanel3D()
 
                 if (isSelected)
                     ImGui::SetItemDefaultFocus();
-            }  
+            }
             ImGui::EndCombo();
         }
-        
-        
+
         if (currentLightningType == 1)
         {
             ImGui::Text("Modele d'eclairage :");
@@ -490,10 +489,9 @@ void AppGui::drawDynamicPanel3D()
                     if (ImGui::Selectable(lightningModels[n], isSelected))
                     {
                         currentLightningModel = n;
-
                     }
                     if (isSelected)
-                    ImGui::SetItemDefaultFocus();
+                        ImGui::SetItemDefaultFocus();
                 }
                 ImGui::EndCombo();
             }
@@ -510,7 +508,6 @@ void AppGui::drawDynamicPanel3D()
                     if (ImGui::Selectable(lightningModels[n], isSelected))
                     {
                         currentLightningModel = n;
-
                     }
                     if (isSelected)
                         ImGui::SetItemDefaultFocus();
@@ -544,62 +541,61 @@ void AppGui::drawDynamicPanel3D()
                 controller->addLight(type, model);
             }
         }
-        
 
         // S'il n'y a aucun eclairage selectionne, on n'affiche pas les options.
         if (currentLightningModel == 0)
             break;
 
         // Pour permettre de conserver les changements de position de la lumiere.
-        //float *lightPosition = controller->getLightPosition();
+        // float *lightPosition = controller->getLightPosition();
 
         ImGui::Text("Position de la lumiere :");
-        //if (ImGui::SliderFloat3("Position", lightPosition, -100.0f, 100.0f))
+        // if (ImGui::SliderFloat3("Position", lightPosition, -100.0f, 100.0f))
         {
-            //controller->setLightPosition(lightPosition);
-            //propertiesChanged = true;
+            // controller->setLightPosition(lightPosition);
+            // propertiesChanged = true;
         }
 
         // Pour permettre de conserver les changements de couleur de la lumiere ambiante.
-        //float *ambientColor = controller->getAmbientColor();
+        // float *ambientColor = controller->getAmbientColor();
 
         ImGui::Text("Couleur ambiante :");
-        //if (ImGui::ColorEdit3("Ambiante", ambientColor))
+        // if (ImGui::ColorEdit3("Ambiante", ambientColor))
         {
-           // controller->setAmbientColor(ambientColor);
-           // propertiesChanged = true;
+            // controller->setAmbientColor(ambientColor);
+            // propertiesChanged = true;
         }
 
         // Pour permettre de conserver les changements de couleur de la lumiere diffuse.
-        //float *diffuseColor = controller->getDiffuseColor();
+        // float *diffuseColor = controller->getDiffuseColor();
         ImGui::Text("Couleur diffuse :");
-        //if (ImGui::ColorEdit3("Diffuse", diffuseColor))
+        // if (ImGui::ColorEdit3("Diffuse", diffuseColor))
         {
-            //controller->setDiffuseColor(diffuseColor);
-            //propertiesChanged = true;
+            // controller->setDiffuseColor(diffuseColor);
+            // propertiesChanged = true;
         }
 
         // On affiche uniquement si le modele d'eclairage est Phong ou Blinn-Phong.
         if (currentLightningModel == 2 || currentLightningModel == 3)
         {
             // Pour permettre de conserver les changements de couleur de la lumiere speculaire.
-            //float *specularColor = controller->getSpecularColor();
+            // float *specularColor = controller->getSpecularColor();
 
             ImGui::Text("Couleur speculaire :");
-            //if (ImGui::ColorEdit3("Speculaire", specularColor))
+            // if (ImGui::ColorEdit3("Speculaire", specularColor))
             {
-             //   controller->setSpecularColor(specularColor);
-                //propertiesChanged = true;
+                //   controller->setSpecularColor(specularColor);
+                // propertiesChanged = true;
             }
 
             // Pour permettre de conserver les changements de brillance.
-            //float shininess = controller->getShininess();
+            // float shininess = controller->getShininess();
 
             ImGui::Text("Brillance :");
-            //if (ImGui::SliderFloat("Brillance", &shininess, 0.0f, 128.0f))
+            // if (ImGui::SliderFloat("Brillance", &shininess, 0.0f, 128.0f))
             {
-            //    controller->setShininess(shininess);
-                //propertiesChanged = true;
+                //    controller->setShininess(shininess);
+                // propertiesChanged = true;
             }
         }
         break;
@@ -641,13 +637,13 @@ void AppGui::drawSceneGraph()
     ImGui::Separator();
     ImGui::Indent(10.0f);
     for (int i = 0; i < controller->getLights().size(); i++)
-    {    
+    {
         std::string label = "Lumiere " + std::to_string(i) + "##L" + std::to_string(i);
         bool selected = (i == controller->getSelectedLightId());
         if (ImGui::Selectable(label.c_str(), selected))
         {
             controller->onLightSelected(i);
-        }    
+        }
     }
     ImGui::Unindent();
 
@@ -1288,10 +1284,10 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
         ;
 }
 
-void AppGui::drawLightProperties(int i) 
-{ 
+void AppGui::drawLightProperties(int i)
+{
     glm::vec3 &position = controller->getLightPosition(i);
-    ImGui::Text("Position :"); 
+    ImGui::Text("Position :");
     if (ImGui::DragFloat3("Position", glm::value_ptr(position), 0.1f, 0.0f, 2000.0f))
     {
         controller->setLightPosition(position, i);
@@ -1301,7 +1297,7 @@ void AppGui::drawLightProperties(int i)
     ImGui::Text("Couleur ambiante :");
     if (ImGui::ColorEdit3("Ambiante", glm::value_ptr(ambientColor)))
     {
-        //controller->setAmbientColor(ambientColor, i);
+        // controller->setAmbientColor(ambientColor, i);
     }
 
     glm::vec3 &diffuseColor = controller->getDiffuseColor(i);
@@ -1359,12 +1355,15 @@ void AppGui::drawLightProperties(int i)
             controller->setShininess(shininess, i);
         }
     }
+<<<<<<< HEAD
 
     if (ImGui::Button("Supprimer"))
     {
         controller->deleteLight(i);
     }
     
+=======
+>>>>>>> 6bac8d5bc7bbec990d919200d4ed0e6d4297ed56
 }
 
 void AppGui::drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model)

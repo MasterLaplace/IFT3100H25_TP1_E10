@@ -302,35 +302,17 @@ int Controller::getLightId(int i) { return canvas3d->getLightId(i); }
 
 int Controller::getSelectedLightId() { return stateMachine.getSelectedLight(); }
 
-glm::vec3 Controller::getLightPosition(int i)
-{
-    return canvas3d->getLightPosition(i);
-}
+glm::vec3 Controller::getLightPosition(int i) { return canvas3d->getLightPosition(i); }
 
-glm::vec3 Controller::getLightDirection(int i)
-{ 
-    return canvas3d->getLightDirection(i);
-}
+glm::vec3 Controller::getLightDirection(int i) { return canvas3d->getLightDirection(i); }
 
-glm::vec3 Controller::getLightColor(int i)
-{ 
-    return canvas3d->getLightColor(i);
-}
+glm::vec3 Controller::getLightColor(int i) { return canvas3d->getLightColor(i); }
 
-glm::vec3& Controller::getAmbientColor(int i)
-{
-    return canvas3d->getAmbientColor(i);
-}
+glm::vec3 &Controller::getAmbientColor(int i) { return canvas3d->getAmbientColor(i); }
 
-glm::vec3 Controller::getDiffuseColor(int i)
-{
-    return canvas3d->getDiffuseColor(i);
-}
+glm::vec3 Controller::getDiffuseColor(int i) { return canvas3d->getDiffuseColor(i); }
 
-glm::vec3 Controller::getSpecularColor(int i)
-{
-    return canvas3d->getSpecularColor(i);
-}
+glm::vec3 Controller::getSpecularColor(int i) { return canvas3d->getSpecularColor(i); }
 
 float Controller::getShininess(int i) { return canvas3d->getShininess(i); }
 
@@ -343,7 +325,7 @@ void Controller::setLightModel(plugin::light::LightModel::Type lightModel, int i
     canvas3d->setLightModel(lightModel, i);
 }
 
-void Controller::setLightType(plugin::light::Light::lightType lightType, int i) 
+void Controller::setLightType(plugin::light::Light::lightType lightType, int i)
 {
     canvas3d->setLightType(lightType, i);
 }
@@ -353,25 +335,16 @@ void Controller::setLightPosition(const glm::vec3 lightPosition, int i)
     canvas3d->setLightPosition(lightPosition, i);
 }
 
-void Controller::setLightDirection(const glm::vec3 lightDirection, int i) 
-{ 
+void Controller::setLightDirection(const glm::vec3 lightDirection, int i)
+{
     canvas3d->setLightDirection(lightDirection, i);
 }
 
-void Controller::setLightColor(const glm::vec3 lightColor, int i) 
-{
-    canvas3d->setLightColor(lightColor, i);
-}
+void Controller::setLightColor(const glm::vec3 lightColor, int i) { canvas3d->setLightColor(lightColor, i); }
 
-void Controller::setAmbientColor(const glm::vec3 ambientColor, int i)
-{
-    canvas3d->setAmbientColor(ambientColor, i);
-}
+void Controller::setAmbientColor(const glm::vec3 ambientColor, int i) { canvas3d->setAmbientColor(ambientColor, i); }
 
-void Controller::setDiffuseColor(const glm::vec3 diffuseColor, int i)
-{
-    canvas3d->setDiffuseColor(diffuseColor, i);
-}
+void Controller::setDiffuseColor(const glm::vec3 diffuseColor, int i) { canvas3d->setDiffuseColor(diffuseColor, i); }
 
 void Controller::setSpecularColor(const glm::vec3 specularColor, int i)
 {
@@ -384,7 +357,7 @@ void Controller::setLightAngle(float angle, int i) { canvas3d->setLightAngle(ang
 
 void Controller::setLightIntensity(float intensity, int i) { canvas3d->setLightIntensity(intensity, i); }
 
-void Controller::addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model) 
+void Controller::addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model)
 {
     canvas3d->addLight(type, model);
 }

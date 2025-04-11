@@ -36,8 +36,7 @@ void plugin::light::PointLight::apply()
 
 // Implémentation de la lumière projecteur
 plugin::light::SpotLight::SpotLight(const glm::vec3 &position, const glm::vec3 &direction, const glm::vec3 &color,
-                                    float cutoffAngle,
-                     float intensity)
+                                    float cutoffAngle, float intensity)
     : position(position), direction(direction), color(color), cutoffAngle(cutoffAngle), intensity(intensity)
 {
 }

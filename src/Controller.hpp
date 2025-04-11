@@ -90,7 +90,7 @@ public:
     glm::vec3 getLightPosition(int i);
     glm::vec3 getLightDirection(int i);
     glm::vec3 getLightColor(int i);
-    glm::vec3& getAmbientColor(int i);
+    glm::vec3 &getAmbientColor(int i);
     glm::vec3 getDiffuseColor(int i);
     glm::vec3 getSpecularColor(int i);
     float getShininess(int i);
