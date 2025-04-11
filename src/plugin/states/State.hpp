@@ -21,6 +21,7 @@ public:
     glm::vec2 mousePressedPosition;
     bool isMousePressed = false;
     int selectedPrimitiveId = -1;
+    int selectedLight = -1;
     std::string selectedImageName = "";
     std::string selectedModelName = "";
     std::string selectedPrefabName = "";

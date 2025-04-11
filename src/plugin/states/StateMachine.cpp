@@ -76,6 +76,15 @@ void StateMachine::onFilledChanged(bool isFilled) { currentState->isFilled = isF
 void StateMachine::onPrimitiveSelected(int id)
 {
     currentState->selectedPrimitiveId = id;
+    currentState->selectedLight = -1;
+    currentState->selectedImageName = "";
+    currentState->selectedModelName = "";
+    currentState->selectedPrefabName = "";
+}
+void StateMachine::onLightSelected(int i) 
+{
+    currentState->selectedPrimitiveId = -1;
+    currentState->selectedLight = i;
     currentState->selectedImageName = "";
     currentState->selectedModelName = "";
     currentState->selectedPrefabName = "";
@@ -83,6 +92,7 @@ void StateMachine::onPrimitiveSelected(int id)
 void StateMachine::onImageSelected(const std::string &name)
 {
     currentState->selectedPrimitiveId = -1;
+    currentState->selectedLight = -1;
     currentState->selectedImageName = name;
     currentState->selectedModelName = "";
     currentState->selectedPrefabName = "";
@@ -90,6 +100,7 @@ void StateMachine::onImageSelected(const std::string &name)
 void StateMachine::onModelSelected(const std::string &name)
 {
     currentState->selectedPrimitiveId = -1;
+    currentState->selectedLight = -1;
     currentState->selectedImageName = "";
     currentState->selectedModelName = name;
     currentState->selectedPrefabName = "";
@@ -97,6 +108,7 @@ void StateMachine::onModelSelected(const std::string &name)
 void StateMachine::onPrefabSelected(const std::string &name)
 {
     currentState->selectedPrimitiveId = -1;
+    currentState->selectedLight = -1;
     currentState->selectedImageName = "";
     currentState->selectedModelName = "";
     currentState->selectedPrefabName = name;
@@ -106,5 +118,7 @@ int StateMachine::getSelectedNodeId() { return currentState->selectedPrimitiveId
 std::string &StateMachine::getSelectedImageName() { return currentState->selectedImageName; }
 std::string &StateMachine::getSelectedModelName() { return currentState->selectedModelName; }
 std::string &StateMachine::getSelectedPrefabName() { return currentState->selectedPrefabName; }
+
+int StateMachine::getSelectedLight() { return currentState->selectedLight; }
 
 } // namespace plugin::states

@@ -9,7 +9,7 @@
 #include "HistogramUI.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
-#include "plugin/light/light.hpp"
+#include "plugin/light/light_header.hpp"
 #include "plugin/states/states.hpp"
 #include "plugin/texture/texture.hpp"
 #include <string>
@@ -60,7 +60,7 @@ public:
     void onModelSelected(const std::string &name);
     void onPrefabSelected(const std::string &name);
     void onCubeMapSelected(const std::string &name);
-    void onEndPositionChanged(uint32_t id, glm::vec2 newPos);
+    void onLightSelected(int i);
 
     void toggleCameraProjection();
     bool isCameraOrthographic();
@@ -71,6 +71,7 @@ public:
 
     void collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids);
     [[nodiscard]] int getSelectedNodeId();
+    [[nodiscard]] int getSelectedLight();
     [[nodiscard]] std::string &getSelectedImageName();
     [[nodiscard]] std::string &getSelectedModelName();
     [[nodiscard]] std::string &getSelectedPrefabName();
@@ -82,20 +83,37 @@ public:
     void setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping);
 
     // Getter pour la lumiere.
-    plugin::light::LightModel::Type getLightModel();
-    float *getLightPosition();
-    float *getAmbientColor();
-    float *getDiffuseColor();
-    float *getSpecularColor();
-    float getShininess();
+    plugin::light::LightModel::Type getLightModel(int i);
+    plugin::light::Light::lightType getLightType(int i);
+    int getLightId(int i);
+    int getSelectedLightId();
+    glm::vec3 getLightPosition(int i);
+    glm::vec3 getLightDirection(int i);
+    glm::vec3 getLightColor(int i);
+    glm::vec3& getAmbientColor(int i);
+    glm::vec3 getDiffuseColor(int i);
+    glm::vec3 getSpecularColor(int i);
+    float getShininess(int i);
+    float getLightAngle(int i);
+    float getLightIntensity(int i);
 
     // Setter pour la lumiere.
-    void setLightModel(plugin::light::LightModel::Type lightModel);
-    void setLightPosition(const float *lightPosition);
-    void setAmbientColor(const float *ambientColor);
-    void setDiffuseColor(const float *diffuseColor);
-    void setSpecularColor(const float *specularColor);
-    void setShininess(float shininess);
+    void setLightModel(plugin::light::LightModel::Type lightModel, int i);
+    void setLightType(plugin::light::Light::lightType lightType, int i);
+    void setLightPosition(const glm::vec3 lightPosition, int i);
+    void setLightDirection(const glm::vec3 lightDirection, int i);
+    void setLightColor(const glm::vec3 lightColor, int i);
+    void setAmbientColor(const glm::vec3 ambientColor, int i);
+    void setDiffuseColor(const glm::vec3 diffuseColor, int i);
+    void setSpecularColor(const glm::vec3 specularColor, int i);
+    void setShininess(float shininess, int i);
+    void setLightAngle(float angle, int i);
+    void setLightIntensity(float intensity, int i);
+
+    // Ajouter et supprimer des lumieres
+    std::vector<plugin::light::Light *> getLights() { return canvas3d->getLights(); }
+    void addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model);
+    void deleteLight(int i);
 
     // Getter pour les courbes.
     curveType getCurveType();
