@@ -28,6 +28,10 @@ public:
 
     float outlineWidth = 1.0f;
     ofColor fillColor = ofColor::black;
+    ofColor ambientColor = ofColor{0, 0, 0};
+    ofColor diffuseColor = ofColor{0.2f * 255, 0.2f * 255, 0.2f * 255};
+    ofColor specularColor = ofColor{255, 255, 255};
+    float shininess = 32.0f;
     ofColor outlineColor = ofColor::black;
     bool isFilled = true;
 };

@@ -30,10 +30,9 @@ public:
 
     // Getter pour le modele.
     plugin::light::LightModel::Type getLightModel();
-    glm::vec3 &getAmbientColor() { return _model.getAmbientColor(); }
+    glm::vec3 getAmbientColor() { return _model.getAmbientColor(); }
     glm::vec3 getDiffuseColor() { return _model.getDiffuseColor(); }
     glm::vec3 getSpecularColor() { return _model.getSpecularColor(); }
-    float getShininess() { return _model.getShininess(); }
 
     // Setter commun.
     void setLightPosition(glm::vec3 lightPosition);
@@ -50,7 +49,13 @@ public:
     void setAmbientColor(glm::vec3 ambientColor) { _model.setAmbientColor(ambientColor); }
     void setDiffuseColor(glm::vec3 diffuseColor) { _model.setDiffuseColor(diffuseColor); }
     void setSpecularColor(glm::vec3 specularColor) { _model.setSpecularColor(specularColor); }
+
+    // Setter pour les proprietes du materiau.
+    void setMaterialAmbientColor(glm::vec3 color) { _model.setMaterialAmbientColor(color); }
+    void setMaterialDiffuseColor(glm::vec3 color) { _model.setMaterialDiffuseColor(color); }
+    void setMaterialSpecularColor(glm::vec3 color) { _model.setMaterialSpecularColor(color); }
     void setShininess(float shininess) { _model.setShininess(shininess); }
+
 
     // Pour appliquer la lumiere.
     void apply();

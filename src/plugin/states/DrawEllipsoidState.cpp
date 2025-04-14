@@ -27,7 +27,10 @@ void DrawEllipsoidState::mouseReleased(Canvas *canvas)
     // On cree l'ellipse.
     PrimitiveParams params;
     params.position = center;
-    params.fillColor = fillColor;
+    params.ambientColor = ambientColor;
+    params.diffuseColor = diffuseColor;
+    params.specularColor = specularColor;
+    params.shininess = shininess;
     params.outlineWidth = outlineWidth;
     params.outlineColor = outlineColor;
     params.isFilled = isFilled;

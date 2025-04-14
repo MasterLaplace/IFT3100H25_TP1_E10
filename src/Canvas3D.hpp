@@ -16,10 +16,10 @@ public:
     glm::vec3 getLightDirection(int i);
     glm::vec3 getLightPosition(int i);
     glm::vec3 getLightColor(int i);
-    glm::vec3 &getAmbientColor(int i);
+    glm::vec3 getAmbientColor(int i);
     glm::vec3 getDiffuseColor(int i);
     glm::vec3 getSpecularColor(int i);
-    float getShininess(int i);
+    float getShininess(int i) { return 32.0f; }
     float getLightAngle(int i);
     float getLightIntensity(int i);
 
@@ -52,4 +52,9 @@ private:
 
     // Pour trouver une lumiere dans la liste.
     plugin::light::Light *getLight(int id);
+
+    glm::vec3 getMaterialAmbientColor(int i);
+    glm::vec3 getMaterialDiffuseColor(int i);
+    glm::vec3 getMaterialSpecularColor(int i);
+    float getMaterialShininess(int i);
 };

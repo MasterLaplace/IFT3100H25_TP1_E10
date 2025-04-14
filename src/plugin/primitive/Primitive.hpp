@@ -11,11 +11,15 @@ struct PrimitiveParams {
     float outlineWidth;
     bool isFilled;
     ofColor fillColor;
+    ofColor ambientColor;
+    ofColor diffuseColor;
+    ofColor specularColor;
+    float shininess;
     ofColor outlineColor;
     std::string imageName = "";
     bool drawGizmo = false;
 
-    PrimitiveParams() : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black) {}
+    PrimitiveParams() : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black), ambientColor(ofColor::black), diffuseColor(ofColor::lightGray), specularColor(ofColor::white), shininess(32.0f) {}
 };
 
 class Primitive {

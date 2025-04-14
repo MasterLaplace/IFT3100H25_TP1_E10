@@ -20,13 +20,11 @@ glm::vec3 Canvas3D::getLightPosition(int i) { return lights[i]->getLightPosition
 
 glm::vec3 Canvas3D::getLightColor(int i) { return lights[i]->getLightColor(); }
 
-glm::vec3 &Canvas3D::getAmbientColor(int i) { return lights[i]->getAmbientColor(); }
+glm::vec3 Canvas3D::getAmbientColor(int i) { return lights[i]->getAmbientColor(); }
 
 glm::vec3 Canvas3D::getDiffuseColor(int i) { return lights[i]->getDiffuseColor(); }
 
 glm::vec3 Canvas3D::getSpecularColor(int i) { return lights[i]->getSpecularColor(); }
-
-float Canvas3D::getShininess(int i) { return lights[i]->getShininess(); }
 
 float Canvas3D::getLightAngle(int i) { return lights[i]->getCutOffAngle(); }
 
@@ -80,34 +78,21 @@ void Canvas3D::addLight(plugin::light::Light::lightType type, plugin::light::Lig
     lights.back()->id = lights.size() - 1;
 }
 
-<<<<<<< HEAD
 void Canvas3D::deleteLight(int i)
 {
-    // Vérifier si l'indice est valide avant tout accès à lights[i]
-    if (i >= 0 && i < lights.size())
-=======
-void Canvas3D::deleteLight(int i)
-{
-    delete lights[i];
-
     for (int i = 0; i < lights.size(); i++)
->>>>>>> 6bac8d5bc7bbec990d919200d4ed0e6d4297ed56
     {
-        // Supprimer l'objet de la mémoire
+        // Supprimer l'objet de la memoire
         delete lights[i];
 
         // Retirer l'élément du vecteur
         lights.erase(lights.begin() + i);
 
-        // Si tu veux réindexer les lumières restantes
+        // Reindexer les lumieres restantes
         for (int j = 0; j < lights.size(); j++)
         {
             lights[j]->id = j;
         }
-    }
-    else
-    {
-        std::cerr << "Erreur : tentative de suppression d'une lumière avec un indice invalide : " << i << std::endl;
     }
 }
 
@@ -119,19 +104,32 @@ void Canvas3D::draw()
     // On active l'eclairage dynamique.
     ofEnableLighting();
 
-    // On active toutes les lumieres et leurs shaders.
-    for (int i = 0; i < lights.size(); i++)
-    {
-        lights[i]->apply();
-    }
-
     // Le shader de tessellation.
     tesShader.begin();
 
     // On dessine toutes les primitives.
     for (size_t i = 0; i < nodes.size(); i++)
     {
-        nodes[i]->draw();
+        // On active toutes les lumieres et leurs shaders.
+        for (int j = 0; j < lights.size(); j++)
+        {
+            // On set la couleur ambiante du materiau.
+            glm::vec3 materialAmbientColor = getMaterialAmbientColor(i);
+            printf("Couleur ambiante : r = %d, g = %d, b = %d\n", materialAmbientColor.r, materialAmbientColor.g,
+                   materialAmbientColor.b);
+            lights[j]->setMaterialAmbientColor(materialAmbientColor);
+
+            // On set la couleur diffuse du materiau.
+            glm::vec3 materialDiffuseColor = getMaterialDiffuseColor(i);
+            lights[j]->setMaterialDiffuseColor(materialDiffuseColor);
+
+            // On set la couleur speculaire du materiau.
+            glm::vec3 materialSpecularColor = getMaterialSpecularColor(i);
+            lights[j]->setMaterialSpecularColor(materialSpecularColor);
+
+            lights[j]->apply();
+            nodes[i]->draw();
+        }
     }
 
     // On desactive le shader de tessellation
@@ -162,5 +160,34 @@ plugin::light::Light *Canvas3D::getLight(int id)
 
     return l;
 }
+
+glm::vec3 Canvas3D::getMaterialAmbientColor(int i) 
+{ 
+    ofColor c = nodes[i]->getPrimitive()->param.ambientColor;
+    float r = static_cast<float>(c.r) / 255.0f;
+    float g = static_cast<float>(c.g) / 255.0f;
+    float b = static_cast<float>(c.b) / 255.0f;
+    return glm::vec3 {r, g, b};
+}
+
+glm::vec3 Canvas3D::getMaterialDiffuseColor(int i) 
+{ 
+    ofColor c = nodes[i]->getPrimitive()->param.diffuseColor;
+    float r = static_cast<float>(c.r) / 255.0f;
+    float g = static_cast<float>(c.g) / 255.0f;
+    float b = static_cast<float>(c.b) / 255.0f;
+    return glm::vec3{r, g, b};
+}
+
+glm::vec3 Canvas3D::getMaterialSpecularColor(int i) 
+{
+    ofColor c = nodes[i]->getPrimitive()->param.specularColor;
+    float r = static_cast<float>(c.r) / 255.0f;
+    float g = static_cast<float>(c.g) / 255.0f;
+    float b = static_cast<float>(c.b) / 255.0f;
+    return glm::vec3{r, g, b};
+}
+
+float Canvas3D::getMaterialShininess(int i) { return nodes[i]->getPrimitive()->param.shininess; }
 
 int Canvas3D::getLightId(int i) { return lights[i]->id; }

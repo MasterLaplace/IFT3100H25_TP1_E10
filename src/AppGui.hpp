@@ -68,6 +68,10 @@ private:
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};
     float outlineWidth = 1.0f;
     float fillColor[3] = {0.0f, 0.0f, 0.0f};
+    float ambientColor[3] = {0.0f, 0.0f, 0.0f};
+    float diffuseColor[3] = {0.2f, 0.2f, 0.2f};
+    float specularColor[3] = {1.0f, 1.0f, 1.0f};
+    float shininess = 32.0f;
     float outlineColor[3] = {0.0f, 0.0f, 0.0f};
     bool isFilled = true;
 };

@@ -15,7 +15,7 @@ void Ellipsoid::draw()
     ofRotateZDeg(param.rotation.z);
     ofScale(param.scale.x, param.scale.y, param.scale.z);
 
-    ofSetColor(param.fillColor);
+    ofSetColor(param.ambientColor);
     ofSetLineWidth(1);
     ofFill();
 

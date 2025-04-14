@@ -24,6 +24,10 @@ public:
 
     void onOutlineWidthChanged(float newWidth);
     void onFillColorChanged(ofColor newColor);
+    void onAmbientColorChanged(ofColor newColor) { currentState->ambientColor = newColor; }
+    void onDiffuseColorChanged(ofColor newColor) { currentState->diffuseColor = newColor; }
+    void onSpecularColorChanged(ofColor newColor) { currentState->specularColor = newColor; }
+    void onShininessChanged(float newShininess) { currentState->shininess = newShininess; }
     void onOutlineColorChanged(ofColor newColor);
     void onFilledChanged(bool isFilled);
     void onPrimitiveSelected(int id);

@@ -127,6 +127,10 @@ void Controller::onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams
 {
     stateMachine.onOutlineWidthChanged(params.outlineWidth);
     stateMachine.onFillColorChanged(params.fillColor);
+    stateMachine.onAmbientColorChanged(params.ambientColor);
+    stateMachine.onDiffuseColorChanged(params.diffuseColor);
+    stateMachine.onSpecularColorChanged(params.specularColor);
+    stateMachine.onShininessChanged(params.shininess);
     stateMachine.onOutlineColorChanged(params.outlineColor);
     stateMachine.onFilledChanged(params.isFilled);
 }
@@ -140,6 +144,10 @@ void Controller::onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::Pr
 
     node->getPrimitive()->param.position = params.position;
     node->getPrimitive()->param.fillColor = params.fillColor;
+    node->getPrimitive()->param.ambientColor = params.ambientColor;
+    node->getPrimitive()->param.diffuseColor = params.diffuseColor;
+    node->getPrimitive()->param.specularColor = params.specularColor;
+    node->getPrimitive()->param.shininess = params.shininess;
     node->getPrimitive()->param.outlineColor = params.outlineColor;
     node->getPrimitive()->param.outlineWidth = params.outlineWidth;
     node->getPrimitive()->param.isFilled = params.isFilled;
@@ -308,7 +316,7 @@ glm::vec3 Controller::getLightDirection(int i) { return canvas3d->getLightDirect
 
 glm::vec3 Controller::getLightColor(int i) { return canvas3d->getLightColor(i); }
 
-glm::vec3 &Controller::getAmbientColor(int i) { return canvas3d->getAmbientColor(i); }
+glm::vec3 Controller::getAmbientColor(int i) { return canvas3d->getAmbientColor(i); }
 
 glm::vec3 Controller::getDiffuseColor(int i) { return canvas3d->getDiffuseColor(i); }
 

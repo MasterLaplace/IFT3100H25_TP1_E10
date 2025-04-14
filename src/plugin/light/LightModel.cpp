@@ -31,29 +31,49 @@ void plugin::light::LightModel::begin()
         case plugin::light::LightModel::Type::Lambert:
             lightShader = &lambert;
             lightShader->begin();
-            lightShader->setUniform3f("color_ambient", _ambientColor);
-            lightShader->setUniform3f("color_diffuse", _diffuseColor);
+
+            // Les attributs de la lumiere.
+            lightShader->setUniform3f("light_color_ambient", _ambientColor);
+            lightShader->setUniform3f("light_color_diffuse", _diffuseColor);
             lightShader->setUniform3f("light_position", _lightPosition);
+
+            // Les attributs du materiaux.
+            lightShader->setUniform3f("material_color_ambient", _materialAmbientColor);
+            lightShader->setUniform3f("material_color_diffuse", _materialDiffuseColor);
             break;
 
         case plugin::light::LightModel::Type::Phong:
             lightShader = &phong;
             lightShader->begin();
-            lightShader->setUniform3f("color_ambient", _ambientColor);
-            lightShader->setUniform3f("color_diffuse", _diffuseColor);
+
+            // Les attributs de la lumiere.
+            lightShader->setUniform3f("light_color_ambient", _ambientColor);
+            lightShader->setUniform3f("light_color_diffuse", _diffuseColor);
             lightShader->setUniform3f("light_position", _lightPosition);
-            lightShader->setUniform3f("color_specular", _specularColor);
-            lightShader->setUniform1f("brightness", _shininess);
+            lightShader->setUniform3f("light_color_specular", _specularColor);
+
+            // Les attributs du materiau.
+            lightShader->setUniform3f("material_color_ambient", _materialAmbientColor);
+            lightShader->setUniform3f("material_color_diffuse", _materialDiffuseColor);
+            lightShader->setUniform3f("material_color_specular", _materialSpecularColor);
+            lightShader->setUniform1f("brightness", _materialShininess);
             break;
 
         case plugin::light::LightModel::Type::BlinnPhong:
             lightShader = &blinnPhong;
             lightShader->begin();
-            lightShader->setUniform3f("color_ambient", _ambientColor);
-            lightShader->setUniform3f("color_diffuse", _diffuseColor);
+
+            // Les attributs de la lumiere.
+            lightShader->setUniform3f("light_color_ambient", _ambientColor);
+            lightShader->setUniform3f("light_color_diffuse", _diffuseColor);
             lightShader->setUniform3f("light_position", _lightPosition);
-            lightShader->setUniform3f("color_specular", _specularColor);
-            lightShader->setUniform1f("brightness", _shininess);
+            lightShader->setUniform3f("light_color_specular", _specularColor);
+
+            // Les attributs du materiau.
+            lightShader->setUniform3f("material_color_ambient", _materialAmbientColor);
+            lightShader->setUniform3f("material_color_diffuse", _materialDiffuseColor);
+            lightShader->setUniform3f("material_color_specular", _materialSpecularColor);
+            lightShader->setUniform1f("brightness", _materialShininess);
             break;
 
         default: break;
