@@ -1246,7 +1246,7 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
     float diffuseColor[3] = {ellipsoid->param.diffuseColor.r / 255.0f, ellipsoid->param.diffuseColor.g / 255.0f,
                              ellipsoid->param.diffuseColor.b / 255.0f};
     float specularColor[3] = {ellipsoid->param.specularColor.r / 255.0f, ellipsoid->param.specularColor.g / 255.0f,
-                             ellipsoid->param.specularColor.b / 255.0f};
+                              ellipsoid->param.specularColor.b / 255.0f};
     float shininess = ellipsoid->param.shininess;
     float outlineColor[3] = {ellipsoid->param.outlineColor.r / 255.0f, ellipsoid->param.outlineColor.g / 255.0f,
                              ellipsoid->param.outlineColor.b / 255.0f};
@@ -1283,7 +1283,7 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
         ImGui::Text("Couleur diffuse :");
         if (ImGui::ColorEdit3("Diffuse", &diffuseColor[0]))
         {
-            ellipsoid->setDiffuseColor(glm::vec3 {diffuseColor[0], diffuseColor[1], diffuseColor[2]});
+            ellipsoid->setDiffuseColor(glm::vec3{diffuseColor[0], diffuseColor[1], diffuseColor[2]});
             ellipsoid->param.diffuseColor =
                 ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
         }
@@ -1291,7 +1291,7 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
         ImGui::Text("Couleur speculaire :");
         if (ImGui::ColorEdit3("Speculaire", &specularColor[0]))
         {
-            ellipsoid->setSpecularColor(glm::vec3 {specularColor[0], specularColor[1], specularColor[2]});
+            ellipsoid->setSpecularColor(glm::vec3{specularColor[0], specularColor[1], specularColor[2]});
             ellipsoid->param.specularColor =
                 ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
         }

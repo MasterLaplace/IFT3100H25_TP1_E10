@@ -19,7 +19,12 @@ struct PrimitiveParams {
     std::string imageName = "";
     bool drawGizmo = false;
 
-    PrimitiveParams() : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black), ambientColor(ofColor::black), diffuseColor(ofColor::lightGray), specularColor(ofColor::white), shininess(32.0f) {}
+    PrimitiveParams()
+        : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black),
+          ambientColor(ofColor::black), diffuseColor(ofColor::lightGray), specularColor(ofColor::white),
+          shininess(32.0f)
+    {
+    }
 };
 
 class Primitive {
