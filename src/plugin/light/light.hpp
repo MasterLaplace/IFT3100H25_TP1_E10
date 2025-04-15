@@ -1,6 +1,6 @@
 #pragma once
 
-#include "C:\Code\of_v0.12.0_vs_release\libs\openFrameworks\gl\ofLight.h"
+#include "ofMain.h"
 #include "LightModel.hpp"
 #include "LightTypes.hpp"
 

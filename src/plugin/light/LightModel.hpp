@@ -11,7 +11,8 @@ public:
         None,
         Lambert,
         Phong,
-        BlinnPhong
+        BlinnPhong,
+        Toon
     };
 
     LightModel();
@@ -57,6 +58,7 @@ private:
     ofShader lambert;
     ofShader phong;
     ofShader blinnPhong;
+    ofShader toon;
 
     // Pointeur vers le shader d'eclairage actif.
     ofShader *lightShader = nullptr;

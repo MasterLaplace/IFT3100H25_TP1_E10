@@ -491,7 +491,7 @@ void AppGui::drawDynamicPanel3D()
         static int currentLightningType = 0;
         plugin::light::Light::lightType type = plugin::light::Light::lightType::NONE;
 
-        const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong"};
+        const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong", "Toon"};
         static int currentLightningModel = 0;
         plugin::light::LightModel::Type model = plugin::light::LightModel::Type::None;
 
@@ -565,6 +565,7 @@ void AppGui::drawDynamicPanel3D()
         case 1: model = plugin::light::LightModel::Type::Lambert; break;
         case 2: model = plugin::light::LightModel::Type::Phong; break;
         case 3: model = plugin::light::LightModel::Type::BlinnPhong; break;
+        case 4: model = plugin::light::LightModel::Type::Toon; break;
         }
 
         if (currentLightningType != 0)
