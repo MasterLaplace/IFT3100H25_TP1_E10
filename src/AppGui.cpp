@@ -1077,7 +1077,7 @@ void AppGui::drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primi
     }
 }
 
-void AppGui::setMaterial(Primitive *p, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess) 
+void AppGui::setMaterial(Primitive *p, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess)
 {
     p->param.ambientColor = ofColor(ambient[0] * 255, ambient[1] * 255, ambient[2] * 255);
     p->param.diffuseColor = ofColor(diffuse[0] * 255, diffuse[1] * 255, diffuse[2] * 255);
@@ -1254,7 +1254,7 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
     float diffuseColor[3] = {ellipsoid->param.diffuseColor.r / 255.0f, ellipsoid->param.diffuseColor.g / 255.0f,
                              ellipsoid->param.diffuseColor.b / 255.0f};
     float specularColor[3] = {ellipsoid->param.specularColor.r / 255.0f, ellipsoid->param.specularColor.g / 255.0f,
-                             ellipsoid->param.specularColor.b / 255.0f};
+                              ellipsoid->param.specularColor.b / 255.0f};
     float shininess = ellipsoid->param.shininess;
     float outlineColor[3] = {ellipsoid->param.outlineColor.r / 255.0f, ellipsoid->param.outlineColor.g / 255.0f,
                              ellipsoid->param.outlineColor.b / 255.0f};
@@ -1281,7 +1281,8 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
     if (filled)
     {
         // La liste des materiaux possibles.
-        const char *materialNames[] = {"Personnalise", "Or", "Argent", "Cuivre", "Chrome", "Plastique rouge", "Caoutchouc noir"};
+        const char *materialNames[] = {"Personnalise",   "Or", "Argent", "Cuivre", "Chrome", "Plastique rouge",
+                                       "Caoutchouc noir"};
         static int currentMaterial = 0;
 
         // Menu deroulant pour selectionner un materiau.
@@ -1439,7 +1440,6 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
         }
 
         currentMaterial = 0;
-
     }
 
     ImGui::Text("Taille :");
@@ -1507,16 +1507,14 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
             if (ImGui::ColorEdit3("Ambiante", &ambientColor[0]))
             {
                 box->setAmbientColor({ambientColor[0], ambientColor[1], ambientColor[2]});
-                box->param.ambientColor =
-                    ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
+                box->param.ambientColor = ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
             }
 
             ImGui::Text("Couleur diffuse :");
             if (ImGui::ColorEdit3("Diffuse", &diffuseColor[0]))
             {
                 box->setDiffuseColor(glm::vec3{diffuseColor[0], diffuseColor[1], diffuseColor[2]});
-                box->param.diffuseColor =
-                    ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+                box->param.diffuseColor = ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
             }
 
             ImGui::Text("Couleur speculaire :");

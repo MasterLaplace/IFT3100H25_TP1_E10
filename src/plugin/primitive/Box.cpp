@@ -38,7 +38,7 @@ void Box::draw()
     ofDisableAntiAliasing();
 }
 
-void Box::setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess) 
+void Box::setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess)
 {
     setAmbientColor(ambient);
     setDiffuseColor(diffuse);
