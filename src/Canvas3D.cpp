@@ -159,17 +159,17 @@ plugin::light::Light *Canvas3D::getLight(int id)
     return l;
 }
 
-glm::vec3 Canvas3D::getMaterialAmbientColor(int i) 
-{ 
+glm::vec3 Canvas3D::getMaterialAmbientColor(int i)
+{
     ofColor c = nodes[i]->getPrimitive()->param.ambientColor;
     float r = static_cast<float>(c.r) / 255.0f;
     float g = static_cast<float>(c.g) / 255.0f;
     float b = static_cast<float>(c.b) / 255.0f;
-    return glm::vec3 {r, g, b};
+    return glm::vec3{r, g, b};
 }
 
-glm::vec3 Canvas3D::getMaterialDiffuseColor(int i) 
-{ 
+glm::vec3 Canvas3D::getMaterialDiffuseColor(int i)
+{
     ofColor c = nodes[i]->getPrimitive()->param.diffuseColor;
     float r = static_cast<float>(c.r) / 255.0f;
     float g = static_cast<float>(c.g) / 255.0f;
@@ -177,7 +177,7 @@ glm::vec3 Canvas3D::getMaterialDiffuseColor(int i)
     return glm::vec3{r, g, b};
 }
 
-glm::vec3 Canvas3D::getMaterialSpecularColor(int i) 
+glm::vec3 Canvas3D::getMaterialSpecularColor(int i)
 {
     ofColor c = nodes[i]->getPrimitive()->param.specularColor;
     float r = static_cast<float>(c.r) / 255.0f;

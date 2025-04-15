@@ -56,7 +56,6 @@ public:
     void setMaterialSpecularColor(glm::vec3 color) { _model.setMaterialSpecularColor(color); }
     void setShininess(float shininess) { _model.setShininess(shininess); }
 
-
     // Pour appliquer la lumiere.
     void apply();
     void close();
