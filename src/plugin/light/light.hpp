@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ofMain.h"
 #include "LightModel.hpp"
 #include "LightTypes.hpp"
+#include "ofMain.h"
 
 namespace plugin::light {
 
