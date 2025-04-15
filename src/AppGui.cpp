@@ -1077,6 +1077,14 @@ void AppGui::drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primi
     }
 }
 
+void AppGui::setMaterial(Primitive *p, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess) 
+{
+    p->param.ambientColor = ofColor(ambient[0] * 255, ambient[1] * 255, ambient[2] * 255);
+    p->param.diffuseColor = ofColor(diffuse[0] * 255, diffuse[1] * 255, diffuse[2] * 255);
+    p->param.specularColor = ofColor(specular[0] * 255, specular[1] * 255, specular[2] * 255);
+    p->param.shininess = shininess;
+}
+
 void AppGui::drawLineProperties(const std::shared_ptr<Line2D> &line)
 {
     drawTransformProperties2D(line); // On dessine les proprietes de transformation generales.
@@ -1272,36 +1280,166 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
 
     if (filled)
     {
-        ImGui::Text("Couleur ambiante :");
-        if (ImGui::ColorEdit3("Ambiante", &ambientColor[0]))
+        // La liste des materiaux possibles.
+        const char *materialNames[] = {"Personnalise", "Or", "Argent", "Cuivre", "Chrome", "Plastique rouge", "Caoutchouc noir"};
+        static int currentMaterial = 0;
+
+        // Menu deroulant pour selectionner un materiau.
+        ImGui::Text("Materiau :");
+        if (ImGui::BeginCombo("Materiau", materialNames[currentMaterial]))
         {
-            ellipsoid->setAmbientColor({ambientColor[0], ambientColor[1], ambientColor[2]});
-            ellipsoid->param.ambientColor =
-                ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
+            for (int i = 0; i < IM_ARRAYSIZE(materialNames); i++)
+            {
+                bool isSelected = (i == currentMaterial);
+                if (ImGui::Selectable(materialNames[i], isSelected))
+                {
+                    currentMaterial = i;
+                }
+                if (isSelected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
         }
 
-        ImGui::Text("Couleur diffuse :");
-        if (ImGui::ColorEdit3("Diffuse", &diffuseColor[0]))
+        // Si c'est un materiaux personnalise.
+        if (currentMaterial == 0)
         {
-            ellipsoid->setDiffuseColor(glm::vec3 {diffuseColor[0], diffuseColor[1], diffuseColor[2]});
-            ellipsoid->param.diffuseColor =
-                ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+            ImGui::Text("Couleur ambiante :");
+            if (ImGui::ColorEdit3("Ambiante", &ambientColor[0]))
+            {
+                ellipsoid->setAmbientColor({ambientColor[0], ambientColor[1], ambientColor[2]});
+                ellipsoid->param.ambientColor =
+                    ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
+            }
+
+            ImGui::Text("Couleur diffuse :");
+            if (ImGui::ColorEdit3("Diffuse", &diffuseColor[0]))
+            {
+                ellipsoid->setDiffuseColor(glm::vec3{diffuseColor[0], diffuseColor[1], diffuseColor[2]});
+                ellipsoid->param.diffuseColor =
+                    ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+            }
+
+            ImGui::Text("Couleur speculaire :");
+            if (ImGui::ColorEdit3("Speculaire", &specularColor[0]))
+            {
+                ellipsoid->setSpecularColor(glm::vec3{specularColor[0], specularColor[1], specularColor[2]});
+                ellipsoid->param.specularColor =
+                    ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
+            }
+
+            float shininess = ellipsoid->getShininess();
+            if (ImGui::DragFloat("Brillance", &shininess))
+            {
+                ellipsoid->setShininess(shininess);
+                ellipsoid->param.shininess = shininess;
+            }
         }
 
-        ImGui::Text("Couleur speculaire :");
-        if (ImGui::ColorEdit3("Speculaire", &specularColor[0]))
+        // Si on selectionne l'or.
+        if (currentMaterial == 1)
         {
-            ellipsoid->setSpecularColor(glm::vec3 {specularColor[0], specularColor[1], specularColor[2]});
-            ellipsoid->param.specularColor =
-                ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.247, 0.199, 0.074};
+            glm::vec3 diffuseColor{0.247, 0.199, 0.074};
+            glm::vec3 specularColor{0.628, 0.555, 0.366};
+            float shininess = 51.2f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
         }
 
-        float shininess = ellipsoid->getShininess();
-        if (ImGui::DragFloat("Brillance", &shininess))
+        // Si on selectionne l'argent.
+        if (currentMaterial == 2)
         {
-            ellipsoid->setShininess(shininess);
-            ellipsoid->param.shininess = shininess;
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.192, 0.192, 0.192};
+            glm::vec3 diffuseColor{0.507, 0.507, 0.507};
+            glm::vec3 specularColor{0.508, 0.508, 0.508};
+            float shininess = 51.2f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
         }
+
+        // Si on selectionne le cuivre.
+        if (currentMaterial == 3)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.229, 0.088, 0.027};
+            glm::vec3 diffuseColor{0.550, 0.211, 0.066};
+            glm::vec3 specularColor{0.580, 0.223, 0.069};
+            float shininess = 51.2f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne le chrome.
+        if (currentMaterial == 4)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.25, 0.25, 0.25};
+            glm::vec3 diffuseColor{0.4, 0.4, 0.4};
+            glm::vec3 specularColor{0.774, 0.774, 0.774};
+            float shininess = 76.8f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne plastique rouge.
+        if (currentMaterial == 5)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.1, 0.0, 0.0};
+            glm::vec3 diffuseColor{0.6, 0.0, 0.0};
+            glm::vec3 specularColor{0.6, 0.6, 0.6};
+            float shininess = 32.0f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne le caoutchouc.
+        if (currentMaterial == 6)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.02, 0.02, 0.02};
+            glm::vec3 diffuseColor{0.01, 0.01, 0.01};
+            glm::vec3 specularColor{0.4, 0.4, 0.4};
+            float shininess = 10.0f;
+
+            // On set les proprietes dans l'ellipsoid.
+            ellipsoid->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes dans l'ellipsoid d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(ellipsoid.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        currentMaterial = 0;
+
     }
 
     ImGui::Text("Taille :");
@@ -1340,11 +1478,166 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
 
     if (filled)
     {
-        ImGui::Text("Couleur de remplissage :");
-        if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+        // La liste des materiaux possibles.
+        const char *materialNames[] = {"Personnalise",   "Or", "Argent", "Cuivre", "Chrome", "Plastique rouge",
+                                       "Caoutchouc noir"};
+        static int currentMaterial = 0;
+
+        // Menu deroulant pour selectionner un materiau.
+        ImGui::Text("Materiau :");
+        if (ImGui::BeginCombo("Materiau", materialNames[currentMaterial]))
         {
-            box->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+            for (int i = 0; i < IM_ARRAYSIZE(materialNames); i++)
+            {
+                bool isSelected = (i == currentMaterial);
+                if (ImGui::Selectable(materialNames[i], isSelected))
+                {
+                    currentMaterial = i;
+                }
+                if (isSelected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
         }
+
+        // Si c'est un materiaux personnalise.
+        if (currentMaterial == 0)
+        {
+            ImGui::Text("Couleur ambiante :");
+            if (ImGui::ColorEdit3("Ambiante", &ambientColor[0]))
+            {
+                box->setAmbientColor({ambientColor[0], ambientColor[1], ambientColor[2]});
+                box->param.ambientColor =
+                    ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
+            }
+
+            ImGui::Text("Couleur diffuse :");
+            if (ImGui::ColorEdit3("Diffuse", &diffuseColor[0]))
+            {
+                box->setDiffuseColor(glm::vec3{diffuseColor[0], diffuseColor[1], diffuseColor[2]});
+                box->param.diffuseColor =
+                    ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+            }
+
+            ImGui::Text("Couleur speculaire :");
+            if (ImGui::ColorEdit3("Speculaire", &specularColor[0]))
+            {
+                box->setSpecularColor(glm::vec3{specularColor[0], specularColor[1], specularColor[2]});
+                box->param.specularColor =
+                    ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
+            }
+
+            float shininess = box->getShininess();
+            if (ImGui::DragFloat("Brillance", &shininess))
+            {
+                box->setShininess(shininess);
+                box->param.shininess = shininess;
+            }
+        }
+
+        // Si on selectionne l'or.
+        if (currentMaterial == 1)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.247, 0.199, 0.074};
+            glm::vec3 diffuseColor{0.247, 0.199, 0.074};
+            glm::vec3 specularColor{0.628, 0.555, 0.366};
+            float shininess = 51.2f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne l'argent.
+        if (currentMaterial == 2)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.192, 0.192, 0.192};
+            glm::vec3 diffuseColor{0.507, 0.507, 0.507};
+            glm::vec3 specularColor{0.508, 0.508, 0.508};
+            float shininess = 51.2f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne le cuivre.
+        if (currentMaterial == 3)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.229, 0.088, 0.027};
+            glm::vec3 diffuseColor{0.550, 0.211, 0.066};
+            glm::vec3 specularColor{0.580, 0.223, 0.069};
+            float shininess = 51.2f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne le chrome.
+        if (currentMaterial == 4)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.25, 0.25, 0.25};
+            glm::vec3 diffuseColor{0.4, 0.4, 0.4};
+            glm::vec3 specularColor{0.774, 0.774, 0.774};
+            float shininess = 76.8f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne plastique rouge.
+        if (currentMaterial == 5)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.1, 0.0, 0.0};
+            glm::vec3 diffuseColor{0.6, 0.0, 0.0};
+            glm::vec3 specularColor{0.6, 0.6, 0.6};
+            float shininess = 32.0f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        // Si on selectionne le caoutchouc.
+        if (currentMaterial == 6)
+        {
+            // Les proprietes du materiau.
+            glm::vec3 ambientColor{0.02, 0.02, 0.02};
+            glm::vec3 diffuseColor{0.01, 0.01, 0.01};
+            glm::vec3 specularColor{0.4, 0.4, 0.4};
+            float shininess = 10.0f;
+
+            // On set les proprietes.
+            box->setMaterial(ambientColor, diffuseColor, specularColor, shininess);
+
+            // On set les proprietes d'une maniere differente.
+            // Je pense qu'on s'est un peu perdu dans notre architecture mais ca fonctionne.
+            setMaterial(box.get(), ambientColor, diffuseColor, specularColor, shininess);
+        }
+
+        currentMaterial = 0;
     }
 
     ImGui::Text("Taille :");

@@ -34,6 +34,7 @@ public:
     void setDiffuseColor(glm::vec3 newColor) { diffuseColor = newColor; }
     void setSpecularColor(glm::vec3 newColor) { specularColor = newColor; }
     void setShininess(float newShininess) { shininess = newShininess; }
+    void setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess);
 
 private:
     void drawFill();

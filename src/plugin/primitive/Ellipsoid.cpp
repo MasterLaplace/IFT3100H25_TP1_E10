@@ -22,10 +22,19 @@ void Ellipsoid::draw()
     if (param.isFilled)
         drawFill();
 
-    drawOutline();
+    else
+        drawOutline();
 
     ofPopMatrix();
     ofDisableAntiAliasing();
+}
+
+void Ellipsoid::setMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess) 
+{
+    setAmbientColor(ambient);
+    setDiffuseColor(diffuse);
+    setSpecularColor(specular);
+    setShininess(shininess);
 }
 
 void Ellipsoid::drawFill()

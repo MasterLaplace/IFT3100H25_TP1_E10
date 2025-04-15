@@ -64,6 +64,8 @@ private:
     void drawPrefabProperties(const std::shared_ptr<plugin::primitive::Primitive> &prefab,
                               const std::string &prefabName);
 
+    void setMaterial(Primitive *p, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess);
+
     // Attributs générique
     float backgroundColor[3] = {1.0f, 1.0f, 1.0f};
     float outlineWidth = 1.0f;

@@ -115,8 +115,6 @@ void Canvas3D::draw()
         {
             // On set la couleur ambiante du materiau.
             glm::vec3 materialAmbientColor = getMaterialAmbientColor(i);
-            printf("Couleur ambiante : r = %d, g = %d, b = %d\n", materialAmbientColor.r, materialAmbientColor.g,
-                   materialAmbientColor.b);
             lights[j]->setMaterialAmbientColor(materialAmbientColor);
 
             // On set la couleur diffuse du materiau.
