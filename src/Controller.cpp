@@ -13,6 +13,7 @@ void Controller::setup()
     gui.setup(this);
     histogramUI.setup(this);
     curveUI.setup(this);
+    mappingScene.setup();
 }
 
 void Controller::update()
@@ -24,43 +25,39 @@ void Controller::update()
 void Controller::draw()
 {
     ofEnableDepthTest();
-    if (is3d)
-    {
-        camera.begin();
-
-        skybox.draw(camera.getPosition());
-        canvas3d->draw();
-
-        camera.end();
-    }
-    else
-    {
-        canvas2d->draw();
-    }
-    ofDisableDepthTest();
-
-    // On sauvegarde les pixels de l'image et des formes sans le ui et la souris
-    exporter.setPixels();
-
-    // C'est Controlleur qui demande � son �tat de dessiner des choses en lien avec l'�tat.
-    // Par exemple, si on est dans l'�tat DrawRectangleState, on va dessiner le fantome du rectangle.
-    stateMachine.draw();
-
-    // C'est le Controlleur qui demande au GUI de s'afficher aussi en fonction de l'etat.
     if (dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState()) != nullptr)
     {
+        stateMachine.draw();
         histogramUI.draw();
     }
-
-    else if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) != nullptr)
+    else if(dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) != nullptr)
     {
+        stateMachine.draw();
         curveUI.draw();
     }
-
-    else
+    else if(currentView == VIEW_3D)
     {
+        camera.begin();
+        skybox.draw(camera.getPosition());
+        canvas3d->draw();
+        camera.end();
+        exporter.setPixels();
+        stateMachine.draw();
         gui.draw();
     }
+    else if (currentView == VIEW_MAPPING)
+    {
+        mappingScene.draw();
+        gui.drawMenu();
+    }
+    else if (currentView == VIEW_2D)
+    {
+        canvas2d->draw();
+        exporter.setPixels();
+        stateMachine.draw();
+        gui.draw();
+    }
+    ofDisableDepthTest();
 }
 
 void Controller::exit() {}
@@ -110,9 +107,19 @@ void Controller::mouseMoved(glm::vec2 pos)
 
 void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased((is3d) ? canvas3d : canvas2d); }
+void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased((currentView == VIEW_3D) ? canvas3d : canvas2d); }
 
-void Controller::toggleCanvas() { is3d = !is3d; }
+void Controller::toggleCanvas()
+{
+    if (currentView == VIEW_3D)
+    {
+        currentView = VIEW_2D;
+    }
+    else
+    {
+        currentView = VIEW_3D;    
+    }
+}
 
 void Controller::importImage() { plugin::image::Importing::importImage(); }
 
@@ -155,7 +162,7 @@ void Controller::onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::Pr
 
 void Controller::onBackgroundColorChanged(ofColor color)
 {
-    (is3d) ? canvas3d->setBackgroundColor(color) : canvas2d->setBackgroundColor(color);
+    (currentView == VIEW_3D) ? canvas3d->setBackgroundColor(color) : canvas2d->setBackgroundColor(color);
 }
 
 void Controller::onPrimitiveSelected(uint32_t id) { stateMachine.onPrimitiveSelected(id); }
@@ -168,18 +175,18 @@ void Controller::onLightSelected(int i) { stateMachine.onLightSelected(i); }
 std::vector<uint32_t> Controller::getPrimitiveId()
 {
     std::vector<uint32_t> ids;
-    for (auto &node : (is3d) ? canvas3d->nodes : canvas2d->nodes)
+    for (auto &node : (currentView == VIEW_3D) ? canvas3d->nodes : canvas2d->nodes)
     {
         collectPrimitiveId(node, ids);
     }
     return ids;
 }
 
-const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return (is3d) ? canvas3d->nodes : canvas2d->nodes; }
+const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return (currentView == VIEW_3D) ? canvas3d->nodes : canvas2d->nodes; }
 
 NodePrimitive *Controller::getNodeById(const uint32_t id)
 {
-    return (is3d) ? canvas3d->getChildById(id) : canvas2d->getChildById(id);
+    return (currentView == VIEW_3D) ? canvas3d->getChildById(id) : canvas2d->getChildById(id);
 }
 
 void Controller::collectPrimitiveId(NodePrimitive *node, std::vector<uint32_t> &ids)
@@ -232,7 +239,7 @@ void Controller::drawPolygonButtonPressed() { stateMachine.changeState(new DrawP
 
 void Controller::deletePrimitiveButtonPressed(uint32_t id)
 {
-    (is3d) ? canvas3d->removeNode(id) : canvas2d->removeNode(id);
+    (currentView == VIEW_3D) ? canvas3d->removeNode(id) : canvas2d->removeNode(id);
     stateMachine.onPrimitiveSelected(-1);
 }
 
@@ -261,6 +268,8 @@ void Controller::drawHistogram(int color)
 }
 
 void Controller::drawCurve(curveType type) { stateMachine.changeState(new DrawCoonsState(type)); }
+
+void Controller::drawMapping() { currentView = VIEW_MAPPING; }
 
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
@@ -480,6 +489,6 @@ void Controller::createModelButtonPressed(const std::string &modelName)
         params.isFilled = true;
 
         auto node = new NodePrimitive(std::make_shared<plugin::primitive::ObjModel>(params, *model), "Model");
-        (is3d) ? canvas3d->addNode(node) : canvas2d->addNode(node);
+        (currentView == VIEW_3D) ? canvas3d->addNode(node) : canvas2d->addNode(node);
     }
 }
