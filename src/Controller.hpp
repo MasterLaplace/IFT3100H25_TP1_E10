@@ -7,6 +7,7 @@
 #include "Controller.hpp"
 #include "CurveUI.hpp"
 #include "HistogramUI.hpp"
+#include "MappingScene.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
 #include "plugin/light/light_header.hpp"
@@ -18,6 +19,12 @@
 using namespace plugin::states;
 using namespace plugin::image;
 using namespace plugin::texture;
+
+enum View {
+    VIEW_2D,
+    VIEW_3D,
+    VIEW_MAPPING
+};
 
 class Controller {
 public:
@@ -50,6 +57,7 @@ public:
     void deletePrimitiveButtonPressed(uint32_t id);
     void drawHistogram(int color);
     void drawCurve(curveType type);
+    void drawMapping();
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
@@ -129,7 +137,7 @@ public:
     void createPrefabButtonPressed(const std::shared_ptr<plugin::primitive::Primitive> &primitive,
                                    const std::string &name);
 
-    bool is3d = false;
+    View currentView = VIEW_2D;
 
 private:
     StateMachine stateMachine;
@@ -138,6 +146,7 @@ private:
     AppGui gui;
     HistogramUI histogramUI;
     CurveUI curveUI;
+    MappingScene mappingScene;
     Exporting exporter;
     Camera camera;
     Skybox skybox;

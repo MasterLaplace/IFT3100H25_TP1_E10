@@ -112,6 +112,7 @@
     <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\CurveUI.cpp" />
     <ClCompile Include="src\HistogramUI.cpp" />
+    <ClCompile Include="src\MappingScene.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
     <ClCompile Include="src\plugin\geometry\BoundaryBox.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\AppGui.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Canvas.hpp" />
@@ -184,6 +186,7 @@
     <ClInclude Include="src\Controller.hpp" />
     <ClInclude Include="src\CurveUI.hpp" />
     <ClInclude Include="src\HistogramUI.hpp" />
+    <ClInclude Include="src\MappingScene.hpp" />
     <ClInclude Include="src\Node.hpp" />
     <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\app\Application.hpp" />
@@ -199,8 +202,8 @@
     <ClInclude Include="src\plugin\image\ToneMapping.hpp" />
     <ClInclude Include="src\plugin\image\images.hpp" />
     <ClInclude Include="src\plugin\light\LightModel.hpp" />
-    <ClInclude Include="src\plugin\light\Light.hpp" />
     <ClInclude Include="src\plugin\light\LightTypes.hpp" />
+    <ClInclude Include="src\plugin\light\light.hpp" />
     <ClInclude Include="src\plugin\light\light_header.hpp" />
     <ClInclude Include="src\plugin\primitive\Box.hpp" />
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />

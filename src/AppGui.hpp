@@ -31,6 +31,7 @@ public:
     tool selectedTool;
 
     void setup(Controller *_controller);
+    void drawMenu();
     void draw();
 
 private:

@@ -9,12 +9,19 @@ void AppGui::setup(Controller *_controller)
     plugin::image::ResourceManager::construct(); // On initialise le gestionnaire de ressources.
 }
 
+void AppGui::drawMenu()
+{
+    gui.begin();
+    drawMenuBar();
+    gui.end();
+}
+
 void AppGui::draw()
 {
     gui.begin();
     drawMenuBar();
 
-    if (controller->is3d)
+    if (controller->currentView == VIEW_3D)
         drawToolsPanel3D(), drawDynamicPanel3D();
     else
         drawToolsPanel2D(), drawDynamicPanel2D();
@@ -60,7 +67,7 @@ void AppGui::drawMenuBar()
 
         if (ImGui::BeginMenu("Vues"))
         {
-            string view = controller->is3d ? "Aller 2D" : "Aller 3D";
+            string view = controller->currentView == VIEW_3D ? "Aller 2D" : "Aller 3D";
 
             if (ImGui::MenuItem(view.c_str()))
             {
@@ -68,7 +75,7 @@ void AppGui::drawMenuBar()
                 controller->toggleCanvas();
             }
 
-            if (controller->is3d)
+            if (controller->currentView == VIEW_3D)
             {
                 string isOrthographic = controller->isCameraOrthographic() ? "Vers Perspective" : "Vers Orthographique";
                 if (ImGui::MenuItem(isOrthographic.c_str()))
@@ -117,6 +124,16 @@ void AppGui::drawMenuBar()
             }
             ImGui::EndMenu();
         }
+
+        if (ImGui::BeginMenu("Effet de relief"))
+        {
+            if (ImGui::MenuItem("Vers le mapping"))
+            {
+                controller->drawMapping();
+            }
+            ImGui::EndMenu();
+        }
+
         ImGui::EndMainMenuBar();
     }
 }
