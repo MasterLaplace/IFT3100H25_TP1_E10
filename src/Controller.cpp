@@ -30,12 +30,12 @@ void Controller::draw()
         stateMachine.draw();
         histogramUI.draw();
     }
-    else if(dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) != nullptr)
+    else if (dynamic_cast<DrawCoonsState *>(stateMachine.getCurrentState()) != nullptr)
     {
         stateMachine.draw();
         curveUI.draw();
     }
-    else if(currentView == VIEW_3D)
+    else if (currentView == VIEW_3D)
     {
         camera.begin();
         skybox.draw(camera.getPosition());
@@ -107,7 +107,10 @@ void Controller::mouseMoved(glm::vec2 pos)
 
 void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
 
-void Controller::mouseReleased(int x, int y, int button) { stateMachine.mouseReleased((currentView == VIEW_3D) ? canvas3d : canvas2d); }
+void Controller::mouseReleased(int x, int y, int button)
+{
+    stateMachine.mouseReleased((currentView == VIEW_3D) ? canvas3d : canvas2d);
+}
 
 void Controller::toggleCanvas()
 {
@@ -117,7 +120,7 @@ void Controller::toggleCanvas()
     }
     else
     {
-        currentView = VIEW_3D;    
+        currentView = VIEW_3D;
     }
 }
 
@@ -182,7 +185,10 @@ std::vector<uint32_t> Controller::getPrimitiveId()
     return ids;
 }
 
-const std::vector<NodePrimitive *> &Controller::getCanvasNodes() { return (currentView == VIEW_3D) ? canvas3d->nodes : canvas2d->nodes; }
+const std::vector<NodePrimitive *> &Controller::getCanvasNodes()
+{
+    return (currentView == VIEW_3D) ? canvas3d->nodes : canvas2d->nodes;
+}
 
 NodePrimitive *Controller::getNodeById(const uint32_t id)
 {

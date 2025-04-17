@@ -71,7 +71,6 @@ void MappingScene::draw()
     camera.end();
 }
 
-
 void MappingScene::mousePressed(int x, int y, int button)
 {
     if (button == OF_MOUSE_BUTTON_LEFT)
