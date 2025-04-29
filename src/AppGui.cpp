@@ -9,10 +9,7 @@ void AppGui::setup(Controller *_controller)
     plugin::image::ResourceManager::construct(); // On initialise le gestionnaire de ressources.
 }
 
-void AppGui::drawMenu()
-{
-    drawMenuBar();
-}
+void AppGui::drawMenu() { drawMenuBar(); }
 
 void AppGui::draw()
 {
