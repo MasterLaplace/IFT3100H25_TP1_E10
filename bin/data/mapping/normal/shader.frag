@@ -1,4 +1,5 @@
-#version 330
+#version 330 core
+
 in vec3 fragPos;
 in vec3 fragNormal;
 in vec2 fragTexCoord;
@@ -8,28 +9,33 @@ out vec4 outputColor;
 uniform sampler2DRect diffuseTexture;
 uniform sampler2DRect normalMap;
 
-uniform vec3 lightDir;
-uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
-uniform float ambientStrength = 0.1;
+uniform vec3 lightPos;
+uniform vec3 viewPos;
+uniform vec3 lightColor = vec3(1.0);
+uniform float shininess = 10.0;
+uniform float specularStrength = 0.5;
 
 void main()
 {
-	// Couleur de base (diffuse)
-	vec4 texColor = texture(diffuseTexture, fragTexCoord);
+    // Échantillonnage de la couleur
+    vec4 texColor = texture(diffuseTexture, fragTexCoord);
 
-	// Lire et transformer la normale depuis la normal map
-	vec3 normalFromMap = texture(normalMap, fragTexCoord).rgb;
-	normalFromMap = normalize(normalFromMap * 2.0 - 1.0);
+    // Lecture et transformation de la normale depuis la normal map
+    vec3 normalMapColor = texture(normalMap, fragTexCoord).rgb;
+    vec3 normal = normalize(TBN * (normalMapColor * 2.0 - 1.0));
 
-	// Transformer la lumière en espace tangent
-	vec3 lightDirTangent = normalize(TBN * -lightDir);
+    vec3 viewDir = normalize(viewPos - fragPos);
+    vec3 lightDir = normalize(lightPos - fragPos);
 
-	// Calcul de la lumière
-	float diff = max(dot(normalFromMap, lightDirTangent), 0.0);
+    // Diffuse
+    float diffuse = max(dot(normal, lightDir), 0.0);
 
-	vec3 ambient = ambientStrength * lightColor;
-	vec3 diffuse = diff * lightColor;
-	vec3 result = (ambient + diffuse) * texColor.rgb;
+    // Spéculaire Blinn-Phong
+    vec3 halfwayDir = normalize(lightDir + viewDir);
+    float specAmount = pow(max(dot(normal, halfwayDir), 0.0), shininess);
+    float specular = specularStrength * specAmount;
 
-	outputColor = vec4(result, texColor.a);
+    vec3 lighting = texColor.rgb * (diffuse + 0.6 + specular) * lightColor;
+
+    outputColor = vec4(lighting, texColor.a);
 }

@@ -7,8 +7,7 @@
 enum MappingMethod {
     DIFFUSE,
     DISPLACEMENT,
-    NORMAL,
-    PARALLAX
+    NORMAL
 };
 
 class MappingScene : public ofBaseApp {
@@ -18,6 +17,7 @@ public:
     void calculateTangents();
 
     ofPlanePrimitive plane;
+    ofSpherePrimitive sphere;
     ofVboMesh vboMesh;
     ofEasyCam camera;
 
@@ -32,7 +32,7 @@ public:
     float displacementScale;
 
     // Paramètres de la lumière
-    glm::vec3 lightDirection = glm::vec3(0.0f, -1.0f, 0.0f);
-    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    float ambientStrength = 0.5f;
+    glm::vec3 lightPosition;
+    glm::vec3 lightColor;
+    float ambientStrength;
 };

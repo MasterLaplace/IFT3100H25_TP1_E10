@@ -7,7 +7,7 @@ void MappingScene::setup()
 
     // Charger les textures
     ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
-    ofLoadImage(normalTexture, "mapping/normal.jpg");
+    ofLoadImage(normalTexture, "mapping/normal_2.jpg");
     ofLoadImage(heightMap, "mapping/height.jpg");
 
     // Configuration du plane
@@ -17,6 +17,13 @@ void MappingScene::setup()
     plane.mapTexCoordsFromTexture(normalTexture);
     plane.mapTexCoordsFromTexture(heightMap);
 
+    // Configuration de la lumière
+    lightPosition = glm::vec3(100.0f, 100.0f, 100.0f); // Direction de la lumière
+    lightColor = glm::vec3(1.0f, 1.0f, 1.0f); // Couleur blanche
+    ambientStrength = 0.1f;  
+
+    sphere.setRadius(10);
+
     // Configuration du vboMesh pour avoir les tangentes
     vboMesh = plane.getMesh();
     calculateTangents();
@@ -25,26 +32,8 @@ void MappingScene::setup()
     camera.setDistance(600);
     camera.setNearClip(10);
     camera.setFarClip(2000);
-
-    // S'assurer que heightMap est en niveaux de gris
-    // Cela pourrait aider avec le problème de pics
-    ofPixels pixels;
-    heightMap.readToPixels(pixels);
-    if (pixels.getNumChannels() > 1)
-    {
-        ofPixels grayPixels;
-        grayPixels.allocate(pixels.getWidth(), pixels.getHeight(), OF_PIXELS_GRAY);
-        for (int y = 0; y < pixels.getHeight(); y++)
-        {
-            for (int x = 0; x < pixels.getWidth(); x++)
-            {
-                ofColor color = pixels.getColor(x, y);
-                float gray = color.getBrightness();
-                grayPixels.setColor(x, y, ofColor(gray));
-            }
-        }
-        heightMap.allocate(grayPixels);
-    }
+    camera.setPosition(0, 0, 600);
+    camera.lookAt(glm::vec3(0, 0, 0));
 
     // Configurer les paramètres de texture pour la heightMap
     heightMap.setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
@@ -125,6 +114,11 @@ void MappingScene::draw()
     ofBackground(40);
 
     camera.begin();
+
+    ofSetColor(255);
+    sphere.setPosition(lightPosition);
+    sphere.draw();
+
     if (ImGui::GetIO().WantCaptureMouse)
     {
         camera.disableMouseInput();
@@ -139,6 +133,7 @@ void MappingScene::draw()
     {
         currentShader.begin();
 
+        
         // Assignation des textures aux unités appropriées
         currentShader.setUniformTexture("diffuseTexture", diffuseTexture, 0);
 
@@ -149,17 +144,18 @@ void MappingScene::draw()
             currentShader.setUniform1f("displacementScale", displacementScale);
             break;
         case NORMAL:
-            currentShader.setUniformTexture("normalTexture", normalTexture, 1);
-
-            // Envoyer les paramètres de lumière pour le normal mapping
-            currentShader.setUniform3f("lightDir", lightDirection.x, lightDirection.y, lightDirection.z);
-            currentShader.setUniform3f("lightColor", lightColor.x, lightColor.y, lightColor.z);
-            currentShader.setUniform1f("ambientStrength", ambientStrength);
+            currentShader.setUniformTexture("normalMap", normalTexture, 1);
             break;
-        case PARALLAX: break;
         }
 
+        // Envoyer les paramètres de lumière
+        currentShader.setUniform3f("lightPos", lightPosition.x, lightPosition.y, lightPosition.z);
+        currentShader.setUniform3f("viewPos", camera.getGlobalPosition().x, camera.getGlobalPosition().y, camera.getGlobalPosition().z);
+        currentShader.setUniform3f("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        currentShader.setUniform1f("ambientStrength", ambientStrength);
+
         // Calcul et envoi des matrices au shader
+        ofMatrix4x4 modelMatrix = plane.getGlobalTransformMatrix();
         ofMatrix4x4 modelViewMatrix = camera.getModelViewMatrix();
         ofMatrix4x4 projectionMatrix = camera.getProjectionMatrix();
         ofMatrix4x4 modelViewProjectionMatrix = projectionMatrix * modelViewMatrix;
@@ -170,12 +166,14 @@ void MappingScene::draw()
 
         // Dessiner le plane
         ofPushMatrix();
-
-        if (currentMappingMethod == DISPLACEMENT)
-            plane.draw();
-        else
+        if (currentMappingMethod == NORMAL)
+        {
             vboMesh.draw();
-
+        }
+        else
+        {
+            plane.draw();
+        }
         ofPopMatrix();
 
         currentShader.end();
@@ -184,7 +182,7 @@ void MappingScene::draw()
     camera.end();
 
     ImGui::Begin("Mapping Options");
-    const char *mappingOptions[] = {"diffuse", "displacement", "normal", "parallax"};
+    const char *mappingOptions[] = {"diffuse", "displacement", "normal"};
     int selectedOption = static_cast<int>(currentMappingMethod);
     if (ImGui::Combo("Mapping Method", &selectedOption, mappingOptions, IM_ARRAYSIZE(mappingOptions)))
     {
@@ -202,32 +200,23 @@ void MappingScene::draw()
         }
     }
 
-    if (currentMappingMethod == NORMAL)
+    if (ImGui::TreeNode("Lighting Settings"))
     {
-        if (ImGui::TreeNode("Lighting Settings"))
+        // Position de la lumière
+        float lightPos[3] = {lightPosition.x, lightPosition.y, lightPosition.z};
+        if (ImGui::SliderFloat3("Light Position", lightPos, -300.0f, 300.0f))
         {
-            // Direction de la lumière
-            float direction[3] = {lightDirection.x, lightDirection.y, lightDirection.z};
-            if (ImGui::SliderFloat3("Light Direction", direction, -1.0f, 1.0f))
-            {
-                lightDirection = glm::normalize(glm::vec3(direction[0], direction[1], direction[2]));
-            }
-
-            // Couleur de la lumière
-            float color[3] = {lightColor.x, lightColor.y, lightColor.z};
-            if (ImGui::ColorEdit3("Light Color", color))
-            {
-                lightColor = glm::vec3(color[0], color[1], color[2]);
-            }
-
-            // Force ambiante
-            if (ImGui::SliderFloat("Ambient Strength", &ambientStrength, 0.0f, 1.0f))
-            {
-                // La valeur est déjà mise à jour directement dans ambientStrength
-            }
-
-            ImGui::TreePop();
+            lightPosition = glm::vec3(lightPos[0], lightPos[1], lightPos[2]);
         }
+
+        // Couleur de la lumière
+        float color[3] = {lightColor.x, lightColor.y, lightColor.z};
+        if (ImGui::ColorEdit3("Light Color", color))
+        {
+            lightColor = glm::vec3(color[0], color[1], color[2]);
+        }
+
+        ImGui::TreePop();
     }
 
     ImGui::End();

@@ -21,15 +21,20 @@ void main()
     // Lecture de la hauteur depuis la heightmap
     vec4 texColor = texture(heightMap, texcoord);
     float height = dot(texColor.rgb, vec3(0.299, 0.587, 0.114)); // Conversion en luminance
-    
     // Calcul du déplacement avec une échelle ajustable
     vec3 displacedPosition = position.xyz + normalize(normal) * (height * displacementScale);
-    
-    // Outputs vers fragment shader
-    fragNormal = mat3(modelViewMatrix) * normal; // Transformer la normale vers l'espace vue
-    fragNormal = normalize(fragNormal);
+
+	mat3 normalMatrix = transpose(inverse(mat3(modelViewMatrix)));
+
+	// passer directement les coordonnées de texture
+	fragTexCoord = texcoord;
+  
+	// transformer la normale
+	fragNormal = normalize(normalMatrix * vec3(normal));
+  
+	// position du fragment
     fragPos = vec3(modelViewMatrix * vec4(displacedPosition, 1.0));
-    fragTexCoord = texcoord;
-    
+  
+	// position finale
     gl_Position = modelViewProjectionMatrix * vec4(displacedPosition, 1.0);
 }
