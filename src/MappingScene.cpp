@@ -119,7 +119,6 @@ void MappingScene::calculateTangents()
     vboMesh.getVbo().setAttributeData(10, &tangents[0].x, 3, tangents.size(), GL_STATIC_DRAW);
 }
 
-
 void MappingScene::draw()
 {
     plane.enableTextures();
