@@ -6,7 +6,7 @@ void MappingScene::setup()
     ofEnableDepthTest();
 
     // Set up plane geometry
-    plane.set(400, 400, 10, 10);
+    plane.set(400, 400, 200, 200);
     plane.setPosition(0, 0, 0);
 
     // Set up camera
@@ -18,15 +18,19 @@ void MappingScene::setup()
     currentRotation = ofQuaternion(0, 0, 0, 1);
     dragging = false;
 
-    // Load textures
-    diffuseTexture.load("diffuse.jpg");
-    normalTexture.load("normal.jpg");
-
-    // Load shader for normal mapping
-    displacementShader.load("normal_mapping_330_vs.glsl", "normal_mapping_330_fs.glsl");
+    ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
+    ofLoadImage(normalTexture, "mapping/normal.jpg");
+    ofLoadImage(heightMap, "mapping/height.jpg");
+    plane.mapTexCoordsFromTexture(diffuseTexture);
 
     // Set initial light position
     lightPos = ofVec3f(300, 300, 500);
+
+    // Initialize the mapping method
+    currentMappingMethod = DIFFUSE;
+
+   // Load default shader (diffuse)
+    currentShader.load("mapping/diffuse/shader");
 }
 
 void MappingScene::update()
@@ -41,57 +45,70 @@ void MappingScene::draw()
 {
     plane.enableTextures();
     ofBackground(40);
+    
     camera.begin();
+
+    if (ImGui::GetIO().WantCaptureMouse)
+    {
+        camera.disableMouseInput();
+    }
+    else
+    {
+        camera.enableMouseInput();
+    }
 
     // Draw light source
     ofSetColor(255, 255, 0);
     ofDrawSphere(lightPos, 20);
 
-    // Draw grid
-    ofSetColor(100);
-    ofDrawGrid(100, 10, false, false, true, false);
-
-    // Apply object rotation
-    ofPushMatrix();
-    ofVec3f axis;
-    float angle;
-    currentRotation.getRotate(angle, axis);
-    ofRotateDeg(angle, axis.x, axis.y, axis.z);
-
+    ofSetColor(255); 
     // Use shader and draw plane
-    if (displacementShader.isLoaded())
+    if (currentShader.isLoaded())
     {
-        displacementShader.begin();
-        displacementShader.setUniformTexture("diffuse", diffuseTexture.getTexture(), 0);
+        currentShader.setUniformTexture("diffuseTexture", diffuseTexture, 0);
+
+        switch (currentMappingMethod)
+        {
+        case DISPLACEMENT:
+            currentShader.setUniformTexture("heightMap", heightMap, 1);
+            break;
+        case NORMAL:
+            currentShader.setUniformTexture("normalTexture", normalTexture, 2);
+            break;
+        case PARALLAX:
+            break;
+        }
+
+        currentShader.begin();
+
+        ofPushMatrix();
         plane.draw();
-        displacementShader.end();
+        ofPopMatrix();
+
+        currentShader.end();
     }
 
-    ofPopMatrix();
     camera.end();
+
+    ImGui::Begin("Mapping Options");
+    const char *mappingOptions[] = {"diffuse", "displacement", "normal", "parallax"};
+    int selectedOption = static_cast<int>(currentMappingMethod);
+    if (ImGui::Combo("Mapping Method", &selectedOption, mappingOptions, IM_ARRAYSIZE(mappingOptions)))
+    {
+        currentMappingMethod = static_cast<MappingMethod>(selectedOption);
+        currentShader.load("mapping/" + std::string(mappingOptions[selectedOption]) + "/shader");
+    }
+    ImGui::End();
 }
 
 void MappingScene::mousePressed(int x, int y, int button)
 {
-    if (button == OF_MOUSE_BUTTON_LEFT)
-    {
-        lastMouse = ofVec2f(x, y);
-        dragging = true;
-    }
+
 }
 
 void MappingScene::mouseDragged(int x, int y, int button)
 {
-    if (dragging)
-    {
-        float rotX = (x - lastMouse.x) * 0.5;
-        float rotY = (y - lastMouse.y) * 0.5;
-        ofQuaternion yRot(rotX, ofVec3f(0, 1, 0));
-        ofQuaternion xRot(rotY, ofVec3f(1, 0, 0));
-        rotation = yRot * xRot;
-        currentRotation = rotation * currentRotation;
-        lastMouse = ofVec2f(x, y);
-    }
+
 }
 
 void MappingScene::mouseReleased(int x, int y, int button) { dragging = false; }

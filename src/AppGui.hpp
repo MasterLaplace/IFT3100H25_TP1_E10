@@ -33,6 +33,7 @@ public:
     void setup(Controller *_controller);
     void drawMenu();
     void draw();
+    ofxImGui::Gui *getGui() { return &gui; }
 
 private:
     ofxImGui::Gui gui;

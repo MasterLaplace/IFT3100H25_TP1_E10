@@ -11,9 +11,7 @@ void AppGui::setup(Controller *_controller)
 
 void AppGui::drawMenu()
 {
-    gui.begin();
     drawMenuBar();
-    gui.end();
 }
 
 void AppGui::draw()
