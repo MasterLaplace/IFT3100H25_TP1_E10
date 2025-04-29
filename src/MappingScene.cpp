@@ -55,10 +55,7 @@ void MappingScene::setup()
     currentShader.load("mapping/diffuse/shader");
 }
 
-void MappingScene::update()
-{
-
-}
+void MappingScene::update() {}
 
 void MappingScene::draw()
 {
