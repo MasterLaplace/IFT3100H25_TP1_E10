@@ -171,7 +171,12 @@ void MappingScene::draw()
 
         // Dessiner le plane
         ofPushMatrix();
-        vboMesh.draw();
+
+        if (currentMappingMethod == DISPLACEMENT) 
+            plane.draw();
+        else 
+            vboMesh.draw();
+
         ofPopMatrix();
 
         currentShader.end();
