@@ -4,10 +4,9 @@
 in vec3 fragPos;
 in vec2 fragTexCoord;
 out vec4 outputColor;
-
-uniform sampler2DRect tex0;
+uniform sampler2DRect diffuseTexture;
 
 void main()
 {
-  outputColor = texture(tex0, fragTexCoord);
+  outputColor = texture(diffuseTexture, fragTexCoord);
 }

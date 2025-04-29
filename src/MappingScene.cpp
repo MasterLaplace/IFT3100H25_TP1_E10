@@ -5,22 +5,26 @@ void MappingScene::setup()
     ofSetFrameRate(60);
     ofEnableDepthTest();
 
-    // Set up plane geometry
+    // Charger les textures
+    ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
+    ofLoadImage(normalTexture, "mapping/normal.jpg");
+    ofLoadImage(heightMap, "mapping/height.jpg");
+
+    // Configuration du plane
     plane.set(400, 400, 200, 200);
     plane.setPosition(0, 0, 0);
+    plane.mapTexCoordsFromTexture(diffuseTexture);
+    plane.mapTexCoordsFromTexture(normalTexture);
+    plane.mapTexCoordsFromTexture(heightMap);
+
+    // Configuration du vboMesh pour avoir les tangentes
+    vboMesh = plane.getMesh();
+    calculateTangents();
 
     // Set up camera
     camera.setDistance(600);
     camera.setNearClip(10);
     camera.setFarClip(2000);
-    rotation = ofQuaternion(0, 0, 0, 1);
-    currentRotation = ofQuaternion(0, 0, 0, 1);
-    dragging = false;
-
-    // Charger les textures
-    ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
-    ofLoadImage(normalTexture, "mapping/normal.jpg");
-    ofLoadImage(heightMap, "mapping/height.jpg");
 
     // S'assurer que heightMap est en niveaux de gris
     // Cela pourrait aider avec le problème de pics
@@ -46,16 +50,75 @@ void MappingScene::setup()
     heightMap.setTextureMinMagFilter(GL_LINEAR, GL_LINEAR);
     heightMap.setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 
-    // Mapper les coordonnées de texture pour le plane
-    plane.mapTexCoordsFromTexture(diffuseTexture);
-
     currentMappingMethod = DIFFUSE;
     displacementScale = 5.0f;
 
     currentShader.load("mapping/diffuse/shader");
 }
 
-void MappingScene::update() {}
+void MappingScene::calculateTangents()
+{
+    // Récupérer les données du mesh
+    std::vector<glm::vec3> &vertices = plane.getMesh().getVertices();
+    std::vector<glm::vec3> &normals = plane.getMesh().getNormals();
+    std::vector<glm::vec2> &texCoords = plane.getMesh().getTexCoords();
+    std::vector<ofIndexType> indices = plane.getMesh().getIndices();
+
+    // Créer les vecteurs pour les tangentes et bitangentes
+    std::vector<ofVec3f> tangents(vertices.size(), ofVec3f(0, 0, 0));
+    std::vector<ofVec3f> bitangents(vertices.size(), ofVec3f(0, 0, 0));
+
+    // Pour chaque triangle
+    for (size_t i = 0; i < indices.size(); i += 3)
+    {
+        if (i + 2 >= indices.size())
+            continue;
+
+        ofIndexType i1 = indices[i];
+        ofIndexType i2 = indices[i + 1];
+        ofIndexType i3 = indices[i + 2];
+
+        glm::vec3 v1 = vertices[i1];
+        glm::vec3 v2 = vertices[i2];
+        glm::vec3 v3 = vertices[i3];
+
+        glm::vec2 uv1 = texCoords[i1];
+        glm::vec2 uv2 = texCoords[i2];
+        glm::vec2 uv3 = texCoords[i3];
+
+        // Calculer les différences
+        glm::vec3 deltaPos1 = v2 - v1;
+        glm::vec3 deltaPos2 = v3 - v1;
+
+        glm::vec2 deltaUV1 = uv2 - uv1;
+        glm::vec2 deltaUV2 = uv3 - uv1;
+
+        // Calculer la tangente et la bitangente
+        float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+        if (std::isfinite(r))
+        { // Vérifier que r n'est pas inf ou NaN
+            glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+            // Ajouter aux vecteurs
+            tangents[i1] += tangent;
+            tangents[i2] += tangent;
+            tangents[i3] += tangent;
+        }
+    }
+
+    // Orthogonaliser et normaliser les tangentes
+    for (size_t i = 0; i < vertices.size(); i++)
+    {
+        ofVec3f n = normals[i];
+        ofVec3f t = tangents[i];
+
+        // Orthogonaliser la tangente par rapport à la normale (Gram-Schmidt)
+        t = (t - n * n.dot(t)).normalize();
+    }
+
+    vboMesh.getVbo().setAttributeData(10, &tangents[0].x, 3, tangents.size(), GL_STATIC_DRAW);
+}
+
 
 void MappingScene::draw()
 {
@@ -71,8 +134,6 @@ void MappingScene::draw()
     {
         camera.enableMouseInput();
     }
-
-    ofSetColor(255);
 
     // Use shader and draw plane
     if (currentShader.isLoaded())
@@ -110,19 +171,8 @@ void MappingScene::draw()
 
         // Dessiner le plane
         ofPushMatrix();
-        plane.draw();
+        vboMesh.draw();
         ofPopMatrix();
-
-        // Débinder les textures
-        if (currentMappingMethod == DISPLACEMENT)
-        {
-            heightMap.unbind(1);
-        }
-        else if (currentMappingMethod == NORMAL)
-        {
-            normalTexture.unbind(1);
-        }
-        diffuseTexture.unbind(0);
 
         currentShader.end();
     }
