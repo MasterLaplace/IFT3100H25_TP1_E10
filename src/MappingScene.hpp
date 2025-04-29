@@ -1,6 +1,14 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxImGui.h"
+
+enum MappingMethod {
+    DIFFUSE,
+    DISPLACEMENT,
+    NORMAL,
+    PARALLAX
+};
 
 class MappingScene : public ofBaseApp {
 public:
@@ -23,10 +31,10 @@ public:
     bool dragging;
 
     // Normal mapping variables
-    ofShader displacementShader;
-    ofImage diffuseTexture;
-    ofImage normalTexture;
-    ofImage heightMap;
+    ofShader currentShader;
+    ofTexture diffuseTexture;
+    ofTexture normalTexture;
+    ofTexture heightMap;
 
     // Parallax parameters
     float heightScale;
@@ -35,4 +43,6 @@ public:
 
     // Light position
     ofVec3f lightPos;
+
+    MappingMethod currentMappingMethod;
 };

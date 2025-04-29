@@ -47,8 +47,10 @@ void Controller::draw()
     }
     else if (currentView == VIEW_MAPPING)
     {
+        gui.getGui()->begin();
         mappingScene.draw();
         gui.drawMenu();
+        gui.getGui()->end();
     }
     else if (currentView == VIEW_2D)
     {
