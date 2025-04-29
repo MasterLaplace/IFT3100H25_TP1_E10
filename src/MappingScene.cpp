@@ -19,8 +19,8 @@ void MappingScene::setup()
 
     // Configuration de la lumière
     lightPosition = glm::vec3(100.0f, 100.0f, 100.0f); // Direction de la lumière
-    lightColor = glm::vec3(1.0f, 1.0f, 1.0f); // Couleur blanche
-    ambientStrength = 0.1f;  
+    lightColor = glm::vec3(1.0f, 1.0f, 1.0f);          // Couleur blanche
+    ambientStrength = 0.1f;
 
     sphere.setRadius(10);
 
@@ -133,7 +133,6 @@ void MappingScene::draw()
     {
         currentShader.begin();
 
-        
         // Assignation des textures aux unités appropriées
         currentShader.setUniformTexture("diffuseTexture", diffuseTexture, 0);
 
@@ -143,14 +142,13 @@ void MappingScene::draw()
             currentShader.setUniformTexture("heightMap", heightMap, 1);
             currentShader.setUniform1f("displacementScale", displacementScale);
             break;
-        case NORMAL:
-            currentShader.setUniformTexture("normalMap", normalTexture, 1);
-            break;
+        case NORMAL: currentShader.setUniformTexture("normalMap", normalTexture, 1); break;
         }
 
         // Envoyer les paramètres de lumière
         currentShader.setUniform3f("lightPos", lightPosition.x, lightPosition.y, lightPosition.z);
-        currentShader.setUniform3f("viewPos", camera.getGlobalPosition().x, camera.getGlobalPosition().y, camera.getGlobalPosition().z);
+        currentShader.setUniform3f("viewPos", camera.getGlobalPosition().x, camera.getGlobalPosition().y,
+                                   camera.getGlobalPosition().z);
         currentShader.setUniform3f("lightColor", lightColor.x, lightColor.y, lightColor.z);
         currentShader.setUniform1f("ambientStrength", ambientStrength);
 
