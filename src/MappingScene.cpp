@@ -119,7 +119,6 @@ void MappingScene::calculateTangents()
     vboMesh.getVbo().setAttributeData(10, &tangents[0].x, 3, tangents.size(), GL_STATIC_DRAW);
 }
 
-
 void MappingScene::draw()
 {
     plane.enableTextures();
@@ -172,9 +171,9 @@ void MappingScene::draw()
         // Dessiner le plane
         ofPushMatrix();
 
-        if (currentMappingMethod == DISPLACEMENT) 
+        if (currentMappingMethod == DISPLACEMENT)
             plane.draw();
-        else 
+        else
             vboMesh.draw();
 
         ofPopMatrix();
