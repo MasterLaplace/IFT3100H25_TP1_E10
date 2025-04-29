@@ -25,6 +25,9 @@
     <ClCompile Include="src\HistogramUI.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\MappingScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\app\Application.cpp">
       <Filter>src\app</Filter>
     </ClCompile>
@@ -58,7 +61,13 @@
     <ClCompile Include="src\plugin\image\ToneMapping.cpp">
       <Filter>src\plugin\image</Filter>
     </ClCompile>
+    <ClCompile Include="src\plugin\light\Light.cpp">
+      <Filter>src\plugin\light</Filter>
+    </ClCompile>
     <ClCompile Include="src\plugin\light\LightModel.cpp">
+      <Filter>src\plugin\light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\light\LightTypes.cpp">
       <Filter>src\plugin\light</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\primitive\Box.cpp">
@@ -211,103 +220,97 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\plugin\light\LightTypes.cpp">
-      <Filter>src\plugin\light</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plugin\light\Light.cpp">
-      <Filter>src\plugin\light</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\app">
-      <UniqueIdentifier>{C2853B7F--E69-5-45-63-A-7A7-A9F797A77493}</UniqueIdentifier>
+      <UniqueIdentifier>{96073312--C21-3-4E-83-9-22C-21D983A49BD1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin">
-      <UniqueIdentifier>{29A33755--23E-B-4A-5E-8-592-D04ED5D54116}</UniqueIdentifier>
+      <UniqueIdentifier>{3954E319--AF1-1-42-2A-9-C6C-EFE2497721B4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\geometry">
-      <UniqueIdentifier>{5D157496--7E8-1-4A-BE-8-C1E-462C1B26F8BC}</UniqueIdentifier>
+      <UniqueIdentifier>{669B22D1--190-B-45-55-8-43C-B46045D70789}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\image">
-      <UniqueIdentifier>{8E9A7DEC--032-5-4F-C5-B-30F-C6F9E19B3A2F}</UniqueIdentifier>
+      <UniqueIdentifier>{8C744C07--2C8-5-48-2F-8-932-01D09CEBBFF6}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\light">
-      <UniqueIdentifier>{EFBD5BF7--F34-4-4B-9D-8-D67-E48877041355}</UniqueIdentifier>
+      <UniqueIdentifier>{62EF3A01--50D-3-4A-93-B-D5C-CA5740AF2CC8}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\primitive">
-      <UniqueIdentifier>{C8A88C17--BE4-F-43-19-8-177-83B70A9FC46B}</UniqueIdentifier>
+      <UniqueIdentifier>{1D74CA5B--386-0-40-E9-A-14D-D16AA86840FB}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\shape">
-      <UniqueIdentifier>{6398D95B--8A6-2-46-CE-9-E32-78943D760DF4}</UniqueIdentifier>
+      <UniqueIdentifier>{3C404EAC--A85-E-43-88-9-16E-808562E8BF25}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\states">
-      <UniqueIdentifier>{6993F895--1F1-3-47-F2-A-0C1-456F927C064E}</UniqueIdentifier>
+      <UniqueIdentifier>{16C95A6F--F83-7-4D-16-9-BEC-52E8CBAA00B0}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\texture">
-      <UniqueIdentifier>{D0EBA7F8--4F2-B-40-42-B-382-7F99F4DE69F5}</UniqueIdentifier>
+      <UniqueIdentifier>{F93FE688--A34-B-46-5F-B-9C1-BA1E94B29BED}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\topology">
-      <UniqueIdentifier>{9A4D9745--25A-D-49-0C-9-A19-2ED82132A912}</UniqueIdentifier>
+      <UniqueIdentifier>{8D5A8DBA--181-1-44-95-B-B96-1D8DAA2E2553}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation">
-      <UniqueIdentifier>{FF1CF80A--A17-5-49-32-A-5E4-EE126A31CC36}</UniqueIdentifier>
+      <UniqueIdentifier>{5CFD78B5--68B-4-4D-14-9-E47-FD4A575F53B0}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation\history">
-      <UniqueIdentifier>{56AE9789--AF4-A-48-26-A-F4E-7E6CCB382559}</UniqueIdentifier>
+      <UniqueIdentifier>{02D024E5--E49-3-4C-A2-9-44F-D658EA84A552}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{C4AC5647--65B-6-49-47-9-6CA-976FBA201A2A}</UniqueIdentifier>
+      <UniqueIdentifier>{6C87C2E1--C37-6-4F-20-9-5B3-B64DB432ADD7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader">
-      <UniqueIdentifier>{95CCF74E--2A3-6-4A-BE-8-C7C-5F4FEBD9CC11}</UniqueIdentifier>
+      <UniqueIdentifier>{FD370E1E--772-F-44-F7-A-FBF-9C5454258AA3}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\src">
-      <UniqueIdentifier>{CCA2CB2F--A82-1-46-FF-8-BB5-905A7E84908F}</UniqueIdentifier>
+      <UniqueIdentifier>{7A90BAC3--01B-2-43-6A-8-6C4-F5A301048920}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs">
-      <UniqueIdentifier>{082F88E0--F5B-1-4B-60-B-1AE-529C388CE7FE}</UniqueIdentifier>
+      <UniqueIdentifier>{B7D5A634--CF1-3-43-0C-B-BA1-D8FA7F356C4E}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp">
-      <UniqueIdentifier>{0B45EF98--E5C-0-4D-04-B-C39-7B6B0CBB5F09}</UniqueIdentifier>
+      <UniqueIdentifier>{A8AC9CB4--739-6-43-0B-8-EA9-F6195290619D}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include">
-      <UniqueIdentifier>{61B4A5D5--59E-2-4C-7C-9-53E-B55F800F571F}</UniqueIdentifier>
+      <UniqueIdentifier>{D8AFDA3C--9FC-3-4A-01-9-1A6-46D850C2EA0D}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp">
-      <UniqueIdentifier>{56B60A77--EA2-F-4B-76-8-F61-3B8F4DB5AC39}</UniqueIdentifier>
+      <UniqueIdentifier>{3927E7B6--22C-F-47-6C-8-868-FD65FEDA478A}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler">
-      <UniqueIdentifier>{87102F92--A4C-1-43-28-B-9D9-3B54E31EC510}</UniqueIdentifier>
+      <UniqueIdentifier>{95D8669D--55B-7-49-C5-8-D52-4F7397831223}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port">
-      <UniqueIdentifier>{93BD80AF--8BB-9-49-5F-A-6A3-79597942C7B9}</UniqueIdentifier>
+      <UniqueIdentifier>{5E76B3F0--E2B-2-4E-7B-9-7F2-B71796A1AD82}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI">
-      <UniqueIdentifier>{D987A704--92B-4-4C-05-8-6F2-B668FB940FF2}</UniqueIdentifier>
+      <UniqueIdentifier>{8796D8DC--417-F-47-19-8-5DA-25D96BA1082D}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui">
-      <UniqueIdentifier>{9B70684C--1A5-C-4E-5F-B-EC0-6DE6B84815E1}</UniqueIdentifier>
+      <UniqueIdentifier>{BE70F6AA--DC4-8-4E-44-A-461-DAE27797E602}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui\src">
-      <UniqueIdentifier>{48245863--9FE-D-4D-E7-B-CF1-93D8AF3B9C66}</UniqueIdentifier>
+      <UniqueIdentifier>{D5E01B15--108-5-4F-EA-8-83A-14BB1862AC58}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui">
-      <UniqueIdentifier>{8BD6B91B--95C-B-40-3D-A-FA9-FE3E268A2A0C}</UniqueIdentifier>
+      <UniqueIdentifier>{DF2854DA--F50-9-4A-C8-9-D27-8572F7471405}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\src">
-      <UniqueIdentifier>{5753AD94--7DE-7-4C-DD-A-C9A-2ACC436C0853}</UniqueIdentifier>
+      <UniqueIdentifier>{9D9D8406--1C3-6-4A-6C-A-0C1-2FAD3F6625A8}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs">
-      <UniqueIdentifier>{0795770A--362-1-43-B2-9-755-5CD309C1A5AE}</UniqueIdentifier>
+      <UniqueIdentifier>{7777A124--6DB-8-4F-EE-A-CC0-4A5155443609}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui">
-      <UniqueIdentifier>{5B8D830D--A38-A-47-EC-9-279-C5D613D7279F}</UniqueIdentifier>
+      <UniqueIdentifier>{590D8C42--FC8-B-41-BB-8-655-38F2D4E2A9A4}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui\src">
-      <UniqueIdentifier>{EC8AD724--F71-C-4C-F3-8-F15-1DFAD992FD40}</UniqueIdentifier>
+      <UniqueIdentifier>{B8EE3C1E--1BC-B-47-30-B-106-BC96937399D0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +333,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\HistogramUI.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MappingScene.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Node.hpp">
@@ -377,7 +383,13 @@
     <ClInclude Include="src\plugin\light\LightModel.hpp">
       <Filter>src\plugin\light</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\light\Light.hpp">
+    <ClInclude Include="src\plugin\light\LightTypes.hpp">
+      <Filter>src\plugin\light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\light\light.hpp">
+      <Filter>src\plugin\light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\light\light_header.hpp">
       <Filter>src\plugin\light</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\primitive\Box.hpp">
@@ -829,12 +841,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plugin\light\LightTypes.hpp">
-      <Filter>src\plugin\light</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plugin\light\light_header.hpp">
-      <Filter>src\plugin\light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
