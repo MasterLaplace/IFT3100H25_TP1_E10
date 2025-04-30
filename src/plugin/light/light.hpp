@@ -1,8 +1,8 @@
 #pragma once
 
 #include <glm/vec3.hpp>
-#include <ofShader.h>
 #include <ofLight.h>
+#include <ofShader.h>
 
 namespace plugin::light {
 
@@ -62,7 +62,7 @@ private:
     // Les proprietes de l'eclairage.
     ModelType _model = ModelType::Lambert;
     LightType _type = LightType::Ambient;
-    
+
     glm::vec3 _lightPosition{0.0, 0.0, 0.0};
     glm::vec3 _ambientColor{0.2, 0.2, 0.2};
     glm::vec3 _diffuseColor{0.8, 0.8, 0.8};

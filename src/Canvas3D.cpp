@@ -25,25 +25,25 @@ void Canvas3D::draw()
 
     // On dessine toutes les primitives.
     for (size_t i = 0; i < nodes.size(); i++)
-    { 
-            // On set la couleur ambiante du materiau.
-            glm::vec3 materialAmbientColor = getMaterialAmbientColor(i);
-            light.setMaterialAmbientColor(materialAmbientColor);
+    {
+        // On set la couleur ambiante du materiau.
+        glm::vec3 materialAmbientColor = getMaterialAmbientColor(i);
+        light.setMaterialAmbientColor(materialAmbientColor);
 
-            // On set la couleur diffuse du materiau.
-            glm::vec3 materialDiffuseColor = getMaterialDiffuseColor(i);
-            light.setMaterialDiffuseColor(materialDiffuseColor);
+        // On set la couleur diffuse du materiau.
+        glm::vec3 materialDiffuseColor = getMaterialDiffuseColor(i);
+        light.setMaterialDiffuseColor(materialDiffuseColor);
 
-            // On set la couleur speculaire du materiau.
-            glm::vec3 materialSpecularColor = getMaterialSpecularColor(i);
-            light.setMaterialSpecularColor(materialSpecularColor);
+        // On set la couleur speculaire du materiau.
+        glm::vec3 materialSpecularColor = getMaterialSpecularColor(i);
+        light.setMaterialSpecularColor(materialSpecularColor);
 
-            // On set la brillance du materiau.
-            float materialShininess = getMaterialShininess(i);
-            light.setShininess(materialShininess);
+        // On set la brillance du materiau.
+        float materialShininess = getMaterialShininess(i);
+        light.setShininess(materialShininess);
 
-            // On dessine la primitive.
-            nodes[i]->draw(); 
+        // On dessine la primitive.
+        nodes[i]->draw();
     }
 
     // On desactive le shader de tessellation
@@ -51,7 +51,6 @@ void Canvas3D::draw()
 
     // On desactive le shader.
     light.end();
-  
 
     // On desactive l'eclairage dynamique.
     ofDisableLighting();
