@@ -6,9 +6,9 @@ void MappingScene::setup()
     ofEnableDepthTest();
 
     // Charger les textures
-    ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
-    ofLoadImage(normalTexture, "mapping/normal.jpg");
-    ofLoadImage(heightMap, "mapping/height.jpg");
+    ofLoadImage(diffuseTexture, "shaders/diffuse.jpg");
+    ofLoadImage(normalTexture, "shaders/normal.jpg");
+    ofLoadImage(heightMap, "shaders/height.jpg");
 
     // Configuration du plane
     plane.set(400, 400, 200, 200);
@@ -42,7 +42,7 @@ void MappingScene::setup()
     currentMappingMethod = DIFFUSE;
     displacementScale = 5.0f;
 
-    currentShader.load("mapping/diffuse/shader");
+    currentShader.load("shaders/diffuse/shader");
 }
 
 void MappingScene::calculateTangents()
@@ -185,7 +185,7 @@ void MappingScene::draw()
     if (ImGui::Combo("Mapping Method", &selectedOption, mappingOptions, IM_ARRAYSIZE(mappingOptions)))
     {
         currentMappingMethod = static_cast<MappingMethod>(selectedOption);
-        currentShader.load("mapping/" + std::string(mappingOptions[selectedOption]) + "/shader");
+        currentShader.load("shaders/" + std::string(mappingOptions[selectedOption]) + "/shader");
     }
 
     // Ajouter un slider pour contrôler l'intensité du déplacement
