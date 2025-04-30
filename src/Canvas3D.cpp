@@ -20,12 +20,12 @@ void Canvas3D::draw()
     // Le shader de tessellation.
     tesShader.begin();
 
-    // On active le shader de lumiere.
-    light.begin();
-
     // On dessine toutes les primitives.
     for (size_t i = 0; i < nodes.size(); i++)
     {
+        // On active le shader de lumiere.
+        light.begin();
+
         // On set la couleur ambiante du materiau.
         glm::vec3 materialAmbientColor = getMaterialAmbientColor(i);
         light.setMaterialAmbientColor(materialAmbientColor);
@@ -44,13 +44,13 @@ void Canvas3D::draw()
 
         // On dessine la primitive.
         nodes[i]->draw();
+
+        // On desactive le shader.
+        light.end();
     }
 
     // On desactive le shader de tessellation
     tesShader.end();
-
-    // On desactive le shader.
-    light.end();
 
     // On desactive l'eclairage dynamique.
     ofDisableLighting();

@@ -1613,7 +1613,7 @@ void AppGui::drawLightProperties()
     {
         float intensity = controller->getLightIntensity();
         ImGui::Text("Intensite lumineuse :");
-        if (ImGui::DragFloat("Intensite lumiere", &intensity, 1.0f, 1.0f, 100.0f))
+        if (ImGui::DragFloat("Intensite lumiere", &intensity, 1.0f, 1.0f, 200.0f))
         {
             controller->setLightIntensity(intensity);
         }
