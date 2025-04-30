@@ -258,7 +258,7 @@ void PBRScene::drawGui()
         ImGui::DragFloat3("Echelle", &p.scale.x, 0.01f, 0.01f, 10.0f);
         ImGui::Separator();
 
-        ImGui::Text("Propriétés du matériau");
+        ImGui::Text("Proprietes du materiau");
         ImGui::DragFloat("Brillance", &p.brightness, 0.01f, 0.0f, 10.0f);
         ImGui::DragFloat("Metallique", &p.metallic, 0.01f, 0.0f, 1.0f);
         ImGui::DragFloat("Rugosite", &p.roughness, 0.01f, 0.0f, 1.0f);
