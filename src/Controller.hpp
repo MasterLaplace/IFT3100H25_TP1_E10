@@ -8,6 +8,7 @@
 #include "CurveUI.hpp"
 #include "HistogramUI.hpp"
 #include "MappingScene.hpp"
+#include "PBRScene.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
 #include "plugin/light/Light.hpp"
@@ -23,7 +24,8 @@ using namespace plugin::texture;
 enum View {
     VIEW_2D,
     VIEW_3D,
-    VIEW_MAPPING
+    VIEW_MAPPING,
+    VIEW_PBR,
 };
 
 class Controller {
@@ -58,6 +60,7 @@ public:
     void drawHistogram(int color);
     void drawCurve(curveType type);
     void drawMapping();
+    void drawPBR();
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);
@@ -136,6 +139,7 @@ private:
     HistogramUI histogramUI;
     CurveUI curveUI;
     MappingScene mappingScene;
+    PBRScene pbrScene;
     Exporting exporter;
     Camera camera;
     Skybox skybox;

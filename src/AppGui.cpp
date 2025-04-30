@@ -129,6 +129,15 @@ void AppGui::drawMenuBar()
             ImGui::EndMenu();
         }
 
+        if (ImGui::BeginMenu("PBR"))
+        {
+            if (ImGui::MenuItem("Vers le PBR"))
+            {
+                controller->drawPBR();
+            }
+            ImGui::EndMenu();
+        }
+
         ImGui::EndMainMenuBar();
     }
 }

@@ -28,6 +28,9 @@
     <ClCompile Include="src\MappingScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PBRScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\app\Application.cpp">
       <Filter>src\app</Filter>
     </ClCompile>
@@ -220,97 +223,94 @@
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\app">
-      <UniqueIdentifier>{73E26A27--C03-1-4B-C0-B-149-9FB4182E0321}</UniqueIdentifier>
+      <UniqueIdentifier>{CD1D358C--A8D-7-4F-7E-8-F0D-F64D81A335C1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin">
-      <UniqueIdentifier>{4806811F--DAA-E-48-48-B-F35-2AA166052EC9}</UniqueIdentifier>
+      <UniqueIdentifier>{65DB2D8D--406-5-4D-70-B-0A0-44D5EB9CFA21}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\geometry">
-      <UniqueIdentifier>{470ACC23--86B-A-4F-4D-9-ABB-A1BD1544AA69}</UniqueIdentifier>
+      <UniqueIdentifier>{4EA52DDC--DD1-B-4B-3F-B-BBE-40754DB59DE2}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\image">
-      <UniqueIdentifier>{769A883A--AF8-4-46-B4-A-5D6-33EE3521CEC7}</UniqueIdentifier>
+      <UniqueIdentifier>{104BCA5C--8BF-C-43-A1-8-FCB-41896E2ED6D6}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\light">
-      <UniqueIdentifier>{E42B5526--E6D-2-42-91-8-18C-0344188AE558}</UniqueIdentifier>
+      <UniqueIdentifier>{03B714DB--BF1-A-4C-1A-8-186-DA22DA2E9116}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\primitive">
-      <UniqueIdentifier>{1DFD8E4C--F38-C-43-79-A-EB4-E71B1BE1D05A}</UniqueIdentifier>
+      <UniqueIdentifier>{13F99C29--144-5-49-1D-8-8D7-D5D9E0FB177E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\shape">
-      <UniqueIdentifier>{F78C84D0--B57-B-42-BA-9-5D9-0FC3D33B620C}</UniqueIdentifier>
+      <UniqueIdentifier>{A046916A--C98-2-4D-4F-9-B7A-6406DA9F4C67}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\states">
-      <UniqueIdentifier>{254A52B9--FB7-9-45-3B-B-6EF-7A9D605AF9CD}</UniqueIdentifier>
+      <UniqueIdentifier>{7F19E5C3--418-F-47-60-B-7AB-52D6D62E4CB8}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\texture">
-      <UniqueIdentifier>{4EEF2895--6F8-1-49-11-B-159-76664A0AC741}</UniqueIdentifier>
+      <UniqueIdentifier>{415EBB39--1C5-C-45-5D-8-AA1-AE7A0FDA83E5}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\topology">
-      <UniqueIdentifier>{83D01D45--80C-A-40-44-8-67C-C13C83921E05}</UniqueIdentifier>
+      <UniqueIdentifier>{2BD33F11--9F4-7-42-28-9-C41-4CDD6F578D30}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation">
-      <UniqueIdentifier>{845139ED--BB9-B-4F-4E-9-632-42BAA842A4A2}</UniqueIdentifier>
+      <UniqueIdentifier>{B09ACC3D--A6E-6-4B-80-A-278-B6517EB76A6F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\plugin\transformation\history">
-      <UniqueIdentifier>{CC3FFF39--8AD-2-40-91-B-C09-51C9CC4485B5}</UniqueIdentifier>
+      <UniqueIdentifier>{F33989AB--C30-5-40-85-A-1D3-05C7EA676FEF}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{3E02B263--605-D-41-B1-9-4D4-2DBC788F18B4}</UniqueIdentifier>
+      <UniqueIdentifier>{219D8FBA--006-D-4E-33-8-628-F382EDCC529A}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader">
-      <UniqueIdentifier>{0B3EB688--9EF-6-43-58-B-BF2-60272212349E}</UniqueIdentifier>
+      <UniqueIdentifier>{40F2EC50--B05-2-4D-B1-9-433-02E731332309}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\src">
-      <UniqueIdentifier>{CD85DD33--7E3-D-43-E8-B-155-DB2BA8DD1C3B}</UniqueIdentifier>
+      <UniqueIdentifier>{61F555BF--753-3-47-57-A-647-BE7F19F270A2}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs">
-      <UniqueIdentifier>{BDF913FE--74F-3-41-DE-8-A6C-7BCA71195D56}</UniqueIdentifier>
+      <UniqueIdentifier>{9A027C07--886-4-45-A3-9-7D5-399F91EF7152}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp">
-      <UniqueIdentifier>{F77A554F--44D-8-44-04-9-36E-F0528DE6B8A3}</UniqueIdentifier>
+      <UniqueIdentifier>{33E980EB--FA5-B-40-63-9-1F4-FE842D3FE2AA}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include">
-      <UniqueIdentifier>{C5DC3031--DEE-0-48-94-9-4FE-A665B6B63DEC}</UniqueIdentifier>
+      <UniqueIdentifier>{0A9884F4--5F7-F-45-E3-8-1DD-F95EC7A2D249}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp">
-      <UniqueIdentifier>{71409583--318-3-42-02-B-D47-08791768B61B}</UniqueIdentifier>
+      <UniqueIdentifier>{A6573A5F--1FE-7-42-34-B-824-E022EC266EB7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\Compiler">
-      <UniqueIdentifier>{4441CC87--CC0-6-4B-19-9-A64-F10EC73B5BA6}</UniqueIdentifier>
+      <UniqueIdentifier>{B73CF4C5--903-D-48-8B-8-FB5-63F566D5CD6E}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port">
-      <UniqueIdentifier>{F0A8EE2C--283-9-4C-59-A-6BC-CEC1765EB01B}</UniqueIdentifier>
+      <UniqueIdentifier>{98A91930--772-6-4E-B7-A-91B-F944BB2516A0}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\assimp\port\AndroidJNI">
-      <UniqueIdentifier>{FD9014E6--47A-C-4F-D1-A-EAE-156418270A7A}</UniqueIdentifier>
+      <UniqueIdentifier>{DB7CACA9--0D1-0-43-B8-8-5B5-2E6D66CF4DC7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui">
-      <UniqueIdentifier>{725D051A--117-F-40-F9-8-A35-C580C6AD4DB0}</UniqueIdentifier>
+      <UniqueIdentifier>{A1F5AB9F--0EE-8-46-B8-8-67C-AE84906117CD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui\src">
-      <UniqueIdentifier>{43F5C330--90A-0-42-E0-9-654-85743A822E7D}</UniqueIdentifier>
+      <UniqueIdentifier>{76E6F2A8--D6D-5-4C-2F-A-733-A8A396F81056}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui">
-      <UniqueIdentifier>{C6B36AA7--DF6-4-48-6E-A-5B8-E758FB436B91}</UniqueIdentifier>
+      <UniqueIdentifier>{D245667E--091-D-4E-29-B-B74-406E1ACD6BB7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\src">
-      <UniqueIdentifier>{4E060EBF--734-A-4B-D8-9-49B-E83E2B77C35E}</UniqueIdentifier>
+      <UniqueIdentifier>{5F366996--C24-5-4A-FD-9-7A3-4B9709C54CBC}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs">
-      <UniqueIdentifier>{2C99D12E--3E3-6-48-D7-8-9FD-A6B68C032933}</UniqueIdentifier>
+      <UniqueIdentifier>{BD75EB55--605-D-44-F6-8-F14-D0183899DDB5}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui">
-      <UniqueIdentifier>{801B99E1--ADE-3-45-0C-9-CA9-9A9022AF51EC}</UniqueIdentifier>
+      <UniqueIdentifier>{3065ED73--406-4-44-A4-8-97F-160A9705B942}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxImGui\libs\imgui\src">
-      <UniqueIdentifier>{2E6157E1--154-6-4E-E3-B-50F-0B8CAD257F37}</UniqueIdentifier>
+      <UniqueIdentifier>{53B86AD2--FA8-5-46-6D-9-499-D4EE5B7BA792}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\AppGui.hpp">
       <Filter>src</Filter>
     </ClInclude>
@@ -339,6 +339,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Node.inl">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PBRScene.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\app\Application.hpp">

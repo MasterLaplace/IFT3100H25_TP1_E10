@@ -113,6 +113,7 @@
     <ClCompile Include="src\CurveUI.cpp" />
     <ClCompile Include="src\HistogramUI.cpp" />
     <ClCompile Include="src\MappingScene.cpp" />
+    <ClCompile Include="src\PBRScene.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
     <ClCompile Include="src\plugin\geometry\BoundaryBox.cpp" />
@@ -176,7 +177,6 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\AppGui.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Canvas.hpp" />
@@ -187,6 +187,7 @@
     <ClInclude Include="src\MappingScene.hpp" />
     <ClInclude Include="src\Node.hpp" />
     <ClInclude Include="src\Node.inl" />
+    <ClInclude Include="src\PBRScene.hpp" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />
     <ClInclude Include="src\plugin\geometry\BoundaryBox.hpp" />

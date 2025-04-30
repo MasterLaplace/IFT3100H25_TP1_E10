@@ -7,7 +7,7 @@ void MappingScene::setup()
 
     // Charger les textures
     ofLoadImage(diffuseTexture, "mapping/diffuse.jpg");
-    ofLoadImage(normalTexture, "mapping/normal_2.jpg");
+    ofLoadImage(normalTexture, "mapping/normal.jpg");
     ofLoadImage(heightMap, "mapping/height.jpg");
 
     // Configuration du plane
@@ -198,18 +198,18 @@ void MappingScene::draw()
         }
     }
 
-    if (ImGui::TreeNode("Lighting Settings"))
+    if (ImGui::TreeNode("Options d'illumination"))
     {
         // Position de la lumière
         float lightPos[3] = {lightPosition.x, lightPosition.y, lightPosition.z};
-        if (ImGui::SliderFloat3("Light Position", lightPos, -300.0f, 300.0f))
+        if (ImGui::SliderFloat3("Position de la lumiere", lightPos, -300.0f, 300.0f))
         {
             lightPosition = glm::vec3(lightPos[0], lightPos[1], lightPos[2]);
         }
 
         // Couleur de la lumière
         float color[3] = {lightColor.x, lightColor.y, lightColor.z};
-        if (ImGui::ColorEdit3("Light Color", color))
+        if (ImGui::ColorEdit3("Couleur de la lumiere", color))
         {
             lightColor = glm::vec3(color[0], color[1], color[2]);
         }

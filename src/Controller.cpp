@@ -14,6 +14,7 @@ void Controller::setup()
     histogramUI.setup(this);
     curveUI.setup(this);
     mappingScene.setup();
+    pbrScene.setup();
 }
 
 void Controller::update()
@@ -50,6 +51,13 @@ void Controller::draw()
     {
         gui.getGui()->begin();
         mappingScene.draw();
+        gui.drawMenu();
+        gui.getGui()->end();
+    }
+    else if (currentView == VIEW_PBR)
+    {
+        gui.getGui()->begin();
+        pbrScene.draw();
         gui.drawMenu();
         gui.getGui()->end();
     }
@@ -279,6 +287,8 @@ void Controller::drawHistogram(int color)
 void Controller::drawCurve(curveType type) { stateMachine.changeState(new DrawCoonsState(type)); }
 
 void Controller::drawMapping() { currentView = VIEW_MAPPING; }
+
+void Controller::drawPBR() { currentView = VIEW_PBR; }
 
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 
