@@ -45,7 +45,7 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
 
     shader.setUniform3f("material_color_ambient", p.ambiantColor.x, p.ambiantColor.y, p.ambiantColor.z);
     shader.setUniform3f("material_color_diffuse", 1.0f, 1.0f, 1.0f);  // diffuse tint
-    shader.setUniform3f("material_color_specular", 1.0f, 1.0f, 1.0f);          // specular tint
+    shader.setUniform3f("material_color_specular", 1.0f, 1.0f, 1.0f); // specular tint
     shader.setUniform1f("material_brightness", p.brightness);
     shader.setUniform1f("material_metallic", p.metallic);
     shader.setUniform1f("material_roughness", p.roughness);
@@ -54,7 +54,7 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
     shader.setUniform1f("tone_mapping_exposure", 1.0f);
     shader.setUniform1f("tone_mapping_gamma", 2.0f);
     shader.setUniform1i("tone_mapping_toggle", true);
-    
+
     for (int i = 0; i < lights.size(); ++i)
     {
         std::string idx = "lights[" + std::to_string(i) + "]";
@@ -68,10 +68,14 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
 
     shader.setUniform3f("view_position", cam.getGlobalPosition());
 
-    shader.setUniformTexture("texture_diffuse", p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
-    shader.setUniformTexture("texture_metallic", p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
-    shader.setUniformTexture("texture_roughness", p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
-    shader.setUniformTexture("texture_occlusion", p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
+    shader.setUniformTexture("texture_diffuse",
+                             p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
+    shader.setUniformTexture("texture_metallic",
+                             p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
+    shader.setUniformTexture("texture_roughness",
+                             p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
+    shader.setUniformTexture("texture_occlusion",
+                             p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
     if (p.normalTexture.isAllocated())
     {
         shader.setUniformTexture("texture_normal", p.normalTexture.getTexture(), 4);
@@ -91,7 +95,6 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
     {
         shader.setUniform1i("use_height_map", 0);
     }
-
 
     ofMatrix4x4 modelMatrix = p.primitive.getGlobalTransformMatrix();
     ofMatrix4x4 modelViewMatrix = cam.getModelViewMatrix();
@@ -150,7 +153,6 @@ void PBRScene::draw()
             primitives[i].primitive.drawWireframe();
         }
         ofPopMatrix();
-
     }
 
     for (size_t i = 0; i < lights.size(); ++i)
@@ -447,7 +449,6 @@ void PBRScene::drawGui()
         ImGui::ListBoxFooter();
     }
 
-    
     if (selectedLightIndex >= 0)
     {
         if (ImGui::Button("Deselectionner##lumiere"))
