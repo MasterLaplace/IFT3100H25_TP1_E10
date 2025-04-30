@@ -9,7 +9,7 @@ void PBRScene::setup()
     cam.setPosition(0, 0, -500);
     cam.lookAt({0, 0, 0});
 
-    pointLightShader.load("shaders/pbr/point");
+    shader.load("shaders/pbr/shader");
 
     ofPixels pixels;
     pixels.allocate(1, 1, OF_PIXELS_RGB);
@@ -31,57 +31,78 @@ void PBRScene::setup()
     PBRLight light;
     light.name = "Ponctuelle " + ofToString(nextLightId++);
     light.position = {0, 400, 0};
-    light.color = ofColor(255, 255, 255);
+    light.color = {1, 1, 1};
     light.type = POINT;
     light.direction = {1, 0, 0};
     lights.push_back(light);
 }
 
-void PBRScene::setupPointLightShader(int primitiveIndex, int lightIndex)
+void PBRScene::setupShader(int primitiveIndex, int lightIndex)
 {
     PBRPrimitive &p = primitives[primitiveIndex];
 
-    pointLightShader.begin();
+    shader.begin();
 
-    pointLightShader.setUniform3f("material_color_ambient", p.ambiantColor.x / 255.0f, p.ambiantColor.y / 255.0f,
-                                  p.ambiantColor.z / 255.0f);
-    pointLightShader.setUniform3f("material_color_diffuse", 1.0f, 1.0f, 1.0f);  // diffuse tint
-    pointLightShader.setUniform3f("material_color_specular", 1.0f, 1.0f, 1.0f); // specular tint
-    pointLightShader.setUniform1f("material_brightness", p.brightness);
-    pointLightShader.setUniform1f("material_metallic", p.metallic);
-    pointLightShader.setUniform1f("material_roughness", p.roughness);
-    pointLightShader.setUniform1f("material_occlusion", p.occlusion);
-    pointLightShader.setUniform3f("material_fresnel_ior", 0.0f, 0.0f, 0.0f); // fresnel ior
-    pointLightShader.setUniform1f("tone_mapping_exposure", 1.0f);
-    pointLightShader.setUniform1f("tone_mapping_gamma", 2.0f);
-    pointLightShader.setUniform1i("tone_mapping_toggle", true);
+    shader.setUniform3f("material_color_ambient", p.ambiantColor.x, p.ambiantColor.y, p.ambiantColor.z);
+    shader.setUniform3f("material_color_diffuse", 1.0f, 1.0f, 1.0f);  // diffuse tint
+    shader.setUniform3f("material_color_specular", 1.0f, 1.0f, 1.0f);          // specular tint
+    shader.setUniform1f("material_brightness", p.brightness);
+    shader.setUniform1f("material_metallic", p.metallic);
+    shader.setUniform1f("material_roughness", p.roughness);
+    shader.setUniform1f("material_occlusion", p.occlusion);
+    shader.setUniform3f("material_fresnel_ior", 0.0f, 0.0f, 0.0f); // fresnel ior
+    shader.setUniform1f("tone_mapping_exposure", 1.0f);
+    shader.setUniform1f("tone_mapping_gamma", 2.0f);
+    shader.setUniform1i("tone_mapping_toggle", true);
+    
+    for (int i = 0; i < lights.size(); ++i)
+    {
+        std::string idx = "lights[" + std::to_string(i) + "]";
+        shader.setUniform1i(idx + ".type", lights[i].type);
+        shader.setUniform3f(idx + ".position", lights[i].position);
+        shader.setUniform3f(idx + ".direction", lights[i].direction);
+        shader.setUniform3f(idx + ".color", lights[i].color.x, lights[i].color.y, lights[i].color.z);
+        shader.setUniform1f(idx + ".intensity", 1.0f);
+    }
+    shader.setUniform1i("light_count", lights.size());
 
-    pointLightShader.setUniform3f("light_position", lights[0].position);
-    pointLightShader.setUniform3f("light_color", lights[0].color.r / 255.0f, lights[0].color.g / 255.0f,
-                                  lights[0].color.b / 255.0f);
-    pointLightShader.setUniform1f("light_intensity", 1.0f);
+    shader.setUniform3f("view_position", cam.getGlobalPosition());
 
-    pointLightShader.setUniform3f("camera_position", cam.getGlobalPosition());
+    shader.setUniformTexture("texture_diffuse", p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
+    shader.setUniformTexture("texture_metallic", p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
+    shader.setUniformTexture("texture_roughness", p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
+    shader.setUniformTexture("texture_occlusion", p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
+    if (p.normalTexture.isAllocated())
+    {
+        shader.setUniformTexture("texture_normal", p.normalTexture.getTexture(), 4);
+        shader.setUniform1i("use_normal_map", 1);
+    }
+    else
+    {
+        shader.setUniform1i("use_normal_map", 0);
+    }
 
-    pointLightShader.setUniformTexture(
-        "texture_diffuse", p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
-    pointLightShader.setUniformTexture(
-        "texture_metallic", p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
-    pointLightShader.setUniformTexture(
-        "texture_roughness", p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
-    pointLightShader.setUniformTexture(
-        "texture_occlusion", p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
+    if (p.heightTexture.isAllocated())
+    {
+        shader.setUniformTexture("texture_height", p.heightTexture.getTexture(), 5);
+        shader.setUniform1i("use_height_map", 1);
+    }
+    else
+    {
+        shader.setUniform1i("use_height_map", 0);
+    }
 
+
+    ofMatrix4x4 modelMatrix = p.primitive.getGlobalTransformMatrix();
     ofMatrix4x4 modelViewMatrix = cam.getModelViewMatrix();
     ofMatrix4x4 projectionMatrix = cam.getProjectionMatrix();
 
-    pointLightShader.setUniformMatrix4f("modelViewMatrix", modelViewMatrix);
-    pointLightShader.setUniformMatrix4f("projectionMatrix", projectionMatrix);
+    shader.setUniformMatrix4f("modelMatrix", modelMatrix);
+    shader.setUniformMatrix4f("modelViewMatrix", modelViewMatrix);
+    shader.setUniformMatrix4f("projectionMatrix", projectionMatrix);
 
-    pointLightShader.end();
+    shader.end();
 }
-
-void PBRScene::setupDirectionalLightShader(int primitiveIndex, int lightIndex) {}
 
 void PBRScene::draw()
 {
@@ -109,8 +130,8 @@ void PBRScene::draw()
 
     for (size_t i = 0; i < primitives.size(); ++i)
     {
-        setupPointLightShader(i, 0);
-        pointLightShader.begin();
+        setupShader(i, 0);
+        shader.begin();
         ofSetColor(255, 255, 255);
         ofPushMatrix();
         ofTranslate(primitives[i].position);
@@ -118,7 +139,9 @@ void PBRScene::draw()
         ofRotateYDeg(primitives[i].rotation.y);
         ofRotateZDeg(primitives[i].rotation.z);
         ofScale(primitives[i].scale);
-        primitives[i].primitive.draw();
+        primitives[i].vboMesh.draw();
+
+        shader.end();
 
         // si la primitive est sélectionnée, on dessine le wireframe
         if (i == selectedPrimitiveIndex)
@@ -127,7 +150,7 @@ void PBRScene::draw()
             primitives[i].primitive.drawWireframe();
         }
         ofPopMatrix();
-        pointLightShader.end();
+
     }
 
     for (size_t i = 0; i < lights.size(); ++i)
@@ -136,9 +159,9 @@ void PBRScene::draw()
         ofTranslate(lights[i].position);
 
         // indicateur de la position de la lumiere
-        ofSetColor(lights[i].color);
+        ofSetColor(lights[i].color.x * 255, lights[i].color.y * 255, lights[i].color.z * 255, 255);
         ofDrawSphere(5);
-        ofSetColor(lights[i].color.r, lights[i].color.g, lights[i].color.b, 127);
+        ofSetColor(lights[i].color.x * 255, lights[i].color.y * 255, lights[i].color.z * 255, 127);
         ofDrawSphere(10);
 
         // si la lumiere est directionnelle, on dessine une fleche
@@ -161,8 +184,8 @@ void PBRScene::draw()
         if (i == selectedLightIndex)
         {
             ofSetColor(255, 0, 0);
-            ofDrawLine(-10, 0, 0, 10, 0, 0);
-            ofDrawLine(0, -10, 0, 0, 10, 0);
+            ofDrawLine(-20, 0, 0, 20, 0, 0);
+            ofDrawLine(0, -20, 0, 0, 20, 0);
         }
         ofPopMatrix();
     }
@@ -213,6 +236,14 @@ void PBRScene::drawGui()
             }
         }
         ImGui::ListBoxFooter();
+    }
+
+    if (selectedPrimitiveIndex >= 0)
+    {
+        if (ImGui::Button("Deselectionner##primitive"))
+        {
+            selectedPrimitiveIndex = -1;
+        }
     }
 
     if (selectedPrimitiveIndex >= 0)
@@ -321,6 +352,50 @@ void PBRScene::drawGui()
         {
             ImGui::Text("Non Chargee");
         }
+
+        ImGui::Text("Normale");
+        ImGui::SameLine();
+        if (ImGui::Button("Charger##normale"))
+        {
+            ofFileDialogResult result = ofSystemLoadDialog("Charger une texture normale");
+            if (result.bSuccess)
+            {
+                p.normalTexture.load(result.getPath());
+                p.normalTexture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+                p.primitive.mapTexCoordsFromTexture(p.normalTexture.getTexture());
+            }
+        }
+        ImGui::SameLine();
+        if (p.normalTexture.isAllocated())
+        {
+            ImGui::Text("Chargee");
+        }
+        else
+        {
+            ImGui::Text("Non Chargee");
+        }
+
+        ImGui::Text("Deplacement");
+        ImGui::SameLine();
+        if (ImGui::Button("Charger##deplacement"))
+        {
+            ofFileDialogResult result = ofSystemLoadDialog("Charger une texture deplacement");
+            if (result.bSuccess)
+            {
+                p.heightTexture.load(result.getPath());
+                p.heightTexture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+                p.primitive.mapTexCoordsFromTexture(p.heightTexture.getTexture());
+            }
+        }
+        ImGui::SameLine();
+        if (p.heightTexture.isAllocated())
+        {
+            ImGui::Text("Chargee");
+        }
+        else
+        {
+            ImGui::Text("Non Chargee");
+        }
     }
 
     ImGui::End();
@@ -341,7 +416,7 @@ void PBRScene::drawGui()
         PBRLight light;
         light.name = "Ponctuelle " + ofToString(nextLightId++);
         light.position = centerPosition;
-        light.color = ofColor(255, 255, 255);
+        light.color = {1, 1, 1};
         light.type = POINT;
         light.direction = {1, 0, 0};
         lights.push_back(light);
@@ -352,7 +427,7 @@ void PBRScene::drawGui()
         PBRLight light;
         light.name = "Directionnelle " + ofToString(nextLightId++);
         light.position = centerPosition;
-        light.color = ofColor(255, 255, 255);
+        light.color = {1, 1, 1};
         light.type = DIRECTIONAL;
         light.direction = {1, 0, 0};
         lights.push_back(light);
@@ -372,17 +447,23 @@ void PBRScene::drawGui()
         ImGui::ListBoxFooter();
     }
 
+    
+    if (selectedLightIndex >= 0)
+    {
+        if (ImGui::Button("Deselectionner##lumiere"))
+        {
+            selectedLightIndex = -1;
+        }
+    }
+
     if (selectedLightIndex >= 0)
     {
         PBRLight &l = lights[selectedLightIndex];
         ImGui::Text("Edition: %d", selectedLightIndex);
         ImGui::DragFloat3("Position", &l.position.x, 1.0f);
 
-        ofVec3f color = {l.color.r / 255.0f, l.color.g / 255.0f, l.color.b / 255.0f};
-        if (ImGui::ColorEdit3("Couleur", &color.x, ImGuiColorEditFlags_Float))
-        {
-            l.color = ofColor(color.x * 255, color.y * 255, color.z * 255);
-        }
+        ImGui::ColorEdit3("Couleur", &l.color.x, ImGuiColorEditFlags_Float);
+
         if (l.type == DIRECTIONAL)
         {
             ImGui::DragFloat3("Direction", &l.direction.x, 0.01f, -1.0f, 1.0f);
@@ -394,9 +475,76 @@ void PBRScene::drawGui()
 void PBRScene::setupBaseMat(int i)
 {
     PBRPrimitive &p = primitives[i];
-    p.ambiantColor = {1, 1, 1};
-    p.metallic = 0.0f;
-    p.roughness = 0.5f;
-    p.occlusion = 1.0f;
-    p.brightness = 1.0f;
+    p.ambiantColor = {0.2, 0.5, 0.8};
+    p.brightness = 0.180f;
+    p.metallic = 0.780f;
+    p.roughness = 0.410f;
+    p.occlusion = 0.970f;
+
+    calculateTangents(i);
+}
+
+void PBRScene::calculateTangents(int i)
+{
+    PBRPrimitive &p = primitives[i];
+    // Récupérer les données du mesh
+    std::vector<glm::vec3> &vertices = p.primitive.getMesh().getVertices();
+    std::vector<glm::vec3> &normals = p.primitive.getMesh().getNormals();
+    std::vector<glm::vec2> &texCoords = p.primitive.getMesh().getTexCoords();
+    std::vector<ofIndexType> indices = p.primitive.getMesh().getIndices();
+
+    // Créer les vecteurs pour les tangentes et bitangentes
+    std::vector<ofVec3f> tangents(vertices.size(), ofVec3f(0, 0, 0));
+    std::vector<ofVec3f> bitangents(vertices.size(), ofVec3f(0, 0, 0));
+
+    // Pour chaque triangle
+    for (size_t i = 0; i < indices.size(); i += 3)
+    {
+        if (i + 2 >= indices.size())
+            continue;
+
+        ofIndexType i1 = indices[i];
+        ofIndexType i2 = indices[i + 1];
+        ofIndexType i3 = indices[i + 2];
+
+        glm::vec3 v1 = vertices[i1];
+        glm::vec3 v2 = vertices[i2];
+        glm::vec3 v3 = vertices[i3];
+
+        glm::vec2 uv1 = texCoords[i1];
+        glm::vec2 uv2 = texCoords[i2];
+        glm::vec2 uv3 = texCoords[i3];
+
+        // Calculer les différences
+        glm::vec3 deltaPos1 = v2 - v1;
+        glm::vec3 deltaPos2 = v3 - v1;
+
+        glm::vec2 deltaUV1 = uv2 - uv1;
+        glm::vec2 deltaUV2 = uv3 - uv1;
+
+        // Calculer la tangente et la bitangente
+        float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+        if (std::isfinite(r))
+        { // Vérifier que r n'est pas inf ou NaN
+            glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+            // Ajouter aux vecteurs
+            tangents[i1] += tangent;
+            tangents[i2] += tangent;
+            tangents[i3] += tangent;
+        }
+    }
+
+    // Orthogonaliser et normaliser les tangentes
+    for (size_t i = 0; i < vertices.size(); i++)
+    {
+        ofVec3f n = normals[i];
+        ofVec3f t = tangents[i];
+
+        // Orthogonaliser la tangente par rapport à la normale (Gram-Schmidt)
+        t = (t - n * n.dot(t)).normalize();
+    }
+
+    p.vboMesh = p.primitive.getMesh();
+    p.vboMesh.getVbo().setAttributeData(10, &tangents[0].x, 3, tangents.size(), GL_STATIC_DRAW);
 }
