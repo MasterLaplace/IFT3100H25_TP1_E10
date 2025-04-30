@@ -44,8 +44,8 @@ void PBRScene::setupPointLightShader(int primitiveIndex, int lightIndex)
     pointLightShader.begin();
 
     pointLightShader.setUniform3f("material_color_ambient", p.ambiantColor.x / 255.0f, p.ambiantColor.y / 255.0f,
-                        p.ambiantColor.z / 255.0f);
-    pointLightShader.setUniform3f("material_color_diffuse", 1.0f, 1.0f, 1.0f); // diffuse tint
+                                  p.ambiantColor.z / 255.0f);
+    pointLightShader.setUniform3f("material_color_diffuse", 1.0f, 1.0f, 1.0f);  // diffuse tint
     pointLightShader.setUniform3f("material_color_specular", 1.0f, 1.0f, 1.0f); // specular tint
     pointLightShader.setUniform1f("material_brightness", p.brightness);
     pointLightShader.setUniform1f("material_metallic", p.metallic);
@@ -58,23 +58,19 @@ void PBRScene::setupPointLightShader(int primitiveIndex, int lightIndex)
 
     pointLightShader.setUniform3f("light_position", lights[0].position);
     pointLightShader.setUniform3f("light_color", lights[0].color.r / 255.0f, lights[0].color.g / 255.0f,
-                        lights[0].color.b / 255.0f);
+                                  lights[0].color.b / 255.0f);
     pointLightShader.setUniform1f("light_intensity", 1.0f);
 
     pointLightShader.setUniform3f("camera_position", cam.getGlobalPosition());
 
     pointLightShader.setUniformTexture(
-        "texture_diffuse",
-                             p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
+        "texture_diffuse", p.diffuseTexture.isAllocated() ? p.diffuseTexture.getTexture() : whiteTexture, 0);
     pointLightShader.setUniformTexture(
-        "texture_metallic",
-                             p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
+        "texture_metallic", p.metallicTexture.isAllocated() ? p.metallicTexture.getTexture() : whiteTexture, 1);
     pointLightShader.setUniformTexture(
-        "texture_roughness",
-                             p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
+        "texture_roughness", p.roughnessTexture.isAllocated() ? p.roughnessTexture.getTexture() : whiteTexture, 2);
     pointLightShader.setUniformTexture(
-        "texture_occlusion",
-                             p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
+        "texture_occlusion", p.occlusionTexture.isAllocated() ? p.occlusionTexture.getTexture() : whiteTexture, 3);
 
     ofMatrix4x4 modelViewMatrix = cam.getModelViewMatrix();
     ofMatrix4x4 projectionMatrix = cam.getProjectionMatrix();

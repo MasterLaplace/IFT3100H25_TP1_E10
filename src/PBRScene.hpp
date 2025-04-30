@@ -38,7 +38,6 @@ public:
     void setup();
     void draw();
 
-
 private:
     vector<PBRPrimitive> primitives;
     vector<PBRLight> lights;
