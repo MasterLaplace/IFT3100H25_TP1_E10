@@ -496,173 +496,26 @@ void AppGui::drawDynamicPanel3D()
         break;
 
     case AppGui::LIGHT:
-        ImGui::Text("Option de lumiere");
-
-        // Pour permettre de conserver les changements de selection du modele d'eclairage.
-        const char *lightningTypes[] = {"Aucun", "Ambient", "Point", "Directional", "Spotlight"};
-        static int currentLightningType = 0;
-        plugin::light::Light::lightType type = plugin::light::Light::lightType::NONE;
-
-        const char *lightningModels[] = {"Aucun", "Lambert", "Phong", "Blinn-Phong", "Toon"};
-        static int currentLightningModel = 0;
-        plugin::light::LightModel::Type model = plugin::light::LightModel::Type::None;
-
-        ImGui::Text("Type de lumiere :");
-        if (ImGui::BeginCombo("Type", lightningTypes[currentLightningType]))
-        {
-            for (int n = 0; n < IM_ARRAYSIZE(lightningTypes); n++)
-            {
-                bool isSelected = (currentLightningType == n);
-                if (ImGui::Selectable(lightningTypes[n], isSelected))
-                {
-                    currentLightningType = n;
-                }
-
-                if (isSelected)
-                    ImGui::SetItemDefaultFocus();
-            }
-            ImGui::EndCombo();
-        }
-
-        if (currentLightningType == 1)
-        {
-            ImGui::Text("Modele d'eclairage :");
-            if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
-            {
-                for (int n = 0; n < IM_ARRAYSIZE(lightningModels) - 2; n++)
-                {
-                    bool isSelected = (currentLightningModel == n);
-                    if (ImGui::Selectable(lightningModels[n], isSelected))
-                    {
-                        currentLightningModel = n;
-                    }
-                    if (isSelected)
-                        ImGui::SetItemDefaultFocus();
-                }
-                ImGui::EndCombo();
-            }
-        }
-
-        else if (currentLightningType != 0 && currentLightningType != 1)
-        {
-            ImGui::Text("Modele d'eclairage :");
-            if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
-            {
-                for (int n = 0; n < IM_ARRAYSIZE(lightningModels); n++)
-                {
-                    bool isSelected = (currentLightningModel == n);
-                    if (ImGui::Selectable(lightningModels[n], isSelected))
-                    {
-                        currentLightningModel = n;
-                    }
-                    if (isSelected)
-                        ImGui::SetItemDefaultFocus();
-                }
-                ImGui::EndCombo();
-            }
-        }
-
-        switch (currentLightningType)
-        {
-        case 0: type = plugin::light::Light::lightType::NONE; break;
-        case 1: type = plugin::light::Light::lightType::AMBIENT; break;
-        case 2: type = plugin::light::Light::lightType::POINT_LIGHT; break;
-        case 3: type = plugin::light::Light::lightType::DIRECTIONAL; break;
-        case 4: type = plugin::light::Light::lightType::SPOT; break;
-        }
-
-        switch (currentLightningModel)
-        {
-        case 0: model = plugin::light::LightModel::Type::None; break;
-        case 1: model = plugin::light::LightModel::Type::Lambert; break;
-        case 2: model = plugin::light::LightModel::Type::Phong; break;
-        case 3: model = plugin::light::LightModel::Type::BlinnPhong; break;
-        case 4: model = plugin::light::LightModel::Type::Toon; break;
-        }
-
-        if (currentLightningType != 0)
-        {
-            ImGui::SetNextItemWidth(180);
-            if (ImGui::Button("Creer", ImVec2(180, 40)))
-            {
-                controller->addLight(type, model);
-            }
-        }
-
-        // S'il n'y a aucun eclairage selectionne, on n'affiche pas les options.
-        if (currentLightningModel == 0)
-            break;
-
-        // Pour permettre de conserver les changements de position de la lumiere.
-        // float *lightPosition = controller->getLightPosition();
-
-        ImGui::Text("Position de la lumiere :");
-        // if (ImGui::SliderFloat3("Position", lightPosition, -100.0f, 100.0f))
-        {
-            // controller->setLightPosition(lightPosition);
-            // propertiesChanged = true;
-        }
-
-        // Pour permettre de conserver les changements de couleur de la lumiere ambiante.
-        // float *ambientColor = controller->getAmbientColor();
-
-        ImGui::Text("Couleur ambiante :");
-        // if (ImGui::ColorEdit3("Ambiante", ambientColor))
-        {
-            // controller->setAmbientColor(ambientColor);
-            // propertiesChanged = true;
-        }
-
-        // Pour permettre de conserver les changements de couleur de la lumiere diffuse.
-        // float *diffuseColor = controller->getDiffuseColor();
-        ImGui::Text("Couleur diffuse :");
-        // if (ImGui::ColorEdit3("Diffuse", diffuseColor))
-        {
-            // controller->setDiffuseColor(diffuseColor);
-            // propertiesChanged = true;
-        }
-
-        // On affiche uniquement si le modele d'eclairage est Phong ou Blinn-Phong.
-        if (currentLightningModel == 2 || currentLightningModel == 3)
-        {
-            // Pour permettre de conserver les changements de couleur de la lumiere speculaire.
-            // float *specularColor = controller->getSpecularColor();
-
-            ImGui::Text("Couleur speculaire :");
-            // if (ImGui::ColorEdit3("Speculaire", specularColor))
-            {
-                //   controller->setSpecularColor(specularColor);
-                // propertiesChanged = true;
-            }
-
-            // Pour permettre de conserver les changements de brillance.
-            // float shininess = controller->getShininess();
-
-            ImGui::Text("Brillance :");
-            // if (ImGui::SliderFloat("Brillance", &shininess, 0.0f, 128.0f))
-            {
-                //    controller->setShininess(shininess);
-                // propertiesChanged = true;
-            }
-        }
+        drawLightProperties();
         break;
+
+        if (propertiesChanged)
+        {
+            PrimitiveParams params;
+            params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+            params.ambientColor = ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
+            params.diffuseColor = ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+            params.specularColor = ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
+            params.shininess = shininess;
+            params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
+            params.outlineWidth = outlineWidth;
+            params.isFilled = isFilled;
+
+            controller->onPrimitivePropertiesChanged(params);
+        }
+
+        ImGui::End();
     }
-
-    if (propertiesChanged)
-    {
-        PrimitiveParams params;
-        params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
-        params.ambientColor = ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
-        params.diffuseColor = ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
-        params.specularColor = ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
-        params.shininess = shininess;
-        params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
-        params.outlineWidth = outlineWidth;
-        params.isFilled = isFilled;
-
-        controller->onPrimitivePropertiesChanged(params);
-    }
-
     ImGui::End();
 }
 
@@ -683,20 +536,6 @@ void AppGui::drawSceneGraph()
     {
         displayNode(node, 0);
     }
-
-    ImGui::Text("Lumieres :");
-    ImGui::Separator();
-    ImGui::Indent(10.0f);
-    for (int i = 0; i < controller->getLights().size(); i++)
-    {
-        std::string label = "Lumiere " + std::to_string(i) + "##L" + std::to_string(i);
-        bool selected = (i == controller->getSelectedLightId());
-        if (ImGui::Selectable(label.c_str(), selected))
-        {
-            controller->onLightSelected(i);
-        }
-    }
-    ImGui::Unindent();
 
     ImGui::Separator();
     ImGui::Text("Images Importe :");
@@ -789,7 +628,6 @@ void AppGui::drawProprietiesPanel()
     std::string &imageName = controller->getSelectedImageName();
     std::string &modelName = controller->getSelectedModelName();
     std::string &prefabName = controller->getSelectedPrefabName();
-    int selectedLight = controller->getSelectedLight();
 
     // On s'occupe des proprietes generiques en premier.
 
@@ -844,10 +682,6 @@ void AppGui::drawProprietiesPanel()
         {
             controller->deletePrimitiveButtonPressed(selectedNodeId);
         }
-    }
-    else if (selectedLight != -1)
-    {
-        drawLightProperties(selectedLight);
     }
 
     else if (!prefabName.empty())
@@ -1656,81 +1490,144 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
         ;
 }
 
-void AppGui::drawLightProperties(int i)
+void AppGui::drawLightProperties()
 {
-    glm::vec3 &position = controller->getLightPosition(i);
-    ImGui::Text("Position :");
-    if (ImGui::DragFloat3("Position", glm::value_ptr(position), 0.1f, 0.0f, 2000.0f))
+    ImGui::Text("Option de lumiere");
+
+    // Pour permettre de conserver les changements de selection du modele d'eclairage.
+    const char *lightningTypes[] = {"Ambient", "Directional", "Pointlight", "Spotlight"};
+    static int currentLightningType = 0;
+    plugin::light::Light::LightType type = plugin::light::Light::LightType::Ambient;
+
+    const char *lightningModels[] = {"Lambert", "Phong", "Blinn-Phong", "Toon"};
+    static int currentLightningModel = 0;
+    plugin::light::Light::ModelType model = plugin::light::Light::ModelType::Lambert;
+
+    // On selectionne le modele d'eclairage.
+    ImGui::Text("Modele d'eclairage :");
+    if (ImGui::BeginCombo("Modele", lightningModels[currentLightningModel]))
     {
-        controller->setLightPosition(position, i);
+        for (int n = 0; n < IM_ARRAYSIZE(lightningModels); n++)
+        {
+            bool isSelected = (currentLightningModel == n);
+            if (ImGui::Selectable(lightningModels[n], isSelected))
+            {
+                currentLightningModel = n;
+            }
+            if (isSelected)
+                ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
     }
 
-    glm::vec3 &ambientColor = controller->getAmbientColor(i);
+    // On selectionne le type de lumiere.
+    ImGui::Text("Type de lumiere :");
+    if (ImGui::BeginCombo("Type", lightningTypes[currentLightningType]))
+    {
+        for (int n = 0; n < IM_ARRAYSIZE(lightningTypes); n++)
+        {
+            bool isSelected = (currentLightningType == n);
+            if (ImGui::Selectable(lightningTypes[n], isSelected))
+            {
+                currentLightningType = n;
+            }
+
+            if (isSelected)
+                ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+
+    // On met a jour le type de lumiere.
+    switch (currentLightningType)
+    {
+    case 0: controller->setLightType(plugin::light::Light::LightType::Ambient); break;
+    case 1: controller->setLightType(plugin::light::Light::LightType::Directional); break;
+    case 2: controller->setLightType(plugin::light::Light::LightType::Pointlight); break;
+    case 3: controller->setLightType(plugin::light::Light::LightType::Spotlight); break;
+    }
+
+    // On met a jour le modele d'eclairage.
+    switch (currentLightningModel)
+    {
+    case 0: controller->setLightModel(plugin::light::Light::ModelType::Lambert); break;
+    case 1: controller->setLightModel(plugin::light::Light::ModelType::Phong); break;
+    case 2: controller->setLightModel(plugin::light::Light::ModelType::BlinnPhong); break;
+    case 3: controller->setLightModel(plugin::light::Light::ModelType::Toon); break;
+    }
+
+    // La position de la lumiere uniquement si c'est une lumiere ponctuelle ou un projecteur.
+    if (currentLightningType == 2 || currentLightningType == 3)
+    {
+        glm::vec3 &position = controller->getLightPosition();
+        ImGui::Text("Position :");
+        if (ImGui::DragFloat3("Position lumiere", glm::value_ptr(position), 1.0f, -1000.0f, 2000.0f))
+        {
+            controller->setLightPosition(position);
+        }
+    }
+
+    // La direction de la lumiere uniquement si c'est une lumiere directionnelle ou un projecteur.
+    if (currentLightningType == 1 || currentLightningType == 3)
+    {
+        glm::vec3 &direction = controller->getLightDirection();
+        ImGui::Text("Direction :");
+        if (ImGui::DragFloat3("Direction lumiere", glm::value_ptr(direction), 0.1f, -1000.0f, 1000.0f))
+        {
+            controller->setLightDirection(direction);
+        }
+    }
+
+    // La couleur ambiante de la lumiere est toujours pertinante.
+    glm::vec3 &ambientColor = controller->getAmbientColor();
     ImGui::Text("Couleur ambiante :");
-    if (ImGui::ColorEdit3("Ambiante", glm::value_ptr(ambientColor)))
+    if (ImGui::ColorEdit3("couleur ambiante", glm::value_ptr(ambientColor)))
     {
-        controller->setAmbientColor(ambientColor, i);
+        controller->setAmbientColor(ambientColor);
     }
 
-    glm::vec3 &diffuseColor = controller->getDiffuseColor(i);
-    ImGui::Text("Couleur diffuse :");
-    if (ImGui::ColorEdit3("Diffuse", glm::value_ptr(diffuseColor)))
+    // La couleur diffuse est pertinante uniquement si ce n'est pas une lumiere ambiante.
+    if (currentLightningType != 0)
     {
-        controller->setDiffuseColor(diffuseColor, i);
-    }
-
-    plugin::light::Light::lightType type = controller->getLightType(i);
-    if (type == plugin::light::Light::lightType::DIRECTIONAL || type == plugin::light::Light::lightType::SPOT)
-    {
-        glm::vec3 &direction = controller->getLightDirection(i);
-        ImGui::Text("Direction de la lumiere :");
-        if (ImGui::DragFloat3("Direction", glm::value_ptr(direction), 0.1f, 0.0f, 2000.0f))
+        glm::vec3 &diffuseColor = controller->getDiffuseColor();
+        ImGui::Text("Couleur diffuse :");
+        if (ImGui::ColorEdit3("couleur diffuse", glm::value_ptr(diffuseColor)))
         {
-            controller->setLightDirection(direction, i);
+            controller->setDiffuseColor(diffuseColor);
         }
     }
 
-    if (type == plugin::light::Light::lightType::SPOT)
+    // La couleur speculaire est pertinante uniquement pour le modele de Phong et Blinn-Phong.
+    if (currentLightningModel == 1 || currentLightningModel == 2)
     {
-        float angle = controller->getLightAngle(i);
-        ImGui::Text("Angle du projecteur :");
-        if (ImGui::DragFloat("Angle", &angle, 0.1f, 0.0f, 180.0f))
-        {
-            controller->setLightAngle(angle, i);
-        }
-    }
-
-    if (type == plugin::light::Light::lightType::SPOT || type == plugin::light::Light::lightType::POINT_LIGHT)
-    {
-        float intensity = controller->getLightIntensity(i);
-        ImGui::Text("Intensite lumineuse :");
-        if (ImGui::DragFloat("Intensite", &intensity, 0.1f, 0.0f, 100.0f))
-        {
-            controller->setLightIntensity(intensity, i);
-        }
-    }
-
-    plugin::light::LightModel::Type model = controller->getLightModel(i);
-    if (model == plugin::light::LightModel::Type::Phong || model == plugin::light::LightModel::Type::BlinnPhong)
-    {
-        glm::vec3 &specularColor = controller->getSpecularColor(i);
+        glm::vec3 &specularColor = controller->getSpecularColor();
         ImGui::Text("Couleur speculaire :");
-        if (ImGui::ColorEdit3("Speculaire", glm::value_ptr(specularColor)))
+        if (ImGui::ColorEdit3("couleur speculaire", glm::value_ptr(specularColor)))
         {
-            controller->setSpecularColor(specularColor, i);
-        }
-
-        float shininess = controller->getShininess(i);
-        ImGui::Text("Brillance :");
-        if (ImGui::DragFloat("Brillance", &shininess, 0.1f, 0.0f, 100.0f))
-        {
-            controller->setShininess(shininess, i);
+            controller->setSpecularColor(specularColor);
         }
     }
 
-    if (ImGui::Button("Supprimer"))
+    // L'intensite lumineuse est pertinante uniquement pour le pointlight et le projecteur.
+    if (currentLightningType == 2 || currentLightningType == 3)
     {
-        controller->deleteLight(i);
+        float intensity = controller->getLightIntensity();
+        ImGui::Text("Intensite lumineuse :");
+        if (ImGui::DragFloat("Intensite lumiere", &intensity, 1.0f, 1.0f, 100.0f))
+        {
+            controller->setLightIntensity(intensity);
+        }
+    }
+
+    // L'angle d'ouverture est pertinant uniquement pour le projecteur.
+    if (currentLightningType == 3)
+    {
+        float angle = controller->getLightAngle();
+        ImGui::Text("Angle du projecteur :");
+        if (ImGui::DragFloat("Angle lumiere", &angle, 0.01f, -10.0f, 10.0f))
+        {
+            controller->setLightAngle(angle);
+        }
     }
 }
 

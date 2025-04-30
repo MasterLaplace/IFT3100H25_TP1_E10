@@ -124,8 +124,6 @@
     <ClCompile Include="src\plugin\image\ResourceManager.cpp" />
     <ClCompile Include="src\plugin\image\ToneMapping.cpp" />
     <ClCompile Include="src\plugin\light\Light.cpp" />
-    <ClCompile Include="src\plugin\light\LightModel.cpp" />
-    <ClCompile Include="src\plugin\light\LightTypes.cpp" />
     <ClCompile Include="src\plugin\primitive\Box.cpp" />
     <ClCompile Include="src\plugin\primitive\Ellipse.cpp" />
     <ClCompile Include="src\plugin\primitive\Ellipsoid.cpp" />
@@ -201,9 +199,7 @@
     <ClInclude Include="src\plugin\image\Sampling.hpp" />
     <ClInclude Include="src\plugin\image\ToneMapping.hpp" />
     <ClInclude Include="src\plugin\image\images.hpp" />
-    <ClInclude Include="src\plugin\light\LightModel.hpp" />
-    <ClInclude Include="src\plugin\light\LightTypes.hpp" />
-    <ClInclude Include="src\plugin\light\light.hpp" />
+    <ClInclude Include="src\plugin\light\Light.hpp" />
     <ClInclude Include="src\plugin\light\light_header.hpp" />
     <ClInclude Include="src\plugin\primitive\Box.hpp" />
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Canvas.hpp"
-#include "plugin/light/light_header.hpp"
+#include "plugin/light/Light.hpp"
 #include "plugin/topology/TessellationShader.hpp"
 
 class Canvas3D : public Canvas {
@@ -9,49 +9,38 @@ public:
     Canvas3D();
 
     // Getter pour la lumiere.
-    std::vector<plugin::light::Light *> getLights() { return lights; }
-    plugin::light::LightModel::Type getLightModel(int i);
-    plugin::light::Light::lightType getLightType(int i);
-    int getLightId(int i);
-    glm::vec3 getLightDirection(int i);
-    glm::vec3 getLightPosition(int i);
-    glm::vec3 getLightColor(int i);
-    glm::vec3 getAmbientColor(int i);
-    glm::vec3 getDiffuseColor(int i);
-    glm::vec3 getSpecularColor(int i);
-    float getShininess(int i) { return 32.0f; }
-    float getLightAngle(int i);
-    float getLightIntensity(int i);
+    plugin::light::Light::ModelType getLightModel() { return light.getLightModel(); }
+    plugin::light::Light::LightType getLightType() { return light.getLightType(); }
+    glm::vec3 getLightDirection() { return light.getLightDirection(); }
+    glm::vec3 getLightPosition() { return light.getLightPosition(); }
+    glm::vec3 getAmbientColor() { return light.getAmbientColor(); }
+    glm::vec3 getDiffuseColor() { return light.getDiffuseColor(); }
+    glm::vec3 getSpecularColor() { return light.getSpecularColor(); }
+    float getLightAngle() { return light.getLightAngle(); }
+    float getLightRange() { return light.getLightRange(); }
 
     // Setter pour la lumiere.
-    void setLightModel(plugin::light::LightModel::Type model, int i);
-    void setLightType(plugin::light::Light::lightType lightType, int i);
-    void setLightPosition(const glm::vec3 &position, int i);
-    void setLightDirection(const glm::vec3 &lightDirection, int i);
-    void setLightColor(const glm::vec3 &lightColor, int i);
-    void setAmbientColor(const glm::vec3 &color, int i);
-    void setDiffuseColor(const glm::vec3 &color, int i);
-    void setSpecularColor(const glm::vec3 &color, int i);
-    void setShininess(float shininess, int i);
-    void setLightAngle(float angle, int i);
-    void setLightIntensity(float intensity, int i);
+    void setLightModel(plugin::light::Light::ModelType model) { light.setLightModel(model); }
+    void setLightType(plugin::light::Light::LightType lightType) { light.setLightType(lightType); }
+    void setLightPosition(const glm::vec3 &position) { light.setLightPosition(position); }
+    void setLightDirection(const glm::vec3 &lightDirection) { light.setLightDirection(lightDirection); }
+    void setAmbientColor(const glm::vec3 &color) { light.setAmbientColor(color); }
+    void setDiffuseColor(const glm::vec3 &color) { light.setDiffuseColor(color); }
+    void setSpecularColor(const glm::vec3 &color) { light.setSpecularColor(color); }
+    void setLightAngle(float angle) { light.setLightAngle(angle); }
+    void setLightRange(float range) { light.setLightRange(range); }
 
-    // Pour ajouter et supprimer des lumieres.
-    void addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model);
-    void deleteLight(int i);
+    // Setter pour la matrice de vue.
+    void setViewMatrix(const glm::mat4 &viewMatrix) { light.setViewMatrix(viewMatrix); }
 
     // Fonction de dessin.
     void draw();
 
 private:
-    // liste de lumiere.
-    std::vector<plugin::light::Light *> lights;
+    plugin::light::Light light;
 
     // Shader de tessellation.
     TessellationShader tesShader;
-
-    // Pour trouver une lumiere dans la liste.
-    plugin::light::Light *getLight(int id);
 
     glm::vec3 getMaterialAmbientColor(int i);
     glm::vec3 getMaterialDiffuseColor(int i);

@@ -59,7 +59,7 @@ private:
     void drawTransformProperties3D(const std::shared_ptr<Primitive> &primitive);
     void drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::Ellipsoid> &ellipsoid);
     void drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box);
-    void drawLightProperties(int i);
+    void drawLightProperties();
     void drawObjModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model);
     void drawImageProperties(const std::shared_ptr<plugin::image::Image> &image, const std::string &imageName);
     void drawModelProperties(const std::shared_ptr<plugin::primitive::ObjModel> &model, const std::string &modelName);

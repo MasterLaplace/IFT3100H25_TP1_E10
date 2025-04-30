@@ -10,7 +10,7 @@
 #include "MappingScene.hpp"
 #include "Node.hpp"
 #include "plugin/image/images.hpp"
-#include "plugin/light/light_header.hpp"
+#include "plugin/light/Light.hpp"
 #include "plugin/states/states.hpp"
 #include "plugin/texture/texture.hpp"
 #include <string>
@@ -91,37 +91,26 @@ public:
     void setImageToneMapping(const std::string &name, plugin::image::ToneMapping::Type toneMapping);
 
     // Getter pour la lumiere.
-    plugin::light::LightModel::Type getLightModel(int i);
-    plugin::light::Light::lightType getLightType(int i);
-    int getLightId(int i);
-    int getSelectedLightId();
-    glm::vec3 getLightPosition(int i);
-    glm::vec3 getLightDirection(int i);
-    glm::vec3 getLightColor(int i);
-    glm::vec3 getAmbientColor(int i);
-    glm::vec3 getDiffuseColor(int i);
-    glm::vec3 getSpecularColor(int i);
-    float getShininess(int i);
-    float getLightAngle(int i);
-    float getLightIntensity(int i);
+    plugin::light::Light::ModelType getLightModel() { return canvas3d->getLightModel(); }
+    plugin::light::Light::LightType getLightType() { return canvas3d->getLightType(); }
+    glm::vec3 getLightPosition() { return canvas3d->getLightPosition(); }
+    glm::vec3 getLightDirection() { return canvas3d->getLightDirection(); }
+    glm::vec3 getAmbientColor() { return canvas3d->getAmbientColor(); }
+    glm::vec3 getDiffuseColor() { return canvas3d->getDiffuseColor(); }
+    glm::vec3 getSpecularColor() { return canvas3d->getSpecularColor(); }
+    float getLightAngle() { return canvas3d->getLightAngle(); }
+    float getLightIntensity() { return canvas3d->getLightRange(); }
 
     // Setter pour la lumiere.
-    void setLightModel(plugin::light::LightModel::Type lightModel, int i);
-    void setLightType(plugin::light::Light::lightType lightType, int i);
-    void setLightPosition(const glm::vec3 lightPosition, int i);
-    void setLightDirection(const glm::vec3 lightDirection, int i);
-    void setLightColor(const glm::vec3 lightColor, int i);
-    void setAmbientColor(const glm::vec3 ambientColor, int i);
-    void setDiffuseColor(const glm::vec3 diffuseColor, int i);
-    void setSpecularColor(const glm::vec3 specularColor, int i);
-    void setShininess(float shininess, int i);
-    void setLightAngle(float angle, int i);
-    void setLightIntensity(float intensity, int i);
-
-    // Ajouter et supprimer des lumieres
-    std::vector<plugin::light::Light *> getLights() { return canvas3d->getLights(); }
-    void addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model);
-    void deleteLight(int i);
+    void setLightModel(plugin::light::Light::ModelType lightModel) { canvas3d->setLightModel(lightModel); }
+    void setLightType(plugin::light::Light::LightType lightType) { canvas3d->setLightType(lightType); }
+    void setLightPosition(const glm::vec3 lightPosition) { canvas3d->setLightPosition(lightPosition); }
+    void setLightDirection(const glm::vec3 lightDirection) { canvas3d->setLightDirection(lightDirection); }
+    void setAmbientColor(const glm::vec3 ambientColor) { canvas3d->setAmbientColor(ambientColor); }
+    void setDiffuseColor(const glm::vec3 diffuseColor) { canvas3d->setDiffuseColor(diffuseColor); }
+    void setSpecularColor(const glm::vec3 specularColor) { canvas3d->setSpecularColor(specularColor); }
+    void setLightAngle(float angle) { canvas3d->setLightAngle(angle); }
+    void setLightIntensity(float intensity) { canvas3d->setLightRange(intensity); }
 
     // Getter pour les courbes.
     curveType getCurveType();

@@ -1,91 +1,104 @@
 #pragma once
 
-#include "LightModel.hpp"
-#include "LightTypes.hpp"
-#include "ofMain.h"
+#include <glm/vec3.hpp>
+#include <ofShader.h>
+#include <ofLight.h>
 
 namespace plugin::light {
 
 class Light {
 public:
-    enum class lightType {
-        NONE,
-        AMBIENT,
-        POINT_LIGHT,
-        DIRECTIONAL,
-        SPOT
+    enum class ModelType {
+        Lambert,
+        Phong,
+        BlinnPhong,
+        Toon
     };
 
-    Light(lightType type, plugin::light::LightModel::Type model);
+    enum class LightType {
+        Ambient,
+        Directional,
+        Pointlight,
+        Spotlight
+    };
 
-    // Getter commun.
-    glm::vec3 getLightPosition() { return _model.getLightPosition(); };
+    Light();
 
-    // Getter pour le type.
-    lightType getLightType() { return _type; };
-    glm::vec3 getLightDirection();
-    glm::vec3 getLightColor();
-    float getCutOffAngle();
-    float getIntensity();
+    // Getter pour les proprietes de la lumiere.
+    ModelType getLightModel() const { return _model; }
+    LightType getLightType() const { return _type; }
+    glm::vec3 getLightPosition() const { return _lightPosition; }
+    glm::vec3 getLightDirection() const { return _lightDirection; }
+    float getLightAngle() const { return _lightAngle; }
+    float getLightRange() const { return _lightRange; }
+    glm::vec3 getAmbientColor() { return _ambientColor; }
+    glm::vec3 getDiffuseColor() const { return _diffuseColor; }
+    glm::vec3 getSpecularColor() const { return _specularColor; }
 
-    // Getter pour le modele.
-    plugin::light::LightModel::Type getLightModel();
-    glm::vec3 getAmbientColor() { return _model.getAmbientColor(); }
-    glm::vec3 getDiffuseColor() { return _model.getDiffuseColor(); }
-    glm::vec3 getSpecularColor() { return _model.getSpecularColor(); }
-
-    // Setter commun.
-    void setLightPosition(glm::vec3 lightPosition);
-
-    // Setter pour le type.
-    void setLightType(lightType type);
-    void setLightDirection(glm::vec3 lightDirection);
-    void setLightColor(glm::vec3 lightColor);
-    void setLightAngle(float angle);
-    void setLightIntensity(float intensity);
-
-    // Setter pour le modele.
-    void setLightModel(plugin::light::LightModel::Type model);
-    void setAmbientColor(glm::vec3 ambientColor) { _model.setAmbientColor(ambientColor); }
-    void setDiffuseColor(glm::vec3 diffuseColor) { _model.setDiffuseColor(diffuseColor); }
-    void setSpecularColor(glm::vec3 specularColor) { _model.setSpecularColor(specularColor); }
+    // Setter pour les proprietes de la lumiere.
+    void setLightModel(ModelType model) { _model = model; }
+    void setLightType(LightType type) { _type = type; }
+    void setLightPosition(const glm::vec3 &position) { _lightPosition = position; }
+    void setLightDirection(const glm::vec3 &direction) { _lightDirection = direction; }
+    void setLightAngle(float angle) { _lightAngle = angle; }
+    void setLightRange(float range) { _lightRange = range; }
+    void setAmbientColor(const glm::vec3 &color) { _ambientColor = color; }
+    void setDiffuseColor(const glm::vec3 &color) { _diffuseColor = color; }
+    void setSpecularColor(const glm::vec3 &color) { _specularColor = color; }
 
     // Setter pour les proprietes du materiau.
-    void setMaterialAmbientColor(glm::vec3 color) { _model.setMaterialAmbientColor(color); }
-    void setMaterialDiffuseColor(glm::vec3 color) { _model.setMaterialDiffuseColor(color); }
-    void setMaterialSpecularColor(glm::vec3 color) { _model.setMaterialSpecularColor(color); }
-    void setShininess(float shininess) { _model.setShininess(shininess); }
+    void setMaterialAmbientColor(glm::vec3 color) { _materialAmbientColor = color; }
+    void setMaterialDiffuseColor(glm::vec3 color) { _materialDiffuseColor = color; }
+    void setMaterialSpecularColor(glm::vec3 color) { _materialSpecularColor = color; }
+    void setShininess(float shininess) { _materialShininess = shininess; }
 
-    // Pour appliquer la lumiere.
-    void apply();
-    void close();
+    // Setter pour la matrice de vue.
+    void setViewMatrix(const glm::mat4 &viewMatrix) { _viewMatrix = viewMatrix; }
 
-    int id;
+    void begin();
+    void end();
 
 private:
-    // Le modele de lumiere. Celui-ci supporte son propre changement de type.
-    plugin::light::LightModel _model;
+    // Les proprietes de l'eclairage.
+    ModelType _model = ModelType::Lambert;
+    LightType _type = LightType::Ambient;
+    
+    glm::vec3 _lightPosition{0.0, 0.0, 0.0};
+    glm::vec3 _ambientColor{0.2, 0.2, 0.2};
+    glm::vec3 _diffuseColor{0.8, 0.8, 0.8};
+    glm::vec3 _specularColor{1.0, 1.0, 1.0};
+    glm::vec3 _lightDirection{0.0, 0.0, 1.0};
+    float _lightAngle = 0.0f;
+    float _lightRange = 50.0f;
 
-    // Une variable pour pouvoir changer le type de lumiere.
-    lightType _type;
+    // Les proprietes du materiau.
+    glm::vec3 _materialAmbientColor{0.0, 0.0, 0.0};
+    glm::vec3 _materialDiffuseColor{0.2, 0.2, 0.2};
+    glm::vec3 _materialSpecularColor{1.0, 1.0, 1.0};
+    float _materialShininess = 32.0f;
 
-    // On doit avoir une lumiere de chaque type parce que LightTypes est en fait plusieurs classes au lieu
-    // d'etre une seule classe qui supporte un changement de type.
-    glm::vec3 white{0, 0, 0};
+    glm::mat4 _viewMatrix{1.0f};
 
-    plugin::light::AmbientLight ambient = plugin::light::AmbientLight(white);
-    plugin::light::DirectionalLight directional = plugin::light::DirectionalLight(glm::vec3(0, 0, 0), white);
-    plugin::light::PointLight point = plugin::light::PointLight(glm::vec3(0, 0, 0), white, 1.0f);
-    plugin::light::SpotLight spot = plugin::light::SpotLight(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), white, 1.0f, 1.0f);
+    // Shader pour l'eclairage.
+    ofShader lambertAmbient;
+    ofShader lambertDirectionnal;
+    ofShader lambertPointlight;
+    ofShader lambertSpotlight;
 
-    // Un pointeur sur le type de lumiere active.
-    plugin::light::BaseLight *ptrType = nullptr;
+    ofShader phongAmbient;
+    ofShader phongDirectionnal;
+    ofShader phongPointlight;
+    ofShader phongSpotlight;
 
-    inline static uint32_t _nextId = 0;
+    ofShader blinnPhongAmbient;
+    ofShader blinnPhongDirectionnal;
+    ofShader blinnPhongPointlight;
+    ofShader blinnPhongSpotlight;
 
-    void updateLightType();
+    ofShader toon;
 
-    // Fonction utilitaire pour convertir glm::vec3 en ofFloatColor
-    ofFloatColor glmToOfColor(const glm::vec3 &color) { return ofFloatColor(color.r, color.g, color.b); }
+    // Pointeur vers le shader d'eclairage actif.
+    ofShader *lightShader = nullptr;
 };
+
 } // namespace plugin::light

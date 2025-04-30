@@ -39,6 +39,7 @@ void Controller::draw()
     {
         camera.begin();
         skybox.draw(camera.getPosition());
+        canvas3d->setViewMatrix(camera.getModelViewMatrix());
         canvas3d->draw();
         camera.end();
         exporter.setPixels();
@@ -317,81 +318,6 @@ void Controller::setImageToneMapping(const std::string &name, plugin::image::Ton
     {
         image->get()->setToneMapping(toneMapping);
     }
-}
-
-plugin::light::LightModel::Type Controller::getLightModel(int i) { return canvas3d->getLightModel(i); }
-
-plugin::light::Light::lightType Controller::getLightType(int i) { return canvas3d->getLightType(i); }
-
-int Controller::getLightId(int i) { return canvas3d->getLightId(i); }
-
-int Controller::getSelectedLightId() { return stateMachine.getSelectedLight(); }
-
-glm::vec3 Controller::getLightPosition(int i) { return canvas3d->getLightPosition(i); }
-
-glm::vec3 Controller::getLightDirection(int i) { return canvas3d->getLightDirection(i); }
-
-glm::vec3 Controller::getLightColor(int i) { return canvas3d->getLightColor(i); }
-
-glm::vec3 Controller::getAmbientColor(int i) { return canvas3d->getAmbientColor(i); }
-
-glm::vec3 Controller::getDiffuseColor(int i) { return canvas3d->getDiffuseColor(i); }
-
-glm::vec3 Controller::getSpecularColor(int i) { return canvas3d->getSpecularColor(i); }
-
-float Controller::getShininess(int i) { return canvas3d->getShininess(i); }
-
-float Controller::getLightAngle(int i) { return canvas3d->getLightAngle(i); }
-
-float Controller::getLightIntensity(int i) { return canvas3d->getLightIntensity(i); }
-
-void Controller::setLightModel(plugin::light::LightModel::Type lightModel, int i)
-{
-    canvas3d->setLightModel(lightModel, i);
-}
-
-void Controller::setLightType(plugin::light::Light::lightType lightType, int i)
-{
-    canvas3d->setLightType(lightType, i);
-}
-
-void Controller::setLightPosition(const glm::vec3 lightPosition, int i)
-{
-    canvas3d->setLightPosition(lightPosition, i);
-}
-
-void Controller::setLightDirection(const glm::vec3 lightDirection, int i)
-{
-    canvas3d->setLightDirection(lightDirection, i);
-}
-
-void Controller::setLightColor(const glm::vec3 lightColor, int i) { canvas3d->setLightColor(lightColor, i); }
-
-void Controller::setAmbientColor(const glm::vec3 ambientColor, int i) { canvas3d->setAmbientColor(ambientColor, i); }
-
-void Controller::setDiffuseColor(const glm::vec3 diffuseColor, int i) { canvas3d->setDiffuseColor(diffuseColor, i); }
-
-void Controller::setSpecularColor(const glm::vec3 specularColor, int i)
-{
-    canvas3d->setSpecularColor(specularColor, i);
-}
-
-void Controller::setShininess(float shininess, int i) { canvas3d->setShininess(shininess, i); }
-
-void Controller::setLightAngle(float angle, int i) { canvas3d->setLightAngle(angle, i); }
-
-void Controller::setLightIntensity(float intensity, int i) { canvas3d->setLightIntensity(intensity, i); }
-
-void Controller::addLight(plugin::light::Light::lightType type, plugin::light::LightModel::Type model)
-{
-    canvas3d->addLight(type, model);
-}
-
-void Controller::deleteLight(int i)
-{
-    // Commentaire inutile
-    canvas3d->deleteLight(i);
-    stateMachine.getCurrentState()->selectedLight = -1;
 }
 
 curveType Controller::getCurveType()

@@ -64,12 +64,6 @@
     <ClCompile Include="src\plugin\light\Light.cpp">
       <Filter>src\plugin\light</Filter>
     </ClCompile>
-    <ClCompile Include="src\plugin\light\LightModel.cpp">
-      <Filter>src\plugin\light</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plugin\light\LightTypes.cpp">
-      <Filter>src\plugin\light</Filter>
-    </ClCompile>
     <ClCompile Include="src\plugin\primitive\Box.cpp">
       <Filter>src\plugin\primitive</Filter>
     </ClCompile>
@@ -110,9 +104,6 @@
       <Filter>src\plugin\states</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\states\DrawLineState.cpp">
-      <Filter>src\plugin\states</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plugin\states\DrawMappingState.cpp">
       <Filter>src\plugin\states</Filter>
     </ClCompile>
     <ClCompile Include="src\plugin\states\DrawPointState.cpp">
@@ -386,13 +377,7 @@
     <ClInclude Include="src\plugin\image\images.hpp">
       <Filter>src\plugin\image</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\light\LightModel.hpp">
-      <Filter>src\plugin\light</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plugin\light\LightTypes.hpp">
-      <Filter>src\plugin\light</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plugin\light\light.hpp">
+    <ClInclude Include="src\plugin\light\Light.hpp">
       <Filter>src\plugin\light</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\light\light_header.hpp">
@@ -450,9 +435,6 @@
       <Filter>src\plugin\states</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\states\DrawLineState.hpp">
-      <Filter>src\plugin\states</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plugin\states\DrawMappingState.hpp">
       <Filter>src\plugin\states</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\states\DrawPointState.hpp">
