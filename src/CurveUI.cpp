@@ -71,14 +71,14 @@ void CurveUI::drawOptionPanel()
         }
     }
 
-    if (controller->getCurveType() == plugin::states::BEZIER)
+    /*if (controller->getCurveType() == plugin::states::BEZIER)
     {
         ImGui::SetNextItemWidth(180);
         if (ImGui::Button("Convertir", ImVec2(180, 40)))
         {
             controller->convertCurve();
         }
-    }
+    }*/
 
     if (controller->getCurveType() == plugin::states::CATMULL_ROM)
     {

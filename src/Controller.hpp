@@ -6,6 +6,7 @@
 #include "Canvas3D.hpp"
 #include "Controller.hpp"
 #include "CurveUI.hpp"
+#include "TriangulationUI.hpp"
 #include "HistogramUI.hpp"
 #include "MappingScene.hpp"
 #include "Node.hpp"
@@ -24,6 +25,7 @@ using namespace plugin::texture;
 enum View {
     VIEW_2D,
     VIEW_3D,
+    VIEW_TRIANGULATION,
     VIEW_MAPPING,
     VIEW_PBR,
 };
@@ -59,6 +61,7 @@ public:
     void deletePrimitiveButtonPressed(uint32_t id);
     void drawHistogram(int color);
     void drawCurve(curveType type);
+    void drawTriangulation();
     void drawMapping();
     void drawPBR();
 
@@ -138,6 +141,7 @@ private:
     AppGui gui;
     HistogramUI histogramUI;
     CurveUI curveUI;
+    TriangulationUI triangulationUI;
     MappingScene mappingScene;
     PBRScene pbrScene;
     Exporting exporter;

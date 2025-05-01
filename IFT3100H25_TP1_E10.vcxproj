@@ -148,6 +148,7 @@
     <ClCompile Include="src\plugin\topology\BezierQuadratique.cpp" />
     <ClCompile Include="src\plugin\topology\CatmullRom.cpp" />
     <ClCompile Include="src\plugin\topology\Coons.cpp" />
+    <ClCompile Include="src\plugin\topology\Delauney.cpp" />
     <ClCompile Include="src\plugin\transformation\history\Invoker.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_demo.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_draw.cpp" />
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp" />
+    <ClCompile Include="src\TriangulationUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AppGui.hpp" />
@@ -234,6 +236,7 @@
     <ClInclude Include="src\plugin\topology\Coons.hpp" />
     <ClInclude Include="src\plugin\topology\TessellationShader.hpp" />
     <ClInclude Include="src\plugin\topology\topology.hpp" />
+    <ClInclude Include="src\plugin\topology\Delauney.hpp" />
     <ClInclude Include="src\plugin\transformation\history\Command.hpp" />
     <ClInclude Include="src\plugin\transformation\history\Invoker.hpp" />
     <ClInclude Include="src\plugin\transformation\history\Invoker.inl" />
@@ -352,6 +355,7 @@
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_rectpack.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_textedit.h" />
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h" />
+    <ClInclude Include="src\TriangulationUI.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

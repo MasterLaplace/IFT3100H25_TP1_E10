@@ -101,7 +101,7 @@ void AppGui::drawMenuBar()
             ImGui::EndMenu();
         }
 
-        if (ImGui::BeginMenu("Courbe / Surface"))
+        if (ImGui::BeginMenu("Topologie"))
         {
             if (ImGui::MenuItem("Bezier"))
             {
@@ -117,14 +117,15 @@ void AppGui::drawMenuBar()
             {
                 controller->drawCurve(plugin::states::COONS);
             }
-            ImGui::EndMenu();
-        }
 
-        if (ImGui::BeginMenu("Effet de relief"))
-        {
-            if (ImGui::MenuItem("Vers le mapping"))
+            if (ImGui::MenuItem("Relief"))
             {
                 controller->drawMapping();
+            }
+
+            if (ImGui::MenuItem("Triangulation"))
+            {
+                controller->drawTriangulation();
             }
             ImGui::EndMenu();
         }

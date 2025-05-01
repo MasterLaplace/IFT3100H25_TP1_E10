@@ -217,6 +217,12 @@
     <ClCompile Include="..\..\..\addons\ofxImGui\libs\imgui\src\imgui_widgets.cpp">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\plugin\topology\Delauney.cpp">
+      <Filter>src\plugin\topology</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TriangulationUI.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -835,6 +841,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxImGui\libs\imgui\src\imstb_truetype.h">
       <Filter>addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plugin\topology\Delauney.hpp">
+      <Filter>src\plugin\topology</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TriangulationUI.hpp">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

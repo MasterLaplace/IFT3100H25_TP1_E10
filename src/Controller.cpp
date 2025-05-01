@@ -13,6 +13,7 @@ void Controller::setup()
     gui.setup(this);
     histogramUI.setup(this);
     curveUI.setup(this);
+    triangulationUI.setup(this);
     mappingScene.setup();
     pbrScene.setup();
 }
@@ -46,6 +47,13 @@ void Controller::draw()
         exporter.setPixels();
         stateMachine.draw();
         gui.draw();
+    }
+    else if (currentView == VIEW_TRIANGULATION)
+    {
+        gui.getGui()->begin();
+        triangulationUI.draw();
+        gui.drawMenu();
+        gui.getGui()->end();
     }
     else if (currentView == VIEW_MAPPING)
     {
@@ -110,16 +118,30 @@ void Controller::keyReleased(int key)
 
 void Controller::mouseMoved(glm::vec2 pos)
 {
-
+    if (currentView == VIEW_TRIANGULATION)
+    {
+        triangulationUI.onMouseDragged(pos.x, pos.y);
+    }
     // On transmet la position de la sourie � l'�tat.
     // L'input provient de Application.
     stateMachine.mousePosition = pos;
 }
 
-void Controller::mousePressed(int x, int y, int button) { stateMachine.mousePressed(x, y, button); }
+void Controller::mousePressed(int x, int y, int button) 
+{ 
+    if (currentView == VIEW_TRIANGULATION)
+    {
+        triangulationUI.onMousePressed(x, y);
+    }
+    stateMachine.mousePressed(x, y, button); 
+}
 
 void Controller::mouseReleased(int x, int y, int button)
 {
+    if (currentView == VIEW_TRIANGULATION)
+    {
+        triangulationUI.onMouseReleased();
+    }
     stateMachine.mouseReleased((currentView == VIEW_3D) ? canvas3d : canvas2d);
 }
 
@@ -285,6 +307,8 @@ void Controller::drawHistogram(int color)
 }
 
 void Controller::drawCurve(curveType type) { stateMachine.changeState(new DrawCoonsState(type)); }
+
+void Controller::drawTriangulation() { currentView = VIEW_TRIANGULATION; }
 
 void Controller::drawMapping() { currentView = VIEW_MAPPING; }
 
