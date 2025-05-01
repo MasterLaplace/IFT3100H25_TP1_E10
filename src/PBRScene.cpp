@@ -121,6 +121,12 @@ void PBRScene::draw()
     ofBackground(40);
     ofEnableDepthTest();
     cam.begin();
+    
+    // on dessine le skybox
+    if (selectedSkyboxName != "")
+    {
+        skybox.draw(cam.getGlobalPosition());
+    }
 
     ofDrawAxis(100);
 
@@ -130,6 +136,7 @@ void PBRScene::draw()
     ofTranslate(centerPosition);
     centerSphere.draw();
     ofPopMatrix();
+
 
     for (size_t i = 0; i < primitives.size(); ++i)
     {
@@ -203,7 +210,7 @@ void PBRScene::drawGui()
     ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_Once);
     ImGui::Begin("Primitives");
-    if (ImGui::Button("Add Sphere"))
+    if (ImGui::Button("Ajouter Sphere"))
     {
         PBRPrimitive sphere;
         sphere.name = "Sphere " + ofToString(nextPrimitiveId++);
@@ -215,15 +222,27 @@ void PBRScene::drawGui()
         setupBaseMat(nextPrimitiveId - 1);
     }
 
-    if (ImGui::Button("Add Box"))
+    if (ImGui::Button("Ajouter Boite"))
     {
         PBRPrimitive box;
-        box.name = "Box " + ofToString(nextPrimitiveId++);
+        box.name = "Boite " + ofToString(nextPrimitiveId++);
         box.primitive = ofBoxPrimitive(100, 100, 100);
         box.position = centerPosition;
         box.rotation = {0, 0, 0};
         box.scale = {1, 1, 1};
         primitives.push_back(box);
+        setupBaseMat(nextPrimitiveId - 1);
+    }
+
+    if (ImGui::Button("Ajouter Ellipsoide"))
+    {
+        PBRPrimitive ellipsoid;
+        ellipsoid.name = "Ellipsoide " + ofToString(nextPrimitiveId++);
+        ellipsoid.primitive = ofSpherePrimitive(50, 16);
+        ellipsoid.position = centerPosition;
+        ellipsoid.rotation = {0, 0, 0};
+        ellipsoid.scale = {1, 1, 1};
+        primitives.push_back(ellipsoid);
         setupBaseMat(nextPrimitiveId - 1);
     }
 
@@ -377,27 +396,28 @@ void PBRScene::drawGui()
             ImGui::Text("Non Chargee");
         }
 
-        ImGui::Text("Deplacement");
-        ImGui::SameLine();
-        if (ImGui::Button("Charger##deplacement"))
-        {
-            ofFileDialogResult result = ofSystemLoadDialog("Charger une texture deplacement");
-            if (result.bSuccess)
-            {
-                p.heightTexture.load(result.getPath());
-                p.heightTexture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
-                p.primitive.mapTexCoordsFromTexture(p.heightTexture.getTexture());
-            }
-        }
-        ImGui::SameLine();
-        if (p.heightTexture.isAllocated())
-        {
-            ImGui::Text("Chargee");
-        }
-        else
-        {
-            ImGui::Text("Non Chargee");
-        }
+        // Je commente cette partie, car elle ne fonctionne pas avec les cubes. 
+        //ImGui::Text("Deplacement");
+        //ImGui::SameLine();
+        //if (ImGui::Button("Charger##deplacement"))
+        //{
+        //    ofFileDialogResult result = ofSystemLoadDialog("Charger une texture deplacement");
+        //    if (result.bSuccess)
+        //    {
+        //        p.heightTexture.load(result.getPath());
+        //        p.heightTexture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+        //        p.primitive.mapTexCoordsFromTexture(p.heightTexture.getTexture());
+        //    }
+        //}
+        //ImGui::SameLine();
+        //if (p.heightTexture.isAllocated())
+        //{
+        //    ImGui::Text("Chargee");
+        //}
+        //else
+        //{
+        //    ImGui::Text("Non Chargee");
+        //}
     }
 
     ImGui::End();
@@ -471,6 +491,41 @@ void PBRScene::drawGui()
         }
     }
     ImGui::End();
+
+    ImGui::SetNextWindowPos(ImVec2(10, 740), ImGuiCond_Once);
+    ImGui::SetNextWindowSize(ImVec2(300, 50), ImGuiCond_Once);
+    ImGui::Begin("Skybox");
+    if (ImGui::ListBoxHeader(""))
+    {
+        auto cubemaps = plugin::image::ResourceManager::instance()->getCubeMaps();
+        for (auto &cubemap : cubemaps)
+        {
+            const bool isSelected = (cubemap.first == selectedSkyboxName);
+            if (ImGui::Selectable(cubemap.first.c_str(), isSelected))
+            {
+                selectedSkyboxName = cubemap.first;
+            }
+        }
+        ImGui::ListBoxFooter();
+    }
+
+    if (selectedSkyboxName != "")
+    {
+        ImGui::Text("Skybox: %s", selectedSkyboxName.c_str());
+        if (ImGui::Button("Charger##skybox"))
+        {
+            auto cubemaps = plugin::image::ResourceManager::instance()->getCubeMaps();
+            if (cubemaps.find(selectedSkyboxName) != cubemaps.end())
+            {
+                skybox.load(selectedSkyboxName);
+            }
+        }
+        if (ImGui::Button("Deselectionner##skybox"))
+        {
+            selectedSkyboxName = "";
+        }
+    }
+    ImGui::End();
 }
 
 void PBRScene::setupBaseMat(int i)
@@ -488,6 +543,7 @@ void PBRScene::setupBaseMat(int i)
 void PBRScene::calculateTangents(int i)
 {
     PBRPrimitive &p = primitives[i];
+
     // Récupérer les données du mesh
     std::vector<glm::vec3> &vertices = p.primitive.getMesh().getVertices();
     std::vector<glm::vec3> &normals = p.primitive.getMesh().getNormals();

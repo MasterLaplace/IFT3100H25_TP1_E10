@@ -37,7 +37,6 @@ void Skybox::load(std::string resourceName)
     {
         ofPixels pixels;
         texture.readToPixels(pixels);
-        pixels.rotate90(2); // Rotate 180 degrees (2 * 90 degrees)
         texture.loadData(pixels);
     }
 
@@ -57,7 +56,14 @@ void Skybox::draw(glm::vec3 position)
     // Draw each plane with the corresponding texture
     for (int i = 0; i < 6; ++i)
     {
-        textures[i].bind();
+        // Swap left and right textures
+        int textureIndex = i;
+        if (i == 0) // Left
+            textureIndex = 2;
+        else if (i == 2) // Right
+            textureIndex = 0;
+
+        textures[textureIndex].bind();
 
         // Reset transformations before applying new ones
         planes[i].resetTransform();
@@ -82,24 +88,25 @@ void Skybox::draw(glm::vec3 position)
             planes[i].rotateDeg(180, 0, 1, 0);
             break;
         case 4: // Top
-            planes[i].setPosition(position.x, position.y - size, position.z);
-            planes[i].rotateDeg(-90, 1, 0, 0);
+            planes[i].setPosition(position.x, position.y + size, position.z);
+            planes[i].rotateDeg(90, 1, 0, 0);
             planes[i].rotateDeg(180, 0, 0, 1);
             break;
         case 5: // Bottom
-            planes[i].setPosition(position.x, position.y + size, position.z);
+            planes[i].setPosition(position.x, position.y - size, position.z);
             planes[i].rotateDeg(90, 1, 0, 0);
             planes[i].rotateDeg(180, 0, 0, 1);
             break;
         }
 
         planes[i].draw();
-        textures[i].unbind();
+        textures[textureIndex].unbind();
     }
 
     ofEnableDepthTest();
     ofDisableNormalizedTexCoords();
     ofDisableArbTex();
 }
+
 
 } // namespace plugin::texture

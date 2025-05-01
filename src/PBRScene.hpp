@@ -1,6 +1,8 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxImGui.h"
+#include "plugin/image/ResourceManager.hpp"
+#include "plugin/texture/Skybox.hpp"
 
 class PBRScene {
     struct PBRPrimitive {
@@ -53,6 +55,7 @@ private:
 
     int selectedPrimitiveIndex = -1;
     int selectedLightIndex = -1;
+    string selectedSkyboxName = "";
     int nextPrimitiveId = 0;
     int nextLightId = 0;
 
@@ -60,6 +63,8 @@ private:
 
     ofSpherePrimitive centerSphere;
     glm::vec3 centerPosition = {0, 0, 0};
+
+    plugin::texture::Skybox skybox;
 
     void setupShader(int primitiveIndex, int lightIndex);
     void drawGui();
