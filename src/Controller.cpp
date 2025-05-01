@@ -127,13 +127,13 @@ void Controller::mouseMoved(glm::vec2 pos)
     stateMachine.mousePosition = pos;
 }
 
-void Controller::mousePressed(int x, int y, int button) 
-{ 
+void Controller::mousePressed(int x, int y, int button)
+{
     if (currentView == VIEW_TRIANGULATION)
     {
         triangulationUI.onMousePressed(x, y);
     }
-    stateMachine.mousePressed(x, y, button); 
+    stateMachine.mousePressed(x, y, button);
 }
 
 void Controller::mouseReleased(int x, int y, int button)

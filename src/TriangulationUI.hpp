@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ofxImGui.h"
 #include "Delauney.hpp"
+#include "ofxImGui.h"
 
 class Controller;
 

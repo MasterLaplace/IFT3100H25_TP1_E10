@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include <vector>
 #include <array>
 #include <glm/vec2.hpp>
 #include <ofPoint.h>
+#include <vector>
 
 //------------------------------------------------------------------------
 // Structure maison pour representer un point 2D.
@@ -14,7 +14,6 @@ struct Point {
     bool operator==(const Point &other) const { return x == other.x && y == other.y; }
 };
 //------------------------------------------------------------------------
-
 
 //------------------------------------------------------------------------
 // Structure maison pour representer un triangle.
@@ -53,10 +52,9 @@ struct Triangle {
 };
 //------------------------------------------------------------------------
 
-
 //------------------------------------------------------------------------
 class Delauney {
-public: 
+public:
     void setup();
     void draw();
     void shuffle();
@@ -71,7 +69,7 @@ public:
 
     void addPoint();
     void removeSelectedPoint();
-	
+
 private:
     std::vector<Point> points;
     std::vector<Triangle> triangles;

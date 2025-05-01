@@ -1,9 +1,9 @@
-﻿#include "Delauney.hpp"  
-#include "ofMain.h"  
+﻿#include "Delauney.hpp"
+#include "ofMain.h"
 
-void Delauney::setup() 
+void Delauney::setup()
 {
-    
+
     // On génère aléatoirement des triangles.
     shuffle();
 }
@@ -62,14 +62,14 @@ void Delauney::triangulate(const std::vector<Point> &points)
     }
 
     // Étape 5 : supprimer les triangles connectés au triangle super géant
-    triangles.erase(std::remove_if(triangles.begin(), triangles.end(),[&](const Triangle &t) 
-        {
-            return t.containsVertex(p1) || t.containsVertex(p2) || t.containsVertex(p3);
-        }),
-      triangles.end());
+    triangles.erase(std::remove_if(triangles.begin(), triangles.end(),
+                                   [&](const Triangle &t) {
+                                       return t.containsVertex(p1) || t.containsVertex(p2) || t.containsVertex(p3);
+                                   }),
+                    triangles.end());
 }
 
-void Delauney::draw() 
+void Delauney::draw()
 {
     ofBackground(255); // Fond blanc
 
@@ -97,13 +97,13 @@ void Delauney::draw()
     }
 }
 
-void Delauney::shuffle() 
+void Delauney::shuffle()
 {
     generateRandomPoints(10, ofGetWidth(), ofGetHeight(), points);
     triangulate(points);
 }
 
-void Delauney::onMousePressed(int x, int y) 
+void Delauney::onMousePressed(int x, int y)
 {
     const float tolerance = 5.0f; // Tolérance pour détecter un clic proche d'un point
     for (const auto &point : points)
@@ -121,7 +121,7 @@ void Delauney::onMousePressed(int x, int y)
     isDragging = false;
 }
 
-void Delauney::onMouseDragged(int x, int y) 
+void Delauney::onMouseDragged(int x, int y)
 {
     if (isDragging && selectedPoint.x != -1.0f && selectedPoint.y != -1.0f)
     {
@@ -142,12 +142,9 @@ void Delauney::onMouseDragged(int x, int y)
     }
 }
 
-void Delauney::onMouseReleased() 
-{ 
-    isDragging = false; 
-}
+void Delauney::onMouseReleased() { isDragging = false; }
 
-void Delauney::setPoint(Point newPoint) 
+void Delauney::setPoint(Point newPoint)
 {
     for (auto &point : points)
     {
@@ -161,8 +158,8 @@ void Delauney::setPoint(Point newPoint)
     std::cout << "Aucun point trouvé pour mettre à jour." << std::endl;
 }
 
-void Delauney::addPoint() 
-{ 
+void Delauney::addPoint()
+{
     float x = ofGetWidth() / 2;
     float y = ofGetHeight() / 2;
     points.emplace_back(x, y);
@@ -182,8 +179,7 @@ void Delauney::removeSelectedPoint()
     }
 }
 
-
-void Delauney::generateRandomPoints(int count, float width, float height, std::vector<Point> &points) 
+void Delauney::generateRandomPoints(int count, float width, float height, std::vector<Point> &points)
 {
     points.clear();
     for (int i = 0; i < count; ++i)
@@ -199,8 +195,8 @@ void Delauney::removeTriangle(const Triangle &tri)
     triangles.erase(std::remove(triangles.begin(), triangles.end(), tri), triangles.end());
 }
 
-bool Delauney::isPointInsideCircumcircle(const Point &p, const Triangle &t) 
-{ 
+bool Delauney::isPointInsideCircumcircle(const Point &p, const Triangle &t)
+{
     const auto &a = t.vertices[0];
     const auto &b = t.vertices[1];
     const auto &c = t.vertices[2];
@@ -219,8 +215,8 @@ bool Delauney::isPointInsideCircumcircle(const Point &p, const Triangle &t)
     return det > 0;
 }
 
-bool Delauney::isSharedEdge(const Point &a, const Point &b, const std::vector<Triangle> &tris) 
-{ 
+bool Delauney::isSharedEdge(const Point &a, const Point &b, const std::vector<Triangle> &tris)
+{
     int count = 0;
     for (const auto &t : tris)
     {

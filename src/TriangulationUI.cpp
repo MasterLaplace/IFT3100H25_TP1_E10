@@ -1,7 +1,7 @@
 #include "TriangulationUI.hpp"
 #include "Controller.hpp"
 
-void TriangulationUI::setup(Controller *_controller) 
+void TriangulationUI::setup(Controller *_controller)
 {
     controller = _controller;
     delauney.setup();
