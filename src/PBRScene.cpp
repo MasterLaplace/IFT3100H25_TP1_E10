@@ -233,18 +233,6 @@ void PBRScene::drawGui()
         setupBaseMat(nextPrimitiveId - 1);
     }
 
-    if (ImGui::Button("Ajouter Ellipsoide"))
-    {
-        PBRPrimitive ellipsoid;
-        ellipsoid.name = "Ellipsoide " + ofToString(nextPrimitiveId++);
-        ellipsoid.primitive = ofSpherePrimitive(50, 16);
-        ellipsoid.position = centerPosition;
-        ellipsoid.rotation = {0, 0, 0};
-        ellipsoid.scale = {1, 1, 1};
-        primitives.push_back(ellipsoid);
-        setupBaseMat(nextPrimitiveId - 1);
-    }
-
     if (ImGui::ListBoxHeader(""))
     {
         for (int i = 0; i < primitives.size(); ++i)
