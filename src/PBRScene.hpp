@@ -19,6 +19,10 @@ class PBRScene {
         ofImage metallicTexture;
         ofImage roughnessTexture;
         ofImage occlusionTexture;
+        ofImage normalTexture;
+        ofImage heightTexture;
+
+        ofVboMesh vboMesh;
     };
 
     enum LightType {
@@ -29,7 +33,7 @@ class PBRScene {
     struct PBRLight {
         string name;
         ofVec3f position;
-        ofColor color;
+        ofVec3f color;
         LightType type;
         ofVec3f direction;
     };
@@ -42,9 +46,7 @@ private:
     vector<PBRPrimitive> primitives;
     vector<PBRLight> lights;
 
-    ofShader pointLightShader;
-    ofShader directionalLightShader;
-    ofShader postProcessShader;
+    ofShader shader;
     ofTexture whiteTexture;
     ofFbo lightFbo;
     ofFbo finalFbo;
@@ -59,8 +61,8 @@ private:
     ofSpherePrimitive centerSphere;
     glm::vec3 centerPosition = {0, 0, 0};
 
-    void setupPointLightShader(int primitiveIndex, int lightIndex);
-    void setupDirectionalLightShader(int primitiveIndex, int lightIndex);
+    void setupShader(int primitiveIndex, int lightIndex);
     void drawGui();
     void setupBaseMat(int i);
+    void calculateTangents(int i);
 };
