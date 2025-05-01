@@ -10,13 +10,13 @@ public:
     Skybox();
 
     void draw(glm::vec3 position);
-    void load(std::string resourceName); 
+    void load(std::string resourceName);
 
 private:
-    std::array<ofTexture, 6> textures;      
-    std::array<ofPlanePrimitive, 6> planes; 
-    ofShader shader;                        
-    bool isLoaded = false;                  
+    std::array<ofTexture, 6> textures;
+    std::array<ofPlanePrimitive, 6> planes;
+    ofShader shader;
+    bool isLoaded = false;
 };
 
 } // namespace plugin::texture

@@ -108,5 +108,4 @@ void Skybox::draw(glm::vec3 position)
     ofDisableArbTex();
 }
 
-
 } // namespace plugin::texture

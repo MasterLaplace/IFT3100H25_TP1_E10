@@ -121,7 +121,7 @@ void PBRScene::draw()
     ofBackground(40);
     ofEnableDepthTest();
     cam.begin();
-    
+
     // on dessine le skybox
     if (selectedSkyboxName != "")
     {
@@ -136,7 +136,6 @@ void PBRScene::draw()
     ofTranslate(centerPosition);
     centerSphere.draw();
     ofPopMatrix();
-
 
     for (size_t i = 0; i < primitives.size(); ++i)
     {
@@ -396,10 +395,10 @@ void PBRScene::drawGui()
             ImGui::Text("Non Chargee");
         }
 
-        // Je commente cette partie, car elle ne fonctionne pas avec les cubes. 
-        //ImGui::Text("Deplacement");
-        //ImGui::SameLine();
-        //if (ImGui::Button("Charger##deplacement"))
+        // Je commente cette partie, car elle ne fonctionne pas avec les cubes.
+        // ImGui::Text("Deplacement");
+        // ImGui::SameLine();
+        // if (ImGui::Button("Charger##deplacement"))
         //{
         //    ofFileDialogResult result = ofSystemLoadDialog("Charger une texture deplacement");
         //    if (result.bSuccess)
@@ -409,12 +408,12 @@ void PBRScene::drawGui()
         //        p.primitive.mapTexCoordsFromTexture(p.heightTexture.getTexture());
         //    }
         //}
-        //ImGui::SameLine();
-        //if (p.heightTexture.isAllocated())
+        // ImGui::SameLine();
+        // if (p.heightTexture.isAllocated())
         //{
         //    ImGui::Text("Chargee");
         //}
-        //else
+        // else
         //{
         //    ImGui::Text("Non Chargee");
         //}
