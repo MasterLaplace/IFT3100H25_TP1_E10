@@ -243,7 +243,7 @@ private:
 
         if (tmin > 1e-4 ? tmin : 0.0)
         {
-            std::cout << "intersect" << std::endl;        
+            std::cout << "intersect" << std::endl;
         }
         return tmin > 1e-4 ? tmin : 0.0;
     }
@@ -332,7 +332,7 @@ private:
         std::cout << "camera direction : " << _camera.orientation.x << ", " << _camera.orientation.y << ", "
                   << _camera.orientation.z << std::endl;
 
-        // loop in scene 
+        // loop in scene
         for (auto &obj : _scene)
         {
             std::cout << "object : " << obj->param.position.x << ", " << obj->param.position.y << ", "

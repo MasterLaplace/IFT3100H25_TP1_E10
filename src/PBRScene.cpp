@@ -427,7 +427,6 @@ void PBRScene::drawGui()
         ImGui::Text("Limite de lumiere atteinte");
     }
 
-
     if (ImGui::BeginListBox("##lightList"))
     {
         for (int i = 0; i < int(lights.size()); ++i)

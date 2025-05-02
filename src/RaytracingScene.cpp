@@ -42,7 +42,7 @@ void RaytracingScene::drawGui()
         if (!_raytracer->is_rendering())
         {
             _image.clear();
-            
+
             _raytracer->generate_image_async(glm::vec3(0.0f, 0.0f, 0.0f));
         }
     }
