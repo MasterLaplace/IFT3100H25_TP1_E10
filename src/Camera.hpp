@@ -9,6 +9,4 @@ public:
 
     void toggleProjection();
     void update();
-
-private:
 };
