@@ -70,11 +70,17 @@ void Controller::draw()
     }
     else if (currentView == VIEW_2D)
     {
-
         canvas2d->draw();
         exporter.setPixels();
         stateMachine.draw();
         gui.draw();
+    }
+    else if (currentView == VIEW_RAYTRACING)
+    {
+        gui.getGui()->begin();
+        raytracingScene.draw();
+        gui.drawMenu();
+        gui.getGui()->end();
     }
     ofDisableDepthTest();
 }
@@ -313,7 +319,21 @@ void Controller::drawMapping() { currentView = VIEW_MAPPING; }
 
 void Controller::drawPBR() { currentView = VIEW_PBR; }
 
-void Controller::drawRaytracing() { currentView = VIEW_RAYTRACING; }
+void Controller::drawRaytracing() {
+    currentView = VIEW_RAYTRACING;
+
+    plugin::raytracing::Raytracing::CreateInfo raytracingParams;
+    raytracingParams.position = glm::dvec3(0, 0, 0);
+    raytracingParams.direction = glm::dvec3(0, 0, -1);
+    raytracingParams.background_color = glm::dvec3(0.0);
+    raytracingParams.fov = 0.5135; // ~30 degrés
+    raytracingParams.depth = 5;
+    raytracingParams.width = 800;
+    raytracingParams.height = 600;
+    raytracingParams.ray_per_pixel = 16;
+
+    raytracingScene.setup(raytracingParams, canvas3d->getPrimitives());
+}
 
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 

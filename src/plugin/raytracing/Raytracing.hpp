@@ -22,6 +22,9 @@
 #include <vector>
 
 #include <thread>
+#include <atomic>
+#include <condition_variable>
+#include <mutex>
 
 #include <glm/glm.hpp>
 
@@ -140,6 +143,7 @@ private:
     };
 
 public:
+    Raytracing() = default;
     Raytracing(const CreateInfo &params, const std::vector<std::shared_ptr<primitive::Primitive>> &primitives)
         : _MAX_DEPTH(params.depth), _CAMERA_FOV(params.fov), _CAMERA_POSITION(params.position),
           _CAMERA_ORIENTATION(params.direction), _BACKGROUND_COLOR(params.background_color), _IMAGE_WIDTH(params.width),
@@ -159,6 +163,30 @@ public:
 
         // procédure post-rendu (sauvegarde de l'image et désallocation de la mémoire)
         post_render();
+    }
+
+    inline void generate_image_async(glm::vec3 player_pos) noexcept
+    {
+        _is_rendering = true;
+        std::thread([this, player_pos]() {
+            generate_image(player_pos);
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                _is_rendering = false;
+            }
+            _cv.notify_one();
+        }).detach();
+    }
+
+    inline bool is_rendering() const noexcept
+    {
+        return _is_rendering;
+    }
+
+    inline void wait_for_rendering() noexcept
+    {
+        std::unique_lock<std::mutex> lock(_mutex);
+        _cv.wait(lock, [this]() { return !_is_rendering; });
     }
 
     inline image::Image getImage() const noexcept
@@ -385,14 +413,12 @@ private:
         Vector n;                        // normale
         Vector emission;                 // emission
         Vector colour;                   // couleur
-        primitive::SurfaceType material; // type de surface
 
         if (dynamic_cast<primitive::Ellipsoid *>(obj.get()) != nullptr)
         {
             n = (x - obj->param.position).normalize();
             emission = obj->param.emission;
             colour = Vector(obj->param.fillColor.r, obj->param.fillColor.g, obj->param.fillColor.b);
-            material = obj->param.material;
         }
         else if (dynamic_cast<primitive::Box *>(obj.get()) != nullptr)
         {
@@ -408,7 +434,6 @@ private:
                 n = Vector(0, 0, d.z > 0 ? 1 : -1);
             emission = obj->param.emission;
             colour = Vector(obj->param.fillColor.r, obj->param.fillColor.g, obj->param.fillColor.b);
-            material = obj->param.material;
         }
         else if (dynamic_cast<primitive::ObjModel *>(obj.get()) != nullptr)
         {
@@ -581,6 +606,10 @@ private:
 
     // distribution uniforme entre 0 et 1
     std::uniform_real_distribution<double> _random01{0.0, 1.0};
+
+    std::atomic<bool> _is_rendering{false};
+    std::mutex _mutex;
+    std::condition_variable _cv;
 };
 
 } // namespace plugin::raytracing

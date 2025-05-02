@@ -132,3 +132,15 @@ int Canvas::findMouseSelectedNode(const glm::vec3 &point, std::vector<NodePrimit
 
     return -1; // Retourne -1 si rien n'est trouvé
 }
+
+std::vector<std::shared_ptr<plugin::primitive::Primitive>> Canvas::getPrimitives() const
+{
+    std::vector<std::shared_ptr<plugin::primitive::Primitive>> primitives;
+
+    for (const auto &node : nodes)
+    {
+        node->getPrimitives(primitives);
+    }
+
+    return primitives;
+}

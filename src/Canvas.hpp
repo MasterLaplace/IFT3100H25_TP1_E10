@@ -30,6 +30,8 @@ public:
     void traverse();
     int findMouseSelectedNode(const glm::vec3 &point, std::vector<NodePrimitive *> &nodesToCheck);
 
+    std::vector<std::shared_ptr<plugin::primitive::Primitive>> getPrimitives() const;
+
 private:
     void removeNodeRecursive(NodePrimitive *node, NodePrimitive *parent);
 };

@@ -74,7 +74,7 @@ public:
         list.emplace_back(_primitive->clone());
 
         for (auto &child : _children)
-            child->getPrimitive(list);
+            child->getPrimitives(list);
     }
 
     [[nodiscard]] inline std::shared_ptr<T> &getPrimitive() { return _primitive; }

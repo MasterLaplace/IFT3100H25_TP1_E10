@@ -10,7 +10,7 @@ class Box : public Primitive {
 public:
     Box(PrimitiveParams params, glm::vec3 size);
     Box(const Box &other);
-    Box(Box &&other);
+    Box(Box &&other) = default;
     ~Box() override = default;
 
     void draw() override;

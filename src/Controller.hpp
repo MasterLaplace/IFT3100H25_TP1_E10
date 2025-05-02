@@ -10,6 +10,7 @@
 #include "MappingScene.hpp"
 #include "Node.hpp"
 #include "PBRScene.hpp"
+#include "RaytracingScene.hpp"
 #include "TriangulationUI.hpp"
 #include "plugin/image/images.hpp"
 #include "plugin/light/Light.hpp"
@@ -147,6 +148,7 @@ private:
     TriangulationUI triangulationUI;
     MappingScene mappingScene;
     PBRScene pbrScene;
+    RaytracingScene raytracingScene;
     Exporting exporter;
     Camera camera;
     Skybox skybox;
