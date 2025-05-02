@@ -362,6 +362,7 @@ curveType Controller::getCurveType()
         std::cerr << "Erreur : La fonction getCurveType() du controleur ne peut pas etre appelee si l'etat n'est "
                      "pas un DrawCoonsState."
                   << std::endl;
+        return curveType::NONE;
     }
     else
     {
@@ -377,6 +378,7 @@ ofPoint Controller::getCurvePoint()
         std::cerr << "Erreur : La fonction getCurvePoint() du controleur ne peut pas etre appelee si l'etat n'est "
                      "pas un DrawCoonsState."
                   << std::endl;
+        return ofPoint();
     }
     else
     {

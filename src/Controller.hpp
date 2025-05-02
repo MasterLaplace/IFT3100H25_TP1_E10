@@ -28,7 +28,8 @@ enum View {
     VIEW_TRIANGULATION,
     VIEW_MAPPING,
     VIEW_PBR,
-    VIEW_RAYTACING,
+    VIEW_RAYTRACING,
+    VIEW_HISTOGRAM,
 };
 
 class Controller {
@@ -150,4 +151,3 @@ private:
     Camera camera;
     Skybox skybox;
 };
-#pragma once

@@ -10,7 +10,8 @@ namespace plugin::states {
 enum curveType {
     BEZIER,
     CATMULL_ROM,
-    COONS
+    COONS,
+    NONE
 };
 
 class DrawCoonsState : public State {

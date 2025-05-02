@@ -396,8 +396,8 @@ void AppGui::drawDynamicPanel2D()
         PrimitiveParams params;
         params.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
         params.ambientColor = ofColor(ambientColor[0] * 255, ambientColor[1] * 255, ambientColor[2] * 255);
-        params.diffuseColor = ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[3] * 255);
-        params.specularColor = ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[3] * 255);
+        params.diffuseColor = ofColor(diffuseColor[0] * 255, diffuseColor[1] * 255, diffuseColor[2] * 255);
+        params.specularColor = ofColor(specularColor[0] * 255, specularColor[1] * 255, specularColor[2] * 255);
         params.shininess = shininess;
         params.outlineColor = ofColor(outlineColor[0] * 255, outlineColor[1] * 255, outlineColor[2] * 255);
         params.outlineWidth = outlineWidth;
@@ -1121,7 +1121,6 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
                              ellipsoid->param.diffuseColor.b / 255.0f};
     float specularColor[3] = {ellipsoid->param.specularColor.r / 255.0f, ellipsoid->param.specularColor.g / 255.0f,
                               ellipsoid->param.specularColor.b / 255.0f};
-    float shininess = ellipsoid->param.shininess;
     float outlineColor[3] = {ellipsoid->param.outlineColor.r / 255.0f, ellipsoid->param.outlineColor.g / 255.0f,
                              ellipsoid->param.outlineColor.b / 255.0f};
     bool filled = ellipsoid->param.isFilled;
@@ -1343,6 +1342,12 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
         box->param.isFilled = filled;
     }
 
+    ImGui::Text("Couleur de remplissage :");
+    if (ImGui::ColorEdit3("Couleur de remplissage", &fillColor[0]))
+    {
+        box->param.fillColor = ofColor(fillColor[0] * 255, fillColor[1] * 255, fillColor[2] * 255);
+    }
+
     if (filled)
     {
         // La liste des materiaux possibles.
@@ -1518,11 +1523,11 @@ void AppGui::drawLightProperties()
     // Pour permettre de conserver les changements de selection du modele d'eclairage.
     const char *lightningTypes[] = {"Ambient", "Directional", "Pointlight", "Spotlight"};
     static int currentLightningType = 0;
-    plugin::light::Light::LightType type = plugin::light::Light::LightType::Ambient;
+    // plugin::light::Light::LightType type = plugin::light::Light::LightType::Ambient;
 
     const char *lightningModels[] = {"Lambert", "Phong", "Blinn-Phong", "Toon"};
     static int currentLightningModel = 0;
-    plugin::light::Light::ModelType model = plugin::light::Light::ModelType::Lambert;
+    // plugin::light::Light::ModelType model = plugin::light::Light::ModelType::Lambert;
 
     // On selectionne le modele d'eclairage.
     ImGui::Text("Modele d'eclairage :");
@@ -1588,7 +1593,7 @@ void AppGui::drawLightProperties()
     // La position de la lumiere uniquement si c'est une lumiere ponctuelle ou un projecteur.
     if (currentLightningType == 2 || currentLightningType == 3)
     {
-        glm::vec3 &position = controller->getLightPosition();
+        glm::vec3 position = controller->getLightPosition();
         ImGui::Text("Position :");
         if (ImGui::DragFloat3("Position lumiere", glm::value_ptr(position), 1.0f, -1000.0f, 2000.0f))
         {
@@ -1599,7 +1604,7 @@ void AppGui::drawLightProperties()
     // La direction de la lumiere uniquement si c'est une lumiere directionnelle ou un projecteur.
     if (currentLightningType == 1 || currentLightningType == 3)
     {
-        glm::vec3 &direction = controller->getLightDirection();
+        glm::vec3 direction = controller->getLightDirection();
         ImGui::Text("Direction :");
         if (ImGui::DragFloat3("Direction lumiere", glm::value_ptr(direction), 0.1f, -1000.0f, 1000.0f))
         {
@@ -1608,7 +1613,7 @@ void AppGui::drawLightProperties()
     }
 
     // La couleur ambiante de la lumiere est toujours pertinante.
-    glm::vec3 &ambientColor = controller->getAmbientColor();
+    glm::vec3 ambientColor = controller->getAmbientColor();
     ImGui::Text("Couleur ambiante :");
     if (ImGui::ColorEdit3("couleur ambiante", glm::value_ptr(ambientColor)))
     {
@@ -1618,7 +1623,7 @@ void AppGui::drawLightProperties()
     // La couleur diffuse est pertinante uniquement si ce n'est pas une lumiere ambiante.
     if (currentLightningType != 0)
     {
-        glm::vec3 &diffuseColor = controller->getDiffuseColor();
+        glm::vec3 diffuseColor = controller->getDiffuseColor();
         ImGui::Text("Couleur diffuse :");
         if (ImGui::ColorEdit3("couleur diffuse", glm::value_ptr(diffuseColor)))
         {
@@ -1629,7 +1634,7 @@ void AppGui::drawLightProperties()
     // La couleur speculaire est pertinante uniquement pour le modele de Phong et Blinn-Phong.
     if (currentLightningModel == 1 || currentLightningModel == 2)
     {
-        glm::vec3 &specularColor = controller->getSpecularColor();
+        glm::vec3 specularColor = controller->getSpecularColor();
         ImGui::Text("Couleur speculaire :");
         if (ImGui::ColorEdit3("couleur speculaire", glm::value_ptr(specularColor)))
         {

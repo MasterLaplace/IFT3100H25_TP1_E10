@@ -55,7 +55,7 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
     shader.setUniform1f("tone_mapping_gamma", 2.0f);
     shader.setUniform1i("tone_mapping_toggle", true);
 
-    for (int i = 0; i < lights.size(); ++i)
+    for (size_t i = 0; i < lights.size(); ++i)
     {
         std::string idx = "lights[" + std::to_string(i) + "]";
         shader.setUniform1i(idx + ".type", lights[i].type);
@@ -152,8 +152,8 @@ void PBRScene::draw()
 
         shader.end();
 
-        // si la primitive est sélectionnée, on dessine le wireframe
-        if (i == selectedPrimitiveIndex)
+        // si la primitive est sï¿½lectionnï¿½e, on dessine le wireframe
+        if (int(i) == selectedPrimitiveIndex)
         {
             ofSetColor(255, 0, 0);
             primitives[i].primitive.drawWireframe();
@@ -188,8 +188,8 @@ void PBRScene::draw()
             ofDrawArrow(ofVec3f(0), ofVec3f(0, 0, -40), 5); // vers -Z en local
         }
 
-        // si la lumiere est sélectionnée, on dessine un indicateur
-        if (i == selectedLightIndex)
+        // si la lumiere est sï¿½lectionnï¿½e, on dessine un indicateur
+        if (int(i) == selectedLightIndex)
         {
             ofSetColor(255, 0, 0);
             ofDrawLine(-20, 0, 0, 20, 0, 0);
@@ -235,7 +235,7 @@ void PBRScene::drawGui()
 
     if (ImGui::ListBoxHeader(""))
     {
-        for (int i = 0; i < primitives.size(); ++i)
+        for (int i = 0; i < int(primitives.size()); ++i)
         {
             const bool isSelected = (i == selectedPrimitiveIndex);
             if (ImGui::Selectable(primitives[i].name.c_str(), isSelected))
@@ -416,7 +416,7 @@ void PBRScene::drawGui()
     ImGui::DragFloat3("Position", &centerPosition.x, 1.0f);
     ImGui::End();
 
-    // fenetre pour la gestion des lumières
+    // fenetre pour la gestion des lumiï¿½res
     ImGui::SetNextWindowPos(ImVec2(10, 430), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_Once);
     ImGui::Begin("Illumination");
@@ -444,7 +444,7 @@ void PBRScene::drawGui()
 
     if (ImGui::ListBoxHeader(""))
     {
-        for (int i = 0; i < lights.size(); ++i)
+        for (int i = 0; i < int(lights.size()); ++i)
         {
             const bool isSelected = (i == selectedLightIndex);
 
@@ -546,13 +546,13 @@ void PBRScene::calculateTangents(int i)
 {
     PBRPrimitive &p = primitives[i];
 
-    // Récupérer les données du mesh
+    // Rï¿½cupï¿½rer les donnï¿½es du mesh
     std::vector<glm::vec3> &vertices = p.primitive.getMesh().getVertices();
     std::vector<glm::vec3> &normals = p.primitive.getMesh().getNormals();
     std::vector<glm::vec2> &texCoords = p.primitive.getMesh().getTexCoords();
     std::vector<ofIndexType> indices = p.primitive.getMesh().getIndices();
 
-    // Créer les vecteurs pour les tangentes et bitangentes
+    // Crï¿½er les vecteurs pour les tangentes et bitangentes
     std::vector<ofVec3f> tangents(vertices.size(), ofVec3f(0, 0, 0));
     std::vector<ofVec3f> bitangents(vertices.size(), ofVec3f(0, 0, 0));
 
@@ -574,7 +574,7 @@ void PBRScene::calculateTangents(int i)
         glm::vec2 uv2 = texCoords[i2];
         glm::vec2 uv3 = texCoords[i3];
 
-        // Calculer les différences
+        // Calculer les diffï¿½rences
         glm::vec3 deltaPos1 = v2 - v1;
         glm::vec3 deltaPos2 = v3 - v1;
 
@@ -584,7 +584,7 @@ void PBRScene::calculateTangents(int i)
         // Calculer la tangente et la bitangente
         float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
         if (std::isfinite(r))
-        { // Vérifier que r n'est pas inf ou NaN
+        { // Vï¿½rifier que r n'est pas inf ou NaN
             glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
 
             // Ajouter aux vecteurs
@@ -600,7 +600,7 @@ void PBRScene::calculateTangents(int i)
         ofVec3f n = normals[i];
         ofVec3f t = tangents[i];
 
-        // Orthogonaliser la tangente par rapport à la normale (Gram-Schmidt)
+        // Orthogonaliser la tangente par rapport ï¿½ la normale (Gram-Schmidt)
         t = (t - n * n.dot(t)).normalize();
     }
 
