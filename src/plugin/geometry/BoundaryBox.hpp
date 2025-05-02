@@ -30,13 +30,10 @@ public:
     {
         return _min == other._min && _max == other._max;
     }
-    [[nodiscard]] inline bool operator!=(const BoundaryBox &other) const noexcept
-    {
-        return !(*this == other);
-    }
+    [[nodiscard]] inline bool operator!=(const BoundaryBox &other) const noexcept { return !(*this == other); }
 
     BoundaryBox(float x, float y, float z, float w, float h, float d) noexcept
-    : _min(x, y, z), _max(x + w, y + h, z + d)
+        : _min(x, y, z), _max(x + w, y + h, z + d)
     {
         _min.x = std::min(_min.x, _max.x);
         _min.y = std::min(_min.y, _max.y);
