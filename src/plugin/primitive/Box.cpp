@@ -8,9 +8,10 @@ Box::Box(PrimitiveParams param, glm::vec3 size) : Primitive(param), _size(size)
     _bbox = geometry::BoundaryBox(param.position, size);
 }
 
-Box::Box(const Box &other) : Primitive(other), _size(other._size), 
-    ambientColor(other.ambientColor), diffuseColor(other.diffuseColor), 
-    specularColor(other.specularColor), shininess(other.shininess) {
+Box::Box(const Box &other)
+    : Primitive(other), _size(other._size), ambientColor(other.ambientColor), diffuseColor(other.diffuseColor),
+      specularColor(other.specularColor), shininess(other.shininess)
+{
     _bbox = other._bbox;
 }
 
