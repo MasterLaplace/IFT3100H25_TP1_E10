@@ -319,7 +319,8 @@ void Controller::drawMapping() { currentView = VIEW_MAPPING; }
 
 void Controller::drawPBR() { currentView = VIEW_PBR; }
 
-void Controller::drawRaytracing() {
+void Controller::drawRaytracing()
+{
     currentView = VIEW_RAYTRACING;
 
     plugin::raytracing::Raytracing::CreateInfo raytracingParams;

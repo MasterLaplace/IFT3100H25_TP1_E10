@@ -8,7 +8,8 @@ using namespace plugin;
 
 class RaytracingScene {
 public:
-    void setup(const raytracing::Raytracing::CreateInfo &params, const std::vector<std::shared_ptr<primitive::Primitive>> &primitives);
+    void setup(const raytracing::Raytracing::CreateInfo &params,
+               const std::vector<std::shared_ptr<primitive::Primitive>> &primitives);
     void draw();
 
 private:

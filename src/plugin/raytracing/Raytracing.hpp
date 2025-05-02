@@ -21,10 +21,10 @@
 #include <random>
 #include <vector>
 
-#include <thread>
 #include <atomic>
 #include <condition_variable>
 #include <mutex>
+#include <thread>
 
 #include <glm/glm.hpp>
 
@@ -178,10 +178,7 @@ public:
         }).detach();
     }
 
-    inline bool is_rendering() const noexcept
-    {
-        return _is_rendering;
-    }
+    inline bool is_rendering() const noexcept { return _is_rendering; }
 
     inline void wait_for_rendering() noexcept
     {
@@ -410,9 +407,9 @@ private:
         Vector x = ray.origin + ray.direction * distance;
 
         // attributs de l'objet touché
-        Vector n;                        // normale
-        Vector emission;                 // emission
-        Vector colour;                   // couleur
+        Vector n;        // normale
+        Vector emission; // emission
+        Vector colour;   // couleur
 
         if (dynamic_cast<primitive::Ellipsoid *>(obj.get()) != nullptr)
         {

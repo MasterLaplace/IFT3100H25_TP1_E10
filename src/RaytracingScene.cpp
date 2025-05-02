@@ -1,7 +1,8 @@
 #include "RaytracingScene.hpp"
 #include <thread>
 
-void RaytracingScene::setup(const raytracing::Raytracing::CreateInfo &params, const std::vector<std::shared_ptr<primitive::Primitive>> &primitives)
+void RaytracingScene::setup(const raytracing::Raytracing::CreateInfo &params,
+                            const std::vector<std::shared_ptr<primitive::Primitive>> &primitives)
 {
     _scene = primitives;
 
@@ -91,10 +92,11 @@ void RaytracingScene::drawGui()
             _background_color = glm::dvec3(background_color);
         }
 
-        ImGui::DragInt("Depth", reinterpret_cast<int*>(&_depth), 1, 1, 10);
-        ImGui::SliderInt("Width", reinterpret_cast<int*>(&_width), 1, 4096, "%d", ImGuiSliderFlags_Logarithmic);
-        ImGui::SliderInt("Height", reinterpret_cast<int*>(&_height), 1, 4096, "%d", ImGuiSliderFlags_Logarithmic);
-        ImGui::SliderInt("Rays per Pixel", reinterpret_cast<int*>(&_ray_per_pixel), 1, 1024, "%d", ImGuiSliderFlags_Logarithmic);
+        ImGui::DragInt("Depth", reinterpret_cast<int *>(&_depth), 1, 1, 10);
+        ImGui::SliderInt("Width", reinterpret_cast<int *>(&_width), 1, 4096, "%d", ImGuiSliderFlags_Logarithmic);
+        ImGui::SliderInt("Height", reinterpret_cast<int *>(&_height), 1, 4096, "%d", ImGuiSliderFlags_Logarithmic);
+        ImGui::SliderInt("Rays per Pixel", reinterpret_cast<int *>(&_ray_per_pixel), 1, 1024, "%d",
+                         ImGuiSliderFlags_Logarithmic);
     }
 
     ImGui::End();
