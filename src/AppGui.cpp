@@ -1556,7 +1556,6 @@ void AppGui::drawLightProperties()
         }
     }
 
-
     // On met a jour le type de lumiere.
     switch (currentLightningType)
     {
