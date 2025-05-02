@@ -17,19 +17,19 @@
 
 // c++11
 #include <chrono>
+#include <memory>
 #include <random>
 #include <vector>
-#include <memory>
 
 #include <thread>
 
 #include <glm/glm.hpp>
 
-#include "../primitive/primitives.hpp"
 #include "../geometry/BoundaryBox.hpp"
+#include "../primitive/primitives.hpp"
 
-#include <glm/glm.hpp>
 #include <algorithm>
+#include <glm/glm.hpp>
 
 #include "../../Node.hpp"
 
@@ -166,7 +166,8 @@ public:
         // créer une image à partir du tableau de pixels
         image::Image image;
         image.setUseTexture(false);
-        image.getPixels().setFromPixels(reinterpret_cast<const unsigned char*>(_pixels.data()), _IMAGE_WIDTH, _IMAGE_HEIGHT, ofImageType::OF_IMAGE_COLOR_ALPHA);
+        image.getPixels().setFromPixels(reinterpret_cast<const unsigned char *>(_pixels.data()), _IMAGE_WIDTH,
+                                        _IMAGE_HEIGHT, ofImageType::OF_IMAGE_COLOR_ALPHA);
         image.update();
         image.setUseTexture(true);
 
@@ -215,7 +216,8 @@ private:
         return tmin > 1e-4 ? tmin : 0.0;
     }
 
-    [[nodiscard]] inline double intersect(const Ray &ray, const std::shared_ptr<primitive::Ellipsoid> &object) const noexcept
+    [[nodiscard]] inline double intersect(const Ray &ray,
+                                          const std::shared_ptr<primitive::Ellipsoid> &object) const noexcept
     {
         // distance de l'intersection la plus près si elle existe
         double distance;
@@ -270,7 +272,8 @@ private:
         return distance;
     }
 
-    [[nodiscard]] inline double intersect(const Ray &ray, const std::shared_ptr<primitive::Primitive> &primitive) const noexcept
+    [[nodiscard]] inline double intersect(const Ray &ray,
+                                          const std::shared_ptr<primitive::Primitive> &primitive) const noexcept
     {
         if (dynamic_cast<primitive::Box *>(primitive.get()) != nullptr)
         {
@@ -379,9 +382,9 @@ private:
         Vector x = ray.origin + ray.direction * distance;
 
         // attributs de l'objet touché
-        Vector n;             // normale
-        Vector emission;      // emission
-        Vector colour;        // couleur
+        Vector n;                        // normale
+        Vector emission;                 // emission
+        Vector colour;                   // couleur
         primitive::SurfaceType material; // type de surface
 
         if (dynamic_cast<primitive::Ellipsoid *>(obj.get()) != nullptr)
@@ -394,7 +397,8 @@ private:
         else if (dynamic_cast<primitive::Box *>(obj.get()) != nullptr)
         {
             // normale selon l'axe de la face impactée
-            Vector d = x - Vector(obj->param.position + std::dynamic_pointer_cast<primitive::Box>(obj)->getSize()) * 0.5;
+            Vector d =
+                x - Vector(obj->param.position + std::dynamic_pointer_cast<primitive::Box>(obj)->getSize()) * 0.5;
             double ax = fabs(d.x), ay = fabs(d.y), az = fabs(d.z);
             if (ax > ay && ax > az)
                 n = Vector(d.x > 0 ? 1 : -1, 0, 0);
