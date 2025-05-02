@@ -9,7 +9,7 @@ in vec2 surface_texcoord;
 out vec4 fragment_color;
 
 // attributs uniformes
-uniform sampler2DRect image;
+uniform sampler2D image;
 uniform float exposure;
 uniform float gamma;
 

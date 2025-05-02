@@ -38,7 +38,7 @@ void Image::convert(ColourSpaces::Type nType)
 }
 
 /*
-C'est la fonction draw qui a été redéfinie pour y ajouter le tonemapping.
+C'est la fonction draw qui a ete redefini pour y ajouter le tonemapping.
 */
 void Image::draw(float x, float y) const
 {
