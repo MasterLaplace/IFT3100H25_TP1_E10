@@ -34,6 +34,11 @@ struct PrimitiveParams {
           shininess(32.0f)
     {
     }
+
+    PrimitiveParams(glm::dvec3 position, glm::dvec3 fillColor, SurfaceType material, glm::dvec3 emission)
+        : position(position), fillColor(ofColor(fillColor.x, fillColor.y, fillColor.z)), material(material), emission(emission)
+    {
+    }
 };
 
 class Primitive {

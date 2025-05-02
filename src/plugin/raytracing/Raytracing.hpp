@@ -151,14 +151,14 @@ public:
         : _MAX_DEPTH(params.depth), _CAMERA_FOV(params.fov), _CAMERA_POSITION(params.position),
           _CAMERA_ORIENTATION(params.direction), _BACKGROUND_COLOR(params.background_color), _IMAGE_WIDTH(params.width),
           _IMAGE_HEIGHT(params.height), _RAY_PER_PIXEL(params.ray_per_pixel),
-          _PIXEL_COUNT(params.width * params.height),
-          _camera(params.position, params.direction, params.height, params.width, params.fov), _scene(primitives)
+          _PIXEL_COUNT(params.width * params.height), _scene(primitives),
+          _camera(params.position, params.direction, params.height, params.width, params.fov)
     {
         _pixels.reserve(_PIXEL_COUNT * 4u);
         _pixels.resize(_PIXEL_COUNT * 4u, 0);
     }
 
-    inline void generate_image(glm::vec3 player_pos) noexcept
+    inline void generate_image() noexcept
     {
         // rendu de la scène
         render();
@@ -167,11 +167,11 @@ public:
         post_render();
     }
 
-    inline void generate_image_async(glm::vec3 player_pos) noexcept
+    inline void generate_image_async() noexcept
     {
         _is_rendering = true;
-        std::thread([this, player_pos]() {
-            generate_image(player_pos);
+        std::thread([this]() {
+            generate_image();
             {
                 std::lock_guard<std::mutex> lock(_mutex);
                 _is_rendering = false;

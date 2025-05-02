@@ -15,6 +15,12 @@ public:
 private:
     void drawGui();
 
+    void init_cornell_box();
+
+    void updateScene();
+
+    void exportImage(const std::string &filename);
+
 private:
     std::unique_ptr<raytracing::Raytracing> _raytracer;
     image::Image _image;
@@ -24,8 +30,8 @@ private:
     glm::dvec3 _direction;
     glm::dvec3 _background_color;
     double _fov;
-    uint8_t _depth;
-    uint16_t _width;
-    uint16_t _height;
-    uint16_t _ray_per_pixel;
+    uint32_t _depth;
+    uint32_t _width;
+    uint32_t _height;
+    uint32_t _ray_per_pixel;
 };
