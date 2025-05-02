@@ -53,6 +53,30 @@ public:
      */
     void traverse();
 
+    size_t size() const
+    {
+        if (_primitive == nullptr)
+            return 0;
+
+        size_t size = 1;
+
+        for (auto &child : _children)
+            size += child->size();
+
+        return size;
+    }
+
+    void getPrimitives(std::vector<std::shared_ptr<T>> &list) const
+    {
+        if (_primitive == nullptr)
+            return;
+
+        list.emplace_back(_primitive->clone());
+
+        for (auto &child : _children)
+            child->getPrimitive(list);
+    }
+
     [[nodiscard]] inline std::shared_ptr<T> &getPrimitive() { return _primitive; }
     [[nodiscard]] inline const uint32_t getId() const { return _id; }
     [[nodiscard]] inline const std::string &getName() const { return _name; }
@@ -60,8 +84,8 @@ public:
 
 private:
     std::shared_ptr<T> _primitive;
-    uint32_t _id;
-    std::string _name;
+    uint32_t _id = 0;
+    std::string _name{};
     std::vector<Node<T> *> _children;
 
     inline static uint32_t _nextId = 0;
