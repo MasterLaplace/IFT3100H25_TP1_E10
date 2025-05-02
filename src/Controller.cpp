@@ -43,7 +43,7 @@ void Controller::draw()
         canvas3d->setViewMatrix(camera.getModelViewMatrix());
         canvas3d->draw();
         camera.end();
-        //exporter.setPixels();
+        // exporter.setPixels();
         stateMachine.draw();
         gui.draw();
     }
@@ -71,7 +71,7 @@ void Controller::draw()
     else if (currentView == VIEW_2D)
     {
         canvas2d->draw();
-        //exporter.setPixels();
+        // exporter.setPixels();
         stateMachine.draw();
         gui.draw();
     }
