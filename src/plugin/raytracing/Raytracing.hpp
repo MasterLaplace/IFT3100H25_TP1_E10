@@ -152,7 +152,7 @@ public:
           _CAMERA_ORIENTATION(params.direction), _BACKGROUND_COLOR(params.background_color), _IMAGE_WIDTH(params.width),
           _IMAGE_HEIGHT(params.height), _RAY_PER_PIXEL(params.ray_per_pixel),
           _PIXEL_COUNT(params.width * params.height),
-          _camera(params.position, params.direction, params.height, params.width, params.fov)
+          _camera(params.position, params.direction, params.height, params.width, params.fov), _scene(primitives)
     {
         _pixels.reserve(_PIXEL_COUNT * 4u);
         _pixels.resize(_PIXEL_COUNT * 4u, 0);
@@ -160,8 +160,6 @@ public:
 
     inline void generate_image(glm::vec3 player_pos) noexcept
     {
-        _camera.position = Raytracing::Vector(player_pos);
-
         // rendu de la scène
         render();
 
@@ -241,6 +239,11 @@ private:
 
             if (tmax <= tmin)
                 return 0.0;
+        }
+
+        if (tmin > 1e-4 ? tmin : 0.0)
+        {
+            std::cout << "intersect" << std::endl;        
         }
         return tmin > 1e-4 ? tmin : 0.0;
     }
@@ -324,6 +327,17 @@ private:
     void render() noexcept
     {
         std::cout << "render start" << std::endl;
+        std::cout << "camera position : " << _camera.position.x << ", " << _camera.position.y << ", "
+                  << _camera.position.z << std::endl;
+        std::cout << "camera direction : " << _camera.orientation.x << ", " << _camera.orientation.y << ", "
+                  << _camera.orientation.z << std::endl;
+
+        // loop in scene 
+        for (auto &obj : _scene)
+        {
+            std::cout << "object : " << obj->param.position.x << ", " << obj->param.position.y << ", "
+                      << obj->param.position.z << std::endl;
+        }
 
         uint32_t index = 0;
 

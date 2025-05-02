@@ -62,7 +62,7 @@ void PBRScene::setupShader(int primitiveIndex, int lightIndex)
         shader.setUniform3f(idx + ".position", lights[i].position);
         shader.setUniform3f(idx + ".direction", lights[i].direction);
         shader.setUniform3f(idx + ".color", lights[i].color.x, lights[i].color.y, lights[i].color.z);
-        shader.setUniform1f(idx + ".intensity", 1.0f);
+        shader.setUniform1f(idx + ".intensity", lights[i].intensity);
     }
     shader.setUniform1i("light_count", lights.size());
 
@@ -382,29 +382,6 @@ void PBRScene::drawGui()
         {
             ImGui::Text("Non Chargee");
         }
-
-        // Je commente cette partie, car elle ne fonctionne pas avec les cubes.
-        // ImGui::Text("Deplacement");
-        // ImGui::SameLine();
-        // if (ImGui::Button("Charger##deplacement"))
-        //{
-        //    ofFileDialogResult result = ofSystemLoadDialog("Charger une texture deplacement");
-        //    if (result.bSuccess)
-        //    {
-        //        p.heightTexture.load(result.getPath());
-        //        p.heightTexture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
-        //        p.primitive.mapTexCoordsFromTexture(p.heightTexture.getTexture());
-        //    }
-        //}
-        // ImGui::SameLine();
-        // if (p.heightTexture.isAllocated())
-        //{
-        //    ImGui::Text("Chargee");
-        //}
-        // else
-        //{
-        //    ImGui::Text("Non Chargee");
-        //}
     }
 
     ImGui::End();
@@ -420,27 +397,36 @@ void PBRScene::drawGui()
     ImGui::SetNextWindowPos(ImVec2(10, 430), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_Once);
     ImGui::Begin("Illumination");
-    if (ImGui::Button("Ajouter ponctuelle"))
+
+    if (lights.size() < 5)
     {
-        PBRLight light;
-        light.name = "Ponctuelle " + ofToString(nextLightId++);
-        light.position = centerPosition;
-        light.color = {1, 1, 1};
-        light.type = POINT;
-        light.direction = {1, 0, 0};
-        lights.push_back(light);
+        if (ImGui::Button("Ajouter ponctuelle"))
+        {
+            PBRLight light;
+            light.name = "Ponctuelle " + ofToString(nextLightId++);
+            light.position = centerPosition;
+            light.color = {1, 1, 1};
+            light.type = POINT;
+            light.direction = {1, 0, 0};
+            lights.push_back(light);
+        }
+
+        if (ImGui::Button("Ajouter directionnelle"))
+        {
+            PBRLight light;
+            light.name = "Directionnelle " + ofToString(nextLightId++);
+            light.position = centerPosition;
+            light.color = {1, 1, 1};
+            light.type = DIRECTIONAL;
+            light.direction = {1, 0, 0};
+            lights.push_back(light);
+        }
+    }
+    if (lights.size() >= 10)
+    {
+        ImGui::Text("Limite de lumiere atteinte");
     }
 
-    if (ImGui::Button("Ajouter directionnelle"))
-    {
-        PBRLight light;
-        light.name = "Directionnelle " + ofToString(nextLightId++);
-        light.position = centerPosition;
-        light.color = {1, 1, 1};
-        light.type = DIRECTIONAL;
-        light.direction = {1, 0, 0};
-        lights.push_back(light);
-    }
 
     if (ImGui::BeginListBox("##lightList"))
     {
@@ -466,6 +452,15 @@ void PBRScene::drawGui()
 
     if (selectedLightIndex >= 0)
     {
+        if (ImGui::Button("Supprimer##lumiere"))
+        {
+            lights.erase(lights.begin() + selectedLightIndex);
+            selectedLightIndex = -1;
+        }
+    }
+
+    if (selectedLightIndex >= 0)
+    {
         PBRLight &l = lights[selectedLightIndex];
         ImGui::Text("Edition: %d", selectedLightIndex);
         ImGui::DragFloat3("Position", &l.position.x, 1.0f);
@@ -476,6 +471,8 @@ void PBRScene::drawGui()
         {
             ImGui::DragFloat3("Direction", &l.direction.x, 0.01f, -1.0f, 1.0f);
         }
+
+        ImGui::DragFloat("Intensite", &l.intensity, 0.01f, 0.0f, 10.0f);
     }
     ImGui::End();
 

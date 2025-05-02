@@ -34,6 +34,7 @@ class PBRScene {
 
     struct PBRLight {
         string name;
+        float intensity = 0.1f;
         ofVec3f position;
         ofVec3f color;
         LightType type;
