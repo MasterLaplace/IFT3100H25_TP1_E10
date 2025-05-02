@@ -17,6 +17,20 @@ void Canvas3D::draw()
     // On active l'eclairage dynamique.
     ofEnableLighting();
 
+    // on dessine une indication de la lumiere.
+    ofSetColor(light.getDiffuseColor().r * 255, light.getDiffuseColor().g * 255, light.getDiffuseColor().b * 255);
+    ofDrawSphere(light.getLightPosition(), 10);
+    ofSetColor(light.getAmbientColor().r * 255, light.getAmbientColor().g * 255, light.getAmbientColor().b * 255, 127);
+    ofDrawSphere(light.getLightPosition(), 20);
+
+    if (light.getLightType() == plugin::light::Light::LightType::Directional ||
+        light.getLightType() == plugin::light::Light::LightType::Spotlight)
+    {
+        ofVec3f directionAt = light.getLightDirection();
+        directionAt = directionAt.normalize() * 200;
+        ofDrawArrow(light.getLightPosition(), light.getLightPosition() + directionAt, 5);
+    }
+
     // Le shader de tessellation.
     tesShader.begin();
 

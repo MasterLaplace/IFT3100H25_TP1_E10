@@ -15,7 +15,7 @@ void DrawBoxState::mouseReleased(Canvas *canvas)
     float height = abs(mousePressedPosition.y - mousePosition.y);
 
     // Position is always the top left corner
-    glm::vec3 position = glm::vec3(mousePressedPosition.x, mousePressedPosition.y, 0.0f);
+    glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
 
     if (mousePosition.x < mousePressedPosition.x)
     {

@@ -63,8 +63,8 @@ private:
     ModelType _model = ModelType::Lambert;
     LightType _type = LightType::Ambient;
 
-    glm::vec3 _lightPosition{0.0, 0.0, 0.0};
-    glm::vec3 _ambientColor{0.2, 0.2, 0.2};
+    glm::vec3 _lightPosition{400.0, -400.0, 100.0};
+    glm::vec3 _ambientColor{0.4, 0.4, 0.4};
     glm::vec3 _diffuseColor{0.8, 0.8, 0.8};
     glm::vec3 _specularColor{1.0, 1.0, 1.0};
     glm::vec3 _lightDirection{0.0, 0.0, 1.0};

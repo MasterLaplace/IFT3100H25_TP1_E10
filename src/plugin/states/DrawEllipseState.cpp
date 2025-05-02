@@ -17,16 +17,9 @@ void DrawEllipseState::mouseReleased(Canvas *canvas)
     if (radiusX == 0 || radiusY == 0)
         return;
 
-    int invertX = (mousePosition.x < mousePressedPosition.x) ? -1 : 1;
-    int invertY = (mousePosition.y < mousePressedPosition.y) ? -1 : 1;
-
-    // On calcule le centre de l'ellipse.
-    glm::vec3 center =
-        glm::vec3(mousePressedPosition.x + invertX * radiusX / 2, mousePressedPosition.y + invertY * radiusY / 2, 0);
-
     // On cree l'ellipse.
     PrimitiveParams params;
-    params.position = center;
+    params.position = {0, 0, 0};
     params.fillColor = fillColor;
     params.outlineWidth = outlineWidth;
     params.outlineColor = outlineColor;

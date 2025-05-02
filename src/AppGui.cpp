@@ -1531,22 +1531,31 @@ void AppGui::drawLightProperties()
     }
 
     // On selectionne le type de lumiere.
-    ImGui::Text("Type de lumiere :");
-    if (ImGui::BeginCombo("Type", lightningTypes[currentLightningType]))
+    if (currentLightningModel == 3)
     {
-        for (int n = 0; n < IM_ARRAYSIZE(lightningTypes); n++)
-        {
-            bool isSelected = (currentLightningType == n);
-            if (ImGui::Selectable(lightningTypes[n], isSelected))
-            {
-                currentLightningType = n;
-            }
-
-            if (isSelected)
-                ImGui::SetItemDefaultFocus();
-        }
-        ImGui::EndCombo();
+        ImGui::Text("Type de lumiere : Ponctuelle");
+        currentLightningType = 2;
     }
+    else
+    {
+        ImGui::Text("Type de lumiere :");
+        if (ImGui::BeginCombo("Type", lightningTypes[currentLightningType]))
+        {
+            for (int n = 0; n < IM_ARRAYSIZE(lightningTypes); n++)
+            {
+                bool isSelected = (currentLightningType == n);
+                if (ImGui::Selectable(lightningTypes[n], isSelected))
+                {
+                    currentLightningType = n;
+                }
+
+                if (isSelected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
+    }
+
 
     // On met a jour le type de lumiere.
     switch (currentLightningType)

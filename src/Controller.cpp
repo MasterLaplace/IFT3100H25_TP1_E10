@@ -40,7 +40,6 @@ void Controller::draw()
     else if (currentView == VIEW_3D)
     {
         camera.begin();
-        skybox.draw(camera.getPosition());
         canvas3d->setViewMatrix(camera.getModelViewMatrix());
         canvas3d->draw();
         camera.end();
@@ -71,6 +70,7 @@ void Controller::draw()
     }
     else if (currentView == VIEW_2D)
     {
+
         canvas2d->draw();
         exporter.setPixels();
         stateMachine.draw();
