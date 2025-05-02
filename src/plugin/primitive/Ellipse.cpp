@@ -3,7 +3,11 @@
 
 namespace plugin::primitive {
 
-Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params) { radius = _radius; }
+Ellipse::Ellipse(PrimitiveParams _params, glm::vec2 _radius) : Primitive(_params)
+{
+    radius = _radius;
+    _bbox = geometry::BoundaryBox(param.position, glm::vec3(radius.x, radius.y, 0));
+}
 
 void Ellipse::draw()
 {

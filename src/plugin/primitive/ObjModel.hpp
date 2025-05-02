@@ -66,6 +66,8 @@ class ObjModel : public Primitive {
 public:
     ObjModel(PrimitiveParams params);
     ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primitive::ObjModel> &other);
+    ObjModel(const ObjModel &other);
+    ObjModel(ObjModel &&other);
     ~ObjModel() override = default;
 
     bool load(const std::string &path);
@@ -80,10 +82,11 @@ public:
 
     [[nodiscard]] Model getModel() { return _yourModel; }
 
+    std::shared_ptr<Primitive> clone() const override { return std::make_shared<ObjModel>(*this); }
+
 protected:
 public:
     Model _yourModel;
-    geometry::BoundaryBox _bbox;
 };
 
 } // namespace plugin::primitive

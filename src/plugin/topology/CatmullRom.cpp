@@ -20,7 +20,7 @@ const ofPoint plugin::topology::CatmullRom::getPoint() const
 
 const ofPoint plugin::topology::CatmullRom::getPoint(int index) const
 {
-    if (index < 0 || index >= points.size())
+    if (index < 0 || index >= int(points.size()))
     {
         std::cerr << "Erreur : CatmullRom::getPoint(int index) -> l'index est en dehors du vecteur points."
                   << std::endl;
@@ -36,7 +36,7 @@ const int plugin::topology::CatmullRom::getSelectedPoint() const { return select
 
 void plugin::topology::CatmullRom::setPoint(ofPoint p)
 {
-    if (selectedPoint < 0 || selectedPoint > points.size() - 1)
+    if (selectedPoint < 0 || selectedPoint > int(points.size()) - 1)
     {
         std::cerr << "Erreur : CatmullRom::setPoint() -> selectedPoint est en dehors des limites du vecteur points."
                   << std::endl;
@@ -47,7 +47,7 @@ void plugin::topology::CatmullRom::setPoint(ofPoint p)
 
 void plugin::topology::CatmullRom::setPoints(std::vector<ofPoint> p)
 {
-    if (p.size() <= 3)
+    if (p.size() <= 3u)
     {
         std::cerr
             << "Erreur : CatmullRom::setPoints(std::vector<ofPoint> p) -> le vecteur p doit contenir au moins 4 points."
@@ -60,7 +60,7 @@ void plugin::topology::CatmullRom::setPoints(std::vector<ofPoint> p)
 
 void plugin::topology::CatmullRom::setSelectedPoint(int index)
 {
-    if (index < -1 || index > points.size() - 1)
+    if (index < -1 || index > int(points.size()) - 1)
     {
         std::cerr << "Erreur : CatmullRom::setSelectedPoint() -> index est en dehors des limites du vecteur points."
                   << std::endl;
@@ -82,10 +82,10 @@ void plugin::topology::CatmullRom::draw() const
         ofPoint p2 = points[1];
         ofPoint p3 = points[2];
 
-        // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom.
+        // Calculer le point sur la courbe ï¿½ l'aide de la fonction Catmull-Rom.
         ofPoint p = catmullRom(t, p0, p1, p2, p3);
 
-        // Dessiner la courbe avec les points interpolés.
+        // Dessiner la courbe avec les points interpolï¿½s.
         if (t > 0.0f)
         {
             ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);
@@ -103,10 +103,10 @@ void plugin::topology::CatmullRom::draw() const
             ofPoint p2 = points[i + 1];
             ofPoint p3 = points[i + 2];
 
-            // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom
+            // Calculer le point sur la courbe ï¿½ l'aide de la fonction Catmull-Rom
             ofPoint p = catmullRom(t, p0, p1, p2, p3);
 
-            // Dessiner la courbe avec les points interpolés
+            // Dessiner la courbe avec les points interpolï¿½s
             if (t > 0.0f)
             {
                 ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);
@@ -124,10 +124,10 @@ void plugin::topology::CatmullRom::draw() const
         ofPoint p2 = points[n - 1];
         ofPoint p3 = points[0];
 
-        // Calculer le point sur la courbe à l'aide de la fonction Catmull-Rom
+        // Calculer le point sur la courbe ï¿½ l'aide de la fonction Catmull-Rom
         ofPoint p = catmullRom(t, p0, p1, p2, p3);
 
-        // Dessiner la courbe avec les points interpolés
+        // Dessiner la courbe avec les points interpolï¿½s
         if (t > 0.0f)
         {
             ofPoint prevPoint = catmullRom(t - 0.01f, p0, p1, p2, p3);

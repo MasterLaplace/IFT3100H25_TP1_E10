@@ -224,7 +224,7 @@ void BezierQuadratique::drawWithPoints(int precision) const
         points = pointsCubic;
     }
 
-    for (int i = 0; i < points.size(); i++)
+    for (size_t i = 0; i < points.size(); i++)
     {
         if (i == selectedPoint)
         {

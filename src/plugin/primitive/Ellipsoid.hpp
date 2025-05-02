@@ -17,13 +17,17 @@ namespace plugin::primitive {
 class Ellipsoid : public Primitive {
 public:
     Ellipsoid(PrimitiveParams params, glm::vec3 radius);
+    Ellipsoid(const Ellipsoid &other) = default;
+    Ellipsoid(Ellipsoid &&other) = default;
     ~Ellipsoid() override = default;
 
     void draw() override;
     bool isInside(const glm::vec3 &point) override;
 
     void setRadius(const glm::vec3 &radius) { _radius = radius; }
-    [[nodiscard]] glm::vec3 &getRadius() { return _radius; }
+    [[nodiscard]] const glm::vec3 &getRadius() const { return _radius; }
+
+    std::shared_ptr<Primitive> clone() const override { return std::make_shared<Ellipsoid>(*this); }
 
     glm::vec3 getAmbientColor() { return ambientColor; }
     glm::vec3 getDiffuseColor() { return diffuseColor; }

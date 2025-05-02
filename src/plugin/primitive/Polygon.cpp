@@ -3,7 +3,21 @@
 
 namespace plugin::primitive {
 
-Polygon::Polygon(PrimitiveParams params, std::vector<glm::vec2> _points) : Primitive(params) { points = _points; }
+Polygon::Polygon(PrimitiveParams params, std::vector<glm::vec2> _points) : Primitive(params)
+{
+    points = _points;
+    glm::vec2 minPoint = points[0];
+    glm::vec2 maxPoint = points[0];
+    for (const auto &point : points)
+    {
+        minPoint.x = std::min(minPoint.x, point.x);
+        minPoint.y = std::min(minPoint.y, point.y);
+        maxPoint.x = std::max(maxPoint.x, point.x);
+        maxPoint.y = std::max(maxPoint.y, point.y);
+    }
+    _bbox = geometry::BoundaryBox(param.position + glm::vec3(minPoint.x, minPoint.y, 0),
+                                  glm::vec3(maxPoint.x, maxPoint.y, 0));
+}
 
 void Polygon::draw()
 {

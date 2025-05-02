@@ -3,7 +3,10 @@
 
 namespace plugin::primitive {
 
-Box::Box(PrimitiveParams param, glm::vec3 size) : Primitive(param), _size(size) {}
+Box::Box(PrimitiveParams param, glm::vec3 size) : Primitive(param), _size(size)
+{
+    _bbox = geometry::BoundaryBox(param.position, size);
+}
 
 void Box::draw()
 {

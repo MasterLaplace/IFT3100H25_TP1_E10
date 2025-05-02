@@ -9,14 +9,17 @@ namespace plugin::primitive {
 class Box : public Primitive {
 public:
     Box(PrimitiveParams params, glm::vec3 size);
-    // Box(const Box &other);
+    Box(const Box &other);
+    Box(Box &&other);
     ~Box() override = default;
 
     void draw() override;
     bool isInside(const glm::vec3 &point) override;
 
     void setSize(const glm::vec3 &size) { _size = size; }
-    [[nodiscard]] glm::vec3 &getSize() { return _size; }
+    [[nodiscard]] const glm::vec3 &getSize() const { return _size; }
+
+    std::shared_ptr<Primitive> clone() const override { return std::make_shared<Box>(*this); }
 
     glm::vec3 getAmbientColor() { return ambientColor; }
     glm::vec3 getDiffuseColor() { return diffuseColor; }
@@ -36,7 +39,6 @@ private:
 
 private:
     glm::vec3 _size;
-    // geometry::BoundaryBox bbox;
 
     // Attributs du materiau.
     glm::vec3 ambientColor = {0, 0, 0};

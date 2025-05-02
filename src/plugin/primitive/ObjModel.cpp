@@ -10,7 +10,19 @@ ObjModel::ObjModel(PrimitiveParams params, const std::shared_ptr<plugin::primiti
 {
     _yourModel = other->getModel();
     _bbox = other->_bbox;
-};
+}
+
+ObjModel::ObjModel(const ObjModel &other) : Primitive(other.param)
+{
+    _yourModel = const_cast<ObjModel &>(other).getModel();
+    _bbox = other._bbox;
+}
+
+ObjModel::ObjModel(ObjModel &&other) : Primitive(other.param)
+{
+    _yourModel = other.getModel();
+    _bbox = other._bbox;
+}
 
 bool ObjModel::load(const std::string &path)
 {
