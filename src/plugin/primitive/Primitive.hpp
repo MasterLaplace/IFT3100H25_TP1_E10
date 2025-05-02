@@ -1,6 +1,6 @@
 #pragma once
 
-#include "geometry/BoundaryBox.hpp"
+#include "plugin/geometry/BoundaryBox.hpp"
 #include "ofMain.h"
 
 namespace plugin::primitive {

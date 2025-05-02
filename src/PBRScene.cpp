@@ -233,7 +233,7 @@ void PBRScene::drawGui()
         setupBaseMat(nextPrimitiveId - 1);
     }
 
-    if (ImGui::BeginListBox(""))
+    if (ImGui::BeginListBox("##primtiveList"))
     {
         for (int i = 0; i < int(primitives.size()); ++i)
         {
@@ -442,7 +442,7 @@ void PBRScene::drawGui()
         lights.push_back(light);
     }
 
-    if (ImGui::BeginListBox(""))
+    if (ImGui::BeginListBox("##lightList"))
     {
         for (int i = 0; i < int(lights.size()); ++i)
         {
@@ -482,7 +482,7 @@ void PBRScene::drawGui()
     ImGui::SetNextWindowPos(ImVec2(10, 740), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(300, 50), ImGuiCond_Once);
     ImGui::Begin("Skybox");
-    if (ImGui::BeginListBox(""))
+    if (ImGui::BeginListBox("##cubemapList"))
     {
         auto cubemaps = plugin::image::ResourceManager::instance()->getCubeMaps();
         for (auto &cubemap : cubemaps)
