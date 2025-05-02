@@ -26,7 +26,7 @@ struct PrimitiveParams {
     std::string imageName = "";
     bool drawGizmo = false;
     SurfaceType material = SurfaceType::DIFFUSE; // type de réflexion de la primitive
-    glm::dvec3 emission{};
+    glm::dvec3 emission{1.0};
 
     PrimitiveParams()
         : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black),

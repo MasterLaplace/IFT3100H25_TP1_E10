@@ -1,8 +1,8 @@
 #include "DrawCoonsState.hpp"
 
 plugin::states::DrawCoonsState::DrawCoonsState(curveType _type)
-    : coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
-      bezier(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
+    : bezier(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
+      coons(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f)),
       catmull(ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f), ofPoint(0.0f, 0.0f, 0.0f),
               ofPoint(0.0f, 0.0f, 0.0f))
 {
@@ -100,7 +100,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
     switch (type)
     {
     case plugin::states::BEZIER:
-        for (int i = 0; i < bezier.getPoints().size(); ++i)
+        for (int i = 0; i < int(bezier.getPoints().size()); ++i)
         {
             if (isInside(bezier.getPoint(i)))
             {
@@ -116,7 +116,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
         break;
 
     case plugin::states::CATMULL_ROM:
-        for (int i = 0; i < catmull.getPoints().size(); ++i)
+        for (int i = 0; i < int(catmull.getPoints().size()); ++i)
         {
             if (isInside(catmull.getPoint(i)))
             {
@@ -132,7 +132,7 @@ void plugin::states::DrawCoonsState::mousePressed(int x, int y, int button)
         break;
 
     case plugin::states::COONS:
-        for (int i = 0; i < coons.getPoints().size(); ++i)
+        for (int i = 0; i < int(coons.getPoints().size()); ++i)
         {
             if (isInside(coons.getPoint(i)))
             {
@@ -242,8 +242,8 @@ void plugin::states::DrawCoonsState::convertCurve()
 
 void plugin::states::DrawCoonsState::windowResized(int w, int h)
 {
-    float offsetX = w / 2 - 200;
-    float offsetY = h / 2 - 200;
+    // float offsetX = w / 2 - 200;
+    // float offsetY = h / 2 - 200;
 }
 
 bool plugin::states::DrawCoonsState::isInside(ofPoint pointPos)

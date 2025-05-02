@@ -226,7 +226,7 @@ void BezierQuadratique::drawWithPoints(int precision) const
 
     for (size_t i = 0; i < points.size(); i++)
     {
-        if (i == selectedPoint)
+        if (i == static_cast<size_t>(selectedPoint))
         {
             ofSetColor(ofColor::green);
         }

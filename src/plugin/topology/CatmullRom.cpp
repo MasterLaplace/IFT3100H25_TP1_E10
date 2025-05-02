@@ -94,7 +94,7 @@ void plugin::topology::CatmullRom::draw() const
     }
 
     // Cas pour les segments intermediaires.
-    for (int i = 1; i < points.size() - 2; ++i)
+    for (std::vector<ofVec3f>::size_type i = 1; i < points.size() - 2; ++i)
     {
         for (float t = 0.0f; t <= 1.0f; t += 0.01f)
         {
@@ -136,7 +136,7 @@ void plugin::topology::CatmullRom::draw() const
     }
 
     // On dessine les points de controle.
-    for (int i = 0; i < points.size(); ++i)
+    for (std::vector<ofVec3f>::size_type i = 0; i < points.size(); ++i)
     {
         if (i == selectedPoint)
         {

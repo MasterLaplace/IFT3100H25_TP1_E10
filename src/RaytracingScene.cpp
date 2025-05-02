@@ -57,7 +57,7 @@ void RaytracingScene::drawGui()
 
     // Section: Image Information
     ImGui::Text("Image Information");
-    ImGui::Text("Size: %d x %d", _image.getWidth(), _image.getHeight());
+    ImGui::Text("Size: %f x %f", _image.getWidth(), _image.getHeight());
     ImGui::Text("Number of primitives: %zu", _scene.size());
     ImGui::Separator();
 

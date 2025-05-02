@@ -1713,6 +1713,7 @@ void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primiti
     glm::vec3 position = primitive->param.position;
     glm::vec3 rotation = primitive->param.rotation;
     glm::vec3 scale = primitive->param.scale;
+    glm::vec3 emission = primitive->param.emission;
     char imageName[128];
     strncpy(imageName, primitive->param.imageName.c_str(), sizeof(imageName));
     imageName[sizeof(imageName) - 1] = '\0';
@@ -1733,6 +1734,12 @@ void AppGui::drawTransformProperties3D(const std::shared_ptr<Primitive> &primiti
     if (ImGui::DragFloat3("Echelle", &scale.x, 0.1f))
     {
         primitive->param.scale = scale;
+    }
+
+    ImGui::Text("Raytracing :");
+    if (ImGui::DragFloat3("Puissance d'emission", &emission.x, 0.1f))
+    {
+        primitive->param.emission = emission;
     }
 
     ImGui::Text("Image :");
