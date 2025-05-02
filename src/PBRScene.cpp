@@ -233,7 +233,7 @@ void PBRScene::drawGui()
         setupBaseMat(nextPrimitiveId - 1);
     }
 
-    if (ImGui::ListBoxHeader(""))
+    if (ImGui::BeginListBox(""))
     {
         for (int i = 0; i < int(primitives.size()); ++i)
         {
@@ -243,7 +243,7 @@ void PBRScene::drawGui()
                 selectedPrimitiveIndex = i;
             }
         }
-        ImGui::ListBoxFooter();
+        ImGui::EndListBox();
     }
 
     if (selectedPrimitiveIndex >= 0)
@@ -442,7 +442,7 @@ void PBRScene::drawGui()
         lights.push_back(light);
     }
 
-    if (ImGui::ListBoxHeader(""))
+    if (ImGui::BeginListBox(""))
     {
         for (int i = 0; i < int(lights.size()); ++i)
         {
@@ -453,7 +453,7 @@ void PBRScene::drawGui()
                 selectedLightIndex = i;
             }
         }
-        ImGui::ListBoxFooter();
+        ImGui::EndListBox();
     }
 
     if (selectedLightIndex >= 0)
@@ -482,7 +482,7 @@ void PBRScene::drawGui()
     ImGui::SetNextWindowPos(ImVec2(10, 740), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(300, 50), ImGuiCond_Once);
     ImGui::Begin("Skybox");
-    if (ImGui::ListBoxHeader(""))
+    if (ImGui::BeginListBox(""))
     {
         auto cubemaps = plugin::image::ResourceManager::instance()->getCubeMaps();
         for (auto &cubemap : cubemaps)
@@ -493,7 +493,7 @@ void PBRScene::drawGui()
                 selectedSkyboxName = cubemap.first;
             }
         }
-        ImGui::ListBoxFooter();
+        ImGui::EndListBox();
     }
 
     if (selectedSkyboxName != "")

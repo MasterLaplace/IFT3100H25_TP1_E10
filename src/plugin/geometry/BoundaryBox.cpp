@@ -50,10 +50,6 @@ void BoundaryBox::load(const ofMesh &mesh)
     _max = glm::vec3(maxX->x, maxY->y, maxZ->z);
 }
 
-glm::vec3 BoundaryBox::getMin() const { return _min; }
-
-glm::vec3 BoundaryBox::getMax() const { return _max; }
-
 void BoundaryBox::setMin(const glm::vec3 &m) { _min = m; }
 
 void BoundaryBox::setMax(const glm::vec3 &m) { _max = m; }
