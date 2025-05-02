@@ -114,6 +114,7 @@
     <ClCompile Include="src\HistogramUI.cpp" />
     <ClCompile Include="src\MappingScene.cpp" />
     <ClCompile Include="src\PBRScene.cpp" />
+    <ClCompile Include="src\RaytracingScene.cpp" />
     <ClCompile Include="src\TriangulationUI.cpp" />
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Renderer.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\Node.hpp" />
     <ClInclude Include="src\Node.inl" />
     <ClInclude Include="src\PBRScene.hpp" />
+    <ClInclude Include="src\RaytracingScene.hpp" />
     <ClInclude Include="src\TriangulationUI.hpp" />
     <ClInclude Include="src\app\Application.hpp" />
     <ClInclude Include="src\app\Renderer.hpp" />

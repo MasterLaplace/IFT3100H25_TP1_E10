@@ -43,7 +43,7 @@ void Controller::draw()
         canvas3d->setViewMatrix(camera.getModelViewMatrix());
         canvas3d->draw();
         camera.end();
-        exporter.setPixels();
+        //exporter.setPixels();
         stateMachine.draw();
         gui.draw();
     }
@@ -71,7 +71,7 @@ void Controller::draw()
     else if (currentView == VIEW_2D)
     {
         canvas2d->draw();
-        exporter.setPixels();
+        //exporter.setPixels();
         stateMachine.draw();
         gui.draw();
     }
@@ -324,10 +324,10 @@ void Controller::drawRaytracing()
     currentView = VIEW_RAYTRACING;
 
     plugin::raytracing::Raytracing::CreateInfo raytracingParams;
-    raytracingParams.position = glm::dvec3(0, 0, 0);
-    raytracingParams.direction = glm::dvec3(0, 0, -1);
+    raytracingParams.position = camera.getGlobalPosition();
+    raytracingParams.direction = camera.getOrientationEulerDeg();
     raytracingParams.background_color = glm::dvec3(0.0);
-    raytracingParams.fov = 0.5135; // ~30 degrés
+    raytracingParams.fov = 1.5; // ~30 degrés
     raytracingParams.depth = 5;
     raytracingParams.width = 800;
     raytracingParams.height = 600;

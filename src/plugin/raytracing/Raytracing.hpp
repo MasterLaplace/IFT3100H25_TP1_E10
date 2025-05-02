@@ -37,6 +37,9 @@
 #include "../../Node.hpp"
 
 #include "../image/ResourceManager.hpp"
+#ifndef M_PI
+#    define M_PI 3.14159265358979323846
+#endif
 
 namespace plugin::raytracing {
 
@@ -152,6 +155,7 @@ public:
           _camera(params.position, params.direction, params.height, params.width, params.fov)
     {
         _pixels.reserve(_PIXEL_COUNT * 4u);
+        _pixels.resize(_PIXEL_COUNT * 4u, 0);
     }
 
     inline void generate_image(glm::vec3 player_pos) noexcept
