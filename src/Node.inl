@@ -12,6 +12,13 @@ template <typename T> Node<T>::~Node()
     {
         delete _children[i];
     }
+    _children.clear();
+    _primitive.reset();
+    _primitive = nullptr;
+    _children.shrink_to_fit();
+    _children.clear();
+    _name.clear();
+    _id = 0;
 }
 
 template <typename T> void Node<T>::addChild(Node<T> *child) { _children.push_back(child); }

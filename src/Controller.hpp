@@ -28,6 +28,7 @@ enum View {
     VIEW_TRIANGULATION,
     VIEW_MAPPING,
     VIEW_PBR,
+    VIEW_RAYTACING,
 };
 
 class Controller {
@@ -64,6 +65,7 @@ public:
     void drawTriangulation();
     void drawMapping();
     void drawPBR();
+    void drawRaytracing();
 
     void onPrimitivePropertiesChanged(plugin::primitive::PrimitiveParams params);
     void onPrimitivePropertiesChanged(uint32_t id, plugin::primitive::PrimitiveParams params);

@@ -298,7 +298,6 @@ void Controller::drawHistogram(int color)
     {
         stateMachine.changeState(new DrawHistogramState(color));
     }
-
     else
     {
         DrawHistogramState *state = dynamic_cast<DrawHistogramState *>(stateMachine.getCurrentState());
@@ -313,6 +312,8 @@ void Controller::drawTriangulation() { currentView = VIEW_TRIANGULATION; }
 void Controller::drawMapping() { currentView = VIEW_MAPPING; }
 
 void Controller::drawPBR() { currentView = VIEW_PBR; }
+
+void Controller::drawRaytracing() { currentView = VIEW_RAYTRACING; }
 
 void Controller::toggleCameraProjection() { camera.toggleProjection(); }
 

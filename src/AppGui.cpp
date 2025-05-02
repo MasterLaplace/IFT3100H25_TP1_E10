@@ -139,6 +139,14 @@ void AppGui::drawMenuBar()
             ImGui::EndMenu();
         }
 
+        if (ImGui::BeginMenu("Raytracing view"))
+        {
+            if (ImGui::MenuItem("Generation d'image"))
+            {
+                controller->drawRaytracing();
+            }
+            ImGui::EndMenu();
+        }
         ImGui::EndMainMenuBar();
     }
 }
@@ -525,6 +533,7 @@ void AppGui::drawDynamicPanel3D()
         }
 
         ImGui::End();
+    default: break;
     }
     ImGui::End();
 }
@@ -1300,8 +1309,9 @@ void AppGui::drawEllipsoidProperties(const std::shared_ptr<plugin::primitive::El
     }
 
     ImGui::Text("Taille :");
-    if (ImGui::DragFloat3("Taille", &ellipsoid->getRadius().x, 0.1f))
-        ;
+    glm::vec3 radius = ellipsoid->getRadius();
+    if (ImGui::DragFloat3("Taille", &radius.x, 0.1f))
+        ellipsoid->setRadius(radius);
 }
 
 void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &box)
@@ -1496,8 +1506,9 @@ void AppGui::drawBoxProperties(const std::shared_ptr<plugin::primitive::Box> &bo
     }
 
     ImGui::Text("Taille :");
-    if (ImGui::DragFloat3("Taille", &box->getSize().x, 0.1f))
-        ;
+    glm::vec3 size = box->getSize();
+    if (ImGui::DragFloat3("Taille", &size.x, 0.1f))
+        box->setSize(size);
 }
 
 void AppGui::drawLightProperties()
