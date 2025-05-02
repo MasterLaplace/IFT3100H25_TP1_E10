@@ -1,7 +1,7 @@
 #pragma once
 
-#include "plugin/topology/Delauney.hpp"
 #include "ofxImGui.h"
+#include "plugin/topology/Delauney.hpp"
 
 class Controller;
 
