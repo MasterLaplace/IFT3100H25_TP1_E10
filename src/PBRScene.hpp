@@ -65,6 +65,7 @@ private:
     glm::vec3 centerPosition = {0, 0, 0};
 
     plugin::texture::Skybox skybox;
+    bool showSkybox = true;
 
     void setupShader(int primitiveIndex, int lightIndex);
     void drawGui();

@@ -11,6 +11,7 @@ public:
 
     void draw(glm::vec3 position);
     void load(std::string resourceName);
+    bool isSkyboxLoaded() const { return isLoaded; }
 
 private:
     std::array<ofTexture, 6> textures;

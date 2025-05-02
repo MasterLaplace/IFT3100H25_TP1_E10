@@ -123,7 +123,7 @@ void PBRScene::draw()
     cam.begin();
 
     // on dessine le skybox
-    if (selectedSkyboxName != "")
+    if (skybox.isSkyboxLoaded() && showSkybox)
     {
         skybox.draw(cam.getGlobalPosition());
     }
@@ -510,6 +510,21 @@ void PBRScene::drawGui()
         if (ImGui::Button("Deselectionner##skybox"))
         {
             selectedSkyboxName = "";
+        }
+    }
+
+    ImGui::Separator();
+    ImGui::Text("Skybox chargee: %s", skybox.isSkyboxLoaded() ? "Oui" : "Non");
+    if (skybox.isSkyboxLoaded())
+    {
+        ImGui::Checkbox("Afficher le skybox", &showSkybox);
+        if (showSkybox)
+        {
+            ImGui::Text("Skybox visible");
+        }
+        else
+        {
+            ImGui::Text("Skybox invisible");
         }
     }
     ImGui::End();

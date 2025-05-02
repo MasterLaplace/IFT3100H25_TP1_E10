@@ -179,10 +179,10 @@ void MappingScene::draw()
 
     camera.end();
 
-    ImGui::Begin("Mapping Options");
+    ImGui::Begin("Options");
     const char *mappingOptions[] = {"diffuse", "displacement", "normal"};
     int selectedOption = static_cast<int>(currentMappingMethod);
-    if (ImGui::Combo("Mapping Method", &selectedOption, mappingOptions, IM_ARRAYSIZE(mappingOptions)))
+    if (ImGui::Combo("Effet applique", &selectedOption, mappingOptions, IM_ARRAYSIZE(mappingOptions)))
     {
         currentMappingMethod = static_cast<MappingMethod>(selectedOption);
         currentShader.load("shaders/" + std::string(mappingOptions[selectedOption]) + "/shader");
