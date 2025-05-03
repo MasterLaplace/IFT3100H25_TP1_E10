@@ -327,7 +327,7 @@ void Controller::drawRaytracing()
     raytracingParams.position = camera.getGlobalPosition();
     raytracingParams.direction = camera.getOrientationEulerDeg();
     raytracingParams.background_color = glm::dvec3(0.0);
-    raytracingParams.fov = 1.5; // ~80 degrés
+    raytracingParams.fov = 0.5135f; // ~30 degrés
     raytracingParams.depth = 5u;
     raytracingParams.width = 256;
     raytracingParams.height = 256;

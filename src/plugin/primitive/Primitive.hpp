@@ -15,6 +15,7 @@ struct PrimitiveParams {
     glm::vec3 position = glm::vec3(0.0f);
     glm::vec3 rotation = glm::vec3(0.0f);
     glm::vec3 scale = glm::vec3(1.0f);
+    glm::dvec3 emission{1.0};
     float outlineWidth;
     bool isFilled;
     ofColor fillColor;
@@ -26,7 +27,6 @@ struct PrimitiveParams {
     std::string imageName = "";
     bool drawGizmo = false;
     SurfaceType material = SurfaceType::DIFFUSE; // type de réflexion de la primitive
-    glm::dvec3 emission{1.0};
 
     PrimitiveParams()
         : outlineWidth(1.0f), isFilled(true), fillColor(ofColor::white), outlineColor(ofColor::black),
@@ -35,9 +35,17 @@ struct PrimitiveParams {
     {
     }
 
-    PrimitiveParams(glm::dvec3 position, glm::dvec3 fillColor, SurfaceType material, glm::dvec3 emission)
-        : position(position), fillColor(ofColor(fillColor.x, fillColor.y, fillColor.z)), material(material),
-          emission(emission)
+    /**
+     * @brief Construct a new Primitive Params object
+     *
+     * @param position  position of the primitive
+     * @param fillColor  fill color of the primitive
+     * @param material  material type of the primitive
+     * @param emission  emission color of the primitive
+     */
+    PrimitiveParams(glm::dvec3 position, glm::dvec3 emission, glm::dvec3 fillColor, SurfaceType material)
+        : position(position), emission(emission), fillColor(ofColor(fillColor.x, fillColor.y, fillColor.z)),
+          material(material)
     {
     }
 };

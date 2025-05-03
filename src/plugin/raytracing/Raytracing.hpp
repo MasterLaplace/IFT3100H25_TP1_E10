@@ -54,6 +54,19 @@ public:
         uint16_t width;
         uint16_t height;
         uint16_t ray_per_pixel;
+
+        friend std::ostream &operator<<(std::ostream &os, const CreateInfo &info)
+        {
+            os << "Position: (" << info.position.x << ", " << info.position.y << ", " << info.position.z << ")\n"
+               << "Direction: (" << info.direction.x << ", " << info.direction.y << ", " << info.direction.z << ")\n"
+               << "Background Color: (" << info.background_color.x << ", " << info.background_color.y << ", " << info.background_color.z << ")\n"
+               << "FOV: " << info.fov << "\n"
+               << "Depth: " << static_cast<int>(info.depth) << "\n"
+               << "Width: " << info.width << "\n"
+               << "Height: " << info.height << "\n"
+               << "Rays Per Pixel: " << info.ray_per_pixel;
+            return os;
+        }
     };
 
 private:
@@ -165,6 +178,8 @@ public:
 
         // procédure post-rendu (sauvegarde de l'image et désallocation de la mémoire)
         post_render();
+
+        save_image_file();
     }
 
     inline void generate_image_async() noexcept
@@ -199,6 +214,39 @@ public:
         image.setUseTexture(true);
 
         return image;
+    }
+
+    void save_image_file()
+    {
+        // nom du fichier image de type .ppm (portable pixmap)
+        std::stringstream ss;
+        ss << "image" << _IMAGE_WIDTH << "x" << _IMAGE_HEIGHT << "_" << int(_RAY_PER_PIXEL) << ".ppm";
+        std::string filename = ss.str();
+
+        // déclaration et ouverture du fichier en mode écriture
+        std::ofstream file;
+        file.open(filename, std::ios::out);
+
+        // entête du ficher pour une image avec un espace de couleur RGB 24 bits (P3 pour pixmap)
+        file << "P3\n";
+
+        // largeur et hauteur de l'image sur la seconde ligne de l'entête
+        file << _IMAGE_WIDTH << ' ' << _IMAGE_HEIGHT << '\n';
+
+        // valeur maximale de l'espace de couleur sur la troisième ligne de l'entête
+        file << "255\n";
+
+        // écriture des pixels dans le fichier image
+        for (uint32_t index = 0; index < _PIXEL_COUNT; ++index)
+        {
+            // écrire la couleur du pixel dans le fichier image
+            file << static_cast<std::uint32_t>(format_color_component(_pixels[index].x)) << " ";
+            file << static_cast<std::uint32_t>(format_color_component(_pixels[index].y)) << " ";
+            file << static_cast<std::uint32_t>(format_color_component(_pixels[index].z)) << " ";
+        }
+
+        // fermeture du fichier
+        file.close();
     }
 
 private:
@@ -240,11 +288,6 @@ private:
             if (tmax <= tmin)
                 return 0.0;
         }
-
-        if (tmin > 1e-4 ? tmin : 0.0)
-        {
-            std::cout << "intersect" << std::endl;
-        }
         return tmin > 1e-4 ? tmin : 0.0;
     }
 
@@ -252,13 +295,13 @@ private:
                                           const std::shared_ptr<primitive::Ellipsoid> &object) const noexcept
     {
         // distance de l'intersection la plus près si elle existe
-        double distance;
+        double distance = 0.0;
 
         // seuil de tolérance numérique du test d'intersection
         double epsilon = 1e-4f;
 
         // distance du point d'intersection
-        double t;
+        double t = 0.0;
 
         // vecteur entre le centre de la sphère et l'origine du rayon
         Vector delta = Vector(object->param.position) - ray.origin;
@@ -326,12 +369,6 @@ private:
 
     void render() noexcept
     {
-        std::cout << "render start" << std::endl;
-        std::cout << "camera position : " << _camera.position.x << ", " << _camera.position.y << ", "
-                  << _camera.position.z << std::endl;
-        std::cout << "camera direction : " << _camera.orientation.x << ", " << _camera.orientation.y << ", "
-                  << _camera.orientation.z << std::endl;
-
         // loop in scene
         for (auto &obj : _scene)
         {
@@ -409,7 +446,7 @@ private:
     Vector compute_radiance(const Ray &ray, uint8_t depth)
     {
         // distance de l'intersection
-        double distance;
+        double distance = 0.0;
 
         // identifiant de la géométrie en intersection
         uint32_t id = 0;
@@ -549,7 +586,7 @@ private:
     bool raycast(const Ray &ray, double &distance, uint32_t &id)
     {
         // variable temporaire pour la distance d'une intersection entre un rayon et une sphère
-        double d;
+        double d = 0.0;
 
         // initialiser la distance à une valeur suffisamment éloignée pour qu'on la considère comme l'infinie
         distance = std::numeric_limits<double>::max();

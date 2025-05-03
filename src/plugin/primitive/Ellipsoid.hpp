@@ -24,8 +24,8 @@ public:
     void draw() override;
     bool isInside(const glm::vec3 &point) override;
 
-    void setRadius(const glm::vec3 &radius) { _radius = radius; }
-    [[nodiscard]] const glm::vec3 &getRadius() const { return _radius; }
+    void setRadius(const glm::vec3 &radius) { _radius = glm::dvec3(radius); }
+    [[nodiscard]] const glm::dvec3 &getRadius() const { return _radius; }
 
     std::shared_ptr<Primitive> clone() const override { return std::make_shared<Ellipsoid>(*this); }
 
@@ -45,7 +45,7 @@ private:
     void drawOutline();
 
 private:
-    glm::vec3 _radius;
+    glm::dvec3 _radius;
     const int _numSlices = 50;
     const int _numStacks = 50;
     geometry::BoundaryBox bbox;

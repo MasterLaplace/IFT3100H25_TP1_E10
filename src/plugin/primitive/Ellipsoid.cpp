@@ -5,7 +5,7 @@ namespace plugin::primitive {
 
 Ellipsoid::Ellipsoid(PrimitiveParams params, glm::vec3 radius) : Primitive(params)
 {
-    _radius = radius;
+    _radius = glm::dvec3(radius);
     _bbox = geometry::BoundaryBox(params.position, radius);
 }
 

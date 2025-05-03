@@ -116,7 +116,7 @@ void RaytracingScene::drawGui()
         }
 
         float fov = static_cast<float>(_fov);
-        if (ImGui::DragFloat("Field of View", &fov, 0.1f, 1.0f, 180.0f))
+        if (ImGui::DragFloat("Field of View", &fov, 0.1f, 0.1f, 180.0f))
         {
             _fov = static_cast<double>(fov);
             modified = true;
@@ -218,52 +218,49 @@ void RaytracingScene::init_cornell_box()
             // approximation d'une boîte de Cornell avec des sphères surdimensionnées qui simulent des
             // surfaces planes
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(box_center_x, anchor, box_size_z), glm::dvec3(0.75, 0.75, 0.75),
-                                           primitive::SurfaceType::DIFFUSE, glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(box_center_x, anchor, box_size_z), glm::dvec3(0.),
+                                           glm::dvec3(0.75), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // plancher
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(box_center_x, -anchor + box_size_y, box_size_z),
-                                           glm::dvec3(0.75, 0.75, 0.75), primitive::SurfaceType::DIFFUSE,
-                                           glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(box_center_x, -anchor + box_size_y, box_size_z), glm::dvec3(0.),
+                                           glm::dvec3(0.75), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // plafond
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(anchor + 1, box_center_y, box_size_z),
-                                           glm::dvec3(0.75, 0.25, 0.25), primitive::SurfaceType::DIFFUSE,
-                                           glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(anchor + 1, box_center_y, box_size_z), glm::dvec3(0.),
+                                           glm::dvec3(0.75, 0.25, 0.25), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // mur gauche
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(box_center_x, box_center_y, anchor), glm::dvec3(0.25, 0.75, 0.25),
-                                           primitive::SurfaceType::DIFFUSE, glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(box_center_x, box_center_y, anchor), glm::dvec3(0.),
+                                           glm::dvec3(0.25, 0.75, 0.25), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // mur arrière
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(-anchor + 99, box_center_y, box_size_z),
-                                           glm::dvec3(0.25, 0.25, 0.75), primitive::SurfaceType::DIFFUSE,
-                                           glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(-anchor + 99, box_center_y, box_size_z), glm::dvec3(0.),
+                                           glm::dvec3(0.25, 0.25, 0.75), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // mur droit
             std::make_shared<plugin::primitive::Ellipsoid>(
                 primitive::PrimitiveParams(glm::dvec3(box_center_x, box_center_y, -anchor + 170), glm::dvec3(0.),
-                                           primitive::SurfaceType::DIFFUSE, glm::dvec3(0.)),
+                                           glm::dvec3(0.), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(wall_radius)), // mur avant
 
             // ensemble des sphères situées à l'intérieur de la boîte de Cornell
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(30, 30, 40), glm::dvec3(1.), primitive::SurfaceType::DIFFUSE,
-                                           glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(30, 30, 40), glm::dvec3(0.), glm::dvec3(1.),
+                                           primitive::SurfaceType::SPECULAR),
                 glm::vec3(22.5)), // sphère mirroir
             std::make_shared<plugin::primitive::Ellipsoid>(
-                primitive::PrimitiveParams(glm::dvec3(75, 40, 75), glm::dvec3(1.), primitive::SurfaceType::REFRACTION,
-                                           glm::dvec3(0.)),
+                primitive::PrimitiveParams(glm::dvec3(75, 40, 75), glm::dvec3(0.), glm::dvec3(1.),
+                                           primitive::SurfaceType::REFRACTION),
                 glm::vec3(17.5)), // sphère de verre
 
             std::make_shared<plugin::primitive::Ellipsoid>(
                 primitive::PrimitiveParams(glm::dvec3(box_center_x, 600.0 + box_size_z - 0.27, box_size_z),
-                                           glm::dvec3(0.), primitive::SurfaceType::DIFFUSE, glm::dvec3(15, 15, 15)),
+                                           glm::dvec3(15), glm::dvec3(0.), primitive::SurfaceType::DIFFUSE),
                 glm::vec3(600)), // sphère lumineuse
 
             // ajoute un cube au milieu de la scène
             std::make_shared<plugin::primitive::Box>(
                 primitive::PrimitiveParams(glm::dvec3(center.x - half, center.y - half, center.z - half),
-                                           glm::dvec3(0.8, 0.8, 0.2), primitive::SurfaceType::DIFFUSE, glm::dvec3(0.)),
+                                           glm::dvec3(0.), glm::dvec3(0.8, 0.8, 0.2), primitive::SurfaceType::DIFFUSE),
                 glm::dvec3(10)), // cube
         });
 }
