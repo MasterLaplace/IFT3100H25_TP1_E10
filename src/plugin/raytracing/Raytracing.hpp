@@ -314,7 +314,7 @@ private:
         double b = delta.dot(ray.direction);
 
         // calculer c
-        double c = object->getRadius().x * object->getRadius().y;
+        double c = object->getRadius().x * object->getRadius().x;
 
         // calculer le discriminant de l'équation quadratique
         double discriminant = b * b - a + c;
