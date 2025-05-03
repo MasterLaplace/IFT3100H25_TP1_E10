@@ -59,7 +59,8 @@ public:
         {
             os << "Position: (" << info.position.x << ", " << info.position.y << ", " << info.position.z << ")\n"
                << "Direction: (" << info.direction.x << ", " << info.direction.y << ", " << info.direction.z << ")\n"
-               << "Background Color: (" << info.background_color.x << ", " << info.background_color.y << ", " << info.background_color.z << ")\n"
+               << "Background Color: (" << info.background_color.x << ", " << info.background_color.y << ", "
+               << info.background_color.z << ")\n"
                << "FOV: " << info.fov << "\n"
                << "Depth: " << static_cast<int>(info.depth) << "\n"
                << "Width: " << info.width << "\n"
