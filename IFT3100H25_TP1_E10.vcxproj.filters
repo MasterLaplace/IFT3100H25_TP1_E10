@@ -425,7 +425,7 @@
     <ClInclude Include="src\plugin\image\images.hpp">
       <Filter>src\plugin\image</Filter>
     </ClInclude>
-    <ClInclude Include="src\plugin\light\light.hpp">
+    <ClInclude Include="src\plugin\light\Light.hpp">
       <Filter>src\plugin\light</Filter>
     </ClInclude>
     <ClInclude Include="src\plugin\light\light_header.hpp">

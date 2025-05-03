@@ -212,7 +212,7 @@
     <ClInclude Include="src\plugin\image\Sampling.hpp" />
     <ClInclude Include="src\plugin\image\ToneMapping.hpp" />
     <ClInclude Include="src\plugin\image\images.hpp" />
-    <ClInclude Include="src\plugin\light\light.hpp" />
+    <ClInclude Include="src\plugin\light\Light.hpp" />
     <ClInclude Include="src\plugin\light\light_header.hpp" />
     <ClInclude Include="src\plugin\primitive\Box.hpp" />
     <ClInclude Include="src\plugin\primitive\Ellipse.hpp" />
